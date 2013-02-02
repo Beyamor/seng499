@@ -2,6 +2,8 @@ package hex
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import flash.geom.Point;
+	import net.flashpunk.utils.Draw;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
