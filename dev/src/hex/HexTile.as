@@ -62,15 +62,13 @@ package hex
 		 * Checks if the hex is onscreen.
 		 */
 		override public function get onCamera():Boolean 
-		{
-			var threshold:Number = 2 * radius;
-			
+		{			
 			return collideRect(
 				x, y,
-				FP.camera.x	- threshold,
-				FP.camera.y	- threshold,
-				FP.width	+ threshold,
-				FP.height	+ threshold);
+				FP.camera.x	- radius,
+				FP.camera.y	- radius,
+				FP.width	+ radius * 2,
+				FP.height	+ radius * 2);
 		}
 		
 		/**
