@@ -26,7 +26,11 @@ package
 			
 			FP.console.enable();
 			
-			Input.define("debug-hex-start", Key.DIGIT_0);
+			Input.define("debug-hex-start",	Key.DIGIT_0);
+			Input.define("hex-scroll-up",		Key.W, Key.UP);
+			Input.define("hex-scroll-down",		Key.S, Key.DOWN);
+			Input.define("hex-scroll-left",		Key.A, Key.LEFT);
+			Input.define("hex-scroll-right",	Key.D, Key.RIGHT);
 		}
 		
 		override public function update():void 
