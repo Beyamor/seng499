@@ -7,11 +7,11 @@ package
 	public class InstrumentStub 
 	{
 		private var name:String;
-		private var stub:Class;
+		private var stub:Class = Instrument;
+		
 		public function InstrumentStub() 
 		{
 			this.name = name;
-			stub = Instrument;
 		}
 		
 		public function get_name():String
