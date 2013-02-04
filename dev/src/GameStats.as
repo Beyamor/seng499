@@ -6,12 +6,8 @@ package
 	 */
 	public class GameStats 
 	{
-		private var instruments_inventoy:Array;
-		
-		public function GameStats() 
-		{
-			instruments_inventoy = new Array();
-		}
+		private var instruments_inventoy:Array = new Array();
+		private var store_list:Array = new Array();
 		
 		public function print_inventory()
 		{
@@ -23,6 +19,16 @@ package
 			trace("end");
 		}
 		
+		public function add_to_inventory(stub:InstrumentStub)
+		{
+			instruments_inventoy.push(stub);
+		}
+		
+		public function populate_store_list()
+		{
+			store_list.push(new InstrumentStub("A"));
+			store_list.push(new InstrumentStub("B"));
+		}
 	}
 
 }
