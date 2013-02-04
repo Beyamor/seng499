@@ -13,10 +13,8 @@ package hex
 	{
 		
 		public function HexView() 
-		{
-			addGraphic(new Text("HexView", 10, 30, 100, 30));
-			
-			var grid:HexGrid = new HexGrid(800, 600, 62);
+		{			
+			var grid:HexGrid = new HexGrid(1, 1, 62);
 			
 			for each (var tile:HexTile in grid.allTiles)	add(tile);
 		}
