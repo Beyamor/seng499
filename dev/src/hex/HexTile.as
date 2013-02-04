@@ -1,6 +1,7 @@
 package hex 
 {
 	import flash.geom.Vector3D;
+	import hex.debug.DummyTileWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;
@@ -21,7 +22,7 @@ package hex
 
 		// This hex's color. Probably a temporary feature.
 		private var _color:uint;
-		private function get color():uint { return _color; }
+		public function get color():uint { return _color; }
 
 		// The list of this hex's vertices
 		private var _vertices:Vector.<Point>;
@@ -183,8 +184,10 @@ package hex
 		{
 			super.update();
 			
-			if (Input.mousePressed && containsPoint(Input.mouseX + FP.camera.x, Input.mouseY + FP.camera.y))
-				trace("Pressed! " + getTimer());
+			if (Input.mousePressed && containsPoint(Input.mouseX + FP.camera.x, Input.mouseY + FP.camera.y)) {
+				
+				FP.world = new DummyTileWorld(this);
+			}
 		}
 	}
 

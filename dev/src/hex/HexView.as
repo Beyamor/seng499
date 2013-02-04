@@ -14,7 +14,7 @@ package hex
 		
 		public function HexView() 
 		{			
-			var grid:HexGrid = new HexGrid(1, 1, 62);
+			var grid:HexGrid = new HexGrid(1000, 1000, 64);
 			
 			for each (var tile:HexTile in grid.allTiles)	add(tile);
 		}
