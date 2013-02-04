@@ -18,8 +18,8 @@ package map
 		{
 			super(x, y);
 			graphic = new Image(NODE);
-			height = 32;
-			width = 32;
+			height = (graphic as Image).height;
+			width = (graphic as Image).width;
 		}
 		
 		public override function update():void

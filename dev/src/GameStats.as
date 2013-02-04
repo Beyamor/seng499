@@ -6,15 +6,15 @@ package
 	 */
 	public class GameStats 
 	{
-		private var instruments_inventoy:Array = new Array();
+		private var instruments_inventory:Array = new Array();
 		private var store_list:Array = new Array();
 		
 		public function print_inventory()
 		{
 			trace("begin");
-			for (var i:int; i < instruments_inventoy.length; i++ )
+			for (var i:int; i < instruments_inventory.length; i++ )
 			{
-				trace((instruments_inventoy[i]as Instrament).get_name());
+				trace((instruments_inventory[i]as Instrument).get_name());
 			}
 			trace("end");
 		}
