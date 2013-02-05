@@ -29,14 +29,11 @@ package hex
 		 * Creates a new hex grid.
 		 * The hex grid builds enough hexagons to fill the given dimensions.
 		 */
-		public function HexGrid(world:World, hexagonRadius:Number)
+		public function HexGrid(world:World, hexagonRadius:Number, widthInPixels:Number, heightInPixels:Number)
 		{
                         _world = world;
 			_hexProperties	= new HexGeometricProperties(hexagonRadius);
-                        _gridMather  = new HexGridMather(
-                                                hexProperties,
-                                                2000,  // pixel width
-                                                2000); // pixel height
+                        _gridMather  = new HexGridMather(hexProperties, widthInPixels, heightInPixels);
 
                         fillView();
 		}

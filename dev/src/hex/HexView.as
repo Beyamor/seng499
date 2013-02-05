@@ -4,6 +4,7 @@ package hex
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
+        import flash.geom.Rectangle;
 	
 	/**
 	 * ...
@@ -12,24 +13,23 @@ package hex
 	public class HexView extends World 
 	{
             private var grid:HexGrid;
+            private var scrollCamera:ScrollCamera;
+			
 		
 		public function HexView() 
 		{			
-			grid = new HexGrid(this, 64);
+                        // the hex grid bounds are 100% arbitrary, so deal with it
+                        scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
+			grid = new HexGrid(this, 64, 2000, 2000);
 		}
 		
 		override public function update():void 
 		{
 			super.update();
-			
-			const speed:Number = 5;
-			
-			if (Input.check("hex-scroll-up"))		FP.camera.y -= speed;
-			if (Input.check("hex-scroll-down"))		FP.camera.y += speed;
-			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
-			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
 
-                        grid.fillView();
+                        scrollCamera.update();
+			
+			grid.fillView();
 		}
 	}
 
