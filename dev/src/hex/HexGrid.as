@@ -1,25 +1,21 @@
 package hex 
 {
+	import net.flashpunk.World;
+	import net.flashpunk.FP;
+        import flash.geom.Point;
+
 	/**
 	 * This represents a grid of hexagon tiles.
 	 * @author beyamor
 	 */
 	public class HexGrid 
 	{
-		// Dimensions in pixels
-		private var _widthInPixels:uint;
-		private function get widthInPixels():uint { return _widthInPixels; }
-		private var _heightInPixels:uint;
-		private function get heightInPixels():uint { return _heightInPixels; }
-		
-		// Dimensions in terms of the hex tiles
-		private var _width:uint;
-		private function get width():uint { return _width; }
-		private var _height:uint;
-		private function get height():uint { return _height; }
-		
 		// That grid, baby
-		private var tiles:Vector.<Vector.<HexTile>>;
+                private var tiles:Object = new Object;
+
+                // Dat world
+                private var _world:World;
+                private function get world():World { return _world; }
 		
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
@@ -28,101 +24,127 @@ package hex
 		/**
 		 * Creates a new hex grid.
 		 * The hex grid builds enough hexagons to fill the given dimensions.
-		 * @param	widthInPixels	- The width of the grid in pixels.
-		 * @param	heightInPixels	- The height of the grid in pixels.
-		 * @param	hexagonRadius	- The radius of the hexagons.
 		 */
-		public function HexGrid(widthInPixels:uint, heightInPixels:uint, hexagonRadius:Number)
+		public function HexGrid(world:World, hexagonRadius:Number)
 		{
-			_widthInPixels	= widthInPixels;
-			_heightInPixels	= heightInPixels;
+                        _world = world;
 			_hexProperties	= new HexGeometricProperties(hexagonRadius);
-			
-			prepGrid();
-			build();
+
+                        fillView();
 		}
 		
-		/**
-		 * Sets up the datastructure in which the hexagons are stored.
-		 */
-		private function prepGrid():void {
-			
-			// The width then is how many interleaved distances can fit in the space
-			_width = Math.ceil(widthInPixels / hexProperties.interleavedHorizontalDistance);
+                /**
+                 *  Checks if the index pair is valid.
+                 *  i.e., they must both be even or odd
+                 */
+                private function validIndices(xIndex:int, yIndex:int):Boolean {
 
-			// The height is how many heights can fit in the space,
-			// times two for the sparse array
-			_height = Math.ceil(heightInPixels / hexProperties.verticalHeight) * 2;
-			
-			// Nice. Nice. Let's just create the (empty) entire array now.
-			tiles = new Vector.<Vector.<HexTile>>;
-			for (var tileX:uint = 0; tileX < width; ++tileX) {
-				
-				tiles.push(new Vector.<HexTile>);
-				for (var tileY:uint = 0; tileY < height; ++tileY) {
-					
-					tiles[tileX][tileY] = null;
-				}
-			}
-		}
-		
-		/**
-		 * Contructs the hexagons in the grid.
-		 * NB: there's a good chance we'll need to do this lazily instead.
-		 */
-		private function build():void {
-			
-			var x:Number;
-			var y:Number;
-			
-			// Now here's where we're going to introduce some magic.
-			// In even columns (0, 2, etc.), we're dealing with even rows (0, 2, etc.)
-			// In odd columns (1, 3, etc.), we're dealing with odd columns (1, 3, etc.)
-			// So, when we actually add a hex, we need to treat the two column types differently.
-			// I ain't even gunna justify the math tho. Draw it out.
-			for (var tileX:uint = 0; tileX < width; ++tileX) {
-				for (var tileY:uint = 0; tileY < height; ++tileY) {
+                    return (Math.abs(xIndex) % 2) == (Math.abs(yIndex) % 2);
+                }
 
-					if (tileX % 2 != tileY % 2) continue;
+                /**
+                 * Checks if a tile already exists in the grid at the given indices.
+                 */
+                private function tileExists(xIndex:int, yIndex:int):Boolean {
 
-					// even columns
-					if (tileX % 2 == 0) {
+                    if (!tiles.hasOwnProperty(xIndex))          return false;
+                    if (!tiles[xIndex].hasOwnProperty(yIndex))  return false;
+                    return (tiles[xIndex][yIndex] != null);
+                }
 
-						x = (tileX / 2) * hexProperties.horizontalDistance;
-						y = (tileY / 2) * hexProperties.verticalHeight;						
-					}
+                /**
+                 *  Translates indices in the grid to coordinates in world space.
+                 */
+                private function positionByIndices(xIndex:int, yIndex:int):Point {
 
-					// odd columns
-					else {
+                    var x:Number;
+                    var y:Number;
+                    
+                    // Now here's where we're going to introduce some magic.
+                    // In even columns (0, 2, etc.), we're dealing with even rows (0, 2, etc.)
+                    // In odd columns (1, 3, etc.), we're dealing with odd columns (1, 3, etc.)
+                    // So, when we actually add a hex, we need to treat the two column types differently.
+                    // I ain't even gunna justify the math tho. Draw it out.
+                    
+                    // even columns
+                    if (xIndex % 2 == 0) {
+                    
+                            x = (xIndex / 2) * hexProperties.horizontalDistance;
+                            y = (yIndex / 2) * hexProperties.verticalHeight;						
+                    }
+                    
+                    // odd columns
+                    else {
+                    
+                            x = Math.floor(xIndex / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
+                            y = Math.floor(yIndex / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
+                    }
 
-						x = Math.floor(tileX / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
-						y = Math.floor(tileY / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
-					}
+                    return new Point(x, y);
+                }
 
-					tiles[tileX][tileY] = new HexTile(
-											x,
-											y,
-											hexProperties.radius);
-				}				
-			}
-		}
-		
-		/**
-		 * Gets all of the tiles in this grid.
-		 */
-		public function get allTiles():Vector.<HexTile> {
-			
-			var allTiles:Vector.<HexTile> = new Vector.<HexTile>;
-			
-			for (var tileX:uint = 0; tileX < width; ++tileX) {
-				for (var tileY:uint = 0; tileY < height; ++tileY) {
-					
-					if (tiles[tileX][tileY] != null) allTiles.push(tiles[tileX][tileY]);
-				}
-			}
-			
-			return allTiles;
-		}
+                /**
+                 *  Adds a created tile to the grid.
+                 */
+                private function addToGrid(xIndex:int, yIndex:int, tile:HexTile):void {
+
+                    if (!tiles.hasOwnProperty(xIndex)) tiles[xIndex] = new Object;
+
+                    tiles[xIndex][yIndex] = tile;
+                }
+
+                /**
+                 *  If the tile doesn't already exist, this:
+                 *      - creates it 
+                 *      - adds it to the world
+                *       - adds it to the grid
+                 */
+                private function createIfNecessary(xIndex:int, yIndex:int):void {
+
+                    if (tileExists(xIndex, yIndex)) return;
+
+                    var pos:Point = positionByIndices(xIndex, yIndex);
+                    var tile:HexTile = new HexTile(pos.x, pos.y, hexProperties.radius);
+
+                    world.add(tile);
+                    addToGrid(xIndex, yIndex, tile);
+
+                    // Comment in to log indices of last created tile
+                    //FP.console.log("Creating at " + xIndex + ", " + yIndex);
+                }
+
+                /**
+                 *  Ensures the view space is covered by tiles.
+                 */
+                public function fillView():void {
+
+                    var minX:Number, maxX:Number,
+                        minY:Number, maxY:Number;
+
+                    minX = FP.camera.x;
+                    maxX = FP.camera.x + FP.width;
+                    minY = FP.camera.y;
+                    maxY = FP.camera.y + FP.height;
+
+                    var minXIndex:int, maxXIndex:int,
+                        minYIndex:int, maxYIndex:int;
+
+                    minXIndex = Math.floor(minX / hexProperties.interleavedHorizontalDistance);
+                    minYIndex = Math.floor(minY / hexProperties.interleavedVerticalDistance);
+
+                    maxXIndex = Math.ceil(maxX / hexProperties.interleavedHorizontalDistance);
+                    maxYIndex = Math.ceil(maxY / hexProperties.interleavedVerticalDistance);
+
+                    for (var xIndex:int = minXIndex; xIndex <= maxXIndex; ++xIndex) {
+                        for (var yIndex:int = minYIndex; yIndex <= maxYIndex; ++yIndex) {
+
+                            if (validIndices(xIndex, yIndex)) {
+
+                                createIfNecessary(xIndex, yIndex);
+                            }
+                        }
+                    }
+                }
 	}
 
 }

@@ -11,12 +11,11 @@ package hex
 	 */
 	public class HexView extends World 
 	{
+            private var grid:HexGrid;
 		
 		public function HexView() 
 		{			
-			var grid:HexGrid = new HexGrid(1000, 1000, 64);
-			
-			for each (var tile:HexTile in grid.allTiles)	add(tile);
+			grid = new HexGrid(this, 64);
 		}
 		
 		override public function update():void 
@@ -29,6 +28,8 @@ package hex
 			if (Input.check("hex-scroll-down"))		FP.camera.y += speed;
 			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
 			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
+
+                        grid.fillView();
 		}
 	}
 
