@@ -20,6 +20,16 @@ package hex
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
 		private function get hexProperties():HexGeometricProperties { return _hexProperties; }
+
+                // Okay. Let's bound this thing.
+                private var _absMinXIndex:int;
+                private function get absMinXIndex():int { return _absMinXIndex; }
+                private var _absMaxXIndex:int;
+                private function get absMaxXIndex():int { return _absMaxXIndex; }
+                private var _absMinYIndex:int;
+                private function get absMinYIndex():int { return _absMinYIndex; }
+                private var _absMaxYIndex:int;
+                private function get absMaxYIndex():int { return _absMaxYIndex; }
 		
 		/**
 		 * Creates a new hex grid.
@@ -29,6 +39,13 @@ package hex
 		{
                         _world = world;
 			_hexProperties	= new HexGeometricProperties(hexagonRadius);
+
+                        // These bounds are pretty arbitrary right now.
+                        _absMinXIndex = 0;
+                        _absMinYIndex = 0;
+                        _absMaxXIndex = 0;
+                        _absMaxXIndex = 20;
+                        _absMaxYIndex = 20;
 
                         fillView();
 		}
@@ -129,11 +146,11 @@ package hex
                     var minXIndex:int, maxXIndex:int,
                         minYIndex:int, maxYIndex:int;
 
-                    minXIndex = Math.floor(minX / hexProperties.interleavedHorizontalDistance);
-                    minYIndex = Math.floor(minY / hexProperties.interleavedVerticalDistance);
+                    minXIndex = Math.max(absMinXIndex, Math.floor(minX / hexProperties.interleavedHorizontalDistance));
+                    minYIndex = Math.max(absMinYIndex, Math.floor(minY / hexProperties.interleavedVerticalDistance));
 
-                    maxXIndex = Math.ceil(maxX / hexProperties.interleavedHorizontalDistance);
-                    maxYIndex = Math.ceil(maxY / hexProperties.interleavedVerticalDistance);
+                    maxXIndex = Math.min(absMaxXIndex, Math.ceil(maxX / hexProperties.interleavedHorizontalDistance));
+                    maxYIndex = Math.min(absMaxYIndex, Math.ceil(maxY / hexProperties.interleavedVerticalDistance));
 
                     for (var xIndex:int = minXIndex; xIndex <= maxXIndex; ++xIndex) {
                         for (var yIndex:int = minYIndex; yIndex <= maxYIndex; ++yIndex) {
