@@ -88,13 +88,14 @@ package hex
 			var secondPoint:Point;
 			var pointIndex:uint;
 
-			for (pointIndex = 0; pointIndex < vertices.length; ++pointIndex) {
+                        // Comment in for hex lines
+			// for (pointIndex = 0; pointIndex < vertices.length; ++pointIndex) {
 
-				firstPoint = vertices[pointIndex];
-				secondPoint = vertices[(pointIndex + 1) % vertices.length];
+			// 	firstPoint = vertices[pointIndex];
+			// 	secondPoint = vertices[(pointIndex + 1) % vertices.length];
 
-				Draw.linePlus(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, 0xffffff, 1, 2);
-			}
+			// 	Draw.linePlus(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, 0xffffff, 1, 2);
+			// }
 
 			Draw.circlePlus(x, y, radius * 0.8, color);
 		}

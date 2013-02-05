@@ -21,15 +21,9 @@ package hex
 		private var _hexProperties:HexGeometricProperties;
 		private function get hexProperties():HexGeometricProperties { return _hexProperties; }
 
-                // Okay. Let's bound this thing.
-                private var _absMinXIndex:int;
-                private function get absMinXIndex():int { return _absMinXIndex; }
-                private var _absMaxXIndex:int;
-                private function get absMaxXIndex():int { return _absMaxXIndex; }
-                private var _absMinYIndex:int;
-                private function get absMinYIndex():int { return _absMinYIndex; }
-                private var _absMaxYIndex:int;
-                private function get absMaxYIndex():int { return _absMaxYIndex; }
+                // Math
+                private var _gridMather:HexGridMather;
+                private function get gridMather():HexGridMather { return _gridMather; }
 		
 		/**
 		 * Creates a new hex grid.
@@ -39,13 +33,10 @@ package hex
 		{
                         _world = world;
 			_hexProperties	= new HexGeometricProperties(hexagonRadius);
-
-                        // These bounds are pretty arbitrary right now.
-                        _absMinXIndex = 0;
-                        _absMinYIndex = 0;
-                        _absMaxXIndex = 0;
-                        _absMaxXIndex = 20;
-                        _absMaxYIndex = 20;
+                        _gridMather  = new HexGridMather(
+                                                hexProperties,
+                                                2000,  // pixel width
+                                                2000); // pixel height
 
                         fillView();
 		}
@@ -70,37 +61,6 @@ package hex
                 }
 
                 /**
-                 *  Translates indices in the grid to coordinates in world space.
-                 */
-                private function positionByIndices(xIndex:int, yIndex:int):Point {
-
-                    var x:Number;
-                    var y:Number;
-                    
-                    // Now here's where we're going to introduce some magic.
-                    // In even columns (0, 2, etc.), we're dealing with even rows (0, 2, etc.)
-                    // In odd columns (1, 3, etc.), we're dealing with odd columns (1, 3, etc.)
-                    // So, when we actually add a hex, we need to treat the two column types differently.
-                    // I ain't even gunna justify the math tho. Draw it out.
-                    
-                    // even columns
-                    if (xIndex % 2 == 0) {
-                    
-                            x = (xIndex / 2) * hexProperties.horizontalDistance;
-                            y = (yIndex / 2) * hexProperties.verticalHeight;						
-                    }
-                    
-                    // odd columns
-                    else {
-                    
-                            x = Math.floor(xIndex / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
-                            y = Math.floor(yIndex / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
-                    }
-
-                    return new Point(x, y);
-                }
-
-                /**
                  *  Adds a created tile to the grid.
                  */
                 private function addToGrid(xIndex:int, yIndex:int, tile:HexTile):void {
@@ -120,7 +80,7 @@ package hex
 
                     if (tileExists(xIndex, yIndex)) return;
 
-                    var pos:Point = positionByIndices(xIndex, yIndex);
+                    var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
                     var tile:HexTile = new HexTile(pos.x, pos.y, hexProperties.radius);
 
                     world.add(tile);
@@ -146,11 +106,10 @@ package hex
                     var minXIndex:int, maxXIndex:int,
                         minYIndex:int, maxYIndex:int;
 
-                    minXIndex = Math.max(absMinXIndex, Math.floor(minX / hexProperties.interleavedHorizontalDistance));
-                    minYIndex = Math.max(absMinYIndex, Math.floor(minY / hexProperties.interleavedVerticalDistance));
-
-                    maxXIndex = Math.min(absMaxXIndex, Math.ceil(maxX / hexProperties.interleavedHorizontalDistance));
-                    maxYIndex = Math.min(absMaxYIndex, Math.ceil(maxY / hexProperties.interleavedVerticalDistance));
+                    minXIndex = gridMather.lowerXIndex(minX);
+                    minYIndex = gridMather.lowerYIndex(minY);
+                    maxXIndex = gridMather.upperXIndex(maxX);
+                    maxYIndex = gridMather.upperYIndex(maxY);
 
                     for (var xIndex:int = minXIndex; xIndex <= maxXIndex; ++xIndex) {
                         for (var yIndex:int = minYIndex; yIndex <= maxYIndex; ++yIndex) {
