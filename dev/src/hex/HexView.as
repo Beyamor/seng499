@@ -7,6 +7,7 @@ package hex
         import flash.geom.Rectangle;
         import common.ui.Button;
         import net.flashpunk.graphics.Image;
+        import map.MapView;
 	
 	/**
 	 * ...
@@ -33,7 +34,7 @@ package hex
                                     .withImage(new Image(MAP_BUTTON_SOURCE))
                                     .whenClicked(function():void {
 
-                                        trace("Clicked the button!");
+                                        FP.world = new MapView;
                                     })
                                     .build());
 		}
