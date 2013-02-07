@@ -180,19 +180,6 @@ package hex
 			
 			return true;
 		}
-		
-		override public function update():void 
-		{
-			super.update();
-			
-                        // Okay. Time to move this logic higher up. TODO: refactor this away.
-                        /*
-			if (Input.mousePressed && containsPoint(Input.mouseX + FP.camera.x, Input.mouseY + FP.camera.y)) {
-				
-				FP.world = new DummyTileWorld(this);
-			}
-                        */
-		}
 	}
 
 }

@@ -8,6 +8,7 @@ package hex
         import common.ui.Button;
         import net.flashpunk.graphics.Image;
         import map.MapView;
+	import hex.debug.DummyTileWorld;
 	
 	/**
 	 * ...
@@ -20,7 +21,7 @@ package hex
 
             private var grid:HexGrid;
             private var scrollCamera:ScrollCamera;
-			
+            private var returningToMap:Boolean = false;
 		
 		public function HexView() 
 		{			
@@ -34,7 +35,7 @@ package hex
                                     .withImage(new Image(MAP_BUTTON_SOURCE))
                                     .whenClicked(function():void {
 
-                                        FP.world = new MapView;
+                                        returningToMap = true;
                                     })
                                     .build());
 		}
@@ -44,8 +45,34 @@ package hex
 			super.update();
 
                         scrollCamera.update();
-			
 			grid.fillView();
+
+                        // This is kinda junk.
+                        if (returningToMap) {
+
+                            FP.world = new MapView;
+                        }
+
+                        else {
+                        
+                            if (Input.mousePressed) {
+
+                                // Second time I've written this tonight.
+                                // It's gotta already exist in the engine, right?
+                                // If it don't, let's put it somewhere.
+                                var worldMouseX:Number = Input.mouseX + FP.camera.x,
+                                    worldMouseY:Number = Input.mouseY + FP.camera.y;
+
+                                for each (var tile:HexTile in grid.tilesOnScreen) {
+
+                                    if (tile.containsPoint(worldMouseX, worldMouseY)) {
+
+                                        FP.world = new DummyTileWorld(tile);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
 		}
 	}
 

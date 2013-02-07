@@ -88,9 +88,9 @@ package hex
                 }
 
                 /**
-                 *  Ensures the view space is covered by tiles.
+                 *  Gets the min and max x and y indices of the tiles on screen.
                  */
-                public function fillView():void {
+                private function getIndicesOfViewTiles():Object {
 
                     var minX:Number, maxX:Number,
                         minY:Number, maxY:Number;
@@ -108,8 +108,23 @@ package hex
                     maxXIndex = gridMather.upperXIndex(maxX);
                     maxYIndex = gridMather.upperYIndex(maxY);
 
-                    for (var xIndex:int = minXIndex; xIndex <= maxXIndex; ++xIndex) {
-                        for (var yIndex:int = minYIndex; yIndex <= maxYIndex; ++yIndex) {
+                    return {
+                        minXIndex: gridMather.lowerXIndex(minX),
+                        minYIndex: gridMather.lowerYIndex(minY),
+                        maxXIndex: gridMather.upperXIndex(maxX),
+                        maxYIndex: gridMather.upperYIndex(maxY)
+                    };
+                }
+
+                /**
+                 *  Ensures the view space is covered by tiles.
+                 */
+                public function fillView():void {
+
+                    var indexBounds:Object = getIndicesOfViewTiles();
+
+                    for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
+                        for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
                             if (validIndices(xIndex, yIndex)) {
 
@@ -118,6 +133,25 @@ package hex
                         }
                     }
                 }
+
+                /**
+                 *  Gets all of the tiles which are in view.
+                 */
+                 public function get tilesOnScreen():Vector.<HexTile> {
+
+                    var onscreenTiles:Vector.<HexTile> = new Vector.<HexTile>;
+
+                    var indexBounds:Object = getIndicesOfViewTiles();
+
+                    for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
+                        for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
+
+                            if (tileExists(xIndex, yIndex)) onscreenTiles.push(tiles[xIndex][yIndex]);
+                        }
+                    }
+
+                    return onscreenTiles;
+                 }
 	}
 
 }
