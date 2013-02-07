@@ -65,7 +65,7 @@ package common.ui
             /**
              *      Creates a new fluent button builder.
              /*/
-            public static function describe():ButtonBuilder {
+            public static function description():ButtonBuilder {
 
                 return new ButtonBuilder();
             }
