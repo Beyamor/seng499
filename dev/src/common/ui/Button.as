@@ -1,8 +1,10 @@
-package  
+package common.ui
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
+        import net.flashpunk.Graphic;
+
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -14,12 +16,15 @@ package
 		private var screenY:int;
 		private var clickFunc:Function;
 		
-		public function Button(x:int, y:int, clickFunc:function) 
+		public function Button(x:int, y:int, width:Number, height:Number, graphic:Graphic, clickFunc:Function) 
 		{
 			screenX = x;
 			screenY = y;
 			this.x = FP.camera.x + screenX;
 			this.y = FP.camera.y + screenY;
+                        this.width = width;
+                        this.height = height;
+                        this.graphic = graphic;
 			this.clickFunc = clickFunc;
 		}
 		
@@ -38,12 +43,12 @@ package
 			return false;
 		}
 		
-		private function onClick()
+		private function onClick():void
 		{
 			clickFunc();
 		}
 		
-		public override function update()
+		public override function update():void
 		{
 			x = FP.camera.x + screenX;
 			y = FP.camera.y + screenY;
@@ -54,6 +59,12 @@ package
 			}
 		}
 		
-		
+            /**
+             *      Creates a new fluent button builder.
+             /*/
+            public static function describe():ButtonBuilder {
+
+                return new ButtonBuilder();
+            }
 	}
 }
