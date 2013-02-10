@@ -1,6 +1,7 @@
 package  
 {
 	import flash.geom.Point;
+	import SplineClasses.SplineTable;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -9,9 +10,24 @@ package
 	{
 		
 		public var points:Vector.<Point>; 
+		public var table:SplineTable;
 		public function Spline(inputPoints:Vector.<Point>) 
 		{
 			points = inputPoints;
+			build_table();
+		}
+		
+		public funcion build_table()
+		{
+			var t:Number = 0.0;
+			var arc_length:Number = 0.0;
+			//TODO
+			
+			for (var i:int = 0; i < table.tuples.length * 10; i++ )
+			{
+				//TODO
+				//table.add()
+			}
 		}
 		
 		public function interpolate_for_t(t:Number):Point
