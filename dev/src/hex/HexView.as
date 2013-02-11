@@ -56,17 +56,11 @@ package hex
                         else {
                         
                             if (Input.mousePressed) {
-
-                                // Second time I've written this tonight.
-                                // It's gotta already exist in the engine, right?
-                                // If it don't, let's put it somewhere.
-                                var worldMouseX:Number = Input.mouseX + FP.camera.x,
-                                    worldMouseY:Number = Input.mouseY + FP.camera.y;
-
+								
                                 for each (var tile:HexTile in grid.tilesOnScreen) {
 
-                                    if (tile.containsPoint(worldMouseX, worldMouseY)) {
-
+                                    if (tile.containsPoint(FP.world.mouseX, FP.world.mouseY)) {
+										
                                         FP.world = new DummyTileWorld(tile);
                                         break;
                                     }
