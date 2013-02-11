@@ -17,7 +17,7 @@ package
 			build_table();
 		}
 		
-		public funcion build_table()
+		public function buildTable():void
 		{
 			var t:Number = 0.0;
 			var arc_length:Number = 0.0;
@@ -30,7 +30,7 @@ package
 			}
 		}
 		
-		public function interpolate_for_t(t:Number):Point
+		public function interpolateForT(t:Number):Point
 		{
 			if (points.lengt > 1)
 			{
@@ -40,7 +40,7 @@ package
 					nextPoints.push((points[i].add(t*(points[i].subtract(points[i-1].x)))));
 				}
 				var nextSpline:Spline = new Spline(nextPoints);
-				return interpolate_for_t(t);
+				return interpolateForT(t);
 			}
 			else
 			{

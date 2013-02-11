@@ -17,12 +17,12 @@ package SplineClasses
 			tuples.push(entry);
 		}
 		
-		public function get_t_value(arc:Number)
+		public function getTValue(arc:Number)
 		{
 			var found_match:Boolean = false;
 			for (var int:i = 0; i < tuples.length ; i++ )
 			{
-				if (tuples[i].arc_length>arc)
+				if (tuples[i].arcLength>arc)
 				{
 					found_match = true;
 					break;
@@ -32,14 +32,14 @@ package SplineClasses
 			if (found_match == true)
 			{
 				//catch cases that will run to infinite
-				if (tuples[i].arc_length - tuples[i-1].arc_length)
+				if (tuples[i].arcLength - tuples[i-1].arcLength)
 				{
 					return 0;
 				}	
 				else
 				{
-					var q:Number = (arc - tuples[i-1].arc_length/(tuples[i].arc_length - tuples[i-1].arc_length));
-					var t:Number = tuples[i - 1].t_value + (q * (tuples[i].t_value-tubles[i - 1].t_value));
+					var q:Number = (arc - tuples[i-1].arcLength/(tuples[i].arcLength - tuples[i-1].arcLength));
+					var t:Number = tuples[i - 1].tValue + (q * (tuples[i].tValue-tubles[i - 1].t_value));
 					return t;
 				}
 			}
@@ -54,7 +54,7 @@ package SplineClasses
 			var found_match:Boolean = false;
 			for (var int:i = 0; i < tuples.length ; i++ )
 			{
-				if (tuples[i].t_value>t)
+				if (tuples[i].tValue>t)
 				{
 					found_match = true;
 					break;
@@ -64,14 +64,14 @@ package SplineClasses
 			if (found_match == true)
 			{
 				//catch cases that will run to infinite
-				if (tuples[i].t_value - tuples)
+				if (tuples[i].tValue - tuples)
 				{
 					return 0;
 				}	
 				else
 				{
-					var q:Number = (t - tuples[i-1].t_value/(tuples[i].t_value - tuples[i-1].t_value));
-					var t:Number = tuples[i - 1].arc_length + (q * (tuples[i].arc_length-tubles[i - 1].arc_length));
+					var q:Number = (t - tuples[i-1].tValue/(tuples[i].tValue - tuples[i-1].tValue));
+					var t:Number = tuples[i - 1].arcLength + (q * (tuples[i].arcLength-tubles[i - 1].arc_length));
 					return t;
 				}
 			}

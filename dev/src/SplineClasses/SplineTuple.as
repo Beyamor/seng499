@@ -6,13 +6,13 @@ package SplineClasses
 	 */
 	public class SplineTuple 
 	{
-		public var arc_length:Number;
-		public var t_value:Number;
+		public var arcLength:Number;
+		public var tValue:Number;
 		
 		public function SplineTuple(arc:Number, t:Number) 
 		{
-			arc_length = arc;
-			t_value = t;
+			arcLength = arc;
+			tValue = t;
 		}
 	}
 
