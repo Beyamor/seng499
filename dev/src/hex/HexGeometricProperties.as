@@ -18,7 +18,11 @@ package hex
 		
 		private var _interleavedHorizontalDistance:Number;
 		public function get interleavedHorizontalDistance():Number { return _interleavedHorizontalDistance; }
+                
+                private var _interleavedVerticalDistance:Number;
+                public function get interleavedVerticalDistance():Number { return _interleavedVerticalDistance; }
 		
+
 		private var _horizontalDistance:Number;
 		public function get horizontalDistance():Number { return _horizontalDistance; }
 		
@@ -87,6 +91,9 @@ package hex
 			// distance - the horizontal distance btween two diagonally adjacent
 			// hexes.
 			_interleavedHorizontalDistance = 2 * radius - horizontalOverlap;
+
+                        // Similarly, the interleaved vertical distance.
+                        _interleavedVerticalDistance = 0.5 * Math.sqrt(3) * radius;
 
 			// The second is the horizontal distance between two hexes in the same row.
 			// e.g, the distance between A and B

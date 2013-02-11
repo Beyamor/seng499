@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Load up the bash aliases file
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# Actually compiles the thing.
+# Note that this assumes an mxmlc command. Hence, the aliases above.
+mxmlc src/Main.as -output bin/Main.swf -static-link-runtime-shared-libraries

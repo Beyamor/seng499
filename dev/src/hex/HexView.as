@@ -4,6 +4,11 @@ package hex
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
+        import flash.geom.Rectangle;
+        import common.ui.Button;
+        import net.flashpunk.graphics.Image;
+        import map.MapView;
+	import hex.debug.DummyTileWorld;
 	
 	/**
 	 * ...
@@ -11,24 +16,57 @@ package hex
 	 */
 	public class HexView extends World 
 	{
+            [Embed(source="/assets/map-from-hex-button.png")]
+            private const MAP_BUTTON_SOURCE:Class;
+
+            private var grid:HexGrid;
+            private var scrollCamera:ScrollCamera;
+            private var returningToMap:Boolean = false;
 		
 		public function HexView() 
 		{			
-			var grid:HexGrid = new HexGrid(1000, 1000, 64);
-			
-			for each (var tile:HexTile in grid.allTiles)	add(tile);
+                        // the hex grid bounds are 100% arbitrary, so deal with it
+                        scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
+			grid = new HexGrid(this, 64, 2000, 2000);
+
+                        add(Button.description()
+                                    .at(FP.width - 50, 30)
+                                    .withDepth(-1)
+                                    .withImage(new Image(MAP_BUTTON_SOURCE))
+                                    .whenClicked(function():void {
+
+                                        returningToMap = true;
+                                    })
+                                    .build());
 		}
 		
 		override public function update():void 
 		{
 			super.update();
-			
-			const speed:Number = 5;
-			
-			if (Input.check("hex-scroll-up"))		FP.camera.y -= speed;
-			if (Input.check("hex-scroll-down"))		FP.camera.y += speed;
-			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
-			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
+
+                        scrollCamera.update();
+			grid.fillView();
+
+                        // This is kinda junk.
+                        if (returningToMap) {
+
+                            FP.world = new MapView;
+                        }
+
+                        else {
+                        
+                            if (Input.mousePressed) {
+								
+                                for each (var tile:HexTile in grid.tilesOnScreen) {
+
+                                    if (tile.containsPoint(FP.world.mouseX, FP.world.mouseY)) {
+										
+                                        FP.world = new DummyTileWorld(tile);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
 		}
 	}
 
