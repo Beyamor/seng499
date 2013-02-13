@@ -6,8 +6,8 @@ package
 	 */
 	public class PlayerData 
 	{
-		private var instrumentsInventory:Array = new Array();
-		private var storeList:Array = new Array();
+		private var instrumentsInventory:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+		private var storeList:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
 		
 		public function printInventory()
 		{
@@ -28,6 +28,11 @@ package
 		{
 			storeList.push(new InstrumentStub("A"));
 			storeList.push(new InstrumentStub("B"));
+		}
+		
+		public function getInventory()
+		{
+			return instrumentsInventory;
 		}
 	}
 

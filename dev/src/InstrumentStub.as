@@ -14,12 +14,12 @@ package
 			this.name = name;
 		}
 		
-		public function get_name():String
+		public function getName():String
 		{
 			return name;
 		}
 		
-		public function get_instrument():Instrument
+		public function getInstrument():Instrument
 		{
 			return(new stub(name));
 		}
