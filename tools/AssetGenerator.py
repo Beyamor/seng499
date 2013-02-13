@@ -1,30 +1,28 @@
- ##################################################################
+
 # Asset Generator (AssetGenerator.py)
 # 
 # Original:
 #   Kyle Pulver
 #   @kylepulver
 #   http://kpulv.com
+#   
+#   Kyle comments:
+#       Dont use spaces in filenames or foldernames if you can help it
 #
 # Re-re-re-re-remix:
 #   Colton Phillips
 #   @ColtonPhillips
 #   http://coltonphillips.ca
-#
-#   TODO: Should be sys arguments instead
-
 
 ##################################################################
 # Stuff you can change is right below!
 ##################################################################
- 
-# Where to find the assets in relation to the script
-#ASSET_FOLDER = 'assets'
-# The file to output.  Must use / and not \
-#OUTPUT_FILE = 'src/game/Assets.as'
+
+#EXTENSIONS and PREFIXES need to line up!
+
 # What extensions to look for
 EXTENSIONS = [
-  'png',
+    'png',
     'mp3',
     'oel',
     'ttf'
@@ -37,7 +35,7 @@ PREFIXES = [
     'FONT'
 ]
 # Which folders to exclude
-EXCLUDE = [
+EXCLUDES = [
     'psd',
     'exclude'
 ]
@@ -47,34 +45,12 @@ USAGE_STRING = \
         >> python asset_generator.py ASSET_PATH OUTPUT_FILE
 
 Modify the ASSET_PATH argument to be a path to your assets
- directory from the script.  Usually it's just 'assets'
+directory from the script.  Usually it's just 'assets'
 
- Modify the OUTPUT_FILE to be the resulting .as file.
+Modify the OUTPUT_FILE to be the resulting .as file.
 
- Add names of folders to EXCLUDE to skip them.
-
- Dont use spaces in filenames or foldernames if you can help it
-
- The script assumes your dir structure looks something like this
- --
- assets/
-   png/
-     *.png
-   mp3/
-     *.mp3
-   levels/
-     *.oel
- assetGenerator.py
- --
- So your base assets folder has at least one sub directory for
- each major type of asset -- although this is not necessary.
- However, each sub directory beyond the first for each major
- asset type will be added to the asset name in the ouput file.
-
- If you change or improve this script, just let me know!
-
+Add names of folders to EXCLUDES to skip them.
 """
-##################################################################
  
 import os
  
@@ -84,20 +60,14 @@ def parse_arguments():
         print (USAGE_STRING)
         sys.exit()
     
-    
     asset_path = sys.argv[1]
     output_path = sys.argv[2]
-    return asset_path, output_path
-        
-def do_magic(asset_path, output_path):
-    #path = os.getcwd() + '\\' + ASSET_FOLDER
-    #output = os.getcwd() + '\\' + OUTPUT_FILE
-     
-    # Figure out the class name based on the file
-    class_name = os.path.splitext(os.path.basename(output_path))[0]
-     
-    # Figure out the package name based on the folder
-    package_name = output_path[output_path.find('/') + 1:]
+    return asset_path, output_path    
+
+# TODO: This doesn't appear to work. PN is always ""    
+# Figure out the package name based on the folder
+def package_name_from_path(path):
+    package_name = path[path.find('/') + 1:]
     package_split = package_name.split('/')
     package_split.pop()
     if (len(package_split) > 0):
@@ -105,44 +75,48 @@ def do_magic(asset_path, output_path):
     else:
         package_name = ""
         
-    print package_name
+    return package_name
+ 
+def give_me_the_dicts():
+    asset_dict = dict()
+    prefix_dict = dict()
+    
+    for i in range(len(EXTENSIONS)): 
+        # Each EXTENSION will point to a list of assets
+        # Each EXTENSION points to a specific PREFIX
+        asset_dict[EXTENSIONS[i]] = [];
+        prefix_dict[EXTENSIONS[i]] = PREFIXES[i] 
+    
+    return asset_dict, prefix_dict
+ 
+def build_asset_dict(asset_path, output_path, asset_dict):
+   for root,dirs,files in os.walk(asset_path):
      
-    # Assemble some data structures!
-    stuff = {}
-    prefix = {}
-    for i in range(len(EXTENSIONS)):
-        stuff[EXTENSIONS[i]] = [];
-        prefix[EXTENSIONS[i]] = PREFIXES[i] 
-     
-    # Walk through dem files
-    for r,d,f in os.walk(asset_path):
-        add_to_file = True
-     
-        for excludes in EXCLUDE:
-            if (excludes == os.path.basename(r)):
-                add_to_file = False
-     
-        if (add_to_file):	
-            for files in f:
-                ext = os.path.splitext(files)[1][1:] #grab extension without the '.''
-                for key, value in stuff.items():
-                    if (ext == key):
-                        stuff[key].append(os.path.relpath(r, output_path)[3:] + "\\" + files)
-     
+        if (os.path.basename(root) in EXCLUDES):
+            continue
+     	
+        for file_name in files:
+            extension = os.path.splitext(file_name)[1][1:] # w/o '.'
+            if (extension in asset_dict ):
+                asset_dict[extension].append(os.path.relpath(root, output_path)[3:] + '\\' + file_name)
+ 
+def write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_path, class_name):
+    
+    
     # Start writing the file
-    f = open(output_path, 'w+')
-    f.write("""package """ + package_name + """{
+    file = open(output_path, 'w+')
+    file.write("""package """ + package_name + """{
         /** Auto generated from assetGenerator.py! :) */
         public class """ + class_name + """ {
      
     """);
      
     # Crazy writing all the embeds time
-    for key, value in stuff.items():
-        if (len(stuff[key]) > 0):
-            f.write ("\t\t/** Generating " + key + " assets! */\n")
+    for key, value in asset_dict.items():
+        if (len(asset_dict[key]) > 0):
+            file.write ("\t\t/** Generating " + key + " assets! */\n")
      
-            for files in stuff[key]:
+            for files in asset_dict[key]:
                 subfolder = files[:files.find(asset_path)]
                 subfolders = []
                 subFolderCount = len(subfolder.split('\\'))
@@ -158,32 +132,40 @@ def do_magic(asset_path, output_path):
      
                 file_name = os.path.splitext(os.path.basename(files))[0]
                 file_name = file_name.replace(" ", "_") #get rid of spaces, use underscores instead
-                file_name = file_name.upper().replace(prefix[key] + "_", "") #get rid of prefixes already applied in the file name
-                asset_name = prefix[key] + "_"
+                file_name = file_name.upper().replace(prefix_dict[key] + "_", "") #get rid of prefixes already applied in the file name
+                asset_name = prefix_dict[key] + "_"
                 for i in range(len(subfolders)):
                     asset_name += subfolders[i].upper().replace(" ", "_") + "_"
                 asset_name += file_name
      
-                f.write("\t\t[Embed(source = \"" + files.replace("\\", "/") + "\"")
+                file.write("\t\t[Embed(source = \"" + files.replace("\\", "/") + "\"")
                 
                 # Fonts are special
                 if (key == 'ttf'):
-                    f.write(", embedAsCFF = \"false\", fontFamily = \"" + file_name + "\")] private static const _" + asset_name + ":Class\n")
-                    f.write("\t\tpublic static const " + asset_name + ":String = \"" + file_name + "\"\n\n")
+                    file.write(", embedAsCFF = \"false\", fontFamily = \"" + file_name + "\")] private static const _" + asset_name + ":Class\n")
+                    file.write("\t\tpublic static const " + asset_name + ":String = \"" + file_name + "\"\n\n")
                 else:
                     if (key != 'png' and key != 'mp3'):
-                        f.write(", mimeType = \"application/octet-stream\"")
-                    f.write(")] public static const " + asset_name + ":Class\n")
+                        file.write(", mimeType = \"application/octet-stream\"")
+                    file.write(")] public static const " + asset_name + ":Class\n")
      
             if (key != 'ttf'):
-                f.write("\n")
+                file.write("\n")
      
     # All done!
-    f.write("\t}\n}")
-    f.close()
+    file.write("\t}\n}")
+    file.close()
+
+ 
+def do_magic(asset_path, output_path):
+    class_name = os.path.splitext(os.path.basename(output_path))[0]
+    package_name = package_name_from_path(output_path)
+    asset_dict, prefix_dict = give_me_the_dicts()
+    
+    build_asset_dict(asset_path, output_path, asset_dict)
+    write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_path, class_name)
 
 def main(): 
-
     asset_path, output_path = parse_arguments()
     do_magic(asset_path, output_path)
 
