@@ -16,7 +16,7 @@ package hex
 	 */
 	public class HexView extends World 
 	{
-            [Embed(source="/assets/map-from-hex-button.png")]
+            [Embed(source="/assets/map_from_hex_button.png")]
             private const MAP_BUTTON_SOURCE:Class;
 
             private var grid:HexGrid;
