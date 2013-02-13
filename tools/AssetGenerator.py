@@ -78,42 +78,34 @@ Modify the ASSET_PATH argument to be a path to your assets
  
 import os
  
-
-global asset_path
-global output_path
-
- 
 def parse_arguments():
-    global asset_path
-    global output_path
-
     import sys
     if (len(sys.argv) == 1):
         print (USAGE_STRING)
         sys.exit()
-    else:
-        asset_path = sys.argv[1]
-        output_path = sys.argv[2]
-        
-def do_magic():
-    global asset_path
-    global output_path
     
+    
+    asset_path = sys.argv[1]
+    output_path = sys.argv[2]
+    return asset_path, output_path
+        
+def do_magic(asset_path, output_path):
     #path = os.getcwd() + '\\' + ASSET_FOLDER
     #output = os.getcwd() + '\\' + OUTPUT_FILE
      
     # Figure out the class name based on the file
-    className = os.path.splitext(os.path.basename(output_path))[0]
-    print output_path
+    class_name = os.path.splitext(os.path.basename(output_path))[0]
      
     # Figure out the package name based on the folder
-    packageName = output_path[output_path.find('/') + 1:]
-    packageSplit = packageName.split('/')
-    packageSplit.pop()
-    if (len(packageSplit) > 0):
-        packageName = ".".join(packageSplit) + " "
+    package_name = output_path[output_path.find('/') + 1:]
+    package_split = package_name.split('/')
+    package_split.pop()
+    if (len(package_split) > 0):
+        package_name = ".".join(package_split) + " "
     else:
-        packageName = ""
+        package_name = ""
+        
+    print package_name
      
     # Assemble some data structures!
     stuff = {}
@@ -124,13 +116,13 @@ def do_magic():
      
     # Walk through dem files
     for r,d,f in os.walk(asset_path):
-        addToFile = True
+        add_to_file = True
      
         for excludes in EXCLUDE:
             if (excludes == os.path.basename(r)):
-                addToFile = False
+                add_to_file = False
      
-        if (addToFile):	
+        if (add_to_file):	
             for files in f:
                 ext = os.path.splitext(files)[1][1:] #grab extension without the '.''
                 for key, value in stuff.items():
@@ -139,9 +131,9 @@ def do_magic():
      
     # Start writing the file
     f = open(output_path, 'w+')
-    f.write("""package """ + packageName + """{
+    f.write("""package """ + package_name + """{
         /** Auto generated from assetGenerator.py! :) */
-        public class """ + className + """ {
+        public class """ + class_name + """ {
      
     """);
      
@@ -152,36 +144,36 @@ def do_magic():
      
             for files in stuff[key]:
                 subfolder = files[:files.find(asset_path)]
-                subFolders = []
+                subfolders = []
                 subFolderCount = len(subfolder.split('\\'))
-                folderCount = len(files.split('\\'))
+                folder_count = len(files.split('\\'))
      
-                if (folderCount > subFolderCount + 2):
+                if (folder_count > subFolderCount + 2):
                     start = files.find(asset_path) + len(asset_path) + 1
                     poop = files[start:]
                     start = poop.find('\\') + 1
                     poop = poop[start:]
                     poop = poop.split('\\')
-                    subFolders = poop[:-1]
+                    subfolders = poop[:-1]
      
-                fname = os.path.splitext(os.path.basename(files))[0]
-                fname = fname.replace(" ", "_") #get rid of spaces, use underscores instead
-                fname = fname.upper().replace(prefix[key] + "_", "") #get rid of prefixes already applied in the file name
-                assetName = prefix[key] + "_"
-                for i in range(len(subFolders)):
-                    assetName += subFolders[i].upper().replace(" ", "_") + "_"
-                assetName += fname
+                file_name = os.path.splitext(os.path.basename(files))[0]
+                file_name = file_name.replace(" ", "_") #get rid of spaces, use underscores instead
+                file_name = file_name.upper().replace(prefix[key] + "_", "") #get rid of prefixes already applied in the file name
+                asset_name = prefix[key] + "_"
+                for i in range(len(subfolders)):
+                    asset_name += subfolders[i].upper().replace(" ", "_") + "_"
+                asset_name += file_name
      
                 f.write("\t\t[Embed(source = \"" + files.replace("\\", "/") + "\"")
                 
                 # Fonts are special
                 if (key == 'ttf'):
-                    f.write(", embedAsCFF = \"false\", fontFamily = \"" + fname + "\")] private static const _" + assetName + ":Class\n")
-                    f.write("\t\tpublic static const " + assetName + ":String = \"" + fname + "\"\n\n")
+                    f.write(", embedAsCFF = \"false\", fontFamily = \"" + file_name + "\")] private static const _" + asset_name + ":Class\n")
+                    f.write("\t\tpublic static const " + asset_name + ":String = \"" + file_name + "\"\n\n")
                 else:
                     if (key != 'png' and key != 'mp3'):
                         f.write(", mimeType = \"application/octet-stream\"")
-                    f.write(")] public static const " + assetName + ":Class\n")
+                    f.write(")] public static const " + asset_name + ":Class\n")
      
             if (key != 'ttf'):
                 f.write("\n")
@@ -192,8 +184,8 @@ def do_magic():
 
 def main(): 
 
-    parse_arguments()
-    do_magic()
+    asset_path, output_path = parse_arguments()
+    do_magic(asset_path, output_path)
 
 if __name__ == "__main__":
     main()
