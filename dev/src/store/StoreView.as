@@ -4,6 +4,8 @@ package store
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	import common.ui.Button;
+	import common.Assets;
+	
 	/**
 	 * ...
 	 * TODO: Where does it pull my author name from? Coolton is cheeky, though.
@@ -12,26 +14,7 @@ package store
 	
 	 
 	public class StoreView extends World
-	{
-	
-		[Embed(source="/assets/store/back.png")]
-            private const BACK:Class;
-		
-		[Embed(source="/assets/store/bg.png")]
-            private const BG:Class;	
-		
-		[Embed(source="/assets/store/buy.png")]
-            private const BUY:Class;
-			
-		[Embed(source="/assets/store/instrument_image.png")]
-            private const INSTRUMENT_ITEM:Class;
-			
-		[Embed(source="/assets/store/left.png")]
-            private const LEFT:Class;
-			
-		[Embed(source="/assets/store/right.png")]
-            private const RIGHT:Class;
-		 	
+	{	
 		public function StoreView() 
 		{
 			addStoreButtons();
@@ -43,7 +26,7 @@ package store
 			add(Button.description()
 						.at(0, FP.height - 100)
 						.withDepth(-1)
-						.withImage(new Image(LEFT))
+						.withImage(new Image(Assets.IMG_LEFT))
 						.whenClicked(function():void {
 
 							FP.console.log("clicked left");
@@ -54,7 +37,7 @@ package store
 			add(Button.description()
 						.at(200, FP.height - 100)
 						.withDepth(-1)
-						.withImage(new Image(BACK))
+						.withImage(new Image(Assets.IMG_BACK))
 						.whenClicked(function():void {
 
 							FP.console.log("clicked back");
@@ -65,7 +48,7 @@ package store
 			add(Button.description()
 						.at(400, FP.height - 100)
 						.withDepth(-1)
-						.withImage(new Image(BUY))
+						.withImage(new Image(Assets.IMG_BUY))
 						.whenClicked(function():void {
 
 							FP.console.log("clicked buy");
@@ -76,7 +59,7 @@ package store
 			add(Button.description()
 						.at(600, FP.height - 100)
 						.withDepth(-1)
-						.withImage(new Image(RIGHT))
+						.withImage(new Image(Assets.IMG_RIGHT))
 						.whenClicked(function():void {
 
 							FP.console.log("clicked right");
@@ -87,7 +70,7 @@ package store
 			add(Button.description()
 						.at(50, 30)
 						.withDepth(-1)
-						.withImage(new Image(INSTRUMENT_ITEM))
+						.withImage(new Image(Assets.IMG_INSTRUMENT_IMAGE))
 						.whenClicked(function():void {
 
 							FP.console.log("clicked instrument");
