@@ -5,10 +5,10 @@ package hex
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
-        import flash.geom.Rectangle;
-        import common.ui.Button;
-        import net.flashpunk.graphics.Image;
-        import map.MapView;
+	import flash.geom.Rectangle;
+	import common.ui.Button;
+	import net.flashpunk.graphics.Image;
+	import map.MapView;
 	import hex.debug.DummyTileWorld;
 	import common.Assets;
 	
@@ -18,18 +18,14 @@ package hex
 	 */
 	public class HexView extends World 
 	{
-<<<<<<< HEAD
-            /*[Embed(source="/assets/map_from_hex_button.png")]
-            private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
-=======
-            [Embed(source="/assets/map-from-hex-button.png")]
-            private const MAP_BUTTON_SOURCE:Class;
->>>>>>> b847e0417c9c51c219d13587f51b351cb6852bbf
 
-            private var grid:HexGrid;
-            private var scrollCamera:ScrollCamera;
-            private var returningToMap:Boolean = false;
-			private var game:Game;
+		/*[Embed(source="/assets/map_from_hex_button.png")]
+		private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
+
+		private var grid:HexGrid;
+		private var scrollCamera:ScrollCamera;
+		private var returningToMap:Boolean = false;
+		private var game:Game;
 		
 		public function HexView(game:Game) 
 		{			

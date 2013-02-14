@@ -67,6 +67,11 @@
 				_source = FP.getBitmap(source);
 				_class = String(source);
 			}
+			else if (source is Image)
+			{
+				_source = source._source;
+				_class = source._class;
+			}
 			else if (source is BitmapData) _source = source;
 			if (!_source) throw new Error("Invalid source image.");
 			_sourceRect = _source.rect;

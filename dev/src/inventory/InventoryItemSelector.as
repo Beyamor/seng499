@@ -14,6 +14,7 @@ package inventory
 		private var stub:InstrumentStub;
 		public function InventoryItemSelector(x:int, y:int,stub:InstrumentStub) 
 		{
+			super(x, y);
 			this.stub = stub;
 			var images:Graphiclist = new Graphiclist();
 			//images.add() background Use coltons new graphic thing

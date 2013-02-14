@@ -1,6 +1,7 @@
 package map 
 {
 	import inventory.InventoryDisplay;
+	import inventory.InventoryItemSelector;
 	import model.Game;
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
@@ -17,7 +18,15 @@ package map
 		{
 			this.game = game;
 			add(new Node(70, 70));
-			add(new InventoryDisplay(game.data));
+			var display:InventoryDisplay = new InventoryDisplay(game.data);
+			add(display);
+			//display.fillInventoryDisplay();
+			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
+			for (var i:int = 0; i < inventoryEntities.length; i++ )
+			{
+				add(inventoryEntities[i])
+			}
+			
 		}
 		
 		override public function update():void 

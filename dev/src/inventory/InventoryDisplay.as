@@ -13,18 +13,19 @@ package inventory
 	{
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
 		private var inventoryList:Vector.<InstrumentStub>;
-		private const inventoryWidth:int = 1;
+		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 1;
 		private const inventoryOffset:int = 0;
 		public function InventoryDisplay(data:PlayerData) 
 		{
+			super();
 			x = 600;
 			graphic = new Image(Assets.IMG_INVENTORYBACKGOUND);
 			inventoryList = data.getInventory();
-			fillInventoryDisplay();
+			//fillInventoryDisplay();
 		}
 		
-		public function fillInventoryDisplay()
+		public function getInventoryEntities():Vector.<InventoryItemSelector>//fillInventoryDisplay()
 		{
 			instrumentSelectors = new Vector.<InventoryItemSelector>;
 			for (var i:int = 0; i < inventoryHeight; i++ )
@@ -35,12 +36,13 @@ package inventory
 																				, 50 + (i*100)
 																				, inventoryList[(i*inventoryWidth)+j])
 					instrumentSelectors.push(selector);
-					FP.world.add(selector);
+					//FP.world.add(selector);
 				}
 				
 				if (i * inventoryWidth >= inventoryList.length - inventoryOffset)
 					break;
 			}
+			return instrumentSelectors;
 		}
 		
 	}
