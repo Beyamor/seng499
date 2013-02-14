@@ -1,13 +1,21 @@
-package  
+package model 
 {
+	import common.Assets;
+	import net.flashpunk.graphics.Image;
 	/**
 	 * ...
 	 * @author Lambwatt
 	 */
 	public class PlayerData 
 	{
-		private var instrumentsInventory:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
-		private var storeList:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+		public var instrumentsInventory:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+		public var storeList:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+		
+		public function PlayerData()
+		{
+			populateStoreList();
+			addDummyData();
+		}
 		
 		public function printInventory()
 		{
@@ -24,13 +32,19 @@ package
 			instrumentsInventory.push(stub);
 		}
 		
-		public function populateStoreList()
+		public function populateStoreList():void
 		{
-			storeList.push(new InstrumentStub("A"));
-			storeList.push(new InstrumentStub("B"));
+			storeList.push(new InstrumentStub("A", new Image(Assets.IMG_TESTINSTRUMENT)));
+			storeList.push(new InstrumentStub("B", new Image(Assets.IMG_TESTINSTRUMENT)));
 		}
 		
-		public function getInventory()
+		public function addDummyData():void
+		{
+			addToInventory(new InstrumentStub("A", new Image(Assets.IMG_TESTINSTRUMENT)));
+			instrumentsInventory.push(new InstrumentStub("B", new Image(Assets.IMG_TESTINSTRUMENT)));
+		}
+		
+		public function getInventory():Vector.<InstrumentStub>
 		{
 			return instrumentsInventory;
 		}

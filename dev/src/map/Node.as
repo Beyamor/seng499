@@ -5,6 +5,7 @@ package map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
+	import common.Assets;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -12,12 +13,12 @@ package map
 	public class Node extends Entity
 	{
 		
-		[Embed(source = '../assets/Node.png')] private const NODE:Class;
+		//[Embed(source = '../assets/Node.png')] private const NODE:Class;
 		
 		public function Node(x:int, y:int) 
 		{
 			super(x, y);
-			graphic = new Image(NODE);
+			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
 			width = (graphic as Image).width;
 		}

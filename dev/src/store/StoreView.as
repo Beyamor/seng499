@@ -1,5 +1,6 @@
 package store 
 {
+	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
@@ -15,8 +16,10 @@ package store
 	 
 	public class StoreView extends World
 	{	
-		public function StoreView() 
+		private var game:Game;
+		public function StoreView(game:Game) 
 		{
+			this.game = game;
 			addStoreButtons();
 			
 		}

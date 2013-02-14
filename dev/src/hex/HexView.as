@@ -1,5 +1,6 @@
 package hex 
 {
+	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
@@ -9,6 +10,7 @@ package hex
         import net.flashpunk.graphics.Image;
         import map.MapView;
 	import hex.debug.DummyTileWorld;
+	import common.Assets;
 	
 	/**
 	 * ...
@@ -16,15 +18,17 @@ package hex
 	 */
 	public class HexView extends World 
 	{
-            [Embed(source="/assets/map_from_hex_button.png")]
-            private const MAP_BUTTON_SOURCE:Class;
+            /*[Embed(source="/assets/map_from_hex_button.png")]
+            private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
 
             private var grid:HexGrid;
             private var scrollCamera:ScrollCamera;
             private var returningToMap:Boolean = false;
+			private var game:Game;
 		
-		public function HexView() 
+		public function HexView(game:Game) 
 		{			
+			this.game = game;
                         // the hex grid bounds are 100% arbitrary, so deal with it
                         scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
 			grid = new HexGrid(this, 64, 2000, 2000);
@@ -32,7 +36,7 @@ package hex
                         add(Button.description()
                                     .at(FP.width - 50, 30)
                                     .withDepth(-1)
-                                    .withImage(new Image(MAP_BUTTON_SOURCE))
+                                    .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))//Refactored by MP
                                     .whenClicked(function():void {
 
                                         returningToMap = true;
@@ -50,7 +54,7 @@ package hex
                         // This is kinda junk.
                         if (returningToMap) {
 
-                            FP.world = new MapView;
+                            FP.world = new MapView(game);
                         }
 
                         else {

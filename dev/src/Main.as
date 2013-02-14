@@ -4,6 +4,7 @@ package
 	import flash.events.Event;
 	import hex.HexView;
 	import map.MapView;
+	import model.Game;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
@@ -16,7 +17,7 @@ package
 	 */
 	public class Main extends Engine 
 	{
-		
+		private var game:Game;
 		public function Main():void 
 		{
 			super(800, 600);
@@ -25,6 +26,8 @@ package
 		override public function init():void 
 		{
 			super.init();
+			
+			initModel();
 			
 			FP.console.enable();
 			
@@ -41,9 +44,14 @@ package
 		{
 			super.update();
 			
-			if (Input.pressed("debug-hex-start"))	FP.world = new HexView;
-			else if (Input.pressed("debug-map-start"))	FP.world = new MapView;
-			else if (Input.pressed("debug-store-start")) FP.world = new StoreView;
+			if (Input.pressed("debug-hex-start"))	FP.world = new HexView(game);
+			else if (Input.pressed("debug-map-start"))	FP.world = new MapView(game);
+			else if (Input.pressed("debug-store-start")) FP.world = new StoreView(game);
+		}
+		
+		private function initModel():void
+		{
+			game = new Game();
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package  
+package model 
 {
 	/**
 	 * ...
@@ -6,11 +6,12 @@ package
 	 */
 	public class Game 
 	{
-		var state:GameState = new GameState();
-		var data:PlayerData = new PlayerData();
+		public var state:GameState = new GameState();
+		public var data:PlayerData = new PlayerData();
 		public function Game() 
 		{
-			
+			state = new GameState();
+			data = new PlayerData();
 		}
 		
 	}

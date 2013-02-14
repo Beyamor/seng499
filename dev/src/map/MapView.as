@@ -1,5 +1,7 @@
 package map 
 {
+	import inventory.InventoryDisplay;
+	import model.Game;
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
@@ -10,10 +12,12 @@ package map
 	public class MapView extends World
 	{
 		
-		
-		public function MapView() 
+		private var game:Game;
+		public function MapView(game) 
 		{
+			this.game = game;
 			add(new Node(70, 70));
+			add(new InventoryDisplay(game.data));
 		}
 		
 		override public function update():void 
