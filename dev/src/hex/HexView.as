@@ -18,8 +18,13 @@ package hex
 	 */
 	public class HexView extends World 
 	{
+<<<<<<< HEAD
             /*[Embed(source="/assets/map_from_hex_button.png")]
             private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
+=======
+            [Embed(source="/assets/map-from-hex-button.png")]
+            private const MAP_BUTTON_SOURCE:Class;
+>>>>>>> b847e0417c9c51c219d13587f51b351cb6852bbf
 
             private var grid:HexGrid;
             private var scrollCamera:ScrollCamera;

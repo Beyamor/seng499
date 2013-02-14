@@ -22,11 +22,17 @@
 # Stuff you can change is right below!
 ##################################################################
 
+import os.path
+import re
+
 # HACK: fix the function - CP
 PACKAGE_NAME = 'common'
 
-DEFAULT_ASSET_PATH = r"..\dev\src\assets"
-DEFAULT_OUTPUT_PATH = r"..\dev\src\common\Assets.as"
+#DEFAULT_ASSET_PATH = r"..\dev\src\assets"
+#DEFAULT_OUTPUT_FILE = r"..\dev\src\common\Assets.as"
+DEFAULT_ASSET_PATH = os.path.join("..", "dev", "src", "assets")
+DEFAULT_OUTPUT_FILE = os.path.join("..", "dev", "src", "common",
+"Assets.as")
 
 # What extensions to look for
 EXTENSIONS = [
@@ -66,18 +72,16 @@ Add names of folders to EXCLUDES to skip them.
 Assets cannot contain some symbols!
 """
  
-import os
- 
 def parse_arguments():
     import sys
     
     if (len(sys.argv) == 1):
         print (USAGE_STRING)
-        return DEFAULT_ASSET_PATH, DEFAULT_OUTPUT_PATH       
+        return DEFAULT_ASSET_PATH, DEFAULT_OUTPUT_FILE       
     
     asset_path = sys.argv[1]
-    output_path = sys.argv[2]
-    return asset_path, output_path    
+    output_file = sys.argv[2]
+    return asset_path, output_file    
 
 # TODO: This doesn't appear to work. PN is always "" - CP  
 # Figure out the package name based on the folder
@@ -108,7 +112,8 @@ def give_me_the_dicts():
     
     return asset_dict, prefix_dict
  
-def build_asset_dict(asset_path, output_path, asset_dict):
+def build_asset_dict(asset_path, output_file, asset_dict):
+   output_file_directory, _ = os.path.split(output_file)
    for root,dirs,files in os.walk(asset_path):
      
         if (os.path.basename(root) in EXCLUDES):
@@ -117,11 +122,14 @@ def build_asset_dict(asset_path, output_path, asset_dict):
         for file_name in files:
             extension = os.path.splitext(file_name)[1][1:] # w/o '.'
             if (extension in asset_dict ):
-                asset_dict[extension].append(os.path.relpath(root, output_path)[3:] + '\\' + file_name)
+                asset_dict[extension].append(
+                        os.path.join(
+                            os.path.relpath(root, output_file_directory),
+                            file_name))
  
-def write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_path, class_name):   
+def write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_file, class_name):   
     
-    file = open(output_path, 'w+')
+    file = open(output_file, 'w+')
     file.write(\
     """package """ + package_name + """{
 \t/* Auto generated from AssetGenerator.py! */
@@ -129,43 +137,44 @@ def write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_path
 \t
 """);
      
-    for key, value in asset_dict.items():
-        if (len(asset_dict[key]) == 0):
+    for extension, files_with_extension in asset_dict.items():
+        if (len(files_with_extension) == 0):
             continue
             
-        file.write ("\t\t/* Generating " + key + " assets! */\n")
+        file.write ("\t\t/* Generating " + extension + " assets! */\n")
  
-        for file_path in asset_dict[key]:
+        for file_path in files_with_extension:
             file.write("\t\t[Embed(source = \"" + file_path.replace("\\", "/") + "\"")
             
-            file_name = os.path.splitext(os.path.basename(file_path))[0].replace(" ", "_")
-            asset_name = prefix_dict[key] + "_" + file_name.upper()
+            file_name = os.path.splitext(os.path.basename(file_path))[0]
+            clean_file_name = re.sub("[- ]", "_", file_name)
+            asset_name = prefix_dict[extension] + "_" + clean_file_name.upper()
             
-            if (key == 'ttf'):
+            if (extension == 'ttf'):
                 file.write(", embedAsCFF = \"false\", fontFamily = \"" + file_name + "\")] private static const _" + asset_name + ":Class\n")
                 file.write("\t\tpublic static const " + asset_name + ":String = \"" + file_name + "\"\n\n")
-            if (key != 'png' and key != 'mp3'):
+            if (extension != 'png' and extension != 'mp3'):
                 file.write(", mimeType = \"application/octet-stream\"")
             
             file.write(")] public static const " + asset_name + ":Class\n")
  
-        if (key != 'ttf'):
+        if (extension != 'ttf'):
             file.write("\n")
  
     file.write("\t}\n}")
     file.close()
  
-def do_magic(asset_path, output_path):
-    class_name = os.path.splitext(os.path.basename(output_path))[0]
-    package_name = package_name_from_path(output_path)
+def do_magic(asset_path, output_file):
+    class_name = os.path.splitext(os.path.basename(output_file))[0]
+    package_name = package_name_from_path(output_file)
     asset_dict, prefix_dict = give_me_the_dicts()
     
-    build_asset_dict(asset_path, output_path, asset_dict)
-    write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_path, class_name)
+    build_asset_dict(asset_path, output_file, asset_dict)
+    write_to_file(asset_dict, prefix_dict, package_name, asset_path, output_file, class_name)
 
 def main(): 
-    asset_path, output_path = parse_arguments()
-    do_magic(asset_path, output_path)
+    asset_path, output_file = parse_arguments()
+    do_magic(asset_path, output_file)
 
 if __name__ == "__main__":
     main()
