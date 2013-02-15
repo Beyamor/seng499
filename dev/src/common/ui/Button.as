@@ -32,12 +32,9 @@ package common.ui
 		{
 			if (Input.mousePressed)
 			{
-                                var worldMouseX:Number = Input.mouseX + FP.camera.x,
-                                    worldMouseY:Number = Input.mouseY + FP.camera.y;
-
-				if ( worldMouseX >= x && worldMouseX <= x + width)//uses world coordinates
+				if ( FP.world.mouseX >= x && FP.world.mouseX <= x + width)
 				{
-					if ( worldMouseY >= y && worldMouseY <= y + height)//uses world coordinates
+					if (FP.world.mouseY >= y && FP.world.mouseY <= y + height)
 					{
 						return true;
 					}
