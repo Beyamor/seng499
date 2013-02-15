@@ -18,10 +18,6 @@ package hex
 	 */
 	public class HexView extends World 
 	{
-
-		/*[Embed(source="/assets/map_from_hex_button.png")]
-		private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
-
 		private var grid:HexGrid;
 		private var scrollCamera:ScrollCamera;
 		private var returningToMap:Boolean = false;
@@ -37,7 +33,7 @@ package hex
                         add(Button.description()
                                     .at(FP.width - 50, 30)
                                     .withDepth(-1)
-                                    .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))//Refactored by MP
+                                    .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
                                     .whenClicked(function():void {
 
                                         returningToMap = true;
