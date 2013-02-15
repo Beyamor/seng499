@@ -9,7 +9,6 @@ package hex
 	import common.ui.Button;
 	import net.flashpunk.graphics.Image;
 	import map.MapView;
-	import hex.debug.DummyTileWorld;
 	import common.Assets;
 	
 	/**
@@ -18,10 +17,6 @@ package hex
 	 */
 	public class HexView extends World 
 	{
-
-		/*[Embed(source="/assets/map_from_hex_button.png")]
-		private const MAP_BUTTON_SOURCE:Class; Refactored be MP*/
-
 		private var grid:HexGrid;
 		private var scrollCamera:ScrollCamera;
 		private var returningToMap:Boolean = false;
@@ -37,7 +32,7 @@ package hex
                         add(Button.description()
                                     .at(FP.width - 50, 30)
                                     .withDepth(-1)
-                                    .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))//Refactored by MP
+                                    .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
                                     .whenClicked(function():void {
 
                                         returningToMap = true;
@@ -66,8 +61,7 @@ package hex
 
                                     if (tile.containsPoint(FP.world.mouseX, FP.world.mouseY)) {
 										
-                                        FP.world = new DummyTileWorld(tile);
-                                        break;
+                                        game.state.hexController.hexSelected(tile);
                                     }
                                 }
                             }
