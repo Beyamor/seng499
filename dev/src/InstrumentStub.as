@@ -11,6 +11,7 @@ package
 		private var name:String;
 		private var stub:Class = Instrument;
 		private var image:Image;
+		//private var screenX:int = 600;
 		
 		public function InstrumentStub(name:String, image:Image/*, instrument:Class*/) 
 		{
@@ -39,6 +40,11 @@ package
 		public function getInstrument():Instrument
 		{
 			return(new stub(name));
+		}
+		
+		public function getNameString():String
+		{
+			return (name);
 		}
 	}
 }

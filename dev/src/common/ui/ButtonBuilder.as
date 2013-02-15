@@ -56,8 +56,8 @@ package common.ui
 		  */
 		 public function withGraphicList(list:Graphiclist):ButtonBuilder{
 			 
-			//impliedWidth 	= list[0].width;
-			//impliedHeight 	= list[0].height;
+			impliedWidth 	= list.width;
+			impliedHeight 	= list.height;
 			graphic 		= list;
 			
 			return this;

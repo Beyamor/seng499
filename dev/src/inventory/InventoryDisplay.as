@@ -16,10 +16,13 @@ package inventory
 		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 1;
 		private const inventoryOffset:int = 0;
+		private var screenX:int = 600;
+		private var screenY:int = 0;
 		public function InventoryDisplay(data:PlayerData) 
 		{
 			super();
-			x = 600;
+			x = screenX;
+			y = screenY;
 			graphic = new Image(Assets.IMG_INVENTORYBACKGOUND);
 			inventoryList = data.getInventory();
 			//fillInventoryDisplay();
@@ -45,6 +48,12 @@ package inventory
 			return instrumentSelectors;
 		}
 		
+		override public function update():void 
+		{
+			super.update();
+			x = FP.camera.x + screenX;
+			y = FP.camera.y + screenY;
+		}
 	}
 
 }

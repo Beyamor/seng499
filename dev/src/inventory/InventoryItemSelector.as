@@ -5,6 +5,7 @@ package inventory
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
+	import net.flashpunk.FP;
 	import common.Assets;
 	/**
 	 * ...
@@ -45,9 +46,13 @@ package inventory
 		public function getButton():Button 
 		{
 			return Button.description()
-										.withGraphicList(assembleGraphic())
-										.at(x, y)
-										.build();
+							.withGraphicList(assembleGraphic())
+							.at(x, y)
+							.whenClicked(function():void {
+
+								FP.console.log("clicked "+stub.getNameString());
+							})
+							.build();
 		}
 		
 	}

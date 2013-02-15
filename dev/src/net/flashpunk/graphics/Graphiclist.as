@@ -118,6 +118,26 @@
 		public function get count():uint { return _count; }
 		
 		/**
+		 * Background graphic width
+		 */
+		public function get width():uint {
+			if(_graphics[0]!=null && _graphics[0] is Image)
+				return (_graphics[0] as Image).width;
+			else
+				return 0;
+		}
+		
+		 /**
+		 * Background graphic height
+		 */
+		 public function get height():uint {
+			if(_graphics[0]!=null && _graphics[0] is Image)
+				return (_graphics[0] as Image).height;
+			else
+				return 0;
+		}
+		
+		/**
 		 * Check if the Graphiclist should update.
 		 */
 		private function updateCheck():void
