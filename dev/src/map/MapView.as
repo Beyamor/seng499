@@ -24,7 +24,7 @@ package map
 			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
 			for (var i:int = 0; i < inventoryEntities.length; i++ )
 			{
-				add(inventoryEntities[i])
+				add(inventoryEntities[i].getButton())
 			}
 			
 		}

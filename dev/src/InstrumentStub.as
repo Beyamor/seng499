@@ -24,6 +24,7 @@ package
 			var txt:Text = new Text(name);
 			txt.x = x;
 			txt.y = y;
+			txt.color = 0x000000;
 			return txt;
 		}
 		

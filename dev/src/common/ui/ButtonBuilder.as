@@ -2,6 +2,7 @@ package common.ui
 {
 
     import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Image;
 
     /**
@@ -48,6 +49,19 @@ package common.ui
 
             return this;
          }
+		 
+		 /**
+		  * 	Sets the button's image to an incomming image list
+		  * 	This implicitly sets the height and width to that of the first image in the list
+		  */
+		 public function withGraphicList(list:Graphiclist):ButtonBuilder{
+			 
+			//impliedWidth 	= list[0].width;
+			//impliedHeight 	= list[0].height;
+			graphic 		= list;
+			
+			return this;
+		 }
 
          /**
           *     Sets the button's onClick handler.
