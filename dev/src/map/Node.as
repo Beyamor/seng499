@@ -12,9 +12,6 @@ package map
 	 */
 	public class Node extends Entity
 	{
-		
-		//[Embed(source = '../assets/Node.png')] private const NODE:Class;
-		
 		public function Node(x:int, y:int) 
 		{
 			super(x, y);
@@ -26,14 +23,13 @@ package map
 		public override function update():void
 		{
 			super.update();
-			if (check_for_mouse_click())
+			if (checkForMouseClick())
 			{
-				//go_to_node_hex();
-				
+				//goToNodeHex();
 			}
 		}
 		
-		private function check_for_mouse_click():Boolean
+		private function checkForMouseClick():Boolean
 		{
 			if (Input.mousePressed)
 			{
@@ -49,7 +45,7 @@ package map
 			return false;
 		}
 		
-		private function go_to_node_hex():void
+		private function goToNodeHex():void
 		{
 			
 		}

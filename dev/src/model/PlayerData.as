@@ -22,7 +22,7 @@ package model
 			trace("begin");
 			for (var i:int; i < instrumentsInventory.length; i++ )
 			{
-				trace((instrumentsInventory[i]as Instrument).get_name());
+				trace((instrumentsInventory[i]as Instrument).getName());
 			}
 			trace("end");
 		}
