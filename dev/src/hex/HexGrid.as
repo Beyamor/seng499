@@ -78,7 +78,7 @@ package hex
                     if (tileExists(xIndex, yIndex)) return;
 
                     var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
-                    var tile:HexTile = new HexTile(pos.x, pos.y, hexProperties.radius);
+                    var tile:HexTile = new HexTile(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
 
                     world.add(tile);
                     addToGrid(xIndex, yIndex, tile);

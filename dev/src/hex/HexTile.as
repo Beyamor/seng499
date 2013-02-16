@@ -28,16 +28,24 @@ package hex
 		private var _vertices:Vector.<Point>;
 		private function get vertices():Vector.<Point> { return _vertices; }
 
+                // The indices in the grid
+                private var _xIndex:uint;
+                private var _yIndex:uint;
+                public function get xIndex():uint { return _xIndex; }
+                public function get yIndex():uint { return _yIndex; }
+
 		/**
 		 * Creates a new hex tile.
 		 * @param	x - The x position of the hex in the world.
 		 * @param	y - The y position of the hex in the world.
 		 * @param	radius - The distane from the center of the hex to one of its vertices.
 		 */
-		public function HexTile(x:Number, y:Number, radius:Number)
+		public function HexTile(xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
 
+                        _xIndex = xIndex;
+                        _yIndex = yIndex;
 			_radius = radius;
 			_color = FP.rand(0xFFFFFF);
 
