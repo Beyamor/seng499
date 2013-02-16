@@ -8,6 +8,6 @@ package hex.controllers {
      */
     public interface HexController {
 
-        function hexSelected(hex:HexTile):void;
+        function hexSelected(tile:HexTile):void;
     }
 }

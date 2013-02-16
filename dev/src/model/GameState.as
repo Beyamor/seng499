@@ -2,6 +2,7 @@ package model
 {
         import hex.controllers.HexController;
         import hex.controllers.TileViewer;
+        import hex.controllers.InstrumentPlacer;
 
 	/**
 	 * ...
@@ -26,7 +27,7 @@ package model
                     // So, I mean, we're either navigating or placing an item
                     // The mechanics should change as the game state is actually implemented
                     // But this interface is what the HexView will be dependent upon.
-                    return new TileViewer;
+                    return new InstrumentPlacer;
                 }
 		
 	}

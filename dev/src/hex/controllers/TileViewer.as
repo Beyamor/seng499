@@ -9,9 +9,9 @@ package hex.controllers {
      */
     public class TileViewer implements HexController {
 
-        public function hexSelected(hex:HexTile):void {
+        public function hexSelected(tile:HexTile):void {
 
-            FP.world = new DummyTileWorld(hex);
+            FP.world = new DummyTileWorld(tile);
         }
     }
 }
