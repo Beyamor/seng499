@@ -47,7 +47,7 @@ package hex.controllers {
             // Debug to check instrument placement
             var instruments:Vector.<Instrument> = HexData.getInstruments(tile.xIndex, tile.yIndex);
             var placedInstrument:Instrument     = instruments[instruments.length-1] 
-            FP.log("Placed " + placedInstrument.get_name() + " at " + tile.xIndex + ", " + tile.yIndex);
+            FP.log("Placed " + placedInstrument.getName() + " at " + tile.xIndex + ", " + tile.yIndex);
 
             // Okay. Switch out of instrument placement I guess?
             view.controller = new TileViewer;
