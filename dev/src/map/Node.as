@@ -5,6 +5,8 @@ package map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
+	import model.GameState;
+	import model.Game;
 	import common.Assets;
 	/**
 	 * ...
@@ -12,9 +14,6 @@ package map
 	 */
 	public class Node extends Entity
 	{
-		
-		//[Embed(source = '../assets/Node.png')] private const NODE:Class;
-		
 		public function Node(x:int, y:int) 
 		{
 			super(x, y);
@@ -26,14 +25,13 @@ package map
 		public override function update():void
 		{
 			super.update();
-			if (check_for_mouse_click())
+			if (checkForMouseClick())
 			{
-				//go_to_node_hex();
-				
+				//goToNodeHex();
 			}
 		}
 		
-		private function check_for_mouse_click():Boolean
+		private function checkForMouseClick():Boolean
 		{
 			if (Input.mousePressed)
 			{
@@ -41,7 +39,14 @@ package map
 				{
 					if ( FP.world.mouseY >= y && FP.world.mouseY <= y + height)
 					{
-						trace("click detected on node");
+						//Bugs evaluating these statements.  Need to be fixed
+						if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing)
+						{
+							FP.console.log("placing");
+						}else 
+						{
+							FP.console.log("zooming");
+						}
 						return true;
 					}
 				}
@@ -49,7 +54,7 @@ package map
 			return false;
 		}
 		
-		private function go_to_node_hex():void
+		private function goToNodeHex():void
 		{
 			
 		}
