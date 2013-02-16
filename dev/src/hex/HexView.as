@@ -29,8 +29,11 @@ package hex
 		{			
 			this.game = game;
 
-                        controller = (new ControllerFactory).createFor(game, this);
+                        // Temporary. Creating an instrument to place.
+                        // TODO: Ask MP why we're using instrument stubs and not instruments here
+                        game.state.setInstrumentBeingPlaced(new InstrumentStub(randomInstrumentName(), null));
 
+                        controller = (new ControllerFactory).createFor(game, this);
 
                         // the hex grid bounds are 100% arbitrary, so deal with it
                         scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
@@ -46,7 +49,26 @@ package hex
                                     })
                                     .build());
 		}
-		
+
+                /**
+                 *      Yoinked from: http://actionscriptsnips.blogspot.ca/2009/08/generate-random-string.html
+                 *      Temporary until reading real instruments.
+                 */
+                private function randomInstrumentName():String{
+
+                    var strlen:uint = 8;
+                    var chars:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    var num_chars:Number = chars.length - 1;
+                    var randomChar:String = "";
+
+                    for (var i:Number = 0; i < strlen; i++){
+
+                        randomChar += chars.charAt(Math.floor(Math.random() * num_chars));
+                    }
+
+                    return randomChar;
+                 }
+
 		override public function update():void 
 		{
 			super.update();

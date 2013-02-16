@@ -10,9 +10,18 @@ package hex.controllers {
 
         public function createFor(game:Game, hexView:HexView):HexController {
 
-           // So, uh, once the game state actually has, y'know, state
-           // this should, uh, read that state
-           return new InstrumentPlacer(hexView);
+            if (game.state.getPlacing()) {
+
+                return new InstrumentPlacer(
+                                hexView,
+                                game.state.getInstrumentBeingPlaced().getInstrument());
+            }
+
+            else {
+
+                return new TileViewer;
+            }
         }
+
     }
 }

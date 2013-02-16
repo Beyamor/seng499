@@ -14,6 +14,7 @@ package model
 			
 		}
 		
+                // Can we change this to isPlacing or something like that?
 		public function getPlacing():Boolean
 		{
 			return placing;

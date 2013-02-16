@@ -13,32 +13,11 @@ package hex.controllers {
         private var instrument:Instrument;
         private var view:HexView;
 
-        public function InstrumentPlacer(view:HexView) {
+        public function InstrumentPlacer(view:HexView, instrument:Instrument) {
 
             this.view = view;
-
-            // TODO: get the instrument from the game state
-            instrument = new Instrument(randomInstrumentName());
+            this.instrument = instrument;
         }
-
-    /**
-     *      Yoinked from: http://actionscriptsnips.blogspot.ca/2009/08/generate-random-string.html
-     *      Temporary until reading real instruments.
-     */
-    private function randomInstrumentName():String{
-
-        var strlen:uint = 8;
-        var chars:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var num_chars:Number = chars.length - 1;
-        var randomChar:String = "";
-
-        for (var i:Number = 0; i < strlen; i++){
-
-            randomChar += chars.charAt(Math.floor(Math.random() * num_chars));
-        }
-
-        return randomChar;
-     }
 
         public function hexSelected(tile:HexTile):void {
 
