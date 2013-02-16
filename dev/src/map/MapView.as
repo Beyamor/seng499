@@ -14,7 +14,7 @@ package map
 	{
 		
 		private var game:Game;
-		public function MapView(game) 
+		public function MapView(game:Game) 
 		{
 			this.game = game;
 			add(new Node(70, 70));
@@ -39,8 +39,15 @@ package map
 			if (Input.check("hex-scroll-down"))		FP.camera.y += speed;
 			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
 			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
+			
+			if(game.state.getPlacing())
+				FP.console.log("state = "+game.state.getInstrumentBeingPlaced());
 		}
 		
+		public function getGame():Game 
+		{
+			return game;
+		}
 	}
 
 }

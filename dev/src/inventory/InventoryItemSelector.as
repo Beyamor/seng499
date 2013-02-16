@@ -1,11 +1,14 @@
 package inventory 
 {
 	import common.ui.Button;
+	import map.MapView;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.FP;
+	import model.GameState;
+	import model.Game;
 	import common.Assets;
 	/**
 	 * ...
@@ -49,8 +52,12 @@ package inventory
 							.withGraphicList(assembleGraphic())
 							.at(x, y)
 							.whenClicked(function():void {
-
-								FP.console.log("clicked "+stub.getNameString());
+								//DO NOT REMOVE. Statements need to be fixed.
+								/*if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing==false)
+								{
+									(((FP.world as MapView).getGame as Game).state as GameState).setInstrumentBeingPlaced(stub);
+								}*/
+								FP.console.log("clicked "+stub.getNameString);
 							})
 							.build();
 		}

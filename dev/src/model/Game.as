@@ -14,6 +14,7 @@ package model
 			data = new PlayerData();
 		}
 		
+	
 	}
 
 }
