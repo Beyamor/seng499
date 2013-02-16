@@ -23,7 +23,7 @@ package hex
 		private var scrollCamera:ScrollCamera;
 		private var returningToMap:Boolean = false;
 		private var game:Game;
-                private var controller:HexController;
+                public var  controller:HexController;
 		
 		public function HexView(game:Game) 
 		{			

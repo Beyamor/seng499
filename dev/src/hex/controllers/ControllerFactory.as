@@ -12,7 +12,7 @@ package hex.controllers {
 
            // So, uh, once the game state actually has, y'know, state
            // this should, uh, read that state
-           return new InstrumentPlacer;
+           return new InstrumentPlacer(hexView);
         }
     }
 }
