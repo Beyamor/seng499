@@ -10,6 +10,7 @@ package hex
 	import net.flashpunk.graphics.Image;
 	import map.MapView;
 	import common.Assets;
+        import hex.controllers.HexController;
 	
 	/**
 	 * ...
@@ -21,10 +22,15 @@ package hex
 		private var scrollCamera:ScrollCamera;
 		private var returningToMap:Boolean = false;
 		private var game:Game;
+                private var controller:HexController;
 		
 		public function HexView(game:Game) 
 		{			
 			this.game = game;
+
+                        controller = game.state.hexController;
+
+
                         // the hex grid bounds are 100% arbitrary, so deal with it
                         scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
 			grid = new HexGrid(this, 64, 2000, 2000);
@@ -61,7 +67,7 @@ package hex
 
                                     if (tile.containsPoint(FP.world.mouseX, FP.world.mouseY)) {
 										
-                                        game.state.hexController.hexSelected(tile);
+                                        controller.hexSelected(tile);
                                     }
                                 }
                             }
