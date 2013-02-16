@@ -11,6 +11,7 @@ package hex
 	import map.MapView;
 	import common.Assets;
         import hex.controllers.HexController;
+        import hex.controllers.ControllerFactory;
 	
 	/**
 	 * ...
@@ -28,7 +29,7 @@ package hex
 		{			
 			this.game = game;
 
-                        controller = game.state.hexController;
+                        controller = (new ControllerFactory).createFor(game, this);
 
 
                         // the hex grid bounds are 100% arbitrary, so deal with it
