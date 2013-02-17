@@ -1,4 +1,4 @@
-package hex 
+package hex.math
 {
 	/**
 	 * This guy's just represents a bunch of mathematical properties

@@ -3,6 +3,7 @@ package hex
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
         import flash.geom.Point;
+        import hex.math.*;
 
 	/**
 	 * This represents a grid of hexagon tiles.

@@ -1,4 +1,4 @@
-package hex {
+package hex.math {
 
     import flash.geom.Point;
 
