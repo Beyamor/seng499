@@ -17,7 +17,7 @@ package model
 			addDummyData();
 		}
 		
-		public function printInventory()
+		public function printInventory():void
 		{
 			trace("begin");
 			for (var i:int; i < instrumentsInventory.length; i++ )
@@ -27,7 +27,7 @@ package model
 			trace("end");
 		}
 		
-		public function addToInventory(instrumentData:InstrumentData)
+		public function addToInventory(instrumentData:InstrumentData):void
 		{
 			instrumentsInventory.push(instrumentData);
 		}
