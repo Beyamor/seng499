@@ -50,7 +50,7 @@ package inventory
 		{
 			return Button.description()
 							.withGraphicList(assembleGraphic())
-							.at(x, y)
+							.fixedAt(x, y)
 							.whenClicked(function():void {
 								//DO NOT REMOVE. Statements need to be fixed.
 								if ((FP.world as MapView).getGame().state.isPlacing()==false)
