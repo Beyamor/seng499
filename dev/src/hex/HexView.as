@@ -40,7 +40,7 @@ package hex
 			grid = new HexGrid(this, 64, 2000, 2000);
 
                         add(Button.description()
-                                    .at(FP.width - 50, 30)
+                                    .fixedAt(FP.width - 50, 30)
                                     .withDepth(-1)
                                     .withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
                                     .whenClicked(function():void {

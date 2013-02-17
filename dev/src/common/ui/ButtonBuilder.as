@@ -21,21 +21,37 @@ package common.ui
         private var graphic:Graphic;
         private var onClick:Function;
         private var depth:Number                = 0;
+        private var isFixed:Boolean             = false;
 
         public function ButtonBuilder() {
 
         }
 
         /**
-         *      Sets the position of the button relative to the screen.
+         *      Sets the position of the button in the world.
+         *      This is not screen-relative.
          */
         public function at(x:int, y:int):ButtonBuilder {
 
+            this.isFixed = false;
             this.x = x;
             this.y = y;
 
             return this;
         }
+
+        /**
+         *      Sets the position of the button relative to the screen.
+         *      The button will be fixed onscreen at these screen-relative coordinates.
+         */
+         public function fixedAt(x:int, y:int):ButtonBuilder {
+
+            this.isFixed = true;
+            this.x = x;
+            this.y = y;
+
+            return this;
+         }
 
         /**
          *      Sets the button's image.
@@ -92,6 +108,7 @@ package common.ui
                 if (!heightExplicitlySet)   height  = impliedHeight;
 
                 var b:Button =  new Button(
+                                        isFixed,
                                         x,
                                         y,
                                         width,
