@@ -40,8 +40,8 @@ package map
 			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
 			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
 			
-			if(game.state.getPlacing())
-				FP.log("state = "+game.state.getInstrumentBeingPlaced());
+			//if(game.state.isPlacing())
+				//FP.log("state = placing "+game.state.getInstrumentBeingPlaced().getNameString());
 		}
 		
 		public function getGame():Game 
