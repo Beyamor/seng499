@@ -16,20 +16,20 @@ package inventory
 	 */
 	public class InventoryItemSelector //extends Entity
 	{
-		private var instrumentData:InstrumentData;
+		private var stub:InstrumentStub;
 		private var x:int;
 		private var y:int;
-		public function InventoryItemSelector(x:int, y:int,instrumentData:InstrumentData) 
+		public function InventoryItemSelector(x:int, y:int,stub:InstrumentStub) 
 		{
 			//super(x, y);
 			this.x = x;
 			this.y = y;
-			this.instrumentData = instrumentData;
+			this.stub = stub;
 			//var images:Graphiclist = new Graphiclist();
 			/*/images.add() background Use coltons new graphic thing
 			/images.add(new Image(Assets.IMG_ITEMBACKGROUND));
-			images.add(instrumentData.getImageAt(5,5));
-			images.add(instrumentData.getTextAt(5, 60)); //add instrument name text
+			images.add(stub.getImageAt(5,5));
+			images.add(stub.getTextAt(5, 60)); //add instrument name text
 			graphic = images;
 			
 			setHitbox(images[0].width, images[0].height);
@@ -41,8 +41,8 @@ package inventory
 			var images:Graphiclist = new Graphiclist();
 			//images.add() background Use coltons new graphic thing
 			images.add(new Image(Assets.IMG_ITEMBACKGROUND));
-			images.add(instrumentData.getImageAt(5,5));
-			images.add(instrumentData.getTextAt(5, 60)); //add instrument name text
+			images.add(stub.getImageAt(5,5));
+			images.add(stub.getTextAt(5, 60)); //add instrument name text
 			return images;
 		}
 		
@@ -53,11 +53,11 @@ package inventory
 							.at(x, y)
 							.whenClicked(function():void {
 								//DO NOT REMOVE. Statements need to be fixed.
-								/*if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing==false)
+								if ((FP.world as MapView).getGame().state.isPlacing()==false)
 								{
-									(((FP.world as MapView).getGame as Game).state as GameState).setInstrumentBeingPlaced(instrumentData);
-								}*/
-								FP.console.log("clicked "+instrumentData.getNameString);
+									(FP.world as MapView).getGame().state.setInstrumentBeingPlaced(stub);
+								}
+								FP.console.log("clicked "+stub.getNameString);
 							})
 							.build();
 		}

@@ -10,7 +10,7 @@ package hex.controllers {
 
         public function createFor(game:Game, hexView:HexView):HexController {
 
-            if (game.state.getPlacing()) {
+            if (game.state.isPlacing()) {
 
                 return new InstrumentPlacer(
                                 hexView,
