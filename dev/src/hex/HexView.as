@@ -1,5 +1,6 @@
 package hex 
 {
+        import flash.geom.Point;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -12,6 +13,7 @@ package hex
 	import common.Assets;
         import hex.controllers.HexController;
         import hex.controllers.ControllerFactory;
+        import hex.math.SpaceConverter;
 	
 	/**
 	 * ...
@@ -25,7 +27,7 @@ package hex
 		private var game:Game;
                 public var  controller:HexController;
 		
-		public function HexView(game:Game) 
+		public function HexView(game:Game, mapX:Number, mapY:Number)
 		{			
 			this.game = game;
 
@@ -35,8 +37,24 @@ package hex
                         controller = (new ControllerFactory).createFor(game, this);
 
                         // the hex grid bounds are 100% arbitrary, so deal with it
-                        scrollCamera = new ScrollCamera(350, 0, 0, 2000, 2000);
-			grid = new HexGrid(this, 64, 2000, 2000);
+                        const WIDTH:uint        = 20000;
+                        const HEIGHT:uint       = 20000;
+                        const HEX_RADIUS:uint   = 60;
+
+                        var converter:SpaceConverter = new SpaceConverter(
+                                                        HEX_RADIUS,
+                                                        GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
+                                                        WIDTH, HEIGHT);
+
+                        var hexCoords:Point         = converter.getConvertedPoint(mapX, mapY);
+                        var initialCameraX:Number    = hexCoords.x - FP.width/2;
+                        var initialCameraY:Number    = hexCoords.y - FP.height/2;
+
+                        FP.camera.x = initialCameraX;
+                        FP.camera.y = initialCameraY;
+
+                        scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
+			grid = new HexGrid(this, HEX_RADIUS, WIDTH, HEIGHT);
 
                         add(Button.description()
                                     .fixedAt(FP.width - 50, 30)

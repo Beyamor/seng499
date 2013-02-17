@@ -5,13 +5,13 @@ package hex.math {
     /**
      *      This guy provides conversions between one space (e.g., map) to another (e.g., hexes)
      */
-    class SpaceConverter {
+    public class SpaceConverter {
         
         // Properties!
         private var _hexProperties:HexGeometricProperties;
         private function get hexProperties():HexGeometricProperties { return _hexProperties; }
         private var _gridMather:HexGridMather;
-        private function get gridMather:HexGridMather() { return _gridMather; }
+        private function get gridMather():HexGridMather { return _gridMather; }
 
         private var _xScale:Number;
         private function get xScale():Number { return _xScale; }
@@ -24,7 +24,7 @@ package hex.math {
             toWidthInPixels:Number,   toHeightInPixels:Number) {
 
             _hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
-            _gridMather         = new GridMather(hexagonRadius, toWidthInPixels, toHeightInPixels);
+            _gridMather         = new HexGridMather(hexagonRadius, toWidthInPixels, toHeightInPixels);
             _xScale             = toWidthInPixels / fromWidthInPixels;
             _yScale             = toHeightInPixels / fromHeightInPixels;
         }

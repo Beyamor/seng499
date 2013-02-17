@@ -14,7 +14,7 @@ package map
 	{
 		
 		private var game:Game;
-		public function MapView(game:Game) 
+		public function MapView(game:Game)
 		{
 			this.game = game;
 			add(new Node(70, 70));
