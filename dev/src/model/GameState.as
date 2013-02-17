@@ -7,7 +7,7 @@ package model
 	public class GameState 
 	{
 		private var placing:Boolean = false;
-		private var instrumentBeingPlaced:InstrumentStub = null;
+		private var instrumentBeingPlaced:InstrumentData = null;
 		
 		public function GameState() 
 		{
@@ -20,12 +20,12 @@ package model
 			return placing;
 		}
 		
-		public function getInstrumentBeingPlaced():InstrumentStub
+		public function getInstrumentBeingPlaced():InstrumentData
 		{
 			return instrumentBeingPlaced;
 		}
 		
-		public function setInstrumentBeingPlaced(newInstrument:InstrumentStub):void
+		public function setInstrumentBeingPlaced(newInstrument:InstrumentData):void
 		{
 			instrumentBeingPlaced = newInstrument;
 			placing = true;

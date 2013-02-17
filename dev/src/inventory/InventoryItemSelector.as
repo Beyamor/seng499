@@ -16,20 +16,20 @@ package inventory
 	 */
 	public class InventoryItemSelector //extends Entity
 	{
-		private var stub:InstrumentStub;
+		private var instrumentData:InstrumentData;
 		private var x:int;
 		private var y:int;
-		public function InventoryItemSelector(x:int, y:int,stub:InstrumentStub) 
+		public function InventoryItemSelector(x:int, y:int,instrumentData:InstrumentData) 
 		{
 			//super(x, y);
 			this.x = x;
 			this.y = y;
-			this.stub = stub;
+			this.instrumentData = instrumentData;
 			//var images:Graphiclist = new Graphiclist();
 			/*/images.add() background Use coltons new graphic thing
 			/images.add(new Image(Assets.IMG_ITEMBACKGROUND));
-			images.add(stub.getImageAt(5,5));
-			images.add(stub.getTextAt(5, 60)); //add instrument name text
+			images.add(instrumentData.getImageAt(5,5));
+			images.add(instrumentData.getTextAt(5, 60)); //add instrument name text
 			graphic = images;
 			
 			setHitbox(images[0].width, images[0].height);
@@ -41,8 +41,8 @@ package inventory
 			var images:Graphiclist = new Graphiclist();
 			//images.add() background Use coltons new graphic thing
 			images.add(new Image(Assets.IMG_ITEMBACKGROUND));
-			images.add(stub.getImageAt(5,5));
-			images.add(stub.getTextAt(5, 60)); //add instrument name text
+			images.add(instrumentData.getImageAt(5,5));
+			images.add(instrumentData.getTextAt(5, 60)); //add instrument name text
 			return images;
 		}
 		
@@ -55,9 +55,9 @@ package inventory
 								//DO NOT REMOVE. Statements need to be fixed.
 								/*if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing==false)
 								{
-									(((FP.world as MapView).getGame as Game).state as GameState).setInstrumentBeingPlaced(stub);
+									(((FP.world as MapView).getGame as Game).state as GameState).setInstrumentBeingPlaced(instrumentData);
 								}*/
-								FP.console.log("clicked "+stub.getNameString);
+								FP.console.log("clicked "+instrumentData.getNameString);
 							})
 							.build();
 		}

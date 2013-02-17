@@ -12,7 +12,7 @@ package inventory
 	public class InventoryDisplay extends Entity
 	{
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
-		private var inventoryList:Vector.<InstrumentStub>;
+		private var inventoryList:Vector.<InstrumentData>;
 		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 1;
 		private const inventoryOffset:int = 0;

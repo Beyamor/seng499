@@ -31,7 +31,7 @@ package hex
 
                         // Temporary. Creating an instrument to place.
                         // TODO: Ask MP why we're using instrument stubs and not instruments here
-                        game.state.setInstrumentBeingPlaced(new InstrumentStub(randomInstrumentName(), null));
+                        game.state.setInstrumentBeingPlaced(new InstrumentData(randomInstrumentName(), null));
 
                         controller = (new ControllerFactory).createFor(game, this);
 
