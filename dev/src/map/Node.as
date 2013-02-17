@@ -39,8 +39,7 @@ package map
 				{
 					if ( FP.world.mouseY >= y && FP.world.mouseY <= y + height)
 					{
-						//Bugs evaluating these statements.  Need to be fixed
-						if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing)
+						if ((FP.world as MapView).getGame().state.getPlacing())
 						{
 							FP.console.log("placing");
 						}else 
