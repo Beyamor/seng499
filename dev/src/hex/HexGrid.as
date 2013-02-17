@@ -33,8 +33,8 @@ package hex
 		public function HexGrid(world:World, hexagonRadius:Number, widthInPixels:Number, heightInPixels:Number)
 		{
                         _world = world;
-			_hexProperties	= new HexGeometricProperties(hexagonRadius);
-                        _gridMather  = new HexGridMather(hexProperties, widthInPixels, heightInPixels);
+			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
+                        _gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
 
                         fillView();
 		}

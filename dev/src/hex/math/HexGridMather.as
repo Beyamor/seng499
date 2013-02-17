@@ -24,9 +24,9 @@ package hex.math {
         /**
          *  Creates a new mather. What a silly name.
          */
-        public function HexGridMather(hexProperties:HexGeometricProperties, widthInPixels:Number, heightInPixels:Number) {
+        public function HexGridMather(radius:Number, widthInPixels:Number, heightInPixels:Number) {
 
-            _hexProperties = hexProperties;
+            _hexProperties = HexGeometricProperties.getByRadius(radius);
 
             _absMinXIndex = 0;
             _absMinYIndex = 0;
