@@ -8,8 +8,10 @@ package model
 	 */
 	public class PlayerData 
 	{
+
 		public var instrumentsInventory:Vector.<InstrumentData> = new Vector.<InstrumentData>();
 		public var storeList:Vector.<InstrumentData> = new Vector.<InstrumentData>();
+        private var hexInstruments:Object = new Object;
 		
 		public function PlayerData()
 		{
@@ -47,6 +49,23 @@ package model
 		public function getInventory():Vector.<InstrumentData>
 		{
 			return instrumentsInventory;
+		}
+
+
+		public function addToHexInstruments(xIndex:uint, yIndex:uint, instrument:InstrumentData):void {
+
+			if (!hexInstruments[xIndex])          hexInstruments[xIndex]            = new Object;
+			if (!hexInstruments[xIndex][yIndex])  hexInstruments[xIndex][yIndex]    = new Vector.<InstrumentData>;
+
+			hexInstruments[xIndex][yIndex].push(instrument);
+		}
+
+		public function getHexInstruments(xIndex:uint, yIndex:uint):Vector.<InstrumentData> {
+
+			if (!hexInstruments[xIndex])          return new Vector.<InstrumentData>;
+			if (!hexInstruments[xIndex][yIndex])  return new Vector.<InstrumentData>;
+
+			return hexInstruments[xIndex][yIndex];
 		}
 	}
 

@@ -14,12 +14,12 @@ package model
 			
 		}
 		
-                // Can we change this to isPlacing or something like that?
+        // Can we change this to isPlacing or something like that?
 		public function isPlacing():Boolean
 		{
 			return placing;
 		}
-		
+
 		public function getInstrumentBeingPlaced():InstrumentData
 		{
 			return instrumentBeingPlaced;
@@ -30,6 +30,12 @@ package model
 			instrumentBeingPlaced = newInstrument;
 			placing = true;
 		}
+
+                public function stopPlacingInstrument():void {
+
+                    instrumentBeingPlaced = null;
+                    placing = false;
+                }
 	}
 
 }

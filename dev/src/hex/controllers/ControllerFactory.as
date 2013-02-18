@@ -14,12 +14,11 @@ package hex.controllers {
 
                 return new InstrumentPlacer(
                                 hexView,
-                                game.state.getInstrumentBeingPlaced().getInstrument());
+                                game);
             }
 
             else {
-
-                return new TileViewer;
+                return new TileViewer(game);
             }
         }
 

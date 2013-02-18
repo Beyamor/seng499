@@ -4,8 +4,10 @@ package hex.debug
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.World;
 	import hex.HexTile;
-        import model.HexData;
-        import net.flashpunk.graphics.Text;
+
+	import model.HexData;
+	import net.flashpunk.graphics.Text;
+	import model.Game;
 	
 	/**
 	 * This is just a dummy world for me to test transitioning from a hex tile.
@@ -15,18 +17,17 @@ package hex.debug
 	{
 		private var color:uint;
 		
-		public function DummyTileWorld(tile:HexTile)
+		public function DummyTileWorld(tile:HexTile, game:Game)
 		{
 			color = tile.color;
 
-                        var instrument:Instrument;
-                        var instruments:Vector.<Instrument> = HexData.getInstruments(tile.xIndex, tile.yIndex);
+			var instrument:InstrumentData;
+			var instruments:Vector.<InstrumentData> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
 
-                        for (var i:uint = 0; i < instruments.length; ++i) {
-
-                            instrument = instruments[i];
-                            addGraphic(new Text(instrument.getName(), 20, 30 + 20 * i));
-                        }
+			for (var i:uint = 0; i < instruments.length; ++i) {
+				instrument = instruments[i];
+				addGraphic(new Text(instrument.getNameString(), 20, 30 + 20 * i));
+			}
 		}
 		
 		override public function render():void 

@@ -16,14 +16,29 @@ package common.ui
 		private var screenX:int;
 		private var screenY:int;
 		private var clickFunc:Function;
+
+		// Making this public so that you can toggle it externally if needed.
+		public var isFixed:Boolean;
 		
-		public function Button(x:int, y:int, width:Number, height:Number, graphic:Graphic, clickFunc:Function) 
+		public function Button(isFixedToScreen:Boolean, x:int, y:int, width:Number, height:Number, graphic:Graphic, clickFunc:Function) 
 		{
-			screenX = x;
-			screenY = y;
-                        this.width = width;
-                        this.height = height;
-                        this.graphic = graphic;
+			isFixed = isFixedToScreen;
+
+			if (isFixed) {
+
+				screenX = x;
+				screenY = y;
+			}
+
+			else {
+
+				this.x = x;
+				this.y = y;
+			}
+
+			this.width = width;
+			this.height = height;
+			this.graphic = graphic;
 			this.clickFunc = clickFunc;
 		}
 		
@@ -31,9 +46,9 @@ package common.ui
 		{
 			if (Input.mousePressed)
 			{
-				if ( Input.mouseX >= screenX && Input.mouseX <= screenX + width)
+				if ( world.mouseX >= x && world.mouseX <= x + width)
 				{
-					if (Input.mouseY >= screenY && Input.mouseY <= screenY + height)
+					if (world.mouseY >= y && world.mouseY <= y + height)
 					{
 						return true;
 					}
@@ -60,21 +75,33 @@ package common.ui
 		 */
 		public override function render():void {
 
-			// Draw without camera offset.
-			var cameraPoint:Point   = new Point(0, 0);
+			// To make sure the position is always camera-relative if the button is fixed to the screen,
+			// we're going to update the position here.
+			// The risk of updating the position in the update method is that the position gets updated,
+			// *then* the camera moves.
+			if (isFixed) {
 
-			// The draw point is screen-relative
-			var drawPoint:Point = new Point(0, 0);
+				x = FP.camera.x + screenX;
+				y = FP.camera.y + screenY;
 
-			if (graphic && graphic.visible)
-			{
-				if (graphic.relative)
-				{
+				// Draw without camera offset
+				var cameraPoint:Point = new Point(0, 0);
+
+				// The draw point is screen-relative
+				var drawPoint:Point = new Point(0, 0);
+
+				if (graphic && graphic.visible) {
+
 					drawPoint.x = screenX;
 					drawPoint.y = screenY;
 				}
 
-				graphic.render(renderTarget ? renderTarget : FP.buffer, drawPoint, cameraPoint);
+				graphic.render(renderTarget? renderTarget : FP.buffer, drawPoint, cameraPoint);
+			}
+
+			else {
+
+				super.render();
 			}
 		}
 		

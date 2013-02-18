@@ -1,5 +1,6 @@
 package map 
 {
+        import net.flashpunk.FP;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
@@ -8,6 +9,7 @@ package map
 	import model.GameState;
 	import model.Game;
 	import common.Assets;
+        import hex.HexView;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -32,7 +34,7 @@ package map
 			super.update();
 			if (checkForMouseClick())
 			{
-				//goToNodeHex();
+				goToNodeHex();
 			}
 		}
 		
@@ -60,7 +62,15 @@ package map
 		
 		private function goToNodeHex():void
 		{
-			
+                    if (!(world is MapView)) {
+
+                        FP.log("Error - node's world is not a MapView");
+                        return;
+                    }
+
+                    var game:Game = (world as MapView).getGame();
+
+                    FP.world = new HexView(game, mapX, mapY);
 		}
 	}
 

@@ -12,10 +12,10 @@ package hex {
         private var x:Number, y:Number, minX:Number, maxX:Number, minY:Number, maxY:Number;
         private var speed:Number;
     
-        public function ScrollCamera(speed:Number, minX:Number, minY:Number, maxX:Number, maxY:Number, initialX:Number=0, initialY:Number=0) {
+        public function ScrollCamera(speed:Number, minX:Number, minY:Number, maxX:Number, maxY:Number) {
 
-           x = initialX;
-           y = initialY;
+           x = FP.camera.x;
+           y = FP.camera.y;
 
            this.minX = minX;
            this.minY = minY;

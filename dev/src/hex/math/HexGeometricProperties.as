@@ -1,4 +1,4 @@
-package hex 
+package hex.math
 {
 	/**
 	 * This guy's just represents a bunch of mathematical properties
@@ -8,6 +8,14 @@ package hex
 	 */
 	public class HexGeometricProperties 
 	{
+                // Geometric properties for different radii.
+                private static var propertiesByRadius:Object = new Object;
+                public static function getByRadius(radius:Number):HexGeometricProperties {
+
+                    if (!propertiesByRadius[radius]) propertiesByRadius[radius] = new HexGeometricProperties(radius);
+                    return propertiesByRadius[radius];
+                }
+
 		// The radius of our subject hexagon.
 		private var _radius:Number;
 		public function get radius():Number { return _radius; }
