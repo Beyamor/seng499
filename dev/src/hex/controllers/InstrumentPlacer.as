@@ -1,6 +1,7 @@
 package hex.controllers {
         
     import model.HexData;
+    import model.Game;
     import hex.HexTile;
     import net.flashpunk.FP;
     import hex.HexView;
@@ -10,18 +11,21 @@ package hex.controllers {
      */
     public class InstrumentPlacer implements HexController {
 
+        private var game:Game;
         private var instrument:Instrument;
         private var view:HexView;
 
-        public function InstrumentPlacer(view:HexView, instrument:Instrument) {
+        public function InstrumentPlacer(view:HexView, game:Game) {
 
-            this.view = view;
-            this.instrument = instrument;
+            this.view       = view;
+            this.game       = game;
+            this.instrument = game.state.getInstrumentBeingPlaced().getInstrument();
         }
 
         public function hexSelected(tile:HexTile):void {
 
             HexData.addToInstruments(tile.xIndex, tile.yIndex, instrument);
+            game.state.stopPlacingInstrument();
 
             // Debug to check instrument placement
             var instruments:Vector.<Instrument> = HexData.getInstruments(tile.xIndex, tile.yIndex);

@@ -19,7 +19,7 @@ package model
 		{
 			return placing;
 		}
-		
+
 		public function getInstrumentBeingPlaced():InstrumentStub
 		{
 			return instrumentBeingPlaced;
@@ -30,6 +30,12 @@ package model
 			instrumentBeingPlaced = newInstrument;
 			placing = true;
 		}
+
+                public function stopPlacingInstrument():void {
+
+                    instrumentBeingPlaced = null;
+                    placing = false;
+                }
 	}
 
 }

@@ -14,7 +14,7 @@ package hex.controllers {
 
                 return new InstrumentPlacer(
                                 hexView,
-                                game.state.getInstrumentBeingPlaced().getInstrument());
+                                game);
             }
 
             else {

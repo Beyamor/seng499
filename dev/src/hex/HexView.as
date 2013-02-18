@@ -31,9 +31,6 @@ package hex
 		{			
 			this.game = game;
 
-                        // Temporary. Creating an instrument to place.
-                        game.state.setInstrumentBeingPlaced(new InstrumentStub(randomInstrumentName(), null));
-
                         controller = (new ControllerFactory).createFor(game, this);
 
                         // the hex grid bounds are 100% arbitrary, so deal with it
