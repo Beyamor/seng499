@@ -7,24 +7,25 @@ package model
 	public class GameState 
 	{
 		private var placing:Boolean = false;
-		private var instrumentBeingPlaced:InstrumentStub = null;
+		private var instrumentBeingPlaced:InstrumentData = null;
 		
 		public function GameState() 
 		{
 			
 		}
 		
-		public function getPlacing():Boolean
+                // Can we change this to isPlacing or something like that?
+		public function isPlacing():Boolean
 		{
 			return placing;
 		}
 		
-		public function getInstrumentBeingPlaced():InstrumentStub
+		public function getInstrumentBeingPlaced():InstrumentData
 		{
 			return instrumentBeingPlaced;
 		}
 		
-		public function setInstrumentBeingPlaced(newInstrument:InstrumentStub):void
+		public function setInstrumentBeingPlaced(newInstrument:InstrumentData):void
 		{
 			instrumentBeingPlaced = newInstrument;
 			placing = true;

@@ -8,8 +8,8 @@ package model
 	 */
 	public class PlayerData 
 	{
-		public var instrumentsInventory:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
-		public var storeList:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+		public var instrumentsInventory:Vector.<InstrumentData> = new Vector.<InstrumentData>();
+		public var storeList:Vector.<InstrumentData> = new Vector.<InstrumentData>();
 		
 		public function PlayerData()
 		{
@@ -27,24 +27,24 @@ package model
 			trace("end");
 		}
 		
-		public function addToInventory(stub:InstrumentStub)
+		public function addToInventory(data:InstrumentData)
 		{
-			instrumentsInventory.push(stub);
+			instrumentsInventory.push(data);
 		}
 		
 		public function populateStoreList():void
 		{
-			storeList.push(new InstrumentStub("A", new Image(Assets.IMG_TESTINSTRUMENT)));
-			storeList.push(new InstrumentStub("B", new Image(Assets.IMG_TESTINSTRUMENT)));
+			storeList.push(new InstrumentData("A", new Image(Assets.IMG_TESTINSTRUMENT)));
+			storeList.push(new InstrumentData("B", new Image(Assets.IMG_TESTINSTRUMENT)));
 		}
 		
 		public function addDummyData():void
 		{
-			addToInventory(new InstrumentStub("A", new Image(Assets.IMG_TESTINSTRUMENT)));
-			instrumentsInventory.push(new InstrumentStub("B", new Image(Assets.IMG_TESTINSTRUMENT)));
+			addToInventory(new InstrumentData("A", new Image(Assets.IMG_TESTINSTRUMENT)));
+			instrumentsInventory.push(new InstrumentData("B", new Image(Assets.IMG_TESTINSTRUMENT)));
 		}
 		
-		public function getInventory():Vector.<InstrumentStub>
+		public function getInventory():Vector.<InstrumentData>
 		{
 			return instrumentsInventory;
 		}

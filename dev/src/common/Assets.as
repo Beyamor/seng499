@@ -6,6 +6,7 @@ package common{
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
+		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class
 		[Embed(source = "../assets/map/Node.png")] public static const IMG_NODE:Class
 		[Embed(source = "../assets/map/NodeTargetRing.png")] public static const IMG_NODETARGETRING:Class
 		[Embed(source = "../assets/map/PlacingMouse.png")] public static const IMG_PLACINGMOUSE:Class

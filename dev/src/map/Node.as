@@ -14,9 +14,14 @@ package map
 	 */
 	public class Node extends Entity
 	{
+		private var mapX:int;
+		private var mapY:int;
 		public function Node(x:int, y:int) 
 		{
-			super(x, y);
+			//mapX/Y correspond to the center of the node rather than the upper right corner.
+			mapX = x;
+			mapY = y;
+			super(mapX + (width / 2), mapY + (height / 2));
 			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
 			width = (graphic as Image).width;
@@ -39,8 +44,7 @@ package map
 				{
 					if ( FP.world.mouseY >= y && FP.world.mouseY <= y + height)
 					{
-						//Bugs evaluating these statements.  Need to be fixed
-						if ((((FP.world as MapView).getGame as Game).state as GameState).getPlacing)
+						if ((FP.world as MapView).getGame().state.isPlacing())
 						{
 							FP.console.log("placing");
 						}else 

@@ -4,6 +4,7 @@ package common.ui
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
     import net.flashpunk.Graphic;
+	import flash.geom.Point;
 
 	/**
 	 * ...
@@ -20,8 +21,6 @@ package common.ui
 		{
 			screenX = x;
 			screenY = y;
-			this.x = FP.camera.x + screenX;
-			this.y = FP.camera.y + screenY;
                         this.width = width;
                         this.height = height;
                         this.graphic = graphic;
@@ -32,9 +31,9 @@ package common.ui
 		{
 			if (Input.mousePressed)
 			{
-				if ( FP.world.mouseX >= x && FP.world.mouseX <= x + width)
+				if ( Input.mouseX >= screenX && Input.mouseX <= screenX + width)
 				{
-					if (FP.world.mouseY >= y && FP.world.mouseY <= y + height)
+					if (Input.mouseY >= screenY && Input.mouseY <= screenY + height)
 					{
 						return true;
 					}
@@ -50,21 +49,41 @@ package common.ui
 		
 		public override function update():void
 		{
-			x = FP.camera.x + screenX;
-			y = FP.camera.y + screenY;
-			
 			if (wasClicked())
 			{
 				onClick();
 			}
 		}
-		
-            /**
-             *      Creates a new fluent button builder.
-             /*/
-            public static function description():ButtonBuilder {
 
-                return new ButtonBuilder();
-            }
+		/**
+		 *      Overridden to always draw screen-relative
+		 */
+		public override function render():void {
+
+			// Draw without camera offset.
+			var cameraPoint:Point   = new Point(0, 0);
+
+			// The draw point is screen-relative
+			var drawPoint:Point = new Point(0, 0);
+
+			if (graphic && graphic.visible)
+			{
+				if (graphic.relative)
+				{
+					drawPoint.x = screenX;
+					drawPoint.y = screenY;
+				}
+
+				graphic.render(renderTarget ? renderTarget : FP.buffer, drawPoint, cameraPoint);
+			}
+		}
+		
+		/**
+		 *      Creates a new fluent button builder.
+		 /*/
+		public static function description():ButtonBuilder {
+
+			return new ButtonBuilder();
+		}
 	}
 }

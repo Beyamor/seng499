@@ -6,18 +6,18 @@ package
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class InstrumentStub 
+	public class InstrumentData 
 	{
 		private var name:String;
-		private var stub:Class = Instrument;
+		private var data:Class = Instrument;
 		private var image:Image;
 		//private var screenX:int = 600;
 		
-		public function InstrumentStub(name:String, image:Image/*, instrument:Class*/) 
+		public function InstrumentData(name:String, image:Image/*, instrument:Class*/) 
 		{
 			this.name = name;
 			this.image = image;
-			//this.stub = instrument;
+
 		}
 		
 		public function getTextAt(x:int, y:int):Text
@@ -32,14 +32,14 @@ package
 		public function getImageAt(x:int, y:int):Image
 		{
 			var img:Image = new Image(image);
-			img.x = 5;
-			img.y = 5;
+			img.x = x;
+			img.y = y;
 			return img;
 		}
 		
 		public function getInstrument():Instrument
 		{
-			return(new stub(name));
+			return(new data(name));
 		}
 		
 		public function getNameString():String

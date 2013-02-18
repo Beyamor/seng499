@@ -5,6 +5,7 @@ package inventory
 	import net.flashpunk.FP;
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
+	import flash.geom.Point;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -12,7 +13,7 @@ package inventory
 	public class InventoryDisplay extends Entity
 	{
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
-		private var inventoryList:Vector.<InstrumentStub>;
+		private var inventoryList:Vector.<InstrumentData>;
 		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 1;
 		private const inventoryOffset:int = 0;
@@ -53,6 +54,29 @@ package inventory
 			super.update();
 			x = FP.camera.x + screenX;
 			y = FP.camera.y + screenY;
+		}
+		
+		/**
+		 *      Overridden to always draw screen-relative
+		 */
+		public override function render():void {
+
+			// Draw without camera offset.
+			var cameraPoint:Point   = new Point(0, 0);
+
+			// The draw point is screen-relative
+			var drawPoint:Point = new Point(0, 0);
+
+			if (graphic && graphic.visible)
+			{
+				if (graphic.relative)
+				{
+					drawPoint.x = screenX;
+					drawPoint.y = screenY;
+				}
+
+				graphic.render(renderTarget ? renderTarget : FP.buffer, drawPoint, cameraPoint);
+			}
 		}
 	}
 
