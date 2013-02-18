@@ -19,7 +19,7 @@ package hex.controllers {
 
             else {
 
-                return new TileViewer;
+                return new TileViewer(game);
             }
         }
 

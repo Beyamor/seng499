@@ -10,6 +10,7 @@ package model
 	{
 		public var instrumentsInventory:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
 		public var storeList:Vector.<InstrumentStub> = new Vector.<InstrumentStub>();
+                private var hexInstruments:Object = new Object;
 		
 		public function PlayerData()
 		{
@@ -48,6 +49,23 @@ package model
 		{
 			return instrumentsInventory;
 		}
+
+
+                public function addToHexInstruments(xIndex:uint, yIndex:uint, instrument:InstrumentStub):void {
+
+                    if (!hexInstruments[xIndex])          hexInstruments[xIndex]            = new Object;
+                    if (!hexInstruments[xIndex][yIndex])  hexInstruments[xIndex][yIndex]    = new Vector.<InstrumentStub>;
+
+                    hexInstruments[xIndex][yIndex].push(instrument);
+                }
+
+                public function getHexInstruments(xIndex:uint, yIndex:uint):Vector.<InstrumentStub> {
+
+                    if (!hexInstruments[xIndex])          return new Vector.<InstrumentStub>;
+                    if (!hexInstruments[xIndex][yIndex])  return new Vector.<InstrumentStub>;
+
+                    return hexInstruments[xIndex][yIndex];
+                }
 	}
 
 }
