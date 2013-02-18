@@ -2,6 +2,7 @@ package model
 {
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
+	import map.Node;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -11,7 +12,9 @@ package model
 
 		public var instrumentsInventory:Vector.<InstrumentData> = new Vector.<InstrumentData>();
 		public var storeList:Vector.<InstrumentData> = new Vector.<InstrumentData>();
+		public var nodeList:Vector.<Node> = new Vector.<Node>();
         private var hexInstruments:Object = new Object;
+		
 		
 		public function PlayerData()
 		{

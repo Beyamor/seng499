@@ -1,5 +1,6 @@
 package  
 {
+	import hex.HexTile;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -7,9 +8,11 @@ package
 	public class Instrument 
 	{
 		private var name:String;
-		public function Instrument(name:String) 
+		private var tile:hex.HexTile;
+		public function Instrument(name:String, tile:hex.HexTile) 
 		{
 			this.name = name;
+			this.tile = tile;
 		}
 		
 		public function getName():String

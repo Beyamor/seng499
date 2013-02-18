@@ -1,6 +1,6 @@
 package map 
 {
-        import net.flashpunk.FP;
+    import net.flashpunk.FP;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
@@ -9,7 +9,8 @@ package map
 	import model.GameState;
 	import model.Game;
 	import common.Assets;
-        import hex.HexView;
+    import hex.HexView;
+	
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -18,6 +19,8 @@ package map
 	{
 		private var mapX:int;
 		private var mapY:int;
+		private var connections:Vector.<Instrument>;
+		
 		public function Node(x:int, y:int) 
 		{
 			//mapX/Y correspond to the center of the node rather than the upper right corner.
