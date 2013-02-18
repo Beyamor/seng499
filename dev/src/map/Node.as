@@ -15,7 +15,7 @@ package map
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class Node extends Entity
+	public class Node extends Placable
 	{
 		private var mapX:int;
 		private var mapY:int;
@@ -26,7 +26,7 @@ package map
 			//mapX/Y correspond to the center of the node rather than the upper right corner.
 			mapX = x;
 			mapY = y;
-			super(mapX + (width / 2), mapY + (height / 2));
+			super(mapX + (width / 2), mapY + (height / 2), 0);//cannot acces game as this is called during its constructor.
 			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
 			width = (graphic as Image).width;
