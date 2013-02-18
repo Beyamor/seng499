@@ -12,14 +12,16 @@ package map
 	 */
 	public class MapView extends World
 	{
-		
+		private const worldWidth:int = 1440;
+		private const worldHeight:int = 640;
 		private var game:Game;
 		public function MapView(game:Game)
 		{
 			this.game = game;
+			add(new MapEntity(0, 0));
 			add(new Node(70, 70));
 			var display:InventoryDisplay = new InventoryDisplay(game.data);
-			add(display);
+			//add(display);
 			//display.fillInventoryDisplay();
 			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
 			for (var i:int = 0; i < inventoryEntities.length; i++ )
@@ -35,13 +37,11 @@ package map
 			
 			const speed:Number = 5;
 			
-			if (Input.check("hex-scroll-up"))		FP.camera.y -= speed;
-			if (Input.check("hex-scroll-down"))		FP.camera.y += speed;
-			if (Input.check("hex-scroll-left"))		FP.camera.x -= speed;
-			if (Input.check("hex-scroll-right"))	FP.camera.x += speed;
+			if (Input.check("hex-scroll-up") && camera.y > 0)					FP.camera.y -= speed;
+			if (Input.check("hex-scroll-down") && camera.y < 640-FP.height)		FP.camera.y += speed;
+			if (Input.check("hex-scroll-left") && camera.x > 0)					FP.camera.x -= speed;
+			if (Input.check("hex-scroll-right") && camera.x < 1440-FP.width)	FP.camera.x += speed;
 			
-			//if(game.state.isPlacing())
-				//FP.log("state = placing "+game.state.getInstrumentBeingPlaced().getNameString());
 		}
 		
 		public function getGame():Game 
