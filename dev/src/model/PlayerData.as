@@ -13,7 +13,6 @@ package model
 		public var instrumentsInventory:Vector.<InstrumentData> = new Vector.<InstrumentData>();
 		public var storeList:Vector.<InstrumentData> = new Vector.<InstrumentData>();
 		public var nodeList:Vector.<Node> = new Vector.<Node>();
-		public var activePlacables:Vector.<Placable> = new Vector.<Placable>();
 		private var nextId:uint = 0; //This will need to be treaated differently when loading a saved game.
         private var hexInstruments:Object = new Object;
 		

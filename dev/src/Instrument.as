@@ -5,15 +5,17 @@ package
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class Instrument extends Placable
+	public class Instrument
 	{
 		private var name:String;
 		private var tile:hex.HexTile;
-		public function Instrument(name:String, tile:hex.HexTile) 
+		public var id:int;
+				
+		public function Instrument() 
 		{
-			super(0, 0, 0);
 			this.name = name;
-			this.tile = tile;
+			this.tile = tile;	
+			this.id = id;
 		}
 		
 		public function getName():String

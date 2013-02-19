@@ -15,25 +15,24 @@ package map
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class Node extends Instrument
+	public class NodeEntity extends Entity
 	{
 		private var mapX:int;
 		private var mapY:int;
 		private var connections:Vector.<Instrument>;
 		
-		public function Node() 
+		public function NodeEntity(x:int, y:int) 
 		{
-			
 			//mapX/Y correspond to the center of the node rather than the upper right corner.
-			/*mapX = x;
+			mapX = x;
 			mapY = y;
-			super(mapX + (width / 2), mapY + (height / 2), 0);//cannot acces game as this is called during its constructor.
+			super(mapX + (width / 2), mapY + (height / 2));
 			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
-			width = (graphic as Image).width;*/
+			width = (graphic as Image).width;
 		}
 		
-		/*public override function update():void
+		public override function update():void
 		{
 			super.update();
 			if (checkForMouseClick())
@@ -75,7 +74,7 @@ package map
                     var game:Game = (world as MapView).getGame();
 
                     FP.world = new HexView(game, mapX, mapY);
-		}*/
+		}
 	}
 
 }
