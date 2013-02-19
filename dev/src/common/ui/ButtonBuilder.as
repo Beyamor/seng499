@@ -57,7 +57,11 @@ package common.ui
          *      Sets the button's image.
          *      This implicitly sets the height and width.
          */
-         public function withImage(image:Image):ButtonBuilder {
+         public function withImage(image:*):ButtonBuilder {
+			 
+			 if (!(image is Image)) {
+				 image = new Image(image);
+			 }
 
             impliedWidth    = image.width;
             impliedHeight   = image.height;

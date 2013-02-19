@@ -54,6 +54,16 @@ package model
 		{
 			storeList.push(new InstrumentData(0));
 			storeList.push(new InstrumentData(1));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
 		}
 		
 		public function addDummyData():void
