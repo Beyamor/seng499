@@ -4,7 +4,11 @@ package hex.debug
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.World;
 	import hex.HexTile;
-
+	import hex.HexView;
+	import common.ui.Button;
+	import common.Assets;
+	import net.flashpunk.graphics.Image;
+	
 	import model.HexData;
 	import net.flashpunk.graphics.Text;
 	import model.Game;
@@ -29,6 +33,13 @@ package hex.debug
 				instrument = instruments[i];
 				addGraphic(new Text(instrument.getNameString(), 20, 30 + 20 * i));
 			}
+			
+			add(Button.description()
+						.fixedAt(FP.width - 58, FP.height - 42)
+						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("back"))
+						.withDepth( -1)
+						.whenClicked(function():void{FP.world = new HexView(game,0,0)})
+						.build());
 		}
 		
 		override public function render():void 

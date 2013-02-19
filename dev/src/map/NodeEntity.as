@@ -65,15 +65,15 @@ package map
 		
 		private function goToNodeHex():void
 		{
-                    if (!(world is MapView)) {
+			if (!(world is MapView)) {
 
-                        FP.log("Error - node's world is not a MapView");
-                        return;
-                    }
+				FP.log("Error - node's world is not a MapView");
+				return;
+			}
 
-                    var game:Game = (world as MapView).getGame();
+			var game:Game = (world as MapView).getGame();
 
-                    FP.world = new HexView(game, mapX, mapY);
+			FP.world = new HexView(game, mapX, mapY);
 		}
 	}
 

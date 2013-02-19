@@ -4,6 +4,7 @@ package common.ui
     import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 
     /**
      *  A fluent builder for buttons.
@@ -81,6 +82,25 @@ package common.ui
 			graphic 		= list;
 			
 			return this;
+		 }
+		 
+		 /**
+		  * Sets the image to be the text over image.
+		  */
+		 public function withImageAndText(image:Image, text:Text):ButtonBuilder {
+			 
+			 impliedWidth = image.width;
+			 impliedHeight = image.height;
+			 
+			 text.color = 0x000000;
+			 text.y = 5;
+			 
+			 var list:Graphiclist = new Graphiclist();
+			 list.add(image);
+			 list.add(text);
+			 graphic = list;
+			 
+			 return this;
 		 }
 
          /**

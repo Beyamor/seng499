@@ -41,7 +41,7 @@ package
 		
 		public function getNameString():String
 		{
-                        return GameTables.instrumentNames[key];
+            return GameTables.instrumentNames[key];
 		}
 	}
 }
