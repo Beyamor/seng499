@@ -15,7 +15,7 @@ package inventory
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
 		private var inventoryList:Vector.<InstrumentData>;
 		private const inventoryWidth:int = 2;
-		private const inventoryHeight:int = 1;
+		private const inventoryHeight:int = 2;
 		private const inventoryOffset:int = 0;
 		private var screenX:int = 600;
 		private var screenY:int = 0;
