@@ -26,12 +26,12 @@ package hex.controllers {
 
         public function hexSelected(tile:HexTile):void {
 
-            game.data.addToHexInstruments(tile.xIndex, tile.yIndex, instrument);
+            game.data.addToHexInstruments(tile.xIndex, tile.yIndex, new Instrument(instrument));
             game.state.stopPlacingInstrument();
 
             // Debug to check instrument placement
-            var instruments:Vector.<InstrumentData> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
-            var placedInstrument:InstrumentData    = instruments[instruments.length-1] 
+            var instruments:Vector.<ObservatoryComponent> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
+            var placedInstrument:ObservatoryComponent    = instruments[instruments.length-1] 
             FP.log("Placed " + placedInstrument.getNameString() + " at " + tile.xIndex + ", " + tile.yIndex);
 
             // Okay. Switch out of instrument placement I guess?
