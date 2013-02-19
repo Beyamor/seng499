@@ -26,19 +26,24 @@ package store
                 private var targetPoint:Point = new Point(0, 0);
                 private var offsetIndex:Number = 0;
                 private var offsets:Vector.<Point> = new Vector.<Point>;
+				private var prePurchaseDisplay:PrePurchaseDisplay = null;
 				private var game:Game;
+				2
                
                 public function StoreView(game:Game)
                 {
                         this.game = game;
                        
 						// HACK
-                        offsets.push(new Point(0,0));
-                        offsets.push(new Point(0,400));
-                        offsets.push(new Point(400,0));
-                        offsets.push(new Point(400, 400));
+                        offsets.push(new Point(0,100));
+                        offsets.push(new Point(0,300));
+                        offsets.push(new Point(400,100));
+                        offsets.push(new Point(400, 300));
 						
                         addStoreButtons();
+						
+						prePurchaseDisplay = new PrePurchaseDisplay(game.data);
+						add(prePurchaseDisplay);
                 }
                
                 private function calculateScrollSpeed():void
@@ -65,6 +70,11 @@ package store
                         targetPoint.x = targetPoint.x + FP.screen.width;
                         calculateScrollSpeed();
                 }
+				
+				private function whenClickedInstrument():void 
+				{
+					prePurchaseDisplay.setVisible(true);
+				}
                
                 private function addStoreButtons():void
                 {
@@ -77,7 +87,7 @@ package store
                                                
                                                
                         add(Button.description()
-                                                .fixedAt(200, FP.height - 100)
+                                                .fixedAt(0, 0)
                                                 .withDepth(-1)
                                                 .withImage(Assets.IMG_BACK)
                                                 .whenClicked(whenClickedBack)
@@ -109,9 +119,7 @@ package store
                                                         .at(placerPoint.x + offsets[offsetIndex].x, offsets[offsetIndex].y)
                                                         .withDepth(-1)
                                                         .withImage(Assets.IMG_INSTRUMENT_IMAGE)
-                                                        .whenClicked(function():void {
-                                                                FP.console.log("clicked instrument");
-                                                        })
+                                                        .whenClicked(whenClickedInstrument)
                                                         .build());
                                
 								//Next button needs a new offset placement
