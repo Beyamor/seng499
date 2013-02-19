@@ -19,7 +19,7 @@ package
 		
 		public function getTextAt(x_offset:int, y_offset:int):Text
 		{
-			var txt:Text = new Text(getNameString());
+			var txt:Text = new Text(getName());
 			txt.x = x_offset;
 			txt.y = y_offset;
 			txt.color = 0x000000;
@@ -34,14 +34,9 @@ package
 			return img;
 		}
 		
-		public function getInstrument():Instrument
+		public function getName():String
 		{
-			return null;//(new data(name));
-		}
-		
-		public function getNameString():String
-		{
-                        return GameTables.instrumentNames[key];
+            return GameTables.instrumentNames[key];
 		}
 	}
 }
