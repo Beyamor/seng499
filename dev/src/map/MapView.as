@@ -1,11 +1,17 @@
 package map 
 {
+	//import common.ui.ButtonBuilder;
+	import common.ui.Button;
+	import common.Assets;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;
 	import model.Game;
+	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
+	import store.StoreView;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -20,15 +26,22 @@ package map
 		{
 			this.game = game;
 			add(new MapEntity(0, 0));
-			add(new NodeEntity(70, 70));
+			add(new NodeEntity(game.data.nodeList[0]));
 			var display:InventoryDisplay = new InventoryDisplay(game.data);
-			//add(display);
+			add(display);
 			//display.fillInventoryDisplay();
 			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
 			for (var i:int = 0; i < inventoryEntities.length; i++ )
 			{
 				add(inventoryEntities[i].getButton())
 			}
+			
+			add(Button.description()
+						.fixedAt(FP.width - 58, FP.height - 42)
+						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Store"))
+						.withDepth( -1)
+						.whenClicked(function():void{FP.world = new StoreView(game)})
+						.build());
 			
 		}
 		

@@ -9,7 +9,6 @@ package
 	 */
 	public class InstrumentData 
 	{
-		private var image:Image;
 		private var key:uint;
 		
 		public function InstrumentData(key:uint) 
@@ -17,21 +16,14 @@ package
 			this.key = key;
 		}
 		
-		public function getTextAt(x_offset:int, y_offset:int):Text
+		public function getText():Text
 		{
-			var txt:Text = new Text(getName());
-			txt.x = x_offset;
-			txt.y = y_offset;
-			txt.color = 0x000000;
-			return txt;
+			return new Text(getName());
 		}
 		
-		public function getImageAt(x_offset:int, y_offset:int):Image
+		public function getImage():Image 
 		{
-			var img:Image = new Image(GameTables.instrumentImages[key]);
-			img.x = x_offset;
-			img.y = y_offset;
-			return img;
+			return new Image(GameTables.instrumentImages[key]);
 		}
 		
 		public function getName():String

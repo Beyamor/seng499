@@ -31,8 +31,17 @@ package inventory
 			var images:Graphiclist = new Graphiclist();
 			//images.add() background Use coltons new graphic thing
 			images.add(new Image(Assets.IMG_ITEMBACKGROUND));
-			images.add(data.getImageAt(5,5));
-			images.add(data.getTextAt(5, 60)); //add instrument name text
+			
+			var img:Image = data.getImage();
+			img.x = 5;
+			img.y = 5;
+			images.add(img);
+			
+			var txt:Text = data.getText();
+			txt.x = 5;
+			txt.y = 60;
+			txt.color = 0x000000;
+			images.add(txt); 
 			return images;
 		}
 		

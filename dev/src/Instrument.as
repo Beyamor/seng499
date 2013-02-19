@@ -7,21 +7,20 @@ package
 	 */
 	public class Instrument extends ObservatoryComponent
 	{
-		private var name:String;
-		private var tile:hex.HexTile;
+		private var tile:HexTile;
 		private var instrument:InstrumentData
 		public var id:int;
 				
-		public function Instrument(instrument:InstrumentData) 
+		public function Instrument(intstrument:InstrumentData, tile:HexTile) 
+
 		{
-			this.name = name;
-			this.tile = tile;	
-			this.id = id;
+			this.instrument = instrument;
+			this.tile = tile;
 		}
 		
 		override public function getName():String
 		{
-			return name;
+			return instrument.getName();
 		}
 	}
 

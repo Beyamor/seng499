@@ -6,8 +6,8 @@ package
 	 */
 	public class InstrumentEntity 
 	{
-		
-		public function InstrumentEntity() 
+		private var instrument:Instrument;
+		public function InstrumentEntity(instrument:Instrument) 
 		{
 			
 		}

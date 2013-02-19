@@ -26,7 +26,7 @@ package hex.controllers {
 
         public function hexSelected(tile:HexTile):void {
 
-            game.data.addToHexInstruments(tile.xIndex, tile.yIndex, new Instrument(instrument));
+            game.data.addToHexInstruments(tile.xIndex, tile.yIndex, new Instrument(instrument,tile));
             game.state.stopPlacingInstrument();
 
             // Debug to check instrument placement

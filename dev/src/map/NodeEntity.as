@@ -17,19 +17,19 @@ package map
 	 */
 	public class NodeEntity extends Entity
 	{
-		private var mapX:int;
-		private var mapY:int;
+		private var node:Node;
 		private var connections:Vector.<Instrument>;
 		
-		public function NodeEntity(x:int, y:int) 
+		public function NodeEntity(node:Node) 
 		{
-			//mapX/Y correspond to the center of the node rather than the upper right corner.
-			mapX = x;
-			mapY = y;
-			super(mapX + (width / 2), mapY + (height / 2));
 			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
 			width = (graphic as Image).width;
+			
+			//mapX/Y correspond to the center of the node rather than the upper right corner.
+			this.node = node;
+			super(node.getMapX() + (width / 2), node.getMapY() + (height / 2));
+			
 		}
 		
 		public override function update():void
@@ -65,15 +65,15 @@ package map
 		
 		private function goToNodeHex():void
 		{
-                    if (!(world is MapView)) {
+			if (!(world is MapView)) {
 
-                        FP.log("Error - node's world is not a MapView");
-                        return;
-                    }
+				FP.log("Error - node's world is not a MapView");
+				return;
+			}
 
-                    var game:Game = (world as MapView).getGame();
+			var game:Game = (world as MapView).getGame();
 
-                    FP.world = new HexView(game, mapX, mapY);
+			FP.world = new HexView(game, node.getMapX(), node.getMapY());
 		}
 	}
 

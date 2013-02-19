@@ -24,6 +24,8 @@ package model
 		{
 			populateStoreList();
 			addDummyData();
+			
+			nodeList.push(new Node(70, 70));
 		}
 		
 		public function printInventory():void
