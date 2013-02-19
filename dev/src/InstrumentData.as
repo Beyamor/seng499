@@ -9,7 +9,6 @@ package
 	 */
 	public class InstrumentData 
 	{
-		private var name:String;
 		private var image:Image;
 		private var key:uint;
 		
@@ -20,7 +19,7 @@ package
 		
 		public function getTextAt(x_offset:int, y_offset:int):Text
 		{
-			var txt:Text = new Text(GameTables.instrumentNames[key]);
+			var txt:Text = new Text(getNameString());
 			txt.x = x_offset;
 			txt.y = y_offset;
 			txt.color = 0x000000;
@@ -42,7 +41,7 @@ package
 		
 		public function getNameString():String
 		{
-			return (name);
+                        return GameTables.instrumentNames[key];
 		}
 	}
 }
