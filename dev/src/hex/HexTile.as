@@ -28,11 +28,11 @@ package hex
 		private var _vertices:Vector.<Point>;
 		private function get vertices():Vector.<Point> { return _vertices; }
 
-                // The indices in the grid
-                private var _xIndex:uint;
-                private var _yIndex:uint;
-                public function get xIndex():uint { return _xIndex; }
-                public function get yIndex():uint { return _yIndex; }
+		// The indices in the grid
+		private var _xIndex:uint;
+		private var _yIndex:uint;
+		public function get xIndex():uint { return _xIndex; }
+		public function get yIndex():uint { return _yIndex; }
 
 		/**
 		 * Creates a new hex tile.
@@ -44,8 +44,8 @@ package hex
 		{
 			super(x, y);
 
-                        _xIndex = xIndex;
-                        _yIndex = yIndex;
+			_xIndex = xIndex;
+			_yIndex = yIndex;
 			_radius = radius;
 			_color = FP.rand(0xFFFFFF);
 
@@ -96,7 +96,7 @@ package hex
 			var secondPoint:Point;
 			var pointIndex:uint;
 
-                        // Comment in for hex lines
+			// Comment in for hex lines
 			// for (pointIndex = 0; pointIndex < vertices.length; ++pointIndex) {
 
 			// 	firstPoint = vertices[pointIndex];
