@@ -11,7 +11,7 @@ package
 		private var instrument:InstrumentData
 		public var id:int;
 				
-		public function Instrument(intstrument:InstrumentData, tile:HexTile) 
+		public function Instrument(instrument:InstrumentData, tile:HexTile) 
 
 		{
 			this.instrument = instrument;
