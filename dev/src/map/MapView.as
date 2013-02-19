@@ -12,9 +12,10 @@ package map
 	 */
 	public class MapView extends World
 	{
-		private const worldWidth:int = 1440;
-		private const worldHeight:int = 640;
+		private const WIDTH:int = 1440;
+		private const HEIGHT:int = 640;
 		private var game:Game;
+		
 		public function MapView(game:Game)
 		{
 			this.game = game;
@@ -38,9 +39,9 @@ package map
 			const speed:Number = 5;
 			
 			if (Input.check("hex-scroll-up") && camera.y > 0)					FP.camera.y -= speed;
-			if (Input.check("hex-scroll-down") && camera.y < 640-FP.height)		FP.camera.y += speed;
+			if (Input.check("hex-scroll-down") && camera.y < HEIGHT-FP.height)	FP.camera.y += speed;
 			if (Input.check("hex-scroll-left") && camera.x > 0)					FP.camera.x -= speed;
-			if (Input.check("hex-scroll-right") && camera.x < 1440-FP.width)	FP.camera.x += speed;
+			if (Input.check("hex-scroll-right") && camera.x < WIDTH-FP.width)	FP.camera.x += speed;
 			
 		}
 		
