@@ -23,7 +23,7 @@ package model
 			addDummyData();
 		}
 		
-		public function printInventory()
+		public function printInventory():void
 		{
 			trace("begin");
 			for (var i:int; i < instrumentsInventory.length; i++ )
@@ -33,7 +33,7 @@ package model
 			trace("end");
 		}
 		
-		public function addToInventory(data:InstrumentData)
+		public function addToInventory(data:InstrumentData):void
 		{
 			instrumentsInventory.push(data);
 		}
