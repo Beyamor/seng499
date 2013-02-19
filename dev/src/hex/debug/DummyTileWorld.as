@@ -8,6 +8,7 @@ package hex.debug
 	import model.HexData;
 	import net.flashpunk.graphics.Text;
 	import model.Game;
+	//import ObservatoryComponent;
 	
 	/**
 	 * This is just a dummy world for me to test transitioning from a hex tile.
@@ -21,8 +22,8 @@ package hex.debug
 		{
 			color = tile.color;
 
-			var instrument:InstrumentData;
-			var instruments:Vector.<InstrumentData> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
+			var instrument:ObservatoryComponent;
+			var instruments:Vector.<ObservatoryComponent> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
 
 			for (var i:uint = 0; i < instruments.length; ++i) {
 				instrument = instruments[i];
