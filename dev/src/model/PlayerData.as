@@ -41,7 +41,7 @@ package model
 			instrumentsInventory.push(data);
 		}
 		
-		public function addNode(node:Node)
+		public function addNode(node:Node):void
 		{
 			var converter:SpaceConverter = new SpaceConverter(GameConstants.HEX_RADIUS,
 																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,

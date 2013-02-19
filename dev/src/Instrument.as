@@ -19,7 +19,7 @@ package
 			this.id = id;
 		}
 		
-		public function getName():String
+		override public function getName():String
 		{
 			return name;
 		}

@@ -26,12 +26,12 @@ package map
 			
 		}
 		
-		public function getMapX()
+		public function getMapX():int
 		{
 			return mapX;
 		}
 		
-		public function getMapY()
+		public function getMapY():int
 		{
 			return mapY;
 		}
