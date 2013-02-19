@@ -21,9 +21,10 @@ package map
 		private var mapY:int;
 		private var connections:Vector.<Instrument>;
 		
-		public function Node() 
+		public function Node(x:int, y:int) 
 		{
-			
+			mapX = x;
+			mapY = y;
 		}
 		
 		public function getMapX()

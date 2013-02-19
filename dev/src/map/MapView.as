@@ -25,7 +25,7 @@ package map
 		{
 			this.game = game;
 			add(new MapEntity(0, 0));
-			add(new NodeEntity(70, 70));
+			add(new NodeEntity(game.data.nodeList[0]));
 			var display:InventoryDisplay = new InventoryDisplay(game.data);
 			add(display);
 			//display.fillInventoryDisplay();
