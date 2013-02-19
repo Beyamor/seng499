@@ -5,13 +5,14 @@ package
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class Instrument
+	public class Instrument extends ObservatoryComponent
 	{
 		private var name:String;
 		private var tile:hex.HexTile;
+		private var instrument:InstrumentData
 		public var id:int;
 				
-		public function Instrument() 
+		public function Instrument(intstrument:InstrumentData) 
 		{
 			this.name = name;
 			this.tile = tile;	

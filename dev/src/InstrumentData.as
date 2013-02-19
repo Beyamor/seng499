@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
+	import model.GameTables;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -10,18 +11,16 @@ package
 	{
 		private var name:String;
 		private var image:Image;
-		//private var screenX:int = 600;
+		private var key:uint;
 		
-		public function InstrumentData(name:String, image:Image) 
+		public function InstrumentData(key:uint) 
 		{
-			this.name = name;
-			this.image = image;
-
+			this.key = key;
 		}
 		
 		public function getTextAt(x_offset:int, y_offset:int):Text
 		{
-			var txt:Text = new Text(name);
+			var txt:Text = new Text(GameTables.instrumentNames[key]);
 			txt.x = x_offset;
 			txt.y = y_offset;
 			txt.color = 0x000000;
@@ -30,7 +29,7 @@ package
 		
 		public function getImageAt(x_offset:int, y_offset:int):Image
 		{
-			var img:Image = new Image(image);
+			var img:Image = new Image(GameTables.instrumentImages[key]);
 			img.x = x_offset;
 			img.y = y_offset;
 			return img;

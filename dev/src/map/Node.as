@@ -15,7 +15,7 @@ package map
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class Node extends Instrument
+	public class Node extends ObservatoryComponent
 	{
 		private var mapX:int;
 		private var mapY:int;

@@ -40,14 +40,14 @@ package model
 		
 		public function populateStoreList():void
 		{
-			storeList.push(new InstrumentData("A", new Image(Assets.IMG_TESTINSTRUMENT)));
-			storeList.push(new InstrumentData("B", new Image(Assets.IMG_TESTINSTRUMENT)));
+			storeList.push(new InstrumentData(0));
+			storeList.push(new InstrumentData(1));
 		}
 		
 		public function addDummyData():void
 		{
-			addToInventory(new InstrumentData("A", new Image(Assets.IMG_TESTINSTRUMENT)));
-			instrumentsInventory.push(new InstrumentData("B", new Image(Assets.IMG_TESTINSTRUMENT)));
+			addToInventory(new InstrumentData(0));
+			instrumentsInventory.push(new InstrumentData(1));
 		}
 		
 		public function getInventory():Vector.<InstrumentData>
