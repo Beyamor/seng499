@@ -37,6 +37,14 @@ package map
 			super.update();
 			if (checkForMouseClick())
 			{
+				if ((FP.world as MapView).getGame().state.isPlacing())
+				{
+					(FP.world as MapView).getGame().state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
+					FP.console.log("placing");
+				}else 
+				{
+					FP.console.log("zooming");
+				}
 				goToNodeHex();
 			}
 		}
@@ -49,13 +57,6 @@ package map
 				{
 					if ( FP.world.mouseY >= y && FP.world.mouseY <= y + height)
 					{
-						if ((FP.world as MapView).getGame().state.isPlacing())
-						{
-							FP.console.log("placing");
-						}else 
-						{
-							FP.console.log("zooming");
-						}
 						return true;
 					}
 				}

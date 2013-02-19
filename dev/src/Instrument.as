@@ -1,5 +1,6 @@
 package  
 {
+	import hex.controllers.TileViewer;
 	import hex.HexTile;
 	/**
 	 * ...
@@ -21,6 +22,10 @@ package
 		override public function getName():String
 		{
 			return instrument.getName();
+		}
+		
+		public function getTile():HexTile {
+			return tile;
 		}
 	}
 
