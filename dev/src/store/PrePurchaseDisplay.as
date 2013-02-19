@@ -38,6 +38,8 @@ package store
 		
 		private function buyButtonClicked():void
 		{
+			// TODO: A button needs to know what Instrument it referencing
+			// in order display it's name, image, and description - CP
 			playerData.addToInventory(new InstrumentData(0));
 			FP.console.log("added to inventory");
 		}
@@ -45,7 +47,7 @@ package store
 		private function addDisplayButtons():void
 		{
 			buyButton =  Button.description()
-						.fixedAt(300, 300)
+						.fixedAt(300, 500)
 						.withDepth(-9002)
 						.withImage(Assets.IMG_BUY)
 						.whenClicked(buyButtonClicked)
