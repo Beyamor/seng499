@@ -28,7 +28,6 @@ package store
                 private var offsets:Vector.<Point> = new Vector.<Point>;
 				private var prePurchaseDisplay:PrePurchaseDisplay = null;
 				private var game:Game;
-				2
                
                 public function StoreView(game:Game)
                 {
@@ -111,6 +110,7 @@ package store
                        
                         for (var i:int = 0; i < game.data.storeList.length; i++)
                         {
+								// i=0 is the degenerate case
                                 if (i != 0 && i % NUMBER_OF_BUTTONS == 0) {
                                         placerPoint.x = placerPoint.x + FP.screen.width;
                                 }
