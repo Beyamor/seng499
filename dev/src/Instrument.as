@@ -19,7 +19,7 @@ package
 		
 		public function getName():String
 		{
-			return instrument.getNameString();
+			return instrument.getName();
 		}
 	}
 

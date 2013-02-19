@@ -56,7 +56,7 @@ package inventory
 								{
 									(FP.world as MapView).getGame().state.setInstrumentBeingPlaced(data);
 								}
-								FP.console.log("clicked "+data.getNameString);
+								FP.console.log("clicked "+data.getName);
 
 							})
 							.build();

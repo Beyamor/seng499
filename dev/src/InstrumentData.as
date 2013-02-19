@@ -18,7 +18,7 @@ package
 		
 		public function getText():Text
 		{
-			return new Text(getNameString());
+			return new Text(getName());
 		}
 		
 		public function getImage():Image 
@@ -26,7 +26,7 @@ package
 			return new Image(GameTables.instrumentImages[key]);
 		}
 		
-		public function getNameString():String
+		public function getName():String
 		{
             return GameTables.instrumentNames[key];
 		}
