@@ -12,147 +12,147 @@ package hex
 	public class HexGrid 
 	{
 		// That grid, baby
-                private var tiles:Object = new Object;
+		private var tiles:Object = new Object;
 
-                // Dat world
-                private var _world:World;
-                private function get world():World { return _world; }
-		
+		// Dat world
+		private var _world:World;
+		private function get world():World { return _world; }
+
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
 		private function get hexProperties():HexGeometricProperties { return _hexProperties; }
 
-                // Math
-                private var _gridMather:HexGridMather;
-                private function get gridMather():HexGridMather { return _gridMather; }
-		
+		// Math
+		private var _gridMather:HexGridMather;
+		private function get gridMather():HexGridMather { return _gridMather; }
+
 		/**
 		 * Creates a new hex grid.
 		 * The hex grid builds enough hexagons to fill the given dimensions.
 		 */
 		public function HexGrid(world:World, hexagonRadius:Number, widthInPixels:Number, heightInPixels:Number)
 		{
-                        _world = world;
+			_world = world;
 			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
-                        _gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
+			_gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
 
-                        fillView();
+			fillView();
 		}
-		
-                /**
-                 *  Checks if the index pair is valid.
-                 *  i.e., they must both be even or odd
-                 */
-                private function validIndices(xIndex:int, yIndex:int):Boolean {
 
-                    return (Math.abs(xIndex) % 2) == (Math.abs(yIndex) % 2);
-                }
+		/**
+		 *  Checks if the index pair is valid.
+		 *  i.e., they must both be even or odd
+		 */
+		private function validIndices(xIndex:int, yIndex:int):Boolean {
 
-                /**
-                 * Checks if a tile already exists in the grid at the given indices.
-                 */
-                private function tileExists(xIndex:int, yIndex:int):Boolean {
+			return (Math.abs(xIndex) % 2) == (Math.abs(yIndex) % 2);
+		}
 
-                    if (!tiles.hasOwnProperty(xIndex))          return false;
-                    if (!tiles[xIndex].hasOwnProperty(yIndex))  return false;
-                    return (tiles[xIndex][yIndex] != null);
-                }
+		/**
+		 * Checks if a tile already exists in the grid at the given indices.
+		 */
+		private function tileExists(xIndex:int, yIndex:int):Boolean {
 
-                /**
-                 *  Adds a created tile to the grid.
-                 */
-                private function addToGrid(xIndex:int, yIndex:int, tile:HexTile):void {
+			if (!tiles.hasOwnProperty(xIndex))          return false;
+			if (!tiles[xIndex].hasOwnProperty(yIndex))  return false;
+			return (tiles[xIndex][yIndex] != null);
+		}
 
-                    if (!tiles.hasOwnProperty(xIndex)) tiles[xIndex] = new Object;
+		/**
+		 *  Adds a created tile to the grid.
+		 */
+		private function addToGrid(xIndex:int, yIndex:int, tile:HexTile):void {
 
-                    tiles[xIndex][yIndex] = tile;
-                }
+			if (!tiles.hasOwnProperty(xIndex)) tiles[xIndex] = new Object;
 
-                /**
-                 *  If the tile doesn't already exist, this:
-                 *      - creates it 
-                 *      - adds it to the world
-                *       - adds it to the grid
-                 */
-                private function createIfNecessary(xIndex:int, yIndex:int):void {
+			tiles[xIndex][yIndex] = tile;
+		}
 
-                    if (tileExists(xIndex, yIndex)) return;
+		/**
+		 *  If the tile doesn't already exist, this:
+		 *      - creates it 
+		 *      - adds it to the world
+		*       - adds it to the grid
+		 */
+		private function createIfNecessary(xIndex:int, yIndex:int):void {
 
-                    var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
-                    var tile:HexTile = new HexTile(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
+			if (tileExists(xIndex, yIndex)) return;
 
-                    world.add(tile);
-                    addToGrid(xIndex, yIndex, tile);
+			var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
+			var tile:HexTile = new HexTile(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
 
-                    // Comment in to log indices of last created tile
-                    //FP.console.log("Creating at " + xIndex + ", " + yIndex);
-                }
+			world.add(tile);
+			addToGrid(xIndex, yIndex, tile);
 
-                /**
-                 *  Gets the min and max x and y indices of the tiles on screen.
-                 */
-                private function getIndicesOfViewTiles():Object {
+			// Comment in to log indices of last created tile
+			//FP.console.log("Creating at " + xIndex + ", " + yIndex);
+		}
 
-                    var minX:Number, maxX:Number,
-                        minY:Number, maxY:Number;
+		/**
+		 *  Gets the min and max x and y indices of the tiles on screen.
+		 */
+		private function getIndicesOfViewTiles():Object {
 
-                    minX = FP.camera.x;
-                    maxX = FP.camera.x + FP.width;
-                    minY = FP.camera.y;
-                    maxY = FP.camera.y + FP.height;
+			var minX:Number, maxX:Number,
+				minY:Number, maxY:Number;
 
-                    var minXIndex:int, maxXIndex:int,
-                        minYIndex:int, maxYIndex:int;
+			minX = FP.camera.x;
+			maxX = FP.camera.x + FP.width;
+			minY = FP.camera.y;
+			maxY = FP.camera.y + FP.height;
 
-                    minXIndex = gridMather.lowerXIndex(minX);
-                    minYIndex = gridMather.lowerYIndex(minY);
-                    maxXIndex = gridMather.upperXIndex(maxX);
-                    maxYIndex = gridMather.upperYIndex(maxY);
+			var minXIndex:int, maxXIndex:int,
+				minYIndex:int, maxYIndex:int;
 
-                    return {
-                        minXIndex: gridMather.lowerXIndex(minX),
-                        minYIndex: gridMather.lowerYIndex(minY),
-                        maxXIndex: gridMather.upperXIndex(maxX),
-                        maxYIndex: gridMather.upperYIndex(maxY)
-                    };
-                }
+			minXIndex = gridMather.lowerXIndex(minX);
+			minYIndex = gridMather.lowerYIndex(minY);
+			maxXIndex = gridMather.upperXIndex(maxX);
+			maxYIndex = gridMather.upperYIndex(maxY);
 
-                /**
-                 *  Ensures the view space is covered by tiles.
-                 */
-                public function fillView():void {
+			return {
+				minXIndex: gridMather.lowerXIndex(minX),
+				minYIndex: gridMather.lowerYIndex(minY),
+				maxXIndex: gridMather.upperXIndex(maxX),
+				maxYIndex: gridMather.upperYIndex(maxY)
+			};
+		}
 
-                    var indexBounds:Object = getIndicesOfViewTiles();
+		/**
+		 *  Ensures the view space is covered by tiles.
+		 */
+		public function fillView():void {
 
-                    for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
-                        for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
+			var indexBounds:Object = getIndicesOfViewTiles();
 
-                            if (validIndices(xIndex, yIndex)) {
+			for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
+				for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
-                                createIfNecessary(xIndex, yIndex);
-                            }
-                        }
-                    }
-                }
+					if (validIndices(xIndex, yIndex)) {
 
-                /**
-                 *  Gets all of the tiles which are in view.
-                 */
-                 public function get tilesOnScreen():Vector.<HexTile> {
+						createIfNecessary(xIndex, yIndex);
+					}
+				}
+			}
+		}
 
-                    var onscreenTiles:Vector.<HexTile> = new Vector.<HexTile>;
+		/**
+		 *  Gets all of the tiles which are in view.
+		 */
+		 public function get tilesOnScreen():Vector.<HexTile> {
 
-                    var indexBounds:Object = getIndicesOfViewTiles();
+			var onscreenTiles:Vector.<HexTile> = new Vector.<HexTile>;
 
-                    for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
-                        for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
+			var indexBounds:Object = getIndicesOfViewTiles();
 
-                            if (tileExists(xIndex, yIndex)) onscreenTiles.push(tiles[xIndex][yIndex]);
-                        }
-                    }
+			for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
+				for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
-                    return onscreenTiles;
-                 }
+					if (tileExists(xIndex, yIndex)) onscreenTiles.push(tiles[xIndex][yIndex]);
+				}
+			}
+
+			return onscreenTiles;
+		 }
 	}
 
 }

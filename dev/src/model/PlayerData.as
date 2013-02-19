@@ -28,7 +28,7 @@ package model
 			nodeList.push(new Node(70, 70));
 		}
 		
-		public function printInventory()
+		public function printInventory():void
 		{
 			trace("begin");
 			for (var i:int; i < instrumentsInventory.length; i++ )
@@ -38,12 +38,12 @@ package model
 			trace("end");
 		}
 		
-		public function addToInventory(data:InstrumentData)
+		public function addToInventory(data:InstrumentData):void
 		{
 			instrumentsInventory.push(data);
 		}
 		
-		public function addNode(node:Node)
+		public function addNode(node:Node):void
 		{
 			var converter:SpaceConverter = new SpaceConverter(GameConstants.HEX_RADIUS,
 																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,

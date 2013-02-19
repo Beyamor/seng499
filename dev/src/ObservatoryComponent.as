@@ -12,7 +12,7 @@ package
 			
 		}
 		
-		public function getNameString()
+		public function getName():String
 		{
 			return name;
 		}

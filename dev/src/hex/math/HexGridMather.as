@@ -82,16 +82,16 @@ package hex.math {
             
             // even columns
             if (xIndex % 2 == 0) {
-            
-                    x = (xIndex / 2) * hexProperties.horizontalDistance;
-                    y = (yIndex / 2) * hexProperties.verticalHeight;						
+		
+				x = (xIndex / 2) * hexProperties.horizontalDistance;
+				y = (yIndex / 2) * hexProperties.verticalHeight;						
             }
             
             // odd columns
             else {
             
-                    x = Math.floor(xIndex / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
-                    y = Math.floor(yIndex / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
+				x = Math.floor(xIndex / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
+				y = Math.floor(yIndex / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
             }
 
             return new Point(x, y);

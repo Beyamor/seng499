@@ -20,13 +20,13 @@ package hex.math {
 
         public function SpaceConverter(
             hexagonRadius:Number,
-            fromWidthInPixels:Number,  fromHeightInPixels:Number,
-            toWidthInPixels:Number,   toHeightInPixels:Number) {
+            fromWidthInPixels:Number, fromHeightInPixels:Number,
+            toWidthInPixels:Number, toHeightInPixels:Number) {
 
-            _hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
-            _gridMather         = new HexGridMather(hexagonRadius, toWidthInPixels, toHeightInPixels);
-            _xScale             = toWidthInPixels / fromWidthInPixels;
-            _yScale             = toHeightInPixels / fromHeightInPixels;
+            _hexProperties = HexGeometricProperties.getByRadius(hexagonRadius);
+            _gridMather = new HexGridMather(hexagonRadius, toWidthInPixels, toHeightInPixels);
+            _xScale = toWidthInPixels / fromWidthInPixels;
+            _yScale = toHeightInPixels / fromHeightInPixels;
         }
 
         /**

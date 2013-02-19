@@ -31,7 +31,7 @@ package hex.debug
 
 			for (var i:uint = 0; i < instruments.length; ++i) {
 				instrument = instruments[i];
-				addGraphic(new Text(instrument.getNameString(), 20, 30 + 20 * i));
+				addGraphic(new Text(instrument.getName(), 20, 30 + 20 * i));
 			}
 			
 			add(Button.description()
