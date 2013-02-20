@@ -1,6 +1,5 @@
 package hex.controllers {
         
-    import model.HexData;
     import model.Game;
     import hex.HexTile;
     import net.flashpunk.FP;
