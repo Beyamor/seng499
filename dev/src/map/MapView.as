@@ -26,12 +26,17 @@ package map
 		{
 			this.game = game;
 			add(new MapEntity(0, 0));
-			add(new NodeEntity(game.data.nodeList[0]));
+			
+			for (var i:int = 0 ; i < game.data.nodeList.length; i++ )
+			{
+				add(new NodeEntity(game.data.nodeList[i]));
+			}
+			
 			var display:InventoryDisplay = new InventoryDisplay(game.data);
 			add(display);
 			//display.fillInventoryDisplay();
 			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
-			for (var i:int = 0; i < inventoryEntities.length; i++ )
+			for (i = 0; i < inventoryEntities.length; i++ )
 			{
 				add(inventoryEntities[i].getButton())
 			}
@@ -56,6 +61,19 @@ package map
 			if (Input.check("hex-scroll-left") && camera.x > 0)					FP.camera.x -= speed;
 			if (Input.check("hex-scroll-right") && camera.x < WIDTH-FP.width)	FP.camera.x += speed;
 			
+			if (game.state.isPlacing())
+			{
+				if (game.state.getInstrumentBeingPlaced().isNode())
+				{
+					if (Input.mousePressed == true && FP.world.mouseX - camera.x < 600)//TODO make a proper check for wether click is over the display.
+					{
+						game.data.addNode(new Node(FP.world.mouseX, FP.world.mouseY));
+						game.state.stopPlacingInstrument();
+						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
+						FP.console.log("Added a node.  Do you see it?");
+					}
+				}
+			}
 		}
 		
 		public function getGame():Game 

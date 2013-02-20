@@ -49,6 +49,7 @@ package model
 																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
 																GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
 			var hexCoords:Point         = converter.getConvertedPoint(node.getMapX(), node.getMapY());
+			nodeList.push(node);
 			addToHexInstruments(hexCoords.x, hexCoords.y, node)
 		}
 		

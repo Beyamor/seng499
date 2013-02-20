@@ -38,7 +38,7 @@ package map
 			return mapY;
 		}
 		
-		public function connect(component:ObservatoryComponent)
+		public function connect(component:ObservatoryComponent):void
 		{
 			connections.push(component);
 		}
