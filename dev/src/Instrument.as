@@ -9,10 +9,10 @@ package
 	public class Instrument extends ObservatoryComponent
 	{
 		private var tile:HexTile;
-		private var instrument:InstrumentData
+		private var instrument:ComponentData
 		public var id:int;
 				
-		public function Instrument(instrument:InstrumentData, tile:HexTile) 
+		public function Instrument(instrument:ComponentData, tile:HexTile) 
 
 		{
 			this.instrument = instrument;

@@ -13,8 +13,8 @@ package model
 	public class PlayerData 
 	{
 
-		public var instrumentsInventory:Vector.<InstrumentData> = new Vector.<InstrumentData>();
-		public var storeList:Vector.<InstrumentData> = new Vector.<InstrumentData>();
+		public var instrumentsInventory:Vector.<ComponentData> = new Vector.<ComponentData>();
+		public var storeList:Vector.<ComponentData> = new Vector.<ComponentData>();
 		public var nodeList:Vector.<Node> = new Vector.<Node>();//Instruments will be added here.
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexInstruments:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
@@ -38,7 +38,7 @@ package model
 			trace("end");
 		}
 		
-		public function addToInventory(data:InstrumentData):void
+		public function addToInventory(data:ComponentData):void
 		{
 			instrumentsInventory.push(data);
 		}
@@ -55,27 +55,27 @@ package model
 		
 		public function populateStoreList():void
 		{
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
-			storeList.push(new InstrumentData(0));
-			storeList.push(new InstrumentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
+			storeList.push(new ComponentData(0));
+			storeList.push(new ComponentData(1));
 		}
 		
 		public function addDummyData():void
 		{
-			addToInventory(new InstrumentData(0));
-			instrumentsInventory.push(new InstrumentData(1));
+			addToInventory(new ComponentData(0));
+			instrumentsInventory.push(new ComponentData(1));
 		}
 		
-		public function getInventory():Vector.<InstrumentData>
+		public function getInventory():Vector.<ComponentData>
 		{
 			return instrumentsInventory;
 		}

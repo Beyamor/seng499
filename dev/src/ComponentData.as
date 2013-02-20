@@ -7,11 +7,11 @@ package
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class InstrumentData 
+	public class ComponentData 
 	{
 		private var key:uint;
 		
-		public function InstrumentData(key:uint) 
+		public function ComponentData(key:uint) 
 		{
 			this.key = key;
 		}

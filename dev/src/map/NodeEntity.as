@@ -18,7 +18,7 @@ package map
 	public class NodeEntity extends Entity
 	{
 		private var node:Node;
-		private var connections:Vector.<Instrument>;
+		//private var connections:Vector.<Instrument>;
 		
 		public function NodeEntity(node:Node) 
 		{

@@ -1,6 +1,6 @@
 package model 
 {
-	import map.Node;
+	import Connectable;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -8,8 +8,8 @@ package model
 	public class GameState 
 	{
 		private var placing:Boolean = false;
-		private var instrumentBeingPlaced:InstrumentData = null;
-		private var connectionPoint:Node = null;
+		private var instrumentBeingPlaced:ComponentData = null;
+		private var connectionPoint:Connectable = null;
 		
 		public function GameState() 
 		{
@@ -21,12 +21,12 @@ package model
 			return placing;
 		}
 
-		public function getInstrumentBeingPlaced():InstrumentData
+		public function getInstrumentBeingPlaced():ComponentData
 		{
 			return instrumentBeingPlaced;
 		}
 		
-		public function setInstrumentBeingPlaced(newInstrument:InstrumentData):void
+		public function setInstrumentBeingPlaced(newInstrument:ComponentData):void
 		{
 			instrumentBeingPlaced = newInstrument;
 			placing = true;
@@ -39,12 +39,12 @@ package model
 			placing = false;
         }
 		
-		public function setConnectionPoint(node:Node):void
+		public function setConnectionPoint(node:Connectable):void
 		{
 			connectionPoint = node;
 		}
 		
-		public function getConnectionPoint():Node
+		public function getConnectionPoint():Connectable
 		{
 			return connectionPoint;
 		}

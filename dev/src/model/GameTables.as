@@ -16,7 +16,7 @@ package model
 		instrumentIsNode.push(false);
 			
 		instrumentNames.push("Node");
-		instrumentImages.push(Assets.IMG_TESTINSTRUMENT);
+		instrumentImages.push(Assets.IMG_NODE);
 		instrumentIsNode.push(true);
 
 		

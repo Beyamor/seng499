@@ -13,7 +13,7 @@ package hex.controllers {
 
 
         private var game:Game;
-        private var instrument:InstrumentData;
+        private var instrument:ComponentData;
         private var view:HexView;
 
         public function InstrumentPlacer(view:HexView, game:Game) {

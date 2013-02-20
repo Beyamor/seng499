@@ -16,10 +16,10 @@ package inventory
 	 */
 	public class InventoryItemSelector //extends Entity
 	{
-		private var data:InstrumentData;
+		private var data:ComponentData;
 		private var x:int;
 		private var y:int;
-		public function InventoryItemSelector(x:int, y:int,data:InstrumentData) 
+		public function InventoryItemSelector(x:int, y:int,data:ComponentData) 
 		{
 			this.x = x;
 			this.y = y;

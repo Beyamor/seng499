@@ -38,7 +38,7 @@ package store
 		
 		private function buyButtonClicked():void
 		{
-			playerData.addToInventory(new InstrumentData(0));
+			playerData.addToInventory(new ComponentData(0));
 			FP.console.log("added to inventory");
 		}
 		
