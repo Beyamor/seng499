@@ -30,5 +30,10 @@ package
 		{
             return GameTables.instrumentNames[key];
 		}
+		
+		public function isNode():Boolean
+		{
+			return GameTables.instrumentIsNode[key];
+		}
 	}
 }

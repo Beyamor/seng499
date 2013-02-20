@@ -39,12 +39,12 @@ package model
 			placing = false;
         }
 		
-		public function setConnectionPoint(node:Node)
+		public function setConnectionPoint(node:Node):void
 		{
 			connectionPoint = node;
 		}
 		
-		public function getConnectionPoint()
+		public function getConnectionPoint():Node
 		{
 			return connectionPoint;
 		}
