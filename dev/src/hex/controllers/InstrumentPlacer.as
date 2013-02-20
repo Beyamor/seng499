@@ -27,11 +27,11 @@ package hex.controllers {
 			
 			var addedInstrument:Instrument = new Instrument(instrument, tile)
 			game.state.getConnectionPoint().connect(addedInstrument);
-            game.data.addToHexInstruments(tile.xIndex, tile.yIndex, addedInstrument);
+            game.data.getHexData(tile.xIndex, tile.yIndex).addObservatoryComponent(addedInstrument);
             game.state.stopPlacingInstrument();
 
             // Debug to check instrument placement
-            var instruments:Vector.<ObservatoryComponent> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
+            var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.xIndex, tile.yIndex).observatoryComponents;
             var placedInstrument:ObservatoryComponent    = instruments[instruments.length-1] 
             FP.log("Placed " + placedInstrument.getName() + " at " + tile.xIndex + ", " + tile.yIndex);
 

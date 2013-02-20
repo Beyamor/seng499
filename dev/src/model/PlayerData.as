@@ -51,7 +51,8 @@ package model
 																GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
 			var hexCoords:Point         = converter.getConvertedPoint(node.getMapX(), node.getMapY());
 			nodeList.push(node);
-			addToHexInstruments(hexCoords.x, hexCoords.y, node)
+
+                        getHexData(hexCoords.x, hexCoords.y).addObservatoryComponent(node);
 		}
 		
 		public function populateStoreList():void
@@ -91,17 +92,11 @@ package model
 			if (!hexData[xIndex][yIndex])  hexData[xIndex][yIndex]    = new HexData;
                 }
 
-		public function addToHexInstruments(xIndex:uint, yIndex:uint, instrument:ObservatoryComponent):void {
+                public function getHexData(xIndex:uint, yIndex:uint):HexData {
 
-                        createHexDataIfNecessary(xIndex, yIndex);
-			hexData[xIndex][yIndex].addObservatoryComponent(instrument);
-		}
-
-		public function getHexInstruments(xIndex:uint, yIndex:uint):Vector.<ObservatoryComponent> {
-
-                        createHexDataIfNecessary(xIndex, yIndex);
-			return hexData[xIndex][yIndex].observatoryComponents;
-		}
+                    createHexDataIfNecessary(xIndex, yIndex);
+                    return hexData[xIndex][yIndex];
+                }
 	}
 
 }

@@ -41,7 +41,7 @@ package undersea
 			super.begin();
 			
 			var instrument:ObservatoryComponent;
-			var instruments:Vector.<ObservatoryComponent> = game.data.getHexInstruments(tile.xIndex, tile.yIndex);
+			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.xIndex, tile.yIndex).observatoryComponents;
 			
 			for (var i:uint = 0; i < instruments.length; i++)
 			{
