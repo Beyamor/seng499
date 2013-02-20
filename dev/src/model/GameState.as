@@ -1,5 +1,6 @@
 package model 
 {
+	import map.Node;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -8,6 +9,7 @@ package model
 	{
 		private var placing:Boolean = false;
 		private var instrumentBeingPlaced:InstrumentData = null;
+		private var connectionPoint:Node = null;
 		
 		public function GameState() 
 		{
@@ -33,8 +35,19 @@ package model
 		public function stopPlacingInstrument():void 
 		{
 			instrumentBeingPlaced = null;
+			connectionPoint = null;
 			placing = false;
         }
+		
+		public function setConnectionPoint(node:Node)
+		{
+			connectionPoint = node;
+		}
+		
+		public function getConnectionPoint()
+		{
+			return connectionPoint;
+		}
 	}
 
 }

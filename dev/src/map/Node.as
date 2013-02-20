@@ -19,12 +19,13 @@ package map
 	{
 		private var mapX:int;
 		private var mapY:int;
-		private var connections:Vector.<Instrument>;
+		private var connections:Vector.<ObservatoryComponent>;
 		
 		public function Node(x:int, y:int) 
 		{
 			mapX = x;
 			mapY = y;
+			connections = new Vector.<ObservatoryComponent>;
 		}
 		
 		public function getMapX():int
@@ -35,6 +36,11 @@ package map
 		public function getMapY():int
 		{
 			return mapY;
+		}
+		
+		public function connect(component:ObservatoryComponent)
+		{
+			connections.push(component);
 		}
 	}
 
