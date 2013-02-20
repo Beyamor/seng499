@@ -23,7 +23,7 @@ package store
             private const BUTTONS_PER_PAGE:Number = 4;
 			private const MAGIC_PAGE_LIMIT:Number = 2;
 			
-			private var pageIndex = 0;
+			private var pageIndex:int = 0;
 			private var scrollSpeed:Number = 0;
 			private var cameraTargetPoint:Point = new Point(0, 0);
 			private var prePurchaseDisplay:PrePurchaseDisplay = null;

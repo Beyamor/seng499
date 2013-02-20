@@ -1,9 +1,9 @@
 package hex.controllers {
 
-    import hex.debug.DummyTileWorld;
     import hex.HexTile;
     import net.flashpunk.FP;
     import model.Game;
+	import undersea.UnderseaView;
 
 
     /**
@@ -20,7 +20,7 @@ package hex.controllers {
 
         public function hexSelected(tile:HexTile):void {
 
-            FP.world = new DummyTileWorld(tile, game);
+            FP.world = new UnderseaView(tile, game);
 
         }
     }
