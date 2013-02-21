@@ -8,6 +8,9 @@ package hex
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
         import hex.terrain.Tables;
+        import common.Assets;
+        import map.Node;
+        import net.flashpunk.graphics.Image;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -56,6 +59,26 @@ package hex
 			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
 
 			buildVertexList();
+
+                        // do this more better
+                        var hasNode:Boolean = false;
+                        for each (var observatoryComponent:ObservatoryComponent in data.observatoryComponents) {
+
+                            FP.log("gug");
+
+                            if (observatoryComponent is Node) { // Wut
+
+                                hasNode = true;
+                                FP.log("had node!");
+                                break;
+                            }
+                        }
+
+                        if (hasNode) {
+
+                            graphic = new Image(Assets.IMG_NODE);
+                        }
+
 		}
 
 		/**
@@ -112,6 +135,8 @@ package hex
 			// }
 
 			Draw.circlePlus(x, y, radius * 0.8, color);
+
+                        super.render();
 		}
 		
 		/**

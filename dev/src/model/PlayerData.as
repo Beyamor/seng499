@@ -6,6 +6,7 @@ package model
 	import hex.math.SpaceConverter;
 	import flash.geom.Point;
         import hex.HexData;
+        import net.flashpunk.FP;
 
 	/**
 	 * ...
@@ -26,7 +27,7 @@ package model
 			populateStoreList();
 			addDummyData();
 			
-			nodeList.push(new Node(70, 70));
+                        addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -49,9 +50,10 @@ package model
 			var converter:SpaceConverter = new SpaceConverter(GameConstants.HEX_RADIUS,
 																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
 																GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
-			var hexCoords:Point         = converter.getConvertedPoint(node.getMapX(), node.getMapY());
+			var hexCoords:Object         = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
+                        FP.log("did the thing with hex " + hexCoords.x + ", " + hexCoords.y);
                         getHexData(hexCoords.x, hexCoords.y).addObservatoryComponent(node);
 		}
 		

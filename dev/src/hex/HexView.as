@@ -34,9 +34,9 @@ package hex
 			controller = (new ControllerFactory).createFor(game, this);
 
 			// the hex grid bounds are 100% arbitrary, so deal with it
-			const WIDTH:uint        = 20000;
-			const HEIGHT:uint       = 20000;
-			const HEX_RADIUS:uint   = 60;
+			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
+			const HEIGHT:uint       = GameConstants.HEX_VIEW_HEIGHT;
+			const HEX_RADIUS:uint   = GameConstants.HEX_RADIUS;
 
 			var converter:SpaceConverter = new SpaceConverter(
 											HEX_RADIUS,

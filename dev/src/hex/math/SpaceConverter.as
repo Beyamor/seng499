@@ -40,14 +40,18 @@ package hex.math {
         /**
          *      Convertes coordinates between spaces and gets the hex containing those coordinates.
          */
-        public function getTileIndices(x:Number, y:Number):Point {
+        public function getTileIndices(x:Number, y:Number):Object {
 
             var convertedPoint:Point = getConvertedPoint(x, y);
 
             var xIndex:uint = gridMather.lowerXIndex(convertedPoint.x);
             var yIndex:uint = gridMather.lowerYIndex(convertedPoint.y);
 
-            return new Point(xIndex, yIndex);
+            // ughhhh
+            // TODO: revisit this when soberer. Do it better.
+            if (xIndex % 2 != yIndex % 2) yIndex -= 1;
+
+            return {x: xIndex, y: yIndex};
         }
     }
 }
