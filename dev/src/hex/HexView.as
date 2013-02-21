@@ -51,7 +51,9 @@ package hex
 			FP.camera.y = initialCameraY;
 
 			scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
-			grid = new HexGrid(this, game.data, HEX_RADIUS, WIDTH, HEIGHT);
+
+                        var factory:HexFactory = new HexFactory(game.data);
+			grid = new HexGrid(factory, this, HEX_RADIUS, WIDTH, HEIGHT);
 
 			add(Button.description()
 						.fixedAt(FP.width - 50, 30)

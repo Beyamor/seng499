@@ -19,9 +19,9 @@ package hex
 		private var _world:World;
 		private function get world():World { return _world; }
 
-                // Those player datums
-                private var _playerData:PlayerData;
-                private function get playerData():PlayerData { return _playerData; }
+                // How do we even make a hex tile
+                private var _factory:HexFactory;
+                private function get factory():HexFactory { return _factory; }
 
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
@@ -36,14 +36,14 @@ package hex
 		 * The hex grid builds enough hexagons to fill the given dimensions.
 		 */
 		public function HexGrid(
+                    factory:HexFactory,
                     world:World,
-                    playerData:PlayerData,      // Stuffing player data in here is suck. Think of something better.
                     hexagonRadius:Number,
                     widthInPixels:Number,
                     heightInPixels:Number)
 		{
+                        _factory = factory;
 			_world = world;
-                        _playerData = playerData;
 			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
 			_gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
 
@@ -90,12 +90,7 @@ package hex
 			if (tileExists(xIndex, yIndex)) return;
 
 			var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
-			var tile:HexTile = new HexTile(
-                                            playerData.getHexData(xIndex, yIndex),
-                                            xIndex, yIndex,
-                                            pos.x, pos.y,
-                                            hexProperties.radius);
-
+			var tile:HexTile = factory.create(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
 			world.add(tile);
 			addToGrid(xIndex, yIndex, tile);
 
