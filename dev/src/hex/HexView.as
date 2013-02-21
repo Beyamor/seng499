@@ -34,14 +34,11 @@ package hex
 			controller = (new ControllerFactory).createFor(game, this);
 
 			// the hex grid bounds are 100% arbitrary, so deal with it
-			const WIDTH:uint        = 20000;
-			const HEIGHT:uint       = 20000;
-			const HEX_RADIUS:uint   = 60;
+			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
+			const HEIGHT:uint       = GameConstants.HEX_VIEW_HEIGHT;
+			const HEX_RADIUS:uint   = GameConstants.HEX_RADIUS;
 
-			var converter:SpaceConverter = new SpaceConverter(
-											HEX_RADIUS,
-											GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
-											WIDTH, HEIGHT);
+			var converter:SpaceConverter = SpaceConverter.getCanonical();
 
 			var hexCoords:Point         = converter.getConvertedPoint(mapX, mapY);
 			var initialCameraX:Number    = hexCoords.x - FP.width/2;
@@ -51,7 +48,9 @@ package hex
 			FP.camera.y = initialCameraY;
 
 			scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
-			grid = new HexGrid(this, HEX_RADIUS, WIDTH, HEIGHT);
+
+                        var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
+			grid = new HexGrid(factory, this, HEX_RADIUS, WIDTH, HEIGHT);
 
 			add(Button.description()
 						.fixedAt(FP.width - 50, 30)
@@ -63,25 +62,6 @@ package hex
 						})
 						.build());
 		}
-
-		/**
-		 *      Yoinked from: http://actionscriptsnips.blogspot.ca/2009/08/generate-random-string.html
-		 *      Temporary until reading real instruments.
-		 */
-		private function randomInstrumentName():String{
-
-			var strlen:uint = 8;
-			var chars:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			var num_chars:Number = chars.length - 1;
-			var randomChar:String = "";
-
-			for (var i:Number = 0; i < strlen; i++){
-
-				randomChar += chars.charAt(Math.floor(Math.random() * num_chars));
-			}
-
-			return randomChar;
-		 }
 
 		override public function update():void 
 		{

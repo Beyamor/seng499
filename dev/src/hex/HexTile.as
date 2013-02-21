@@ -7,6 +7,9 @@ package hex
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
+        import hex.terrain.Tables;
+        import common.Assets;
+        import net.flashpunk.graphics.Image;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -15,6 +18,10 @@ package hex
 	 */
 	public class HexTile extends Entity 
 	{
+                // Data!
+                private var _data:HexData;
+                private function get data():HexData { return _data; }
+
 		// The radius of the hexgon.
 		private var _radius:Number;
 		private function get radius():Number { return _radius; }
@@ -28,27 +35,28 @@ package hex
 		private function get vertices():Vector.<Point> { return _vertices; }
 
 		// The indices in the grid
-		private var _xIndex:uint;
-		private var _yIndex:uint;
-		public function get xIndex():uint { return _xIndex; }
-		public function get yIndex():uint { return _yIndex; }
+		private var _indices:HexIndices;
+                public function get indices():HexIndices { return _indices; }
 
 		/**
 		 * Creates a new hex tile.
-		 * @param	x - The x position of the hex in the world.
-		 * @param	y - The y position of the hex in the world.
-		 * @param	radius - The distane from the center of the hex to one of its vertices.
 		 */
-		public function HexTile(xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number)
+		public function HexTile(data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
 
-			_xIndex = xIndex;
-			_yIndex = yIndex;
+                        _data = data;
+                        _indices = indices;
 			_radius = radius;
-			_color = FP.rand(0xFFFFFF);
+			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
 
 			buildVertexList();
+
+                        if (data.hasNode) {
+
+                            graphic = new Image(Assets.IMG_NODE);
+                        }
+
 		}
 
 		/**
@@ -105,6 +113,8 @@ package hex
 			// }
 
 			Draw.circlePlus(x, y, radius * 0.8, color);
+
+                        super.render();
 		}
 		
 		/**

@@ -4,7 +4,10 @@ package model
 	import net.flashpunk.graphics.Image;
 	import map.Node;
 	import hex.math.SpaceConverter;
-	import flash.geom.Point;
+        import hex.HexData;
+        import net.flashpunk.FP;
+        import hex.terrain.Terrain;
+        import hex.HexIndices;
 
 	/**
 	 * ...
@@ -17,7 +20,7 @@ package model
 		public var storeList:Vector.<ComponentData> = new Vector.<ComponentData>();
 		public var nodeList:Vector.<Node> = new Vector.<Node>();//Instruments will be added here.
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
-        private var hexInstruments:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
+        private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		
 		
 		public function PlayerData()
@@ -25,7 +28,7 @@ package model
 			populateStoreList();
 			addDummyData();
 			
-			nodeList.push(new Node(70, 70));
+                        addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -45,12 +48,11 @@ package model
 		
 		public function addNode(node:Node):void
 		{
-			var converter:SpaceConverter = new SpaceConverter(GameConstants.HEX_RADIUS,
-																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
-																GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
-			var hexCoords:Point         = converter.getConvertedPoint(node.getMapX(), node.getMapY());
+			var converter:SpaceConverter = SpaceConverter.getCanonical();
+			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
-			addToHexInstruments(hexCoords.x, hexCoords.y, node)
+
+                        getHexData(hexCoords).addObservatoryComponent(node);
 		}
 		
 		public function populateStoreList():void
@@ -84,22 +86,32 @@ package model
 			return nextId++;
 		}
 
+                public function hexDataExists(indices:HexIndices):Boolean {
 
-		public function addToHexInstruments(xIndex:uint, yIndex:uint, instrument:ObservatoryComponent):void {
+                    if (!hexData[indices.x])            return false;
+                    if (!hexData[indices.x][indices.y]) return false;
+                    return true;
+                }
 
-			if (!hexInstruments[xIndex])          hexInstruments[xIndex]            = new Object;//Vector.<ObservatoryComponent>;
-			if (!hexInstruments[xIndex][yIndex])  hexInstruments[xIndex][yIndex]    = new Vector.<ObservatoryComponent>;
+                public function setHexData(indices:HexIndices, data:HexData):void {
+ 
+			if (!hexData[indices.x]) hexData[indices.x] = new Object;
+			hexData[indices.x][indices.y] = data;
+                }
 
-			hexInstruments[xIndex][yIndex].push(instrument);
-		}
+                private function createHexDataIfNecessary(indices:HexIndices):void {
 
-		public function getHexInstruments(xIndex:uint, yIndex:uint):Vector.<ObservatoryComponent> {
+			if (!hexData[indices.x])            hexData[indices.x]            = new Object;
+			if (!hexData[indices.x][indices.y]) hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
+                }
 
-			if (!hexInstruments[xIndex])          return new Vector.<ObservatoryComponent>;
-			if (!hexInstruments[xIndex][yIndex])  return new Vector.<ObservatoryComponent>;
+                public function getHexData(indices:HexIndices):HexData {
 
-			return hexInstruments[xIndex][yIndex];
-		}
+                    // For the sake of adding nodes to hexes, we'll still create hex data if necessary
+                    // However, we need to figure out what to do about stuff like the node hex's terrain
+                    createHexDataIfNecessary(indices);
+                    return hexData[indices.x][indices.y];
+                }
 	}
 
 }

@@ -21,7 +21,6 @@ package hex.controllers {
         public function hexSelected(tile:HexTile):void {
 
             FP.world = new UnderseaView(tile, game);
-
         }
     }
 }

@@ -1,6 +1,7 @@
 package hex.math {
 
     import flash.geom.Point;
+    import hex.HexIndices;
 
     /**
      *      Lemme just wrap up some math here.
@@ -69,7 +70,7 @@ package hex.math {
         /**
          *  Translates indices in the grid to coordinates in world space.
          */
-        public function positionByIndices(xIndex:int, yIndex:int):Point {
+        public function positionByIndices(indices:HexIndices):Point {
 
             var x:Number;
             var y:Number;
@@ -81,17 +82,17 @@ package hex.math {
             // I ain't even gunna justify the math tho. Draw it out.
             
             // even columns
-            if (xIndex % 2 == 0) {
+            if (indices.isEven) {
 		
-				x = (xIndex / 2) * hexProperties.horizontalDistance;
-				y = (yIndex / 2) * hexProperties.verticalHeight;						
+				x = (indices.x / 2) * hexProperties.horizontalDistance;
+				y = (indices.y / 2) * hexProperties.verticalHeight;						
             }
             
             // odd columns
             else {
             
-				x = Math.floor(xIndex / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
-				y = Math.floor(yIndex / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
+				x = Math.floor(indices.x / 2) * hexProperties.horizontalDistance + hexProperties.interleavedHorizontalDistance;
+				y = Math.floor(indices.y / 2) * hexProperties.verticalHeight + hexProperties.verticalHeight/2;
             }
 
             return new Point(x, y);

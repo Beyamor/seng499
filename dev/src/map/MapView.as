@@ -70,7 +70,7 @@ package map
 						game.data.addNode(new Node(FP.world.mouseX, FP.world.mouseY));
 						game.state.stopPlacingInstrument();
 						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
-						FP.console.log("Added a node.  Do you see it?");
+						//FP.console.log("Added a node.  Do you see it?");
 					}
 				}
 			}
