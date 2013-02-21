@@ -4,10 +4,10 @@ package model
 	import net.flashpunk.graphics.Image;
 	import map.Node;
 	import hex.math.SpaceConverter;
-	import flash.geom.Point;
         import hex.HexData;
         import net.flashpunk.FP;
         import hex.terrain.Terrain;
+        import hex.HexIndices;
 
 	/**
 	 * ...
@@ -49,10 +49,10 @@ package model
 		public function addNode(node:Node):void
 		{
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
-			var hexCoords:Point         = converter.getTileIndices(node.getMapX(), node.getMapY());
+			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
-                        getHexData(hexCoords.x, hexCoords.y).addObservatoryComponent(node);
+                        getHexData(hexCoords).addObservatoryComponent(node);
 		}
 		
 		public function populateStoreList():void
@@ -86,31 +86,31 @@ package model
 			return nextId++;
 		}
 
-                public function hexDataExists(xIndex:uint, yIndex:uint):Boolean {
+                public function hexDataExists(indices:HexIndices):Boolean {
 
-                    if (!hexData[xIndex])           return false;
-                    if (!hexData[xIndex][yIndex])   return false;
+                    if (!hexData[indices.x])            return false;
+                    if (!hexData[indices.x][indices.y]) return false;
                     return true;
                 }
 
-                public function setHexData(xIndex:uint, yIndex:uint, data:HexData):void {
+                public function setHexData(indices:HexIndices, data:HexData):void {
  
-			if (!hexData[xIndex]) hexData[xIndex] = new Object;
-			hexData[xIndex][yIndex] = data;
+			if (!hexData[indices.x]) hexData[indices.x] = new Object;
+			hexData[indices.x][indices.y] = data;
                 }
 
-                private function createHexDataIfNecessary(xIndex:uint, yIndex:uint):void {
+                private function createHexDataIfNecessary(indices:HexIndices):void {
 
-			if (!hexData[xIndex])          hexData[xIndex]            = new Object;
-			if (!hexData[xIndex][yIndex])  hexData[xIndex][yIndex]    = new HexData(new hex.terrain.Terrain);
+			if (!hexData[indices.x])            hexData[indices.x]            = new Object;
+			if (!hexData[indices.x][indices.y]) hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
                 }
 
-                public function getHexData(xIndex:uint, yIndex:uint):HexData {
+                public function getHexData(indices:HexIndices):HexData {
 
                     // For the sake of adding nodes to hexes, we'll still create hex data if necessary
                     // However, we need to figure out what to do about stuff like the node hex's terrain
-                    createHexDataIfNecessary(xIndex, yIndex);
-                    return hexData[xIndex][yIndex];
+                    createHexDataIfNecessary(indices);
+                    return hexData[indices.x][indices.y];
                 }
 	}
 

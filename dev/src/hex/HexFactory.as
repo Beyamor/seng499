@@ -19,17 +19,17 @@ package hex {
             _playerData     = playerData;
         }
 
-        public function create(xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number):HexTile {
+        public function create(indices:HexIndices, x:Number, y:Number, radius:Number):HexTile {
 
-            if (!playerData.hexDataExists(xIndex, yIndex)) {
+            if (!playerData.hexDataExists(indices)) {
 
-                playerData.setHexData(xIndex, yIndex,
-                    cartographer.generateData(xIndex, yIndex));
+                playerData.setHexData(indices,
+                    cartographer.generateData(indices));
             }
 
             return new HexTile(
-                        playerData.getHexData(xIndex, yIndex),
-                        xIndex, yIndex,
+                        playerData.getHexData(indices),
+                        indices,
                         x, y,
                         radius);
         }

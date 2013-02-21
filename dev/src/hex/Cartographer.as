@@ -9,7 +9,7 @@ package hex {
      */
     public class Cartographer {
 
-        public function generateData(xIndex:uint, yIndex:uint):HexData {
+        public function generateData(indices:HexIndices):HexData {
 
             return new HexData(new Terrain(Types.NOT_SAND));
         }

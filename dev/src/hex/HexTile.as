@@ -35,25 +35,18 @@ package hex
 		private function get vertices():Vector.<Point> { return _vertices; }
 
 		// The indices in the grid
-		private var _xIndex:uint;
-		private var _yIndex:uint;
-		public function get xIndex():uint { return _xIndex; }
-		public function get yIndex():uint { return _yIndex; }
+		private var _indices:HexIndices;
+                public function get indices():HexIndices { return _indices; }
 
 		/**
 		 * Creates a new hex tile.
-		 * @param	x - The x position of the hex in the world.
-		 * @param	y - The y position of the hex in the world.
-		 * @param	radius - The distane from the center of the hex to one of its vertices.
 		 */
-		public function HexTile(data:HexData, xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number)
+		public function HexTile(data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
 
                         _data = data;
-
-			_xIndex = xIndex;
-			_yIndex = yIndex;
+                        _indices = indices;
 			_radius = radius;
 			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
 

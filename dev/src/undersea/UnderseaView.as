@@ -39,9 +39,9 @@ package undersea
 		override public function begin():void
 		{
 			super.begin();
-			
+
 			var instrument:ObservatoryComponent;
-			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.xIndex, tile.yIndex).observatoryComponents;
+			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
 			
 			for (var i:uint = 0; i < instruments.length; i++)
 			{

@@ -1,6 +1,7 @@
 package hex.math {
 
     import flash.geom.Point;
+    import hex.HexIndices;
 
     /**
      *      This guy provides conversions between one space (e.g., map) to another (e.g., hexes)
@@ -40,7 +41,7 @@ package hex.math {
         /**
          *      Convertes coordinates between spaces and gets the hex containing those coordinates.
          */
-        public function getTileIndices(x:Number, y:Number):Point {
+        public function getTileIndices(x:Number, y:Number):HexIndices {
 
             var convertedPoint:Point = getConvertedPoint(x, y);
             
@@ -68,7 +69,7 @@ package hex.math {
                             / hexProperties.verticalHeight) * 2 + 1;
             }
 
-            return new Point(xIndex, yIndex);
+            return new HexIndices(xIndex, yIndex);
         }
 
         /**

@@ -51,32 +51,24 @@ package hex
 		}
 
 		/**
-		 *  Checks if the index pair is valid.
-		 *  i.e., they must both be even or odd
-		 */
-		private function validIndices(xIndex:int, yIndex:int):Boolean {
-
-			return (Math.abs(xIndex) % 2) == (Math.abs(yIndex) % 2);
-		}
-
-		/**
 		 * Checks if a tile already exists in the grid at the given indices.
 		 */
-		private function tileExists(xIndex:int, yIndex:int):Boolean {
+		private function tileExists(indices:HexIndices):Boolean {
 
-			if (!tiles.hasOwnProperty(xIndex))          return false;
-			if (!tiles[xIndex].hasOwnProperty(yIndex))  return false;
-			return (tiles[xIndex][yIndex] != null);
+			if (!tiles[indices.x])              return false;
+			if (!tiles[indices.x][indices.y])   return false;
+
+			return (tiles[indices.x][indices.y] != null);
 		}
 
 		/**
 		 *  Adds a created tile to the grid.
 		 */
-		private function addToGrid(xIndex:int, yIndex:int, tile:HexTile):void {
+		private function addToGrid(indices:HexIndices, tile:HexTile):void {
 
-			if (!tiles.hasOwnProperty(xIndex)) tiles[xIndex] = new Object;
+			if (!tiles[indices.x]) tiles[indices.x] = new Object;
 
-			tiles[xIndex][yIndex] = tile;
+			tiles[indices.x][indices.y] = tile;
 		}
 
 		/**
@@ -85,17 +77,14 @@ package hex
 		 *      - adds it to the world
 		*       - adds it to the grid
 		 */
-		private function createIfNecessary(xIndex:int, yIndex:int):void {
+		private function createIfNecessary(indices:HexIndices):void {
 
-			if (tileExists(xIndex, yIndex)) return;
+			if (tileExists(indices)) return;
 
-			var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
-			var tile:HexTile = factory.create(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
+			var pos:Point = gridMather.positionByIndices(indices);
+			var tile:HexTile = factory.create(indices, pos.x, pos.y, hexProperties.radius);
 			world.add(tile);
-			addToGrid(xIndex, yIndex, tile);
-
-			// Comment in to log indices of last created tile
-			//FP.console.log("Creating at " + xIndex + ", " + yIndex);
+			addToGrid(indices, tile);
 		}
 
 		/**
@@ -137,10 +126,10 @@ package hex
 			for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
 				for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
-					if (validIndices(xIndex, yIndex)) {
+                                        if (HexIndices.areValid(xIndex, yIndex)) {
 
-						createIfNecessary(xIndex, yIndex);
-					}
+                                            createIfNecessary(new HexIndices(xIndex, yIndex));
+                                        }
 				}
 			}
 		}
@@ -153,12 +142,16 @@ package hex
 			var onscreenTiles:Vector.<HexTile> = new Vector.<HexTile>;
 
 			var indexBounds:Object = getIndicesOfViewTiles();
+                        var indices:HexIndices;
 
 			for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
 				for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
-					if (tileExists(xIndex, yIndex)) onscreenTiles.push(tiles[xIndex][yIndex]);
-				}
+                                        if (HexIndices.areValid(xIndex, yIndex) && tileExists(new HexIndices(xIndex, yIndex))) {
+
+                                            onscreenTiles.push(tiles[xIndex][yIndex]);
+                                        }
+                                }
 			}
 
 			return onscreenTiles;
