@@ -61,6 +61,9 @@ package store
 			graphic.visible = bool;
 			buyButton.visible = bool;
 			displayIsVisible = bool;
+
+                        if (displayIsVisible)   buyButton.enable();
+                        else                    buyButton.disable();
 		}
 		
 		public function toggleVisible():void
