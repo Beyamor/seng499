@@ -7,6 +7,7 @@ package model
 	import flash.geom.Point;
         import hex.HexData;
         import net.flashpunk.FP;
+        import hex.terrain.Terrain;
 
 	/**
 	 * ...
@@ -51,7 +52,6 @@ package model
 			var hexCoords:Point         = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
-                        FP.log("did the thing with hex " + hexCoords.x + ", " + hexCoords.y);
                         getHexData(hexCoords.x, hexCoords.y).addObservatoryComponent(node);
 		}
 		
@@ -86,14 +86,29 @@ package model
 			return nextId++;
 		}
 
+                public function hexDataExists(xIndex:uint, yIndex:uint):Boolean {
+
+                    if (!hexData[xIndex])           return false;
+                    if (!hexData[xIndex][yIndex])   return false;
+                    return true;
+                }
+
+                public function setHexData(xIndex:uint, yIndex:uint, data:HexData):void {
+ 
+			if (!hexData[xIndex]) hexData[xIndex] = new Object;
+			hexData[xIndex][yIndex] = data;
+                }
+
                 private function createHexDataIfNecessary(xIndex:uint, yIndex:uint):void {
 
 			if (!hexData[xIndex])          hexData[xIndex]            = new Object;
-			if (!hexData[xIndex][yIndex])  hexData[xIndex][yIndex]    = new HexData;
+			if (!hexData[xIndex][yIndex])  hexData[xIndex][yIndex]    = new HexData(new hex.terrain.Terrain);
                 }
 
                 public function getHexData(xIndex:uint, yIndex:uint):HexData {
 
+                    // For the sake of adding nodes to hexes, we'll still create hex data if necessary
+                    // However, we need to figure out what to do about stuff like the node hex's terrain
                     createHexDataIfNecessary(xIndex, yIndex);
                     return hexData[xIndex][yIndex];
                 }

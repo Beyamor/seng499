@@ -11,11 +11,12 @@ package hex {
 
         private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 
-        private var _terrain:Terrain = new Terrain;
+        private var _terrain:Terrain;
         public function get terrain():Terrain { return _terrain; }
 
-        public function HexData() {
+        public function HexData(terrain:Terrain) {
 
+            _terrain = terrain;
         }
 
         public function addObservatoryComponent(component:ObservatoryComponent):void {

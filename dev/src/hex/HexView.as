@@ -49,7 +49,7 @@ package hex
 
 			scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
 
-                        var factory:HexFactory = new HexFactory(game.data);
+                        var factory:HexFactory = new HexFactory(new Cartographer, game.data);
 			grid = new HexGrid(factory, this, HEX_RADIUS, WIDTH, HEIGHT);
 
 			add(Button.description()

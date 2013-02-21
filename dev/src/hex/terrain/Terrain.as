@@ -8,9 +8,9 @@ package hex.terrain {
         private var _type:String;
         public function get type():String { return _type; }
 
-        public function Terrain() {
+        public function Terrain(type:String=null) {
 
-            _type = Types.getAny();
+            _type = type? type : Types.getAny();
         }
     }
 }
