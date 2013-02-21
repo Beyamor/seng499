@@ -7,6 +7,7 @@ package hex
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
+        import hex.terrain.Tables;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -15,6 +16,10 @@ package hex
 	 */
 	public class HexTile extends Entity 
 	{
+                // Data!
+                private var _data:HexData;
+                private function get data():HexData { return _data; }
+
 		// The radius of the hexgon.
 		private var _radius:Number;
 		private function get radius():Number { return _radius; }
@@ -39,14 +44,16 @@ package hex
 		 * @param	y - The y position of the hex in the world.
 		 * @param	radius - The distane from the center of the hex to one of its vertices.
 		 */
-		public function HexTile(xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number)
+		public function HexTile(data:HexData, xIndex:uint, yIndex:uint, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
+
+                        _data = data;
 
 			_xIndex = xIndex;
 			_yIndex = yIndex;
 			_radius = radius;
-			_color = FP.rand(0xFFFFFF);
+			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
 
 			buildVertexList();
 		}

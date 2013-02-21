@@ -1,5 +1,7 @@
 package hex {
 
+    import hex.terrain.Terrain;
+
     /**
      *      The data relevant to a single hex tile.
      *      This class should describe all the important information about a hex.
@@ -8,6 +10,9 @@ package hex {
     public class HexData {
 
         private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
+
+        private var _terrain:Terrain = new Terrain;
+        public function get terrain():Terrain { return _terrain; }
 
         public function HexData() {
 

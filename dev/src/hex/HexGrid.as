@@ -4,6 +4,7 @@ package hex
 	import net.flashpunk.FP;
         import flash.geom.Point;
         import hex.math.*;
+        import model.PlayerData;
 
 	/**
 	 * This represents a grid of hexagon tiles.
@@ -18,6 +19,10 @@ package hex
 		private var _world:World;
 		private function get world():World { return _world; }
 
+                // Those player datums
+                private var _playerData:PlayerData;
+                private function get playerData():PlayerData { return _playerData; }
+
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
 		private function get hexProperties():HexGeometricProperties { return _hexProperties; }
@@ -30,9 +35,15 @@ package hex
 		 * Creates a new hex grid.
 		 * The hex grid builds enough hexagons to fill the given dimensions.
 		 */
-		public function HexGrid(world:World, hexagonRadius:Number, widthInPixels:Number, heightInPixels:Number)
+		public function HexGrid(
+                    world:World,
+                    playerData:PlayerData,      // Stuffing player data in here is suck. Think of something better.
+                    hexagonRadius:Number,
+                    widthInPixels:Number,
+                    heightInPixels:Number)
 		{
 			_world = world;
+                        _playerData = playerData;
 			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
 			_gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
 
@@ -79,7 +90,11 @@ package hex
 			if (tileExists(xIndex, yIndex)) return;
 
 			var pos:Point = gridMather.positionByIndices(xIndex, yIndex);
-			var tile:HexTile = new HexTile(xIndex, yIndex, pos.x, pos.y, hexProperties.radius);
+			var tile:HexTile = new HexTile(
+                                            playerData.getHexData(xIndex, yIndex),
+                                            xIndex, yIndex,
+                                            pos.x, pos.y,
+                                            hexProperties.radius);
 
 			world.add(tile);
 			addToGrid(xIndex, yIndex, tile);
