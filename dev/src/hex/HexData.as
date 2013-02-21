@@ -1,5 +1,6 @@
 package hex {
 
+    import map.Node;
     import hex.terrain.Terrain;
 
     /**
@@ -28,6 +29,19 @@ package hex {
 
             // ugh should make a copy but whatever just don't modify this
             return components;
+        }
+
+        public function get hasNode():Boolean {
+
+            for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+
+                if (observatoryComponent is Node) { // Wut
+
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

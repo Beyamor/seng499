@@ -9,7 +9,6 @@ package hex
 	import flash.utils.getTimer;
         import hex.terrain.Tables;
         import common.Assets;
-        import map.Node;
         import net.flashpunk.graphics.Image;
 	
 	/**
@@ -60,21 +59,7 @@ package hex
 
 			buildVertexList();
 
-                        // do this more better
-                        var hasNode:Boolean = false;
-                        for each (var observatoryComponent:ObservatoryComponent in data.observatoryComponents) {
-
-                            FP.log("gug");
-
-                            if (observatoryComponent is Node) { // Wut
-
-                                hasNode = true;
-                                FP.log("had node!");
-                                break;
-                            }
-                        }
-
-                        if (hasNode) {
+                        if (data.hasNode) {
 
                             graphic = new Image(Assets.IMG_NODE);
                         }
