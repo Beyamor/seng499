@@ -1,7 +1,6 @@
 package hex 
 {
 	import flash.geom.Vector3D;
-	import hex.debug.DummyTileWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;
