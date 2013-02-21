@@ -20,6 +20,13 @@ package hex {
             return x % 2 == 0;
         }
 
+        public function get north():HexIndices      { return new HexIndices(x, y - 2); }
+        public function get south():HexIndices      { return new HexIndices(x, y + 2); }
+        public function get northWest():HexIndices  { return new HexIndices(x - 1, y - 1); }
+        public function get northEast():HexIndices  { return new HexIndices(x + 1, y - 1); }
+        public function get southWest():HexIndices  { return new HexIndices(x - 1, y + 1); }
+        public function get southEast():HexIndices  { return new HexIndices(x + 1, y + 1); }
+
         public static function areValid(xIndex:int, yIndex:int):Boolean {
 
             return (Math.abs(xIndex) % 2) == (Math.abs(yIndex) % 2)

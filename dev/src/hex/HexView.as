@@ -49,7 +49,7 @@ package hex
 
 			scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
 
-                        var factory:HexFactory = new HexFactory(new Cartographer, game.data);
+                        var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
 			grid = new HexGrid(factory, this, HEX_RADIUS, WIDTH, HEIGHT);
 
 			add(Button.description()
@@ -62,25 +62,6 @@ package hex
 						})
 						.build());
 		}
-
-		/**
-		 *      Yoinked from: http://actionscriptsnips.blogspot.ca/2009/08/generate-random-string.html
-		 *      Temporary until reading real instruments.
-		 */
-		private function randomInstrumentName():String{
-
-			var strlen:uint = 8;
-			var chars:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-			var num_chars:Number = chars.length - 1;
-			var randomChar:String = "";
-
-			for (var i:Number = 0; i < strlen; i++){
-
-				randomChar += chars.charAt(Math.floor(Math.random() * num_chars));
-			}
-
-			return randomChar;
-		 }
 
 		override public function update():void 
 		{
