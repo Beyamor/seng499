@@ -5,14 +5,24 @@ package map.terrain
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class LocationPoint extends LocationStructure 
+	public class LocationPoint implements LocationStructure 
 	{
 		private var point:Point;
+		
 		public function LocationPoint() 
 		{
 			
 		}
 		
+		public function distanceToPoint(point:Point):Number
+		{
+			
+		}
+		
+		public function angleFromPoint(point:Point):Number
+		{
+			
+		}
 	}
 
 }

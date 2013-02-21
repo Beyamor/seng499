@@ -2,6 +2,7 @@ package map.terrain
 {
 	import flash.display.FocusDirection;
 	import flash.ui.KeyLocation;
+	import hex.terrain.Terrain;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -11,6 +12,7 @@ package map.terrain
 		
 		private var location:LocationStructure;
 		private var range:Number;
+		private var terrain:Terrain;
 		
 		public function Feature() 
 		{
@@ -24,7 +26,7 @@ package map.terrain
 		
 		public function getTerrainForce(point:Point):TerrainForce
 		{
-			
+			return null;
 		}
 	}
 

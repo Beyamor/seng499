@@ -28,7 +28,7 @@ package map
 			
 			//mapX/Y correspond to the center of the node rather than the upper right corner.
 			this.node = node;
-			super(node.getMapX() + (width / 2), node.getMapY() + (height / 2));
+			super(node.getMapX() - (width / 2), node.getMapY() - (height / 2));
 			
 		}
 		

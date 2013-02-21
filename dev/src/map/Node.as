@@ -25,6 +25,11 @@ package map
 		{
 			return mapY;
 		}
+		
+		public override function getName():String
+		{
+			return "Node";
+		}
 	}
 
 }
