@@ -47,10 +47,8 @@ package model
 		
 		public function addNode(node:Node):void
 		{
-			var converter:SpaceConverter = new SpaceConverter(GameConstants.HEX_RADIUS,
-																GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
-																GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
-			var hexCoords:Object         = converter.getTileIndices(node.getMapX(), node.getMapY());
+			var converter:SpaceConverter = SpaceConverter.getCanonical();
+			var hexCoords:Point         = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
                         FP.log("did the thing with hex " + hexCoords.x + ", " + hexCoords.y);

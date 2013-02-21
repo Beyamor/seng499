@@ -40,18 +40,47 @@ package hex.math {
         /**
          *      Convertes coordinates between spaces and gets the hex containing those coordinates.
          */
-        public function getTileIndices(x:Number, y:Number):Object {
+        public function getTileIndices(x:Number, y:Number):Point {
 
             var convertedPoint:Point = getConvertedPoint(x, y);
+            
+            // I haven't thought of a way to do this accurately, but efficiently
+            // I know it's possible, but I'm not very smart
+            // For the time being, we'll do a rough approximation
+            var xIndex:uint = Math.round(
+                                convertedPoint.x
+                                / hexProperties.interleavedHorizontalDistance);
+            var yIndex:uint;
 
-            var xIndex:uint = gridMather.lowerXIndex(convertedPoint.x);
-            var yIndex:uint = gridMather.lowerYIndex(convertedPoint.y);
+            // Ugh this is incredibly opaque
+            // Trust that it kinda works in a non-mathy way
+            if (xIndex % 2 == 0) {
 
-            // ughhhh
-            // TODO: revisit this when soberer. Do it better.
-            if (xIndex % 2 != yIndex % 2) yIndex -= 1;
+                yIndex = Math.round(
+                            convertedPoint.y
+                            / hexProperties.verticalHeight) * 2;
+            }
 
-            return {x: xIndex, y: yIndex};
+            else {
+
+                yIndex = Math.round(
+                            (convertedPoint.y - hexProperties.verticalHeight / 2)
+                            / hexProperties.verticalHeight) * 2 + 1;
+            }
+
+            return new Point(xIndex, yIndex);
         }
+
+        /**
+         *      Gets the space converter defined in terms of game constants.
+         */
+         public static function getCanonical():SpaceConverter {
+
+            return new SpaceConverter(
+                GameConstants.HEX_RADIUS,
+                GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
+	        GameConstants.HEX_VIEW_WIDTH, GameConstants.HEX_VIEW_HEIGHT);
+
+         }
     }
 }

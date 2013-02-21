@@ -38,10 +38,7 @@ package hex
 			const HEIGHT:uint       = GameConstants.HEX_VIEW_HEIGHT;
 			const HEX_RADIUS:uint   = GameConstants.HEX_RADIUS;
 
-			var converter:SpaceConverter = new SpaceConverter(
-											HEX_RADIUS,
-											GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT,
-											WIDTH, HEIGHT);
+			var converter:SpaceConverter = SpaceConverter.getCanonical();
 
 			var hexCoords:Point         = converter.getConvertedPoint(mapX, mapY);
 			var initialCameraX:Number    = hexCoords.x - FP.width/2;
