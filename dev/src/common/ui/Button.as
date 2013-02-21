@@ -16,6 +16,7 @@ package common.ui
 		private var screenX:int;
 		private var screenY:int;
 		private var clickFunc:Function;
+                private var enabled:Boolean = true;
 
 		// Making this public so that you can toggle it externally if needed.
 		public var isFixed:Boolean;
@@ -64,6 +65,14 @@ package common.ui
 		
 		public override function update():void
 		{
+                        if (isFixed) {
+
+				x = FP.camera.x + screenX;
+				y = FP.camera.y + screenY;
+                        }
+
+                        if (!enabled) return;
+
 			if (wasClicked())
 			{
 				onClick();
@@ -80,9 +89,6 @@ package common.ui
 			// The risk of updating the position in the update method is that the position gets updated,
 			// *then* the camera moves.
 			if (isFixed) {
-
-				x = FP.camera.x + screenX;
-				y = FP.camera.y + screenY;
 
 				// Draw without camera offset
 				var cameraPoint:Point = new Point(0, 0);
@@ -104,6 +110,9 @@ package common.ui
 				super.render();
 			}
 		}
+
+                public function enable():void   { enabled = true; }
+                public function disable():void  { enabled = false; }
 		
 		/**
 		 *      Creates a new fluent button builder.
