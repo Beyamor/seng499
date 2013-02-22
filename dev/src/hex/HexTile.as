@@ -10,6 +10,7 @@ package hex
         import hex.terrain.Tables;
         import common.Assets;
         import net.flashpunk.graphics.Image;
+        import net.flashpunk.graphics.Graphiclist;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -52,11 +53,15 @@ package hex
 
 			buildVertexList();
 
+                        var graphics:Graphiclist = new Graphiclist;
+                        graphics.add(new HexSprite(radius * 0.8, color));
+
                         if (data.hasNode) {
 
-                            graphic = new Image(Assets.IMG_NODE);
+                            graphics.add(new Image(Assets.IMG_NODE));
                         }
 
+                        graphic = graphics;
 		}
 
 		/**
@@ -88,33 +93,6 @@ package hex
 				FP.camera.y	- radius,
 				FP.width	+ radius * 2,
 				FP.height	+ radius * 2);
-		}
-		
-		/**
-		 * Renders the hex.
-		 * Right now, this is done with primities.
-		 * At some point, it should probably be sprite-based.
-		 */
-		override public function render():void 
-		{
-			if (!onCamera) return;
-
-			var firstPoint:Point;
-			var secondPoint:Point;
-			var pointIndex:uint;
-
-			// Comment in for hex lines
-			// for (pointIndex = 0; pointIndex < vertices.length; ++pointIndex) {
-
-			// 	firstPoint = vertices[pointIndex];
-			// 	secondPoint = vertices[(pointIndex + 1) % vertices.length];
-
-			// 	Draw.linePlus(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, 0xffffff, 1, 2);
-			// }
-
-			Draw.circlePlus(x, y, radius * 0.8, color);
-
-                        super.render();
 		}
 		
 		/**
