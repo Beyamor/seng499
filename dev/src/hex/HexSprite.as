@@ -51,21 +51,33 @@ package hex {
 
         private function renderToBuffer():void {
 
-            var vertexIndex:uint;
             var shape:Shape         = new Shape;
             var graphics:Graphics   = shape.graphics;
 
             graphics.clear();
-            graphics.beginFill(_color);
 
+            // Surface of hexagon
+            graphics.lineStyle(0, 0, 0);
+            graphics.beginFill(_color);
+            drawEdges(graphics);
+            graphics.endFill();
+
+            // Outline
+            graphics.lineStyle(2, 0xffffff, 1);
+            graphics.beginFill(0, 0);
+            drawEdges(graphics);
+            graphics.endFill();
+
+            _buffer.draw(shape);
+        }
+
+        private function drawEdges(graphics:Graphics):void {
+
+            var vertexIndex:uint;
             graphics.moveTo(vertices[0].x, vertices[0].y);
             for (vertexIndex = 1; vertexIndex < 6; ++vertexIndex)
                 graphics.lineTo(vertices[vertexIndex].x, vertices[vertexIndex].y);
             graphics.lineTo(vertices[0].x, vertices[0].y);
-
-            graphics.endFill();
-
-            _buffer.draw(shape);
         }
 
         private function buildVertexList():void {
