@@ -12,10 +12,8 @@ package hex {
     import net.flashpunk.FP;
 
     public class HexSprite extends Graphic {
-
+    
         private var _buffer:BitmapData;
-        private var _bufferRect:Rectangle;
-        private var _bitmap:Bitmap          = new Bitmap;
         private var _color:uint;
 
         private var _radius:Number;
@@ -30,23 +28,15 @@ package hex {
         public function HexSprite(radius:Number, color:Number) {
 
             _radius = radius;
-            _color = color;
+            _color  = color;
+            _buffer = new BitmapData(2 * radius, 2 * radius, true, 0);
 
             // Center the hexagon
             x = -centerX;
             y = -centerY;
 
             buildVertexList();
-
-            createBuffer();
             renderToBuffer();
-        }
-
-        private function createBuffer():void {
-
-            _buffer             = new BitmapData(2 * radius, 2 * radius, true, 0);
-            _bufferRect         = _buffer.rect;
-            _bitmap.bitmapData  = _buffer;
         }
 
         private function renderToBuffer():void {
@@ -102,7 +92,7 @@ package hex {
             _point.y = point.y + y - camera.y * scrollY;
             
             // render without transformation
-            target.copyPixels(_buffer, _bufferRect, _point, null, null, true);
+            target.copyPixels(_buffer, _buffer.rect, _point, null, null, true);
         }
     }
 }
