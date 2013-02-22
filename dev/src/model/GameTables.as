@@ -1,6 +1,9 @@
 package model 
 {
 	import common.Assets;
+        import hex.terrain.Types;
+        import observatory.InstrumentProperties;
+
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -19,7 +22,13 @@ package model
 		instrumentImages.push(Assets.IMG_NODE);
 		instrumentIsNode.push(true);
 
-		
+		public static var instrumentProperties:Object = {
+
+                    0:          new InstrumentProperties()
+                                    .producesDataOn(hex.terrain.Types.SAND),
+
+                    1:          new InstrumentProperties()
+                };
 	}
 
 }
