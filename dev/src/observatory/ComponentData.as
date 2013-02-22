@@ -23,17 +23,17 @@ package observatory
 		
 		public function getImage():Image 
 		{
-			return new Image(GameTables.instrumentImages[key]);
+			return new Image(GameTables.instruments[key].image);
 		}
 		
 		public function getName():String
 		{
-            return GameTables.instrumentNames[key];
+            return GameTables.instruments[key].name;
 		}
 		
 		public function isNode():Boolean
 		{
-			return GameTables.instrumentIsNode[key];
+			return GameTables.instruments[key].isNode;
 		}
 	}
 }

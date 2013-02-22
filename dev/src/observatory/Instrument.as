@@ -20,11 +20,13 @@ package observatory
 			this.instrument = instrument;
 			this.tile = tile;
 
-                        isProducingData = GameTables.instrumentProperties[id].producesDataFor(tile.data.terrain);
+                        isProducingData = GameTables.instruments[id].producesDataFor(tile.data.terrain);
 		}
 		
 		override public function getName():String
 		{
+                        // Let me mention that appending the producing data thing to the name
+                        // shouldn't stick around. That's just a temporary display thing.
 			return instrument.getName() + (isProducingData? " - Producing data" : "");
 		}
 		
