@@ -4,6 +4,9 @@ package hex.controllers {
     import hex.HexTile;
     import net.flashpunk.FP;
     import hex.HexView;
+    import observatory.ObservatoryComponent;
+    import observatory.Instrument;
+    import observatory.ComponentData;
 
     /**
      *  The InstrumentPlacer controller places an instrument on a tile.

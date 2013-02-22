@@ -6,6 +6,7 @@ package inventory
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
+        import observatory.ComponentData;
 	/**
 	 * ...
 	 * @author Lambwatt

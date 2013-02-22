@@ -1,4 +1,4 @@
-package  
+package observatory
 {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;

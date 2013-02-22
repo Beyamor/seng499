@@ -10,6 +10,7 @@ package undersea
 	import common.ui.Button;
 	import net.flashpunk.FP;
 	import common.Assets;
+        import observatory.ObservatoryComponent;
 	/**
 	 * ...
 	 * @author Colton Phillips

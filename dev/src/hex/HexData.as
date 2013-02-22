@@ -2,6 +2,7 @@ package hex {
 
     import map.Node;
     import hex.terrain.Terrain;
+    import observatory.ObservatoryComponent;
 
     /**
      *      The data relevant to a single hex tile.

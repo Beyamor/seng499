@@ -1,4 +1,4 @@
-package  
+package observatory
 {
 	import hex.controllers.TileViewer;
 	import hex.HexTile;

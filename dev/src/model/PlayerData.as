@@ -8,6 +8,7 @@ package model
         import net.flashpunk.FP;
         import hex.terrain.Terrain;
         import hex.HexIndices;
+        import observatory.ComponentData;
 
 	/**
 	 * ...

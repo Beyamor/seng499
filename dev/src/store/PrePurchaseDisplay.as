@@ -7,6 +7,7 @@ package store
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
+        import observatory.ComponentData;
 	/**
 	 * ...
 	 * @author ColtonPhillips

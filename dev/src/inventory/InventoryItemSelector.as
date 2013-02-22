@@ -10,6 +10,7 @@ package inventory
 	import model.GameState;
 	import model.Game;
 	import common.Assets;
+        import observatory.ComponentData;
 	/**
 	 * ...
 	 * @author Lambwatt

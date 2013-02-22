@@ -1,6 +1,7 @@
 package model 
 {
-	import Connectable;
+	import observatory.Connectable;
+        import observatory.ComponentData;
 	/**
 	 * ...
 	 * @author Lambwatt

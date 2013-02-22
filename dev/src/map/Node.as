@@ -1,5 +1,6 @@
 package map 
 {
+        import observatory.Connectable;
 	
 	/**
 	 * ...
