@@ -31,10 +31,6 @@ package hex
 		private var _color:uint;
 		public function get color():uint { return _color; }
 
-		// The list of this hex's vertices
-		private var _vertices:Vector.<Point>;
-		private function get vertices():Vector.<Point> { return _vertices; }
-
 		// The indices in the grid
 		private var _indices:HexIndices;
                 public function get indices():HexIndices { return _indices; }
@@ -51,10 +47,8 @@ package hex
 			_radius = radius;
 			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
 
-			buildVertexList();
-
                         var graphics:Graphiclist = new Graphiclist;
-                        graphics.add(new HexSprite(radius * 0.8, color));
+                        graphics.add(new HexSprite(radius, color));
 
                         if (data.hasNode) {
 
@@ -62,24 +56,6 @@ package hex
                         }
 
                         graphic = graphics;
-		}
-
-		/**
-		 * Builds the list of vertices.
-		 */
-		private function buildVertexList():void {
-
-			var theta:Number;
-			_vertices = new Vector.<Point>;
-
-			for (var pointIndex:uint = 0; pointIndex < 6; ++pointIndex) {
-
-				theta = pointIndex * (Math.PI * 2 / 6);
-
-				_vertices.push(new Point(
-							x + radius * Math.cos(theta),
-							y + radius * Math.sin(theta)));
-			}
 		}
 
 		/**

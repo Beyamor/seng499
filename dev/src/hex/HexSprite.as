@@ -16,8 +16,16 @@ package hex {
         private var _buffer:BitmapData;
         private var _bufferRect:Rectangle;
         private var _bitmap:Bitmap          = new Bitmap;
-        private var _radius:Number;
         private var _color:uint;
+
+        private var _radius:Number;
+        private function get radius():Number { return _radius; }
+
+        private var _vertices:Vector.<Point>;
+        private function get vertices():Vector.<Point> { return _vertices; }
+
+        private function get centerX():Number { return radius; }
+        private function get centerY():Number { return radius; }
 
         public function HexSprite(radius:Number, color:Number) {
 
@@ -25,8 +33,10 @@ package hex {
             _color = color;
 
             // Center the hexagon
-            x = -radius;
-            y = -radius;
+            x = -centerX;
+            y = -centerY;
+
+            buildVertexList();
 
             createBuffer();
             renderToBuffer();
@@ -34,39 +44,46 @@ package hex {
 
         private function createBuffer():void {
 
-            _buffer             = new BitmapData(2 * _radius, 2 * _radius, true, 0);
+            _buffer             = new BitmapData(2 * radius, 2 * radius, true, 0);
             _bufferRect         = _buffer.rect;
             _bitmap.bitmapData  = _buffer;
         }
 
         private function renderToBuffer():void {
 
+            var vertexIndex:uint;
             var shape:Shape         = new Shape;
             var graphics:Graphics   = shape.graphics;
 
             graphics.clear();
             graphics.beginFill(_color);
-            graphics.drawCircle(_radius, _radius, _radius);
+
+            graphics.moveTo(vertices[0].x, vertices[0].y);
+            for (vertexIndex = 1; vertexIndex < 6; ++vertexIndex)
+                graphics.lineTo(vertices[vertexIndex].x, vertices[vertexIndex].y);
+            graphics.lineTo(vertices[0].x, vertices[0].y);
+
             graphics.endFill();
 
             _buffer.draw(shape);
         }
-       
+
+        private function buildVertexList():void {
+
+                var theta:Number;
+                _vertices = new Vector.<Point>;
+
+                for (var vertexIndex:uint = 0; vertexIndex < 6; ++vertexIndex) {
+
+                        theta = vertexIndex * (Math.PI * 2 / 6);
+
+                        _vertices.push(new Point(
+                                                centerX + radius * Math.cos(theta),
+                                                centerY + radius * Math.sin(theta)));
+                }
+        }
+  
         override public function render(target:BitmapData, point:Point, camera:Point):void {
-
-            var firstPoint:Point;
-            var secondPoint:Point;
-            var pointIndex:uint;
-
-            // Comment in for hex lines
-            // for (pointIndex = 0; pointIndex < vertices.length; ++pointIndex) {
-
-            // 	firstPoint = vertices[pointIndex];
-            // 	secondPoint = vertices[(pointIndex + 1) % vertices.length];
-
-            // 	Draw.linePlus(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, 0xffffff, 1, 2);
-            // }
-
             
             // determine drawing location
             _point.x = point.x + x - camera.x * scrollX;
