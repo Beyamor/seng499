@@ -21,7 +21,7 @@ package hex
 	{
                 // Data!
                 private var _data:HexData;
-                private function get data():HexData { return _data; }
+                public function get data():HexData { return _data; }
 
 		// The radius of the hexgon.
 		private var _radius:Number;
