@@ -1,6 +1,7 @@
 package store
 {
         import flash.geom.Point;
+        import flash.geom.Rectangle;
         import hex.HexView;
         import map.MapView;
         import model.Game;
@@ -10,6 +11,8 @@ package store
         import net.flashpunk.World;
         import common.ui.Button;
         import common.Assets;
+        import store.ui.ButtonPaginator;
+        import observatory.ComponentData;
        
         /**
          * ...
@@ -29,6 +32,8 @@ package store
 			private var prePurchaseDisplay:PrePurchaseDisplay = null;
 			
 			private var game:Game;
+
+                        private var purchaseButtonPages:ButtonPaginator;
 		   
 			public function StoreView(game:Game)
 			{
@@ -109,34 +114,25 @@ package store
 		   
 			public function populateStoreInventory():void
 			{
-				// HACK						
-				var offsetIndex:Number = 0;
-				var offsets:Vector.<Point> = new Vector.<Point>;
-				offsets.push(new Point(0,100));
-				offsets.push(new Point(0,300));
-				offsets.push(new Point(400,100));
-				offsets.push(new Point(400, 300));
-				
-				// Used to offset buttons on each 'page'
-				var placerPoint:Point = new Point(0, 0);
-			   
-				for (var i:int = 0; i < game.data.storeList.length; i++)
-				{
-						// i=0 is the degenerate case
-						if (i != 0 && i % BUTTONS_PER_PAGE == 0) {
-								placerPoint.x = placerPoint.x + FP.screen.width;
-						}
-					   
-						add(Button.description()
-												.at(placerPoint.x + offsets[offsetIndex].x, offsets[offsetIndex].y)
-												.withDepth(-1)
-												.withImage(Assets.IMG_INSTRUMENT_IMAGE)
-												.whenClicked(whenClickedInstrument)
-												.build());
-					   
-						//Next button needs a new offset placement
-						offsetIndex = (offsetIndex + 1) % BUTTONS_PER_PAGE;
-				}
+                                var purchaseButtons:Vector.<Button> = new Vector.<Button>;
+                                
+                                // Ugh, vector's map is silllly
+                                game.data.storeList.forEach(
+                                    function (component:ComponentData, _:int, __:Vector.<ComponentData>):void {
+
+                                        purchaseButtons.push(Button.description()
+                                                            .withDepth(-1)
+                                                            .withImage(Assets.IMG_INSTRUMENT_IMAGE)
+                                                            .whenClicked(whenClickedInstrument)
+                                                            .build());
+                                });
+
+                                purchaseButtons.forEach(function(button:Button, _:int, __:Vector.<Button>):void { add(button); });
+                                
+                                purchaseButtonPages = new ButtonPaginator(
+                                                        new Rectangle(100, 100, FP.width - 200, 350),
+                                                        2, 2,
+                                                        purchaseButtons);
 			}
 		   
 			override public function update():void
