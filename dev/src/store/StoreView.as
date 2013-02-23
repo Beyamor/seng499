@@ -30,7 +30,6 @@ package store
 			private var pageIndex:int = 0;
 			private var scrollSpeed:Number = 0;
 			private var cameraTargetPoint:Point = new Point(0, 0);
-			private var prePurchaseDisplay:PrePurchaseDisplay = null;
 			
 			private var game:Game;
 
@@ -41,9 +40,6 @@ package store
 					this.game = game;
 				   
 					addStoreButtons();
-					
-					prePurchaseDisplay = new PrePurchaseDisplay(game.data);
-					add(prePurchaseDisplay);
 			}
 		   
 			private function calculateScrollSpeed():void
@@ -112,7 +108,7 @@ package store
 
                             return function():void {
 
-                                FP.log(component.getName());
+                                add(new PrePurchaseDisplay(game.data, component));
                             }
                         }
 		   

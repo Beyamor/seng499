@@ -17,10 +17,12 @@ package store
 		private var displayIsVisible:Boolean = false;
 		private var buyButton:Button = null;
 		private var playerData:PlayerData;
+                private var component:ComponentData;
 		
-		public function PrePurchaseDisplay(data:PlayerData)
+		public function PrePurchaseDisplay(data:PlayerData, component:ComponentData)
 		{
-			playerData = data;
+			playerData      = data;
+                        this.component  = component;
 			
 			super();
 			
@@ -34,16 +36,27 @@ package store
 		override public function added():void
 		{
 			addDisplayButtons();
-			setVisible(false);
 		}
+
+                override public function removed():void {
+
+                    if (buyButton.world) buyButton.world.remove(buyButton);
+                }
 		
 		private function buyButtonClicked():void
 		{
-			// TODO: A button needs to know what Instrument it referencing
-			// in order display it's name, image, and description - CP
-			playerData.addToInventory(new ComponentData(0));
-			FP.console.log("added to inventory");
+			playerData.addToInventory(component);
+			FP.console.log("added to inventory: " + component.getName());
+                        close();
 		}
+
+                public function close():void {
+
+                    if (world) {
+
+                        world.remove(this);
+                    }
+                }
 		
 		private function addDisplayButtons():void
 		{
@@ -55,21 +68,6 @@ package store
 						.build();
 						
 			FP.world.add(buyButton);
-		}
-		
-		public function setVisible(bool:Boolean):void
-		{
-			graphic.visible = bool;
-			buyButton.visible = bool;
-			displayIsVisible = bool;
-
-                        if (displayIsVisible)   buyButton.enable();
-                        else                    buyButton.disable();
-		}
-		
-		public function toggleVisible():void
-		{
-			setVisible(!visible);
 		}
 		
 		override public function update():void 
