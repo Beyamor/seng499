@@ -18,6 +18,7 @@ package store
 		private var buyButton:Button = null;
 		private var playerData:PlayerData;
                 private var component:ComponentData;
+                private var componentImage:Entity;
 		
 		public function PrePurchaseDisplay(data:PlayerData, component:ComponentData)
 		{
@@ -36,11 +37,19 @@ package store
 		override public function added():void
 		{
 			addDisplayButtons();
+
+                        componentImage = world.addGraphic(component.getImage());
+                        componentImage.layer = -9003;
+
+                        // This is all junk. Gotta it at some point.
+                        componentImage.x = FP.width / 2;
+                        componentImage.y = FP.height / 2;
 		}
 
                 override public function removed():void {
 
-                    if (buyButton.world) buyButton.world.remove(buyButton);
+                    if (buyButton.world)    buyButton.world.remove(buyButton);
+                    if (componentImage)     componentImage.world.remove(componentImage);
                 }
 		
 		private function buyButtonClicked():void
