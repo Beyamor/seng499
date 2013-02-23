@@ -8,6 +8,7 @@ package store
         import net.flashpunk.FP;
         import net.flashpunk.Graphic;
         import net.flashpunk.graphics.Image;
+        import net.flashpunk.graphics.Text;
         import net.flashpunk.World;
         import common.ui.Button;
         import common.Assets;
@@ -125,7 +126,9 @@ package store
 
                                         purchaseButtons.push(Button.description()
                                                             .withDepth(-1)
-                                                            .withImage(Assets.IMG_INSTRUMENT_IMAGE)
+                                                            .withImageAndText(
+                                                                Assets.IMG_MAPBUTTONBACKGROUND,
+                                                                new Text(component.getName()))
                                                             .whenClicked(purchaseFunction(component))
                                                             .build());
                                 });

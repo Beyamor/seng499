@@ -87,8 +87,10 @@ package common.ui
 		 /**
 		  * Sets the image to be the text over image.
 		  */
-		 public function withImageAndText(image:Image, text:Text):ButtonBuilder {
+		 public function withImageAndText(image:*, text:Text):ButtonBuilder {
 			 
+                         if (!(image is Image)) image = new Image(image);
+
 			 impliedWidth = image.width;
 			 impliedHeight = image.height;
 			 
