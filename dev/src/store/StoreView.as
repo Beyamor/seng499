@@ -79,11 +79,6 @@ package store
 					}
 			}
 			
-			private function whenClickedInstrument():void 
-			{
-				prePurchaseDisplay.setVisible(true);
-			}
-		   
 			private function addStoreButtons():void
 			{
 					add(Button.description()
@@ -111,6 +106,14 @@ package store
 					populateStoreInventory();
 				   
 			}
+
+                        private function purchaseFunction(component:ComponentData):Function {
+
+                            return function():void {
+
+                                FP.log(component.getName());
+                            }
+                        }
 		   
 			public function populateStoreInventory():void
 			{
@@ -123,7 +126,7 @@ package store
                                         purchaseButtons.push(Button.description()
                                                             .withDepth(-1)
                                                             .withImage(Assets.IMG_INSTRUMENT_IMAGE)
-                                                            .whenClicked(whenClickedInstrument)
+                                                            .whenClicked(purchaseFunction(component))
                                                             .build());
                                 });
 
