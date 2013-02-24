@@ -27,67 +27,27 @@ package store
         public class StoreView extends World { 
 
               		private var game:Game;
-                        private var purchaseButtonsDisplay:PurchaseButtonsDisplay;
+                        private var purchaseButtons:PurchaseButtonsDisplay;
+                        private var navButtons:NavButtonsDisplay;
                         private var background:BackgroundDisplay;
 
 			public function StoreView(game:Game)
 			{
 					this.game = game;
 
-                                        purchaseButtonsDisplay = new PurchaseButtonsDisplay(this, game.data);
-				   
-					addStoreButtons();
-
-                                        // Background
-                                        background = new BackgroundDisplay(this, Assets.IMG_BG);
+                                        purchaseButtons = new PurchaseButtonsDisplay(this, game.data);
+                                        navButtons      = new NavButtonsDisplay(this, game, purchaseButtons);
+                                        background      = new BackgroundDisplay(this, Assets.IMG_BG);
 			}
 	   
-			private function whenClickedLeft():void
-			{
-                            purchaseButtonsDisplay.goToPreviousPage();
-			}
-		   
-			private function whenClickedBack():void
-			{
-					FP.world = new MapView(game);
-			}
-		   
-			private function whenClickedRight():void
-			{
-                            purchaseButtonsDisplay.goToNextPage();
-			}
-			
-			private function addStoreButtons():void
-			{
-					add(Button.description()
-											.fixedAt(0, FP.height - 100)
-											.withDepth(-1)
-											.withImage(Assets.IMG_LEFT)
-											.whenClicked(whenClickedLeft)
-											.build());     
-										   
-										   
-					add(Button.description()
-											.fixedAt(0, 0)
-											.withDepth(-1)
-											.withImage(Assets.IMG_BACK)
-											.whenClicked(whenClickedBack)
-											.build());                     
-										   
-					add(Button.description()
-											.fixedAt(600, FP.height - 100)
-											.withDepth(-1)
-											.withImage(Assets.IMG_RIGHT)
-											.whenClicked(whenClickedRight)
-											.build());     
-			}
-
                         override public function update():void {
 
                             background.update();
-                            purchaseButtonsDisplay.update();
+                            purchaseButtons.update();
+                            navButtons.update();
                             background.updateLists();
-                            purchaseButtonsDisplay.updateLists();
+                            purchaseButtons.updateLists();
+                            navButtons.updateLists();
                             super.update();
                         }
 
@@ -95,7 +55,8 @@ package store
 
                             background.render();
                             super.render();
-                            purchaseButtonsDisplay.render();
+                            purchaseButtons.render();
+                            navButtons.render();
                         }
         }
 }
