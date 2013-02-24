@@ -8,12 +8,14 @@ package store
         import net.flashpunk.FP;
         import net.flashpunk.Graphic;
         import net.flashpunk.graphics.Image;
+        import net.flashpunk.graphics.TiledImage;
         import net.flashpunk.graphics.Text;
         import net.flashpunk.World;
         import common.ui.Button;
         import common.Assets;
         import store.ui.ButtonPaginator;
         import observatory.ComponentData;
+        import store.displays.*;
        
         /**
          * ...
@@ -22,44 +24,25 @@ package store
          */
          
         public class StoreView extends World { 
-               
-			private const SCROLL_SCALING_FACTOR:Number = 12;
-            private const BUTTONS_PER_PAGE:Number = 4;
-			private const MAGIC_PAGE_LIMIT:Number = 2;
-			
-			private var pageIndex:int = 0;
-			private var scrollSpeed:Number = 0;
-			private var cameraTargetPoint:Point = new Point(0, 0);
-			
-			private var game:Game;
 
-                        private var purchaseButtonPages:ButtonPaginator;
-		   
+              		private var game:Game;
+                        private var purchaseButtonsDisplay:PurchaseButtonsDisplay;
+
 			public function StoreView(game:Game)
 			{
 					this.game = game;
+
+                                        purchaseButtonsDisplay = new PurchaseButtonsDisplay(this, game.data);
 				   
 					addStoreButtons();
+
+                                        // Background
+                                        addGraphic(new TiledImage(Assets.IMG_BG, FP.width, FP.height), 100);
 			}
-		   
-			private function calculateScrollSpeed():void
-			{
-					scrollSpeed = Math.abs(cameraTargetPoint.x - FP.camera.x) / SCROLL_SCALING_FACTOR;
-			}
-			
-			public function setTargetToPage(pageIndex:int):void
-			{
-				cameraTargetPoint.x = pageIndex * FP.screen.width;
-				calculateScrollSpeed();
-			}
-		   
+	   
 			private function whenClickedLeft():void
 			{
-					if (pageIndex > 0) 
-					{
-						pageIndex--;
-						setTargetToPage(pageIndex);
-					}
+                            purchaseButtonsDisplay.goToPreviousPage();
 			}
 		   
 			private function whenClickedBack():void
@@ -69,11 +52,7 @@ package store
 		   
 			private function whenClickedRight():void
 			{
-					if (pageIndex < MAGIC_PAGE_LIMIT) 
-					{
-						pageIndex++;
-						setTargetToPage(pageIndex);
-					}
+                            purchaseButtonsDisplay.goToNextPage();
 			}
 			
 			private function addStoreButtons():void
@@ -99,50 +78,19 @@ package store
 											.withImage(Assets.IMG_RIGHT)
 											.whenClicked(whenClickedRight)
 											.build());     
-				   
-					populateStoreInventory();
-				   
 			}
 
-                        private function purchaseFunction(component:ComponentData):Function {
+                        override public function update():void {
 
-                            return function():void {
-
-                                add(new PrePurchaseDisplay(game.data, component));
-                            }
+                            purchaseButtonsDisplay.update();
+                            purchaseButtonsDisplay.updateLists();
+                            super.update();
                         }
-		   
-			public function populateStoreInventory():void
-			{
-                                var purchaseButtons:Vector.<Button> = new Vector.<Button>;
-                                
-                                // Ugh, vector's map is silllly
-                                game.data.storeList.forEach(
-                                    function (component:ComponentData, _:int, __:Vector.<ComponentData>):void {
 
-                                        purchaseButtons.push(Button.description()
-                                                            .withDepth(-1)
-                                                            .withImageAndText(
-                                                                Assets.IMG_MAPBUTTONBACKGROUND,
-                                                                new Text(component.getName()))
-                                                            .whenClicked(purchaseFunction(component))
-                                                            .build());
-                                });
+                        override public function render():void {
 
-                                purchaseButtons.forEach(function(button:Button, _:int, __:Vector.<Button>):void { add(button); });
-                                
-                                purchaseButtonPages = new ButtonPaginator(
-                                                        new Rectangle(100, 100, FP.width - 200, 350),
-                                                        2, 2,
-                                                        purchaseButtons);
-			}
-		   
-			override public function update():void
-			{
-					super.update();
-				   
-					FP.stepTowards(camera, cameraTargetPoint.x, cameraTargetPoint.y, scrollSpeed);
-			}
-		   
+                            super.render();
+                            purchaseButtonsDisplay.render();
+                        }
         }
 }
