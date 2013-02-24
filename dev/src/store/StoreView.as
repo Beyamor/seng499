@@ -15,6 +15,7 @@ package store
         import common.Assets;
         import store.ui.ButtonPaginator;
         import observatory.ComponentData;
+        import common.displays.BackgroundDisplay;
         import store.displays.*;
        
         /**
@@ -27,6 +28,7 @@ package store
 
               		private var game:Game;
                         private var purchaseButtonsDisplay:PurchaseButtonsDisplay;
+                        private var background:BackgroundDisplay;
 
 			public function StoreView(game:Game)
 			{
@@ -37,7 +39,7 @@ package store
 					addStoreButtons();
 
                                         // Background
-                                        addGraphic(new TiledImage(Assets.IMG_BG, FP.width, FP.height), 100);
+                                        background = new BackgroundDisplay(this, Assets.IMG_BG);
 			}
 	   
 			private function whenClickedLeft():void
@@ -82,13 +84,16 @@ package store
 
                         override public function update():void {
 
+                            background.update();
                             purchaseButtonsDisplay.update();
+                            background.updateLists();
                             purchaseButtonsDisplay.updateLists();
                             super.update();
                         }
 
                         override public function render():void {
 
+                            background.render();
                             super.render();
                             purchaseButtonsDisplay.render();
                         }
