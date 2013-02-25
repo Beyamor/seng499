@@ -15,7 +15,6 @@ package store.displays {
     import store.ui.ButtonPaginator;
     import observatory.ComponentData;
     import common.displays.Display;
-    import store.PrePurchaseDisplay;
 
     public class PurchaseButtonsDisplay extends Display {
  

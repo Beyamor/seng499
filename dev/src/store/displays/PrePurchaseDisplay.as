@@ -1,4 +1,4 @@
-package store 
+package store.displays
 {
 	import common.ui.Button;
 	import model.PlayerData;
@@ -10,6 +10,7 @@ package store
         import observatory.ComponentData;
         import common.displays.Display;
         import net.flashpunk.World;
+        import net.flashpunk.utils.Input;
 	/**
 	 * ...
 	 * @author ColtonPhillips
@@ -60,7 +61,7 @@ package store
                 public function close():void {
 
                     // Just gunna assume this is the top of the stack
-                    if (stack) stack.pop();
+                    if (stack && stack.top == this) stack.pop();
                 }
 		
 		private function addDisplayButtons():void
@@ -77,6 +78,12 @@ package store
 			add(buyButton);
 		}
 		
+                override public function update():void {
+
+                    super.update();
+
+                    if (Input.mousePressed && !containsMouse) close();
+                }
 	}
 
 }

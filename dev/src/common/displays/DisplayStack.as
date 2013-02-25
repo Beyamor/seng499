@@ -13,6 +13,11 @@ package common.displays {
             for each (var display:Display in displaysToAdd) push(display);
         }
 
+        public function get top():Display {
+
+            return (displays.length > 0)? displays[displays.length - 1] : null;
+        }
+
         public function push(... displaysToAdd):DisplayStack {
 
             for each (var display:Display in displaysToAdd) {
