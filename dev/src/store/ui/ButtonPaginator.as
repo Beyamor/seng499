@@ -1,14 +1,19 @@
 package store.ui {
 
     import flash.geom.Rectangle;
+    import flash.geom.Point;
     import common.ui.Button;
     import net.flashpunk.FP;
+    import net.flashpunk.World;
 
     /**
      *  Displays pages of buttons
      */
     public class ButtonPaginator {
 
+	private static const SCROLL_SCALING_FACTOR:Number   = 30;
+
+        private var world:World;
         private var buttons:Vector.<Button>;
         private var view:Rectangle;
         private var horizontalNumber:uint;
@@ -16,12 +21,17 @@ package store.ui {
         private function get numberPerPage():uint { return horizontalNumber * verticalNumber; }
         private var buttonWidth:Number;
         private var buttonHeight:Number;
-
+	private var pageIndex:int = 0;
+	private var scrollSpeed:Number = 0;
+	private var cameraTargetPoint:Point = new Point(0, 0);
+        private function get camera():Point { return world.camera; }
+	
         // TODO: Figure out page separation. Maybe supply in constructor?
-        private function get pageSeparation():Number { return FP.width; }
+        private function get pageSeparation():Number { return 2 * view.width; }
 
-        public function ButtonPaginator(view:Rectangle, horizontalNumber:uint, verticalNumber:uint, buttons:Vector.<Button>) {
+        public function ButtonPaginator(world:World, view:Rectangle, horizontalNumber:uint, verticalNumber:uint, buttons:Vector.<Button>) {
 
+            this.world              = world;
             this.view               = view;
             this.horizontalNumber   = horizontalNumber;
             this.verticalNumber     = verticalNumber;
@@ -72,5 +82,45 @@ package store.ui {
                 button.y = lowerY + gridY * yStep;
             }
         }
+
+	public function update():void
+        {
+                FP.stepTowards(camera, cameraTargetPoint.x, cameraTargetPoint.y, scrollSpeed);
+        }
+
+        private function get highestPageIndex():int {
+
+            return buttons.length / (horizontalNumber * verticalNumber);
+         }
+	
+        public function goToNextPage():void {
+
+		if (pageIndex < highestPageIndex) 
+		{
+			pageIndex++;
+			setTargetToPage(pageIndex);
+		}
+        }
+	  
+        public function goToPreviousPage():void {
+
+		if (pageIndex > 0) 
+		{
+			pageIndex--;
+			setTargetToPage(pageIndex);
+		}
+        }
+	   
+	private function calculateScrollSpeed():void
+	{
+			scrollSpeed = Math.abs(cameraTargetPoint.x - camera.x) / SCROLL_SCALING_FACTOR;
+	}
+	
+	public function setTargetToPage(pageIndex:int):void
+	{
+		cameraTargetPoint.x = pageIndex * pageSeparation;
+		calculateScrollSpeed();
+	}
+		
     }
 }

@@ -19,17 +19,11 @@ package store.displays {
 
     public class PurchaseButtonsDisplay extends Display {
  
-	private static const SCROLL_SCALING_FACTOR:Number   = 100;
         private static const HORIZONTAL_NUMBER:uint         = 2;
         private static const VERTICAL_NUMBER:uint           = 2;
 
         private var playerData:PlayerData;
-
-	private var pageIndex:int = 0;
-	private var scrollSpeed:Number = 0;
-	private var cameraTargetPoint:Point = new Point(0, 0);
-	
-        private var purchaseButtonPages:ButtonPaginator;
+        private var pages:ButtonPaginator;
 
         public function PurchaseButtonsDisplay(parent:World, playerData:PlayerData) {
 
@@ -43,44 +37,12 @@ package store.displays {
 	override public function update():void
         {
                 super.update();
-                
-                FP.stepTowards(camera, cameraTargetPoint.x, cameraTargetPoint.y, scrollSpeed);
+                pages.update();
         }
 
-        public function goToNextPage():void {
+        public function goToPreviousPage():void { pages.goToPreviousPage(); }
+        public function goToNextPage():void { pages.goToNextPage(); }
 
-		if (pageIndex < highestPageIndex) 
-		{
-			pageIndex++;
-			setTargetToPage(pageIndex);
-		}
-        }
-
-         private function get highestPageIndex():int {
-
-            return playerData.storeList.length / (HORIZONTAL_NUMBER * VERTICAL_NUMBER);
-         }
-		  
-        public function goToPreviousPage():void {
-
-		if (pageIndex > 0) 
-		{
-			pageIndex--;
-			setTargetToPage(pageIndex);
-		}
-        }
-	   
-	private function calculateScrollSpeed():void
-	{
-			scrollSpeed = Math.abs(cameraTargetPoint.x - camera.x) / SCROLL_SCALING_FACTOR;
-	}
-	
-	public function setTargetToPage(pageIndex:int):void
-	{
-		cameraTargetPoint.x = pageIndex * FP.screen.width;
-		calculateScrollSpeed();
-	}
-		
         private function purchaseFunction(component:ComponentData):Function {
 
              return function():void {
@@ -88,14 +50,12 @@ package store.displays {
                 if (stack) stack.push(new PrePurchaseDisplay(parent, playerData, component));
              }
          }
-
+         
         public function populateStoreInventory():void
         {
                 var purchaseButtons:Vector.<Button> = new Vector.<Button>;
                 
-                // Ugh, vector's map is silllly
-                playerData.storeList.forEach(
-                    function (component:ComponentData, _:int, __:Vector.<ComponentData>):void {
+                for each (var component:ComponentData in playerData.storeList) {
 
                         purchaseButtons.push(Button.description()
                                             .withDepth(-1)
@@ -104,15 +64,15 @@ package store.displays {
                                                 new Text(component.getName()))
                                             .whenClicked(purchaseFunction(component))
                                             .build());
-                });
+                };
 
                 for each (var button:Button in purchaseButtons) add(button);
                 
-                purchaseButtonPages = new ButtonPaginator(
+                pages = new ButtonPaginator(
+                                        this,
                                         new Rectangle(0, 0, width, height),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
                                         purchaseButtons);
         }
-
     }
 }
