@@ -2,7 +2,7 @@ package common.displays {
 
     /**
      *      A stack of displays?
-     *      Updates and renders bottom to top
+     *      Updates top to bottom, render bottom to top.
      */
     public class DisplayStack {
 
@@ -34,8 +34,18 @@ package common.displays {
         public function update():DisplayStack {
             
             var display:Display;
+            var displayIndex:int;
 
-            for each (display in displays) display.update();
+            // Easiest way to allow pushing/popping while updating
+            // is just to produced a copy of the display list which does not get changed
+            var snapshotOfDisplays:Vector.<Display> = displays.concat();
+
+            for (displayIndex = snapshotOfDisplays.length - 1; displayIndex >=0; --displayIndex) {
+
+                snapshotOfDisplays[displayIndex].update();
+                if (snapshotOfDisplays[displayIndex].blocksUpdates) break;
+            }
+
             for each (display in displays) display.updateLists();
 
             return this;

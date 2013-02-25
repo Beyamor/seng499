@@ -48,6 +48,8 @@ package store
                         // This is all junk. Gotta it at some point.
                         componentImage.x = center.x;
                         componentImage.y = center.y;
+
+                        blocksUpdates = true;
 		}
 		
 		private function buyButtonClicked():void

@@ -20,7 +20,6 @@ package common.displays {
         private var _height:int;
         public function get height():int { return _height; }
 
-        // Maybe use the camera for these?
         private var _x:int;
         private var _y:int;
 
@@ -30,6 +29,11 @@ package common.displays {
         public function get center():Point { return new Point(x + width/2, y + height/2); }
 
         public var stack:DisplayStack = null;
+
+        /**
+         *      Whether this display prevents the ones below it from updating.
+         */
+        public var blocksUpdates:Boolean = false;
 
         public function Display(parent:World, x:int, y:int, width:int, height:int) {
 
