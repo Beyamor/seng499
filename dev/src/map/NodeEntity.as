@@ -8,6 +8,7 @@ package map
 	import net.flashpunk.World;
 	import model.GameState;
 	import model.Game;
+	import observatory.Node;
 	import common.Assets;
     import hex.HexView;
 	

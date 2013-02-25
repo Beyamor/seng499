@@ -1,4 +1,4 @@
-package map 
+package observatory 
 {
         import observatory.Connectable;
 	

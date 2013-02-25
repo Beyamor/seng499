@@ -12,6 +12,7 @@ package map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import store.StoreView;
+	import observatory.Node;
 	/**
 	 * ...
 	 * @author Lambwatt

@@ -2,13 +2,14 @@ package model
 {
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
-	import map.Node;
+	import observatory.Node;
+	import observatory.Instrument;
 	import hex.math.SpaceConverter;
-        import hex.HexData;
-        import net.flashpunk.FP;
-        import hex.terrain.Terrain;
-        import hex.HexIndices;
-        import observatory.ComponentData;
+	import hex.HexData;
+	import net.flashpunk.FP;
+	import hex.terrain.Terrain;
+	import hex.HexIndices;
+	import observatory.ComponentData;
 
 	/**
 	 * ...

@@ -1,6 +1,6 @@
 package hex {
 
-    import map.Node;
+    import observatory.Node;
     import hex.terrain.Terrain;
     import observatory.ObservatoryComponent;
 
