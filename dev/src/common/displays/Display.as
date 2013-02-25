@@ -7,6 +7,26 @@ package common.displays {
     import net.flashpunk.FP;
     import net.flashpunk.Entity;
 
+    /**
+     *      A display is kind of like a sub-world or a windowed view, I guess?
+     *      It has its own entities and it renders only to a portion of the screen.
+     *      If you have different "groupings" of entities (e.g. background, nav buttons, and overlay),
+     *      you probably want to stick them in different displays.
+     *
+     *      You can have multiple displays side by side or even on top of each other.
+     *
+     *      Create the display with an x and y specifying its top-left in its parent world
+     *      as well the width and height of its view.
+     *
+     *      Coordinates in the display are relative to its x and y position.
+     *      So, if you place an entity at (0,0) in the display,
+     *      that entity will show up at (x,y) in the parent world.
+     *      Makes sense?
+     *
+     *      Rather than moving FP.camera,
+     *      always move the display's camera to change what the display is rendering.
+     *
+     */
     public class Display extends World {
 
         private var _parent:World;

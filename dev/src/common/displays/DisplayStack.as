@@ -2,7 +2,12 @@ package common.displays {
 
     /**
      *      A stack of displays?
+     *      Push and pop displays onto the stack.
      *      Updates top to bottom, render bottom to top.
+     *
+     *      Displays can be set as blocksUpdates.
+     *      This will prevent displays below them from being updated.
+     *
      */
     public class DisplayStack {
 
