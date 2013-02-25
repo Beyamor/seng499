@@ -109,9 +109,10 @@ package store.displays {
                 for each (var button:Button in purchaseButtons) add(button);
                 
                 purchaseButtonPages = new ButtonPaginator(
-                                        new Rectangle(x, y, width, height),
+                                        new Rectangle(0, 0, width, height),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
                                         purchaseButtons);
         }
+
     }
 }

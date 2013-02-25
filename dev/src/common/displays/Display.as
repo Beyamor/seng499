@@ -26,7 +26,7 @@ package common.displays {
         public function get x():int { return _x; }
         public function get y():int { return _y; }
 
-        public function get center():Point { return new Point(x + width/2, y + height/2); }
+        public function get center():Point { return new Point(width/2, height/2); }
 
         public var stack:DisplayStack = null;
 
@@ -74,8 +74,8 @@ package common.displays {
             // So that entities render to the buffer with consideration for the display's x and y,
             // we need to offset the camera point.
             // Might be worth changing the Entity render function to account for world's camera?
-            var xOffset:Number = x + camera.x;
-            var yOffset:Number = y + camera.y;
+            var xOffset:Number = camera.x;
+            var yOffset:Number = camera.y;
 
             FP.camera.x += xOffset;
             FP.camera.y += yOffset;
@@ -98,5 +98,22 @@ package common.displays {
                    FP.screen.mouseY >= y &&
                    FP.screen.mouseY <= y + height;
         }
+
+	/**
+	 * X position of the mouse in the World.
+	 */
+	override public function get mouseX():int
+	{
+		return FP.screen.mouseX + FP.camera.x - x;
+	}
+	
+	/**
+	 * Y position of the mouse in the world.
+	 */
+	override public function get mouseY():int
+	{
+		return FP.screen.mouseY + FP.camera.y - y;
+	}
+
     }
 }

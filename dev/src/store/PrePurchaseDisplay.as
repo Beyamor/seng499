@@ -36,8 +36,6 @@ package store
                             background.width,
                             background.height);
 			
-                        background.x = (FP.width - width)/2;
-                        background.y = (FP.height - height)/2;
 			super.addGraphic(background, 100);
 
 			addDisplayButtons();
