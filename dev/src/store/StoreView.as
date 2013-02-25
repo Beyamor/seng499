@@ -16,6 +16,7 @@ package store
         import store.ui.ButtonPaginator;
         import observatory.ComponentData;
         import common.displays.BackgroundDisplay;
+        import common.displays.DisplayStack;
         import store.displays.*;
        
         /**
@@ -27,36 +28,32 @@ package store
         public class StoreView extends World { 
 
               		private var game:Game;
-                        private var purchaseButtons:PurchaseButtonsDisplay;
-                        private var navButtons:NavButtonsDisplay;
-                        private var background:BackgroundDisplay;
+                        private var displays:DisplayStack;
 
 			public function StoreView(game:Game)
 			{
 					this.game = game;
 
-                                        purchaseButtons = new PurchaseButtonsDisplay(this, game.data);
-                                        navButtons      = new NavButtonsDisplay(this, game, purchaseButtons);
-                                        background      = new BackgroundDisplay(this, Assets.IMG_BG);
+                                        var purchaseButtons:PurchaseButtonsDisplay  = new PurchaseButtonsDisplay(this, game.data);
+                                        var navButtons:NavButtonsDisplay            = new NavButtonsDisplay(this, game, purchaseButtons);
+                                        var background:BackgroundDisplay            = new BackgroundDisplay(this, Assets.IMG_BG);
+
+                                        displays = new DisplayStack(
+                                            background,
+                                            purchaseButtons,
+                                            navButtons);
 			}
 	   
                         override public function update():void {
 
-                            background.update();
-                            purchaseButtons.update();
-                            navButtons.update();
-                            background.updateLists();
-                            purchaseButtons.updateLists();
-                            navButtons.updateLists();
+                            displays.update();
                             super.update();
                         }
 
                         override public function render():void {
 
-                            background.render();
+                            displays.render();
                             super.render();
-                            purchaseButtons.render();
-                            navButtons.render();
                         }
         }
 }
