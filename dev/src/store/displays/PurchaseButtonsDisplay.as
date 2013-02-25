@@ -85,7 +85,7 @@ package store.displays {
 
              return function():void {
 
-                 parent.add(new PrePurchaseDisplay(playerData, component));
+                if (stack) stack.push(new PrePurchaseDisplay(parent, playerData, component));
              }
          }
 

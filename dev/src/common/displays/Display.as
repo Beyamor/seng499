@@ -27,6 +27,10 @@ package common.displays {
         public function get x():int { return _x; }
         public function get y():int { return _y; }
 
+        public function get center():Point { return new Point(x + width/2, y + height/2); }
+
+        public var stack:DisplayStack = null;
+
         public function Display(parent:World, x:int, y:int, width:int, height:int) {
 
             super();
@@ -45,6 +49,12 @@ package common.displays {
             super.add(e);
             e.renderTarget = _buffer;
             return e;
+        }
+
+        override public function remove(e:Entity):Entity {
+
+            e.renderTarget = null;
+            return super.remove(e);
         }
 
         private function clearBuffer():void {

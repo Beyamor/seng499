@@ -15,13 +15,20 @@ package common.displays {
 
         public function push(... displaysToAdd):DisplayStack {
 
-            for each (var display:Display in displaysToAdd) displays.push(display);
+            for each (var display:Display in displaysToAdd) {
+            
+                displays.push(display);
+                display.stack = this;
+            }
+
             return this;
         }
 
         public function pop():Display {
 
-            return displays.pop();
+            var display:Display = displays.pop();
+            display.stack = null;
+            return display;
         }
 
         public function update():DisplayStack {

@@ -8,11 +8,13 @@ package store
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
         import observatory.ComponentData;
+        import common.displays.Display;
+        import net.flashpunk.World;
 	/**
 	 * ...
 	 * @author ColtonPhillips
 	 */
-	public class PrePurchaseDisplay extends Entity
+	public class PrePurchaseDisplay extends Display
 	{
 		private var displayIsVisible:Boolean = false;
 		private var buyButton:Button = null;
@@ -20,37 +22,33 @@ package store
                 private var component:ComponentData;
                 private var componentImage:Entity;
 		
-		public function PrePurchaseDisplay(data:PlayerData, component:ComponentData)
+		public function PrePurchaseDisplay(parent:World, data:PlayerData, component:ComponentData)
 		{
+                        var background:Image = new Image(Assets.IMG_PREPURCHASE_DISPLAY);
+
 			playerData      = data;
                         this.component  = component;
 			
-			super();
+			super(
+                            parent,
+                            FP.width/2 - background.width/2,
+                            FP.height/2 - background.height/2,
+                            background.width,
+                            background.height);
 			
-			x = 50;
-			y = 50;
-			layer = -9001;
-			
-			graphic = new Image(Assets.IMG_PREPURCHASE_DISPLAY);		
-		}
-		
-		override public function added():void
-		{
+                        background.x = (FP.width - width)/2;
+                        background.y = (FP.height - height)/2;
+			super.addGraphic(background, 100);
+
 			addDisplayButtons();
 
-                        componentImage = world.addGraphic(component.getImage());
+                        componentImage = addGraphic(component.getImage());
                         componentImage.layer = -9003;
 
                         // This is all junk. Gotta it at some point.
-                        componentImage.x = FP.width / 2;
-                        componentImage.y = FP.height / 2;
+                        componentImage.x = center.x;
+                        componentImage.y = center.y;
 		}
-
-                override public function removed():void {
-
-                    if (buyButton.world)    buyButton.world.remove(buyButton);
-                    if (componentImage)     componentImage.world.remove(componentImage);
-                }
 		
 		private function buyButtonClicked():void
 		{
@@ -61,27 +59,22 @@ package store
 
                 public function close():void {
 
-                    if (world) {
-
-                        world.remove(this);
-                    }
+                    // Just gunna assume this is the top of the stack
+                    if (stack) stack.pop();
                 }
 		
 		private function addDisplayButtons():void
 		{
+                        var img:Image = new Image(Assets.IMG_BUY);
+
 			buyButton =  Button.description()
-						.fixedAt(300, 500)
+						.at(center.x - img.width/2, center.y + height/2 - img.height)
 						.withDepth(-9002)
-						.withImage(Assets.IMG_BUY)
+						.withImage(img)
 						.whenClicked(buyButtonClicked)
 						.build();
 						
-			FP.world.add(buyButton);
-		}
-		
-		override public function update():void 
-		{
-			super.update();
+			add(buyButton);
 		}
 		
 	}
