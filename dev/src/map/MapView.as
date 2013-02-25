@@ -63,6 +63,15 @@ package map
 			
 			if (game.state.isPlacing())
 			{
+                                // We currently have a bug where, if a node has been selected for placement,
+                                // if the player clicks on an existing node, they will still be taken to the hex view.
+                                // However, the logic below will have already added the node at the map level
+                                // The visible symptom of the bug is a null pointer in the hex view when clicking on a tile.
+                                // This is because the hex controller thinks that there's still an instrument to be placed,
+                                // even though the logic below has already stopped instrument placement.
+                                // We could add a check in the hex controller, but the heart of the problem is
+                                // going to the hex view at all when placing a node.
+                                // TODO: Figure this out, dawgs.
 				if (game.state.getInstrumentBeingPlaced().isNode())
 				{
 					if (Input.mousePressed == true && FP.world.mouseX - camera.x < 600)//TODO make a proper check for wether click is over the display.
