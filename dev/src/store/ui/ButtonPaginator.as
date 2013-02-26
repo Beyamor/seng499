@@ -45,16 +45,16 @@ package store.ui {
         private function maxButtonWidth():Number {
 
             var maxWidth:Number = 0;
-            buttons.forEach(function(button:Button, _:int, __:Vector.<Button>):void
-                { if (button.width > maxWidth) maxWidth = button.width; })
+            for each (var button:Button in buttons)
+                { if (button.width > maxWidth) maxWidth = button.width; }
             return maxWidth;
         }
 
         private function maxButtonHeight():Number {
 
             var maxHeight:Number = 0;
-            buttons.forEach(function(button:Button, _:int, __:Vector.<Button>):void
-                { if (button.height > maxHeight) maxHeight = button.height; })
+            for each (var button:Button in buttons)
+                 { if (button.height > maxHeight) maxHeight = button.height; }
             return maxHeight;
         }
 
@@ -90,7 +90,7 @@ package store.ui {
 
         private function get highestPageIndex():int {
 
-            return buttons.length / (horizontalNumber * verticalNumber);
+            return (buttons.length - 1) / (horizontalNumber * verticalNumber);
          }
 	
         public function goToNextPage():void {

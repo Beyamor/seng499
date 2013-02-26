@@ -31,6 +31,8 @@ package store.displays {
             this.playerData = playerData;
 
             populateStoreInventory();
+
+            clearColor = 0xff333333;
         }
 
 	override public function update():void

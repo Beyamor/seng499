@@ -55,6 +55,12 @@ package common.displays {
          */
         public var blocksUpdates:Boolean = false;
 
+        /**
+         *      The color used to fill the buffer on redraw
+         *      Note: alpha must be specified. 0x000000 is transparent black. 0xff000000 is opaque black.
+         */
+         public var clearColor:uint = 0x00000000;
+
         public function Display(parent:World, x:int, y:int, width:int, height:int) {
 
             super();
@@ -83,7 +89,7 @@ package common.displays {
 
         private function clearBuffer():void {
 
-            _buffer.fillRect(_buffer.rect, 0);
+            _buffer.fillRect(_buffer.rect, clearColor);
         }
 
         override public function render():void {
