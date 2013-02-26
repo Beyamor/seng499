@@ -1,15 +1,13 @@
 package map.terrain 
 {
+	import flash.geom.Point;
 	/**
 	 * ...
 	 * @author Lambwatt
 	 */
 	public interface LocationStructure 
 	{
-		
-		public function distanceToPoint(point:Point):Number;
-		public function angleFromPoint(point:Point):Number;
-		
+		function distanceToPoint(point:Point):Number;
+		function angleToPoint(point:Point):Number;
 	}
-
 }

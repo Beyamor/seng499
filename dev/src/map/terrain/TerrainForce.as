@@ -9,11 +9,10 @@ package map.terrain
 	{
 		private var direction:int;
 		private var terrain:Terrain;
-		public function TerrainForce() 
+		public function TerrainForce(terrain:Terrain, direction:int) 
 		{
-			
-		}
-		
+			this.terrain = terrain;
+			this.direction = direction;
+		}	
 	}
-
 }

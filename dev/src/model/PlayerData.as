@@ -30,7 +30,7 @@ package model
 			populateStoreList();
 			addDummyData();
 			
-                        addNode(new Node(70, 70));
+            addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void

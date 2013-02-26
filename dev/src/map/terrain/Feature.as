@@ -1,8 +1,10 @@
 package map.terrain 
 {
-	import flash.display.FocusDirection;
-	import flash.ui.KeyLocation;
+	//import flash.display.FocusDirection; //what does this do?  I think Imight have added it by accident
+	import flash.geom.Point;
+	import map.terrain.LocationStructure;
 	import hex.terrain.Terrain;
+	
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -14,9 +16,11 @@ package map.terrain
 		private var range:Number;
 		private var terrain:Terrain;
 		
-		public function Feature() 
+		public function Feature(location:LocationStructure, range:Number, terrain:Terrain) 
 		{
-			
+			this.location = location;
+			this.range = range;
+			this.terrain = terrain;
 		}
 		
 		public function isInRange(point:Point):Boolean
@@ -26,7 +30,7 @@ package map.terrain
 		
 		public function getTerrainForce(point:Point):TerrainForce
 		{
-			return null;
+			return new TerrainForce( terrain, location.angleToPoint(point));
 		}
 	}
 
