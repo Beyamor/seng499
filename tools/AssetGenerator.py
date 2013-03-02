@@ -39,7 +39,8 @@ EXTENSIONS = [
     'png',
     'mp3',
     'oel',
-    'ttf'
+    'ttf',
+    'flv'
 ]
 # What prefixes to give to the assets
 #EXTENSIONS and PREFIXES need to line up!
@@ -47,7 +48,8 @@ PREFIXES = [
     'IMG',
     'SOUND',
     'LEVEL',
-    'FONT'
+    'FONT',
+    'VIDEO'
 ]
 # Which folders to exclude
 EXCLUDES = [

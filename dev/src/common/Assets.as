@@ -2,6 +2,9 @@ package common{
 	/* Auto generated from AssetGenerator.py! */
 	public class Assets {
 	
+		/* Generating flv assets! */
+		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
+
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
