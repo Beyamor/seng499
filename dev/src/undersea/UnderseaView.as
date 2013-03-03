@@ -29,7 +29,7 @@ package undersea
 		private var tile:HexTile;
 
 		private var video:Video = new Video();
-		private var chinceRotate:int = -180;
+		private var ns:NetStream;
 		
 		public function UnderseaView(tile:HexTile, game:Game) 
 		{
@@ -41,7 +41,6 @@ package undersea
 		private function clickedBack():void
 		{
 			FP.world = new HexView(game, 0, 0);
-			FP.stage.removeChild(video);
 		}
 		
 		private function setUpButtons():void
@@ -76,7 +75,7 @@ package undersea
 		{
 			if (e.info.code == 'NetConnection.Connect.Success') {
 				trace(e.target as NetConnection);
-				var ns:NetStream = new NetStream(e.target as NetConnection);
+				ns = new NetStream(e.target as NetConnection);
 				
 				ns.client = {};
 				var file:ByteArray = new Assets.VIDEO_TEST();
@@ -122,14 +121,14 @@ package undersea
 		override public function update():void
 		{
 			super.update();
-			chinceRotate++;
+		}
+		
+		override public function end():void
+		{
+			super.end();
 			
-			video.rotationX = chinceRotate;
-			video.rotationY = chinceRotate;
-			video.rotationZ = chinceRotate;
-			
-			if (chinceRotate == 180)
-				chinceRotate = -180;
+			FP.stage.removeChild(video);
+			ns.close();
 		}
 		
 	}
