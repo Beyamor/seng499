@@ -1,7 +1,9 @@
 package 
 {
+	import common.Assets;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.media.Sound;
 	import hex.HexView;
 	import map.MapView;
 	import model.Game;
@@ -28,6 +30,7 @@ package
 			super.init();
 			
 			initModel();
+			initSound();
 			
 			FP.console.enable();
 			
@@ -53,6 +56,12 @@ package
 		{
 			game = new Game();
 		}
-	}
+
+		private function initSound():void
+		{
+			var sound:Sound = (new Assets.SOUND_NEPTUNE) as Sound;
+			sound.play();
+		}
+}
 	
 }

@@ -5,6 +5,9 @@ package common{
 		/* Generating flv assets! */
 		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
 
+		/* Generating mp3 assets! */
+		[Embed(source = "../assets/sound/neptune.mp3")] public static const SOUND_NEPTUNE:Class
+
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
