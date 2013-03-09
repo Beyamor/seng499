@@ -57,7 +57,7 @@ package model
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
-			getHexData(hexCoords).addObservatoryComponent(new ComponentData(GameTables.getInstrumentIDByName("node")));
+			getHexData(hexCoords).addObservatoryComponent(new ComponentData(GameTables.instrumentIDByName("node")));
 		}
 		
 		public function populateStoreList():void

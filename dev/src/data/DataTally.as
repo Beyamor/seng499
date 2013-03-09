@@ -29,7 +29,7 @@ package data
 					
 					if (component.isNode()) continue;
 					
-					var componentProperties:InstrumentProperties = GameTables.instruments[GameTables.getInstrumentIDByName(component.getName())];
+					var componentProperties:InstrumentProperties = GameTables.instrumentByName(component.getName());
 					var isProducingData:Boolean = componentProperties.producesDataFor(hexData.terrain);
 					
 					if (isProducingData) ++sum;

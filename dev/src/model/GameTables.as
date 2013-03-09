@@ -26,7 +26,7 @@ package model
                         .finish()
                 );
 				
-				public static function getInstrumentIDByName(name:String):uint {
+				public static function instrumentIDByName(name:String):uint {
 					
 					name = name.toLowerCase();
 					
@@ -37,6 +37,11 @@ package model
 					}
 					
 					throw new Error("Unknown instrument name: " + name);
+				}
+				
+				public static function instrumentByName(name:String):InstrumentProperties {
+					
+					return instruments[instrumentIDByName(name)];
 				}
 	}
 

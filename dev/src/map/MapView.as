@@ -23,6 +23,7 @@ package map
 		private const WIDTH:int = 1440;
 		private const HEIGHT:int = 640;
 		private var game:Game;
+		private var cursor:Cursor;
 		
 		public function MapView(game:Game)
 		{
@@ -57,10 +58,6 @@ package map
 						.withDepth( -1)
 						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
 						.build());
-			
-			var cursor:Cursor = Cursor.fromImage(Assets.IMG_PLACINGMOUSE);
-			cursor.show();
-			add(cursor);
 			
 		}
 		
@@ -98,6 +95,7 @@ package map
 					{
 						game.data.addNode(new Node(FP.world.mouseX, FP.world.mouseY));
 						game.state.stopPlacingInstrument();
+						removeCursor();
 						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
 						//FP.console.log("Added a node.  Do you see it?");
 					}
@@ -108,6 +106,19 @@ package map
 		public function getGame():Game 
 		{
 			return game;
+		}
+		
+		public function removeCursor():void {
+			
+			if (cursor) remove(cursor);
+		}
+		
+		public function setCursor(newCursor:Cursor):void {
+			
+			if (cursor) remove(cursor);
+			cursor = newCursor;
+			cursor.show();
+			add(cursor);
 		}
 	}
 

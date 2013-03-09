@@ -1,9 +1,13 @@
 package common.ui 
 {
+	import common.Assets;
 	import flash.ui.Mouse;
+	import model.GameTables;
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
+	import observatory.ComponentData;
 	
 	/**
 	 * Custom mouse cursor.
@@ -43,6 +47,12 @@ package common.ui
 			return this;
 		}
 		
+		override public function removed():void 
+		{
+			super.removed();
+			hide();
+		}
+		
 		override public function update():void 
 		{
 			super.update();
@@ -54,6 +64,19 @@ package common.ui
 		public static function fromImage(source:*):Cursor {
 			
 			return new Cursor(new Image(source));
+		}
+		
+		public static function forPlacingInstrument(component:ComponentData):Cursor {
+			
+			var pointer:Image		= new Image(Assets.IMG_PLACINGMOUSE);
+			var instrument:Image	= new Image(GameTables.instrumentByName(component.getName()).image);
+			
+			instrument.scaleX = (pointer.width / instrument.width) * 0.5;
+			instrument.scaleY = (pointer.height / instrument.height) * 0.5;
+			instrument.x = 10;
+			instrument.y = 10;
+			
+			return new Cursor(new Graphiclist(instrument, pointer));
 		}
 		
 		public static function hideActive():void {
