@@ -26,7 +26,7 @@ package map
 		private var game:Game;
 		
 		public function MapView(game:Game)
-		{
+		{			
 			this.game = game;
 			add(new MapEntity(0, 0));
 			
@@ -58,6 +58,8 @@ package map
 						.withDepth( -1)
 						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
 						.build());
+						
+			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
 			
 		}
 		
