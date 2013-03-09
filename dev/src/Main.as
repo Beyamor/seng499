@@ -12,6 +12,7 @@ package
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import store.StoreView;
+	import title.TitleView;
 	
 	/**
 	 * ...
@@ -41,6 +42,8 @@ package
 			Input.define("hex-scroll-down",		Key.S, Key.DOWN);
 			Input.define("hex-scroll-left",		Key.A, Key.LEFT);
 			Input.define("hex-scroll-right",	Key.D, Key.RIGHT);
+			
+			FP.world = new TitleView(game);
 		}
 		
 		override public function update():void 
