@@ -52,11 +52,8 @@ package inventory
 							.withGraphicList(assembleGraphic())
 							.fixedAt(x, y)
 							.whenClicked(function():void {
-								//DO NOT REMOVE. Statements need to be fixed.
-								if ((FP.world as MapView).getGame().state.isPlacing()==false)
-								{
-									(FP.world as MapView).getGame().state.setInstrumentBeingPlaced(data);
-								}
+								
+								(FP.world as MapView).getGame().state.setInstrumentBeingPlaced(data);
 								FP.console.log("clicked "+data.getName());
 
 							})
