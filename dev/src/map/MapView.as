@@ -1,6 +1,7 @@
 package map 
 {
 	//import common.ui.ButtonBuilder;
+	import common.NeptuneWorld;
 	import common.ui.Button;
 	import common.Assets;
 	import common.ui.Cursor;
@@ -18,12 +19,11 @@ package map
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class MapView extends World
+	public class MapView extends NeptuneWorld
 	{
 		private const WIDTH:int = 1440;
 		private const HEIGHT:int = 640;
 		private var game:Game;
-		private var cursor:Cursor;
 		
 		public function MapView(game:Game)
 		{
@@ -59,12 +59,6 @@ package map
 						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
 						.build());
 			
-		}
-		
-		override public function end():void 
-		{
-			super.end();
-			Cursor.hideActive();
 		}
 		
 		override public function update():void 
@@ -106,19 +100,6 @@ package map
 		public function getGame():Game 
 		{
 			return game;
-		}
-		
-		public function removeCursor():void {
-			
-			if (cursor) remove(cursor);
-		}
-		
-		public function setCursor(newCursor:Cursor):void {
-			
-			if (cursor) remove(cursor);
-			cursor = newCursor;
-			cursor.show();
-			add(cursor);
 		}
 	}
 
