@@ -16,6 +16,7 @@ package undersea
 	import common.ui.Button;
 	import net.flashpunk.FP;
 	import common.Assets;
+	import observatory.ComponentData;
     import observatory.ObservatoryComponent;
 	
 	/**
@@ -55,8 +56,8 @@ package undersea
 		
 		private function setUpInstruments():void
 		{
-			var instrument:ObservatoryComponent;
-			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
+			var instrument:ComponentData;
+			var instruments:Vector.<ComponentData> = game.data.getHexData(tile.indices).observatoryComponents;
 			
 			for (var i:uint = 0; i < instruments.length; i++)
 			{

@@ -25,6 +25,19 @@ package model
                         .isNode()
                         .finish()
                 );
+				
+				public static function getInstrumentIDByName(name:String):uint {
+					
+					name = name.toLowerCase();
+					
+					// TODO: Think about why these things aren't keyed by name anyway
+					for (var id:int = 0; id < instruments.length; ++id) {
+						
+						if (instruments[id].name.toLowerCase() == name) return id;
+					}
+					
+					throw new Error("Unknown instrument name: " + name);
+				}
 	}
 
 }

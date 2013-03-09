@@ -2,6 +2,8 @@ package hex {
 
     import map.Node;
     import hex.terrain.Terrain;
+	import model.GameTables;
+	import observatory.ComponentData;
     import observatory.ObservatoryComponent;
 
     /**
@@ -11,7 +13,7 @@ package hex {
      */
     public class HexData {
 
-        private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
+        private var components:Vector.<ComponentData> = new Vector.<ComponentData>;
 
         private var _terrain:Terrain;
         public function get terrain():Terrain { return _terrain; }
@@ -21,12 +23,12 @@ package hex {
             _terrain = terrain;
         }
 
-        public function addObservatoryComponent(component:ObservatoryComponent):void {
+        public function addObservatoryComponent(component:ComponentData):void {
 
             components.push(component);
         }
 
-        public function get observatoryComponents():Vector.<ObservatoryComponent> {
+        public function get observatoryComponents():Vector.<ComponentData> {
 
             // ugh should make a copy but whatever just don't modify this
             return components;
@@ -34,9 +36,9 @@ package hex {
 
         public function get hasNode():Boolean {
 
-            for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+            for each (var observatoryComponent:ComponentData in observatoryComponents) {
 
-                if (observatoryComponent is Node) { // Wut
+                if (observatoryComponent.isNode()) { // Wut
 
                     return true;
                 }

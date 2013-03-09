@@ -30,13 +30,8 @@ package hex.controllers {
 			
 			var addedInstrument:Instrument = new Instrument(instrument, tile)
 			game.state.getConnectionPoint().connect(addedInstrument);
-            game.data.getHexData(tile.indices).addObservatoryComponent(addedInstrument);
+            game.data.getHexData(tile.indices).addObservatoryComponent(instrument);
             game.state.stopPlacingInstrument();
-
-            // Debug to check instrument placement
-            var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
-            var placedInstrument:ObservatoryComponent    = instruments[instruments.length-1] 
-            FP.log("Placed " + placedInstrument.getName() + " at " + tile.indices.x + ", " + tile.indices.y);
 
             // Okay. Switch out of instrument placement I guess?
             view.controller = new TileViewer(game);
