@@ -1,5 +1,6 @@
 package common 
 {
+	import common.displays.DisplayStack;
 	import common.ui.Cursor;
 	import net.flashpunk.World;
 	
@@ -10,10 +11,23 @@ package common
 	public class NeptuneWorld extends World 
 	{
 		private var cursor:Cursor;
+		protected var displays:DisplayStack = new DisplayStack;
 		
 		public function NeptuneWorld() 
 		{
 			
+		}
+		
+		override public function update():void 
+		{
+			displays.update();
+			super.update();
+		}
+		
+		override public function render():void 
+		{
+			displays.render();
+			super.render();
 		}
 		
 		public function removeCursor():void {

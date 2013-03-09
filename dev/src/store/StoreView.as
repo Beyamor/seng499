@@ -1,5 +1,6 @@
 package store
 {
+		import common.NeptuneWorld;
         import flash.geom.Point;
         import flash.geom.Rectangle;
         import hex.HexView;
@@ -25,35 +26,22 @@ package store
          * @author coolton
          */
          
-        public class StoreView extends World { 
+        public class StoreView extends NeptuneWorld { 
 
-              		private var game:Game;
-                        private var displays:DisplayStack;
+			private var game:Game;
 
 			public function StoreView(game:Game)
 			{
-					this.game = game;
+				this.game = game;
 
-                                        var purchaseButtons:PurchaseButtonsDisplay  = new PurchaseButtonsDisplay(this, game.data);
-                                        var navButtons:NavButtonsDisplay            = new NavButtonsDisplay(this, game, purchaseButtons);
-                                        var background:BackgroundDisplay            = new BackgroundDisplay(this, Assets.IMG_BG);
+				var purchaseButtons:PurchaseButtonsDisplay  = new PurchaseButtonsDisplay(this, game.data);
+				var navButtons:NavButtonsDisplay            = new NavButtonsDisplay(this, game, purchaseButtons);
+				var background:BackgroundDisplay            = new BackgroundDisplay(this, Assets.IMG_BG);
 
-                                        displays = new DisplayStack(
-                                            background,
-                                            purchaseButtons,
-                                            navButtons);
+				displays = new DisplayStack(
+					background,
+					purchaseButtons,
+					navButtons);
 			}
-	   
-                        override public function update():void {
-
-                            displays.update();
-                            super.update();
-                        }
-
-                        override public function render():void {
-
-                            displays.render();
-                            super.render();
-                        }
         }
 }
