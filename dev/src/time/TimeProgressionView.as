@@ -1,5 +1,6 @@
 package time 
 {
+	import data.DataConverter;
 	import map.MapView;
 	import model.Game;
 	import net.flashpunk.FP;
@@ -26,7 +27,9 @@ package time
 			add(timeProgress);
 			
 			var dataSum:uint = new DataTally(game.data).sum;
-			addGraphic(new Text("Data: " + dataSum, FP.halfWidth, FP.halfHeight + 100)); 
+			addGraphic(new Text("Data: " + dataSum, FP.halfWidth, FP.halfHeight + 100));
+			game.data.addMoney(new DataConverter(dataSum).moneyValue);
+			addGraphic(new Text("Money: " + game.data.money, FP.halfWidth, FP.halfHeight + 120));
 		}
 		
 		override public function update():void 
