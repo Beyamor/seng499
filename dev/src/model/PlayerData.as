@@ -4,12 +4,13 @@ package model
 	import net.flashpunk.graphics.Image;
 	import map.Node;
 	import hex.math.SpaceConverter;
-        import hex.HexData;
-        import net.flashpunk.FP;
-        import hex.terrain.Terrain;
-        import hex.HexIndices;
-		import observatory.ComponentData;
-		import observatory.Instrument;
+	import hex.HexData;
+	import net.flashpunk.FP;
+	import hex.terrain.Terrain;
+	import hex.HexIndices;
+	import observatory.ComponentData;
+	import observatory.Instrument;
+	import time.Calendar;
 
 	/**
 	 * ...
