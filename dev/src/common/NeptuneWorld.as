@@ -32,7 +32,7 @@ package common
 		override public function end():void 
 		{
 			super.end();
-			Cursor.hideActive();
+			Cursor.hideActiveIfThis(cursor);
 		}
 	}
 

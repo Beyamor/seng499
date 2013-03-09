@@ -85,6 +85,12 @@ package common.ui
 			
 			activeCursor.hide();
 		}
+		
+		public static function hideActiveIfThis(someCursor:Cursor):void {
+			
+			if (activeCursor != someCursor) return;
+			hideActive();
+		}
 	}
 
 }

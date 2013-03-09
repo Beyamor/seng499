@@ -1,5 +1,6 @@
 package hex.controllers {
         
+	import common.ui.Cursor;
     import model.Game;
     import hex.HexTile;
     import net.flashpunk.FP;
@@ -24,6 +25,7 @@ package hex.controllers {
             this.game       = game;
             this.instrument = game.state.getInstrumentBeingPlaced();
 
+			view.setCursor(Cursor.forPlacingInstrument(instrument));
         }
 
         public function hexSelected(tile:HexTile):void {
@@ -32,6 +34,7 @@ package hex.controllers {
 			game.state.getConnectionPoint().connect(addedInstrument);
             game.data.getHexData(tile.indices).addObservatoryComponent(instrument);
             game.state.stopPlacingInstrument();
+			view.removeCursor();
 
             // Okay. Switch out of instrument placement I guess?
             view.controller = new TileViewer(game);

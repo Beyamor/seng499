@@ -1,5 +1,6 @@
 package hex 
 {
+	import common.NeptuneWorld;
     import flash.geom.Point;
 	import model.Game;
 	import net.flashpunk.FP;
@@ -19,7 +20,7 @@ package hex
 	 * ...
 	 * @author beyamor
 	 */
-	public class HexView extends World 
+	public class HexView extends NeptuneWorld 
 	{
 		private var grid:HexGrid;
 		private var scrollCamera:ScrollCamera;
@@ -28,7 +29,9 @@ package hex
 		public var  controller:HexController;
 		
 		public function HexView(game:Game, mapX:Number, mapY:Number)
-		{			
+		{
+			super();
+			
 			this.game = game;
 
 			controller = (new ControllerFactory).createFor(game, this);
@@ -49,7 +52,7 @@ package hex
 
 			scrollCamera = new ScrollCamera(350, 0, 0, WIDTH, HEIGHT);
 
-                        var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
+            var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
 			grid = new HexGrid(factory, this, HEX_RADIUS, WIDTH, HEIGHT);
 
 			add(Button.description()
