@@ -3,6 +3,7 @@ package map
 	//import common.ui.ButtonBuilder;
 	import common.ui.Button;
 	import common.Assets;
+	import common.ui.Cursor;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;
 	import model.Game;
@@ -57,6 +58,16 @@ package map
 						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
 						.build());
 			
+			var cursor:Cursor = Cursor.fromImage(Assets.IMG_PLACINGMOUSE);
+			cursor.show();
+			add(cursor);
+			
+		}
+		
+		override public function end():void 
+		{
+			super.end();
+			Cursor.hideActive();
 		}
 		
 		override public function update():void 
