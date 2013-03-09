@@ -6,7 +6,7 @@ package time
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
-	import time.ui.TimeProgress;
+	import time.ui.TimeProgressWidget;
 	import data.DataTally;
 	
 	/**
@@ -17,13 +17,13 @@ package time
 	public class TimeProgressionView extends World 
 	{
 		private var game:Game;
-		private var timeProgress:TimeProgress;
+		private var timeProgress:TimeProgressWidget;
 		
 		public function TimeProgressionView(game:Game)
 		{
 			this.game = game;
 			
-			timeProgress = new TimeProgress(FP.halfWidth, FP.halfHeight, game.data.calendar);
+			timeProgress = new TimeProgressWidget(FP.halfWidth, FP.halfHeight, game.data.calendar);
 			add(timeProgress);
 			
 			var dataSum:uint = new DataTally(game.data).sum;

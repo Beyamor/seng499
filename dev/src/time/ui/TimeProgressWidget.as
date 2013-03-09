@@ -12,14 +12,14 @@ package time.ui
 	 * it's also responsible for making the change in time happen.
 	 * @author beyamor
 	 */
-	public class TimeProgress extends Entity 
+	public class TimeProgressWidget extends Entity 
 	{
 		private var calendar:Calendar;
 		private var seasonDisplay:Text;
 		private var yearDisplay:Text;
 		private var finished:Boolean = false;
 		
-		public function TimeProgress(x:Number, y:Number, calendar:Calendar)
+		public function TimeProgressWidget(x:Number, y:Number, calendar:Calendar)
 		{
 			this.calendar = calendar;
 			
