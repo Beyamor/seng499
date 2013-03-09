@@ -1,5 +1,8 @@
 package time 
 {
+	import common.seq.DelayedCallback;
+	import common.seq.DelayItem;
+	import common.seq.Sequencer;
 	import data.DataConverter;
 	import map.MapView;
 	import model.Game;
@@ -21,6 +24,7 @@ package time
 		private var timeProgress:TimeProgressWidget;
 		private var dataDisplay:Text;
 		private var moneyDisplay:Text;
+		private var seq:Sequencer;
 		
 		public function TimeProgressionView(game:Game)
 		{
@@ -36,21 +40,34 @@ package time
 			moneyDisplay = new Text("Money: " + game.data.money, FP.halfWidth, FP.halfHeight + 120, 100);
 			addGraphic(moneyDisplay);
 			
-			new TimeProgress(this, game.data.calendar)
-				.addOnChangeCallback(function():void {
+			seq = new Sequencer(
+			
+				// Update season
+				new DelayedCallback(1, function():void {
 					
+					game.data.calendar.goToNextSeason();
 					timeProgress.updateDisplayText();
-				})
-				.addOnFinishedCallback(function():void {
+				}),
+				
+				// Accumulate money
+				new DelayedCallback(1, function():void {
 					
 					game.data.addMoney(new DataConverter(dataSum).moneyValue);
 					moneyDisplay.text = "Money: " + game.data.money;
-					addTween(new Alarm(1, function():void {
-						
-						FP.world = new MapView(game);
-					}), true);
+				}),
+				
+				// Return to map
+				new DelayedCallback(1, function():void {
+					
+					FP.world = new MapView(game);
 				})
-				.start();
+			);
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			seq.update();
 		}
 	}
 
