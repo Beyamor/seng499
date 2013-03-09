@@ -10,26 +10,29 @@ package time
 	{
 		public static const NUMBER_OF_SEASONS:uint = 4;
 		
-		private var season:int	= 0;
-		private var year:int	= 0;
+		private var _season:int	= 0;
+		private var _year:int	= 0;
+		
+		public function get season():int { return _season; }
+		public function get year():int { return _year; }
 		
 		public function Calendar(year:int = 0, season:int = 0)
 		{
-			this.season = season;
-			this.year	= year;
+			this._season = season;
+			this._year	= year;
 		}
 		
 		private function goToNextYear():void {
 			
-			++year;
-			season = 0;
+			++_year;
+			_season = 0;
 		}
 		
 		public function goToNextSeason():void {
 			
-			++season;
+			++_season;
 			
-			if (season >= NUMBER_OF_SEASONS) goToNextYear();
+			if (_season >= NUMBER_OF_SEASONS) goToNextYear();
 		}
 	}
 

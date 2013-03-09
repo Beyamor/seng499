@@ -12,6 +12,7 @@ package map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import store.StoreView;
+	import time.TimeProgressionView;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -46,6 +47,14 @@ package map
 						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Store"))
 						.withDepth( -1)
 						.whenClicked(function():void{FP.world = new StoreView(game)})
+						.build());
+			
+			// TODO: Less suck button
+			add(Button.description()
+						.fixedAt(FP.width - 58, FP.height - 100)
+						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Time"))
+						.withDepth( -1)
+						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
 						.build());
 			
 		}
