@@ -53,9 +53,9 @@ package map
 		{
 			if (Input.mousePressed)
 			{
-				if ( FP.world.mouseX >= x && FP.world.mouseX <= x + width)
+				if ( world.mouseX >= x && world.mouseX <= x + width)
 				{
-					if ( FP.world.mouseY >= y && FP.world.mouseY <= y + height)
+					if ( world.mouseY >= y && world.mouseY <= y + height)
 					{
 						return true;
 					}

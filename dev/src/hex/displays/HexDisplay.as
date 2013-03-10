@@ -8,7 +8,7 @@ package hex.displays
 	import hex.HexTile;
 	import hex.HexView;
     import flash.geom.Point;
-	import hex.ScrollCamera;
+	import common.ScrollCamera;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;

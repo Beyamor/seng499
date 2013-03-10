@@ -7,6 +7,7 @@ package map
 	import common.ui.Cursor;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;
+	import map.displays.MapDisplay;
 	import model.Game;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
@@ -21,25 +22,17 @@ package map
 	 */
 	public class MapView extends NeptuneWorld
 	{
-		private const WIDTH:int = 1440;
-		private const HEIGHT:int = 640;
 		private var game:Game;
 		
 		public function MapView(game:Game)
 		{			
 			this.game = game;
-			add(new MapEntity(0, 0));
-			
-			for (var i:int = 0 ; i < game.data.nodeList.length; i++ )
-			{
-				add(new NodeEntity(game.data.nodeList[i]));
-			}
 			
 			var display:InventoryDisplay = new InventoryDisplay(game.data);
 			add(display);
 			//display.fillInventoryDisplay();
 			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
-			for (i = 0; i < inventoryEntities.length; i++ )
+			for (var i:int = 0; i < inventoryEntities.length; i++ )
 			{
 				add(inventoryEntities[i].getButton())
 			}
@@ -61,42 +54,7 @@ package map
 						
 			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
 			
-		}
-		
-		override public function update():void 
-		{
-			super.update();
-			
-			const speed:Number = 5;
-			
-			if (Input.check("hex-scroll-up") && camera.y > 0)					FP.camera.y -= speed;
-			if (Input.check("hex-scroll-down") && camera.y < HEIGHT-FP.height)	FP.camera.y += speed;
-			if (Input.check("hex-scroll-left") && camera.x > 0)					FP.camera.x -= speed;
-			if (Input.check("hex-scroll-right") && camera.x < WIDTH-FP.width)	FP.camera.x += speed;
-			
-			if (game.state.isPlacing())
-			{
-                                // We currently have a bug where, if a node has been selected for placement,
-                                // if the player clicks on an existing node, they will still be taken to the hex view.
-                                // However, the logic below will have already added the node at the map level
-                                // The visible symptom of the bug is a null pointer in the hex view when clicking on a tile.
-                                // This is because the hex controller thinks that there's still an instrument to be placed,
-                                // even though the logic below has already stopped instrument placement.
-                                // We could add a check in the hex controller, but the heart of the problem is
-                                // going to the hex view at all when placing a node.
-                                // TODO: Figure this out, dawgs.
-				if (game.state.getInstrumentBeingPlaced().isNode())
-				{
-					if (Input.mousePressed == true && FP.world.mouseX - camera.x < 600)//TODO make a proper check for wether click is over the display.
-					{
-						game.data.addNode(new Node(FP.world.mouseX, FP.world.mouseY));
-						game.state.stopPlacingInstrument();
-						removeCursor();
-						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
-						//FP.console.log("Added a node.  Do you see it?");
-					}
-				}
-			}
+			displays.push(new MapDisplay(this, game));			
 		}
 		
 		public function getGame():Game 
