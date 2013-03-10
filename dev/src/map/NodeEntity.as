@@ -40,11 +40,16 @@ package map
 			{
 				if ((FP.world as MapView).getGame().state.isPlacing())
 				{
-					(FP.world as MapView).getGame().state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
-					FP.console.log("placing");
-				}else 
+					//(FP.world as MapView).getGame().state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
+					(FP.world as MapView).getGame().state.selectNode();
+					//FP.console.log("placing");
+				}else if ((FP.world as MapView).getGame().state.isConnecting())
 				{
-					FP.console.log("zooming");
+					(FP.world as MapView).getGame().state.setConnectionPoint(node);
+				}
+				else
+				{
+					//FP.console.log("zooming");
 				}
 				goToNodeHex();
 			}
