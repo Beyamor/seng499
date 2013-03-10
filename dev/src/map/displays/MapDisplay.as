@@ -25,7 +25,7 @@ package map.displays
 		
 		public function MapDisplay(mapView:MapView, game:Game)
 		{
-			super(mapView, 0, 0, WIDTH, HEIGHT);
+			super(mapView, 0, 0, FP.width, FP.height);
 			
 			this.game		= game;
 			this.mapView	= mapView;
@@ -35,7 +35,7 @@ package map.displays
 			
 			for (var i:int = 0 ; i < game.data.nodeList.length; i++ )
 			{
-				add(new NodeEntity(game.data.nodeList[i]));
+				add(new NodeEntity(game.data.nodeList[i], game));
 			}
 		}
 		
@@ -63,13 +63,11 @@ package map.displays
 						game.data.addNode(new Node(mouseX, mouseY));
 						game.state.stopPlacingInstrument();
 						mapView.removeCursor();
-						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
+						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));
 						//FP.console.log("Added a node.  Do you see it?");
 					}
 				}
 			}
-			
-			FP.log("depr derp derp");
 		}
 	}
 

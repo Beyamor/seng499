@@ -18,9 +18,10 @@ package map
 	public class NodeEntity extends Entity
 	{
 		private var node:Node;
+		private var game:Game
 		//private var connections:Vector.<Instrument>;
 		
-		public function NodeEntity(node:Node) 
+		public function NodeEntity(node:Node, game:Game) 
 		{
 			graphic = new Image(Assets.IMG_NODE);
 			height = (graphic as Image).height;
@@ -29,7 +30,7 @@ package map
 			//mapX/Y correspond to the center of the node rather than the upper right corner.
 			this.node = node;
 			super(node.getMapX() - (width / 2), node.getMapY() - (height / 2));
-			
+			this.game = game;
 		}
 		
 		public override function update():void
@@ -37,9 +38,9 @@ package map
 			super.update();
 			if (checkForMouseClick())
 			{
-				if ((FP.world as MapView).getGame().state.isPlacing())
+				if (game.state.isPlacing())
 				{
-					(FP.world as MapView).getGame().state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
+					game.state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
 					FP.console.log("placing");
 				}else 
 				{
@@ -57,6 +58,7 @@ package map
 				{
 					if ( world.mouseY >= y && world.mouseY <= y + height)
 					{
+						FP.log("clicked a bitch");
 						return true;
 					}
 				}
@@ -66,14 +68,6 @@ package map
 		
 		private function goToNodeHex():void
 		{
-			if (!(world is MapView)) {
-
-				FP.log("Error - node's world is not a MapView");
-				return;
-			}
-
-			var game:Game = (world as MapView).getGame();
-
 			FP.world = new HexView(game, node.getMapX(), node.getMapY());
 		}
 	}
