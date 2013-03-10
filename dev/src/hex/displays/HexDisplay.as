@@ -1,6 +1,7 @@
 package hex.displays 
 {
 	import common.displays.Display;
+	import common.ui.DataDisplay;
 	import hex.Cartographer;
 	import hex.HexFactory;
 	import hex.HexGrid;
@@ -36,7 +37,7 @@ package hex.displays
 		
 		public function HexDisplay(hexParent:HexView, game:Game, mapX:Number, mapY:Number)
 		{
-			super(hexParent, 0, 0, 600, FP.height);
+			super(hexParent, 0, 0, DataDisplay.WIDTH, FP.height);
 			view					= hexParent;
 			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
 			const HEIGHT:uint       = GameConstants.HEX_VIEW_HEIGHT;

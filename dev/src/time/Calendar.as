@@ -34,6 +34,18 @@ package time
 			
 			if (_season >= NUMBER_OF_SEASONS) goToNextYear();
 		}
+		
+		public static function seasonName(season:int):String {
+			
+			switch (season) {
+				
+				case 0: return "Spring";
+				case 1: return "Summer";
+				case 2: return "Fall";
+				case 3: return "Winter";
+				default: throw new Error("Uknowkn season: " + season);
+			}
+		}
 	}
 
 }

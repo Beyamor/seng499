@@ -1,6 +1,7 @@
 package hex 
 {
 	import common.NeptuneWorld;
+	import common.ui.DataDisplay;
     import flash.geom.Point;
 	import hex.displays.HexDisplay;
 	import model.Game;
@@ -41,7 +42,10 @@ package hex
 						})
 						.build());
 						
-			displays.push(new HexDisplay(this, game, mapX, mapY));
+			displays.push(
+				new HexDisplay(this, game, mapX, mapY),
+				new DataDisplay(this, game.data)
+			);
 		}
 	}
 
