@@ -37,7 +37,8 @@ package hex.displays
 		
 		public function HexDisplay(hexParent:HexView, game:Game, mapX:Number, mapY:Number)
 		{
-			super(hexParent, 0, 0, DataDisplay.WIDTH, FP.height);
+			super(hexParent, 0, 0, FP.width - 100, FP.height);
+			
 			view					= hexParent;
 			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
 			const HEIGHT:uint       = GameConstants.HEX_VIEW_HEIGHT;
@@ -60,10 +61,12 @@ package hex.displays
 		
 		override public function update():void 
 		{
+			super.update();
+			
 			scrollCamera.update();
 			grid.fillView();
 			
-			if (Input.mousePressed && containsMouse) {
+			if (Input.mousePressed && isFirstDisplayContaingMouse) {
 					
 				for each (var tile:HexTile in grid.tilesOnScreen) {
 
@@ -72,9 +75,8 @@ package hex.displays
 						view.controller.hexSelected(tile);
 					}
 				}
-			}
+			}		
 			
-			super.update();
 		}
 	}
 
