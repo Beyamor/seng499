@@ -34,7 +34,7 @@ package
 			initSound();
 			
 			// You don't need it
-			FP.console.enable();
+			//FP.console.enable();
 			
 			Input.define("debug-hex-start",		Key.DIGIT_0);
 			Input.define("debug-map-start",		Key.DIGIT_1);

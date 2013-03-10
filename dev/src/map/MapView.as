@@ -5,6 +5,7 @@ package map
 	import common.ui.Button;
 	import common.Assets;
 	import common.ui.Cursor;
+	import common.ui.DataDisplay;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;
 	import map.displays.MapDisplay;
@@ -28,15 +29,8 @@ package map
 		{			
 			this.game = game;
 			
-			var display:InventoryDisplay = new InventoryDisplay(game.data);
-			add(display);
-			//display.fillInventoryDisplay();
-			var inventoryEntities:Vector.<InventoryItemSelector> = display.getInventoryEntities();
-			for (var i:int = 0; i < inventoryEntities.length; i++ )
-			{
-				add(inventoryEntities[i].getButton())
-			}
-			
+			// TODO: Think pretty seriously about moving these guys into the "inventory" display
+			// Or at least, like, make a more coherent side panel thing
 			add(Button.description()
 						.fixedAt(FP.width - 58, FP.height - 42)
 						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Store"))
@@ -54,7 +48,9 @@ package map
 						
 			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
 			
-			displays.push(new MapDisplay(this, game));			
+			displays.push(
+				new MapDisplay(this, game),
+				new InventoryDisplay(this, game.data));			
 		}
 		
 		public function getGame():Game 

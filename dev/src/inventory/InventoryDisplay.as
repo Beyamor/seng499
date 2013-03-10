@@ -1,5 +1,7 @@
 package inventory 
 {
+	import common.displays.Display;
+	import map.MapView;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -11,7 +13,7 @@ package inventory
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class InventoryDisplay extends Entity
+	public class InventoryDisplay extends Display
 	{
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
 		private var inventoryList:Vector.<ComponentData>;
@@ -20,63 +22,34 @@ package inventory
 		private const inventoryOffset:int = 0;
 		private var screenX:int = 600;
 		private var screenY:int = 0;
-		public function InventoryDisplay(data:PlayerData) 
+		public function InventoryDisplay(mapView:MapView, data:PlayerData) 
 		{
-			super();
-			x = screenX;
-			y = screenY;
-			graphic = new Image(Assets.IMG_INVENTORYBACKGOUND);
+			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);
+			
+			super(mapView, screenX, screenY, backgroundImage.width, backgroundImage.height);
+			
+			addGraphic(backgroundImage);
+			
 			inventoryList = data.getInventory();
-			//fillInventoryDisplay();
+			fillInventoryDisplay();
 		}
 		
-		public function getInventoryEntities():Vector.<InventoryItemSelector>//fillInventoryDisplay()
+		public function fillInventoryDisplay():void
 		{
 			instrumentSelectors = new Vector.<InventoryItemSelector>;
 			for (var i:int = 0; i < inventoryHeight; i++ )
 			{
 				for (var j:int = 0; j < inventoryWidth && (i*inventoryWidth)+j < inventoryList.length - inventoryOffset; j++)
 				{
-					var selector:InventoryItemSelector = new InventoryItemSelector(610+(j*100)
+					var selector:InventoryItemSelector = new InventoryItemSelector(10 +(j*100)
 																				, 50 + (i*100)
 																				, inventoryList[(i*inventoryWidth)+j])
 					instrumentSelectors.push(selector);
-					//FP.world.add(selector);
+					add(selector.getButton());
 				}
 				
 				if (i * inventoryWidth >= inventoryList.length - inventoryOffset)
 					break;
-			}
-			return instrumentSelectors;
-		}
-		
-		override public function update():void 
-		{
-			super.update();
-			x = FP.camera.x + screenX;
-			y = FP.camera.y + screenY;
-		}
-		
-		/**
-		 *      Overridden to always draw screen-relative
-		 */
-		public override function render():void {
-
-			// Draw without camera offset.
-			var cameraPoint:Point   = new Point(0, 0);
-
-			// The draw point is screen-relative
-			var drawPoint:Point = new Point(0, 0);
-
-			if (graphic && graphic.visible)
-			{
-				if (graphic.relative)
-				{
-					drawPoint.x = screenX;
-					drawPoint.y = screenY;
-				}
-
-				graphic.render(renderTarget ? renderTarget : FP.buffer, drawPoint, cameraPoint);
 			}
 		}
 	}
