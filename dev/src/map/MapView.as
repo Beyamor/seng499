@@ -1,6 +1,7 @@
 package map 
 {
 	//import common.ui.ButtonBuilder;
+	import common.displays.Display;
 	import common.NeptuneWorld;
 	import common.ui.Button;
 	import common.Assets;
@@ -48,9 +49,11 @@ package map
 						
 			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
 			
+			var inventoryDisplay:Display	= new InventoryDisplay(this, game.data).thatSlidesOn;
+			var mapDisplay:Display			= new MapDisplay(this, game).withRightEdgeExpandingTo(inventoryDisplay);
 			displays.push(
-				new MapDisplay(this, game),
-				new InventoryDisplay(this, game.data).thatSlidesOn,
+				mapDisplay,
+				inventoryDisplay,
 				new DataDisplay(this, game.data));
 		}
 		

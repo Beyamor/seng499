@@ -23,7 +23,7 @@ package hex
 	/**
 	 * ...
 	 * @author beyamor
-	 */
+	 */5
 	public class HexView extends NeptuneWorld 
 	{
 		public var  controller:HexController;
