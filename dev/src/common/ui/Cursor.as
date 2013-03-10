@@ -57,6 +57,8 @@ package common.ui
 		{
 			super.update();
 			
+			if (!world) return;
+			
 			x = world.mouseX;
 			y = world.mouseY;
 		}

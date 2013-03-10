@@ -19,9 +19,9 @@ package hex
 	 */
 	public class HexTile extends Entity 
 	{
-                // Data!
-                private var _data:HexData;
-                public function get data():HexData { return _data; }
+		// Data!
+		private var _data:HexData;
+		public function get data():HexData { return _data; }
 
 		// The radius of the hexgon.
 		private var _radius:Number;
@@ -33,29 +33,34 @@ package hex
 
 		// The indices in the grid
 		private var _indices:HexIndices;
-                public function get indices():HexIndices { return _indices; }
+		public function get indices():HexIndices { return _indices; }
+		
+		// Da camera
+		private var _camera:Point;
+		private function get camera():Point { return _camera; }
 
 		/**
 		 * Creates a new hex tile.
 		 */
-		public function HexTile(data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
+		public function HexTile(camera:Point, data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
 
-                        _data = data;
-                        _indices = indices;
+			_data = data;
+			_indices = indices;
 			_radius = radius;
 			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
+			_camera = camera;
 
-                        var graphics:Graphiclist = new Graphiclist;
-                        graphics.add(new HexSprite(radius, color));
+			var graphics:Graphiclist = new Graphiclist;
+			graphics.add(new HexSprite(radius, color));
 
-                        if (data.hasNode) {
+			if (data.hasNode) {
 
-                            graphics.add(new Image(Assets.IMG_NODE));
-                        }
+				graphics.add(new Image(Assets.IMG_NODE));
+			}
 
-                        graphic = graphics;
+			graphic = graphics;
 		}
 
 		/**
@@ -65,8 +70,8 @@ package hex
 		{			
 			return collideRect(
 				x, y,
-				FP.camera.x	- radius,
-				FP.camera.y	- radius,
+				camera.x	- radius,
+				camera.y	- radius,
 				FP.width	+ radius * 2,
 				FP.height	+ radius * 2);
 		}
@@ -91,6 +96,8 @@ package hex
 			// First, get the relative vector from the center of the hexagon
 			const relX:Number = x - this.x;
 			const relY:Number = y - this.y;
+			
+			FP.log(relX + ", " + relY);
 			
 			// Now, so we only have to check one case
 			// (as opposed to each combination of positive and negative x and y),

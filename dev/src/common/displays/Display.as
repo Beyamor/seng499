@@ -130,7 +130,7 @@ package common.displays {
 	 */
 	override public function get mouseX():int
 	{
-		return FP.screen.mouseX + FP.camera.x - x;
+		return FP.screen.mouseX + FP.camera.x - x + camera.x;
 	}
 	
 	/**
@@ -138,7 +138,7 @@ package common.displays {
 	 */
 	override public function get mouseY():int
 	{
-		return FP.screen.mouseY + FP.camera.y - y;
+		return FP.screen.mouseY + FP.camera.y - y + camera.y;
 	}
 
     }

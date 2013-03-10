@@ -18,6 +18,8 @@ package hex
 		// Dat world
 		private var _world:World;
 		private function get world():World { return _world; }
+		private var _camera:Point;
+		private function get camera():Point { return _camera; }
 
                 // How do we even make a hex tile
                 private var _factory:HexFactory;
@@ -38,11 +40,13 @@ package hex
 		public function HexGrid(
                     factory:HexFactory,
                     world:World,
+					camera:Point,
                     hexagonRadius:Number,
                     widthInPixels:Number,
                     heightInPixels:Number)
 		{
-                        _factory = factory;
+			_camera = camera;
+            _factory = factory;
 			_world = world;
 			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
 			_gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
@@ -82,7 +86,7 @@ package hex
 			if (tileExists(indices)) return;
 
 			var pos:Point = gridMather.positionByIndices(indices);
-			var tile:HexTile = factory.create(indices, pos.x, pos.y, hexProperties.radius);
+			var tile:HexTile = factory.create(camera, indices, pos.x, pos.y, hexProperties.radius);
 			world.add(tile);
 			addToGrid(indices, tile);
 		}
@@ -95,10 +99,10 @@ package hex
 			var minX:Number, maxX:Number,
 				minY:Number, maxY:Number;
 
-			minX = FP.camera.x;
-			maxX = FP.camera.x + FP.width;
-			minY = FP.camera.y;
-			maxY = FP.camera.y + FP.height;
+			minX = camera.x;
+			maxX = camera.x + FP.width;
+			minY = camera.y;
+			maxY = camera.y + FP.height;
 
 			var minXIndex:int, maxXIndex:int,
 				minYIndex:int, maxYIndex:int;
@@ -147,11 +151,11 @@ package hex
 			for (var xIndex:int = indexBounds.minXIndex; xIndex <= indexBounds.maxXIndex; ++xIndex) {
 				for (var yIndex:int = indexBounds.minYIndex; yIndex <= indexBounds.maxYIndex; ++yIndex) {
 
-                                        if (HexIndices.areValid(xIndex, yIndex) && tileExists(new HexIndices(xIndex, yIndex))) {
+						if (HexIndices.areValid(xIndex, yIndex) && tileExists(new HexIndices(xIndex, yIndex))) {
 
-                                            onscreenTiles.push(tiles[xIndex][yIndex]);
-                                        }
-                                }
+							onscreenTiles.push(tiles[xIndex][yIndex]);
+						}
+				}
 			}
 
 			return onscreenTiles;
