@@ -8,6 +8,8 @@ package inventory
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
+		import net.flashpunk.tweens.misc.VarTween;
+		import net.flashpunk.utils.Ease;
         import observatory.ComponentData;
 	/**
 	 * ...
@@ -26,12 +28,21 @@ package inventory
 		{
 			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);
 			
-			super(mapView, screenX, screenY, backgroundImage.width, backgroundImage.height);
+			super(mapView, FP.width, screenY, backgroundImage.width, backgroundImage.height);
 			
 			addGraphic(backgroundImage);
 			
 			inventoryList = data.getInventory();
 			fillInventoryDisplay();
+			
+			slideOn();
+		}
+		
+		private function slideOn():void {
+			
+			var tween:VarTween = new VarTween;
+			tween.tween(this, "x", screenX, 0.25, Ease.quadOut);
+			parent.addTween(tween, true);
 		}
 		
 		public function fillInventoryDisplay():void

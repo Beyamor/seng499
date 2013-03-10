@@ -34,17 +34,10 @@ package common.displays {
 
         private var _buffer:BitmapData;
 
-        private var _width:int;
-        public function get width():int { return _width; }
-
-        private var _height:int;
-        public function get height():int { return _height; }
-
-        private var _x:int;
-        private var _y:int;
-
-        public function get x():int { return _x; }
-        public function get y():int { return _y; }
+        public var width:int;
+        public var height:int;
+        public var x:int;
+        public var y:int;
 
         public function get center():Point { return new Point(width/2, height/2); }
 
@@ -66,10 +59,10 @@ package common.displays {
 			super();
 
 			_parent     = parent;
-			_x          = x;
-			_y          = y;
-			_width      = width;
-			_height     = height;
+			this.x          = x;
+			this.y          = y;
+			this.width      = width;
+			this.height     = height;
 
 			_buffer     = new BitmapData(width, height, true, 0);
 		}
