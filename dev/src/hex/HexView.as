@@ -1,5 +1,6 @@
 package hex 
 {
+	import common.displays.Display;
 	import common.NeptuneWorld;
 	import common.ui.DataDisplay;
     import flash.geom.Point;
@@ -32,11 +33,14 @@ package hex
 			super();
 
 			controller = (new ControllerFactory).createFor(game, this);
-						
+			
+			var hexControlPanel:Display	= new HexControlPanel(this, game).thatSlidesOn;
+			var hexDisplay:Display		= new HexDisplay(this, game, mapX, mapY).withRightEdgeExpandingTo(hexControlPanel);
+			
 			displays.push(
-				new HexDisplay(this, game, mapX, mapY),
-				new DataDisplay(this, game.data),
-				new HexControlPanel(this, game).thatSlidesOn
+				hexDisplay,
+				hexControlPanel,
+				new DataDisplay(this, game.data)
 			);
 		}
 	}

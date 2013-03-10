@@ -38,6 +38,8 @@ package common.displays {
         public var height:int;
         public var x:int;
         public var y:int;
+		
+		private var rightEdgePin:* = null;
 
         public function get center():Point { return new Point(width/2, height/2); }
 
@@ -83,6 +85,13 @@ package common.displays {
 		private function clearBuffer():void {
 
 			_buffer.fillRect(_buffer.rect, clearColor);
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			
+			if (rightEdgePin) width = rightEdgePin.x - x;
 		}
 
 		override public function render():void {
@@ -149,5 +158,7 @@ package common.displays {
 			return stack.isFirstDisplayContainingPoint(this, FP.screen.mouseX, FP.screen.mouseY);
 		}
 
+		public function expandRightEdgeTo(something:*):void { rightEdgePin = something; }
+		public function withRightEdgeExpandingTo(something:*):Display { expandRightEdgeTo(something); return this; }
     }
 }

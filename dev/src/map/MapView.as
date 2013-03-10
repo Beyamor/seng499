@@ -47,7 +47,7 @@ package map
 						.build());
 						
 			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
-						
+			
 			displays.push(
 				new MapDisplay(this, game),
 				new InventoryDisplay(this, game.data).thatSlidesOn,
