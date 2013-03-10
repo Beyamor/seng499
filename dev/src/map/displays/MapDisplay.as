@@ -1,5 +1,6 @@
 package map.displays 
 {
+	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import common.ScrollCamera;
 	import map.MapEntity;
@@ -22,14 +23,15 @@ package map.displays
 		private var scrollCamera:ScrollCamera;
 		private var game:Game;
 		private var mapView:MapView;
+		private var controlPanel:ControlPanel;
 		
 		public function MapDisplay(mapView:MapView, game:Game)
 		{
 			super(mapView, 0, 0, FP.width, FP.height);
 			
-			this.game		= game;
-			this.mapView	= mapView;
-			scrollCamera	= new ScrollCamera(this, 350, 0, 0, WIDTH, HEIGHT);
+			this.game			= game;
+			this.mapView		= mapView;
+			scrollCamera		= new ScrollCamera(this, 350, 0, 0, WIDTH, HEIGHT);
 			
 			add(new MapEntity(0, 0));
 			

@@ -1,5 +1,6 @@
 package inventory 
 {
+	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import map.MapView;
 	import model.PlayerData;
@@ -15,34 +16,19 @@ package inventory
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class InventoryDisplay extends Display
+	public class InventoryDisplay extends ControlPanel
 	{
 		private var instrumentSelectors:Vector.<InventoryItemSelector>;
 		private var inventoryList:Vector.<ComponentData>;
 		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 2;
 		private const inventoryOffset:int = 0;
-		private var screenX:int = 600;
-		private var screenY:int = 0;
+
 		public function InventoryDisplay(mapView:MapView, data:PlayerData) 
 		{
-			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);
-			
-			super(mapView, FP.width, screenY, backgroundImage.width, backgroundImage.height);
-			
-			addGraphic(backgroundImage);
-			
+			super(mapView);
 			inventoryList = data.getInventory();
 			fillInventoryDisplay();
-			
-			slideOn();
-		}
-		
-		private function slideOn():void {
-			
-			var tween:VarTween = new VarTween;
-			tween.tween(this, "x", screenX, 0.25, Ease.quadOut);
-			parent.addTween(tween, true);
 		}
 		
 		public function fillInventoryDisplay():void

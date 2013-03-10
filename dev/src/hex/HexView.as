@@ -3,6 +3,7 @@ package hex
 	import common.NeptuneWorld;
 	import common.ui.DataDisplay;
     import flash.geom.Point;
+	import hex.displays.HexControlPanel;
 	import hex.displays.HexDisplay;
 	import model.Game;
 	import net.flashpunk.FP;
@@ -31,20 +32,11 @@ package hex
 			super();
 
 			controller = (new ControllerFactory).createFor(game, this);
-
-			add(Button.description()
-						.fixedAt(FP.width - 50, 30)
-						.withDepth(-1)
-						.withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
-						.whenClicked(function():void {
-
-							FP.world = new MapView(game);
-						})
-						.build());
 						
 			displays.push(
 				new HexDisplay(this, game, mapX, mapY),
-				new DataDisplay(this, game.data)
+				new DataDisplay(this, game.data),
+				new HexControlPanel(this, game).thatSlidesOn
 			);
 		}
 	}

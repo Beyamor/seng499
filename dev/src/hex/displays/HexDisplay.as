@@ -37,7 +37,8 @@ package hex.displays
 		
 		public function HexDisplay(hexParent:HexView, game:Game, mapX:Number, mapY:Number)
 		{
-			super(hexParent, 0, 0, FP.width - 100, FP.height);
+			// TODO: Tie width to control panel
+			super(hexParent, 0, 0, FP.width, FP.height);
 			
 			view					= hexParent;
 			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
