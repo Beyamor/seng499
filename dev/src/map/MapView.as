@@ -50,7 +50,8 @@ package map
 			
 			displays.push(
 				new MapDisplay(this, game),
-				new InventoryDisplay(this, game.data));			
+				new InventoryDisplay(this, game.data),
+				new DataDisplay(this, game.data));			
 		}
 		
 		public function getGame():Game 
