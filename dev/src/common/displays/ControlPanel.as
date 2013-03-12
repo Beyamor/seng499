@@ -1,6 +1,7 @@
 package common.displays 
 {
 	import common.Assets;
+	import common.tweens.InOutTweener;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.tweens.misc.VarTween;
@@ -14,28 +15,24 @@ package common.displays
 	{
 		public static const SCREEN_X:int = 600;
 		public static const SCREEN_Y:int = 0;
+		private var tweener:InOutTweener;
 		
 		public function ControlPanel(parent:World) 
 		{
 			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);			
 			super(parent, FP.width, SCREEN_Y, backgroundImage.width, backgroundImage.height);			
 			addGraphic(backgroundImage);
+			tweener = InOutTweener.forX(parent, this, SCREEN_X, FP.width);
 		}
 		
 		public function slideOn(callback:Function=null):void {
 			
-			x = FP.width; // Right of screen
-			
-			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "x", SCREEN_X, 0.35, Ease.cubeOut);
-			parent.addTween(tween, true);
+			tweener.moveIn(callback);
 		}
 		
 		public function slideOff(callback:Function=null):void {
 						
-			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "x", FP.width, 0.35, Ease.cubeIn);
-			parent.addTween(tween, true);
+			tweener.moveOut(callback);
 		}
 		
 		// Totally redundant, but it reads better

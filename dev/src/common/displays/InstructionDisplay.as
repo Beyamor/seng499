@@ -1,5 +1,6 @@
 package common.displays 
 {
+	import common.tweens.InOutTweener;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -24,11 +25,13 @@ package common.displays
 		private var text:Text;
 		private var textEntity:Entity;
 		private var autoclearAlarm:Alarm;
+		private var tweener:InOutTweener;
 		
 		public function InstructionDisplay(parent:World)
 		{
 			super(parent, FP.halfWidth - WIDTH / 2, -HEIGHT, WIDTH, HEIGHT);
 			clearColor = 0x88FFFFFF;
+			tweener = InOutTweener.forY(parent, this, 0, -HEIGHT);
 		}
 		
 		public function show(instruction:String, autoclear:Boolean=true):void {
@@ -41,7 +44,7 @@ package common.displays
 			
 			if (!isShown) {
 				
-				slideOn();
+				tweener.moveIn();
 				isShown = true;
 			}
 			
@@ -62,27 +65,9 @@ package common.displays
 			
 			if (isShown) {
 				
-				slideOff();
+				tweener.moveOut();
 				isShown = false;
 			}
-		}
-		
-		private function slideOn(callback:Function=null):void {
-			
-			// Pretty well straight copying this from the control panel
-			// TODO: Move it somewhere to be shared
-			y = -HEIGHT;
-			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "y", 0, 0.35, Ease.cubeOut);
-			parent.addTween(tween, true);
-		}
-		
-		private function slideOff(callback:Function=null):void {
-			
-			y = 0;
-			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "y", -HEIGHT, 0.35, Ease.cubeIn);
-			parent.addTween(tween, true);
 		}
 		
 		override public function update():void 
