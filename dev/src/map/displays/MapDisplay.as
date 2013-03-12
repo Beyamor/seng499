@@ -3,6 +3,7 @@ package map.displays
 	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import common.ScrollCamera;
+	import flash.events.ContextMenuEvent;
 	import map.MapEntity;
 	import map.MapView;
 	import map.Node;
@@ -46,30 +47,28 @@ package map.displays
 			super.update();
 			
 			scrollCamera.update();
+			if (Input.mousePressed && isFirstDisplayContaingMouse) handleMousePress();
+		}
+		
+		private function maybeGetClickedNode():NodeEntity {
 			
-			if (game.state.isPlacing())
-			{
-				// We currently have a bug where, if a node has been selected for placement,
-				// if the player clicks on an existing node, they will still be taken to the hex view.
-				// However, the logic below will have already added the node at the map level
-				// The visible symptom of the bug is a null pointer in the hex view when clicking on a tile.
-				// This is because the hex controller thinks that there's still an instrument to be placed,
-				// even though the logic below has already stopped instrument placement.
-				// We could add a check in the hex controller, but the heart of the problem is
-				// going to the hex view at all when placing a node.
-				// TODO: Figure this out, dawgs.
-				if (game.state.getInstrumentBeingPlaced().isNode())
-				{
-					if (Input.mousePressed && isFirstDisplayContaingMouse)
-					{
-						game.data.addNode(new Node(mouseX, mouseY));
-						game.state.stopPlacingInstrument();
-						mapView.removeCursor();
-						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));
-						//FP.console.log("Added a node.  Do you see it?");
-					}
-				}
+			var nodes:Vector.<NodeEntity> = new Vector.<NodeEntity>;
+			getClass(NodeEntity, nodes);
+			
+			for each (var node:NodeEntity in nodes) {
+				
+				if (node.checkForMouseClick()) return node;
 			}
+			
+			return null;
+		}
+		
+		private function handleMousePress():void {
+			
+			var clickedNode:NodeEntity = maybeGetClickedNode();
+			
+			if (clickedNode)	mapView.controller.nodeClicked(clickedNode);
+			else				mapView.controller.emptySpaceClicked(mouseX, mouseY);
 		}
 	}
 

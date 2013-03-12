@@ -33,24 +33,7 @@ package map
 			this.game = game;
 		}
 		
-		public override function update():void
-		{
-			super.update();
-			if (checkForMouseClick())
-			{
-				if (game.state.isPlacing())
-				{
-					game.state.setConnectionPoint(node);//This will be more fleshed out when JBs are an alternative to nodes.
-					FP.console.log("placing");
-				}else 
-				{
-					FP.console.log("zooming");
-				}
-				goToNodeHex();
-			}
-		}
-		
-		private function checkForMouseClick():Boolean
+		public function checkForMouseClick():Boolean
 		{
 			if (Input.mousePressed)
 			{
@@ -58,7 +41,6 @@ package map
 				{
 					if ( world.mouseY >= y && world.mouseY <= y + height)
 					{
-						FP.log("clicked a bitch");
 						return true;
 					}
 				}
@@ -66,10 +48,9 @@ package map
 			return false;
 		}
 		
-		private function goToNodeHex():void
-		{
-			FP.world = new HexView(game, node.getMapX(), node.getMapY());
-		}
+		public function get mapX():int { return node.getMapX(); }
+		public function get mapY():int { return node.getMapY(); }
+		public function get data():Node { return node; }
 	}
 
 }

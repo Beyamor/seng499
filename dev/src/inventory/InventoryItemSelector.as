@@ -2,6 +2,7 @@ package inventory
 {
 	import common.ui.Button;
 	import common.ui.Cursor;
+	import map.controllers.ControllerFactory;
 	import map.MapView;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
@@ -58,7 +59,7 @@ package inventory
 								var mapWorld:MapView = (FP.world as MapView);
 								
 								mapWorld.getGame().state.setInstrumentBeingPlaced(data);
-								mapWorld.setCursor(Cursor.forPlacingInstrument(data));
+								mapWorld.controller = new ControllerFactory(mapWorld).build();
 								
 								FP.console.log("clicked "+data.getName());
 

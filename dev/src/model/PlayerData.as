@@ -132,9 +132,10 @@ package model
 			return hexes;
 		}
 		
-		public function addMoney(amount:uint) {
+		public function addMoney(amount:uint):PlayerData {
 			
 			_money += amount;
+			return this;
 		}
 		
 		public function get money():uint {
