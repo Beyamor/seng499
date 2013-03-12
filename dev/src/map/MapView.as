@@ -7,7 +7,7 @@ package map
 	import common.ui.Button;
 	import common.Assets;
 	import common.ui.Cursor;
-	import common.ui.DataDisplay;
+	import common.displays.DataDisplay;
 	import hex.HexView;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;

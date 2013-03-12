@@ -3,7 +3,7 @@ package hex
 	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import common.NeptuneWorld;
-	import common.ui.DataDisplay;
+	import common.displays.DataDisplay;
     import flash.geom.Point;
 	import hex.displays.HexControlPanel;
 	import hex.displays.HexDisplay;

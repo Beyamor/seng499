@@ -1,4 +1,4 @@
-package common.ui 
+package common.displays 
 {
 	import common.displays.Display;
 	import model.PlayerData;

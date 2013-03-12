@@ -1,7 +1,7 @@
 package hex.displays 
 {
 	import common.displays.Display;
-	import common.ui.DataDisplay;
+	import common.displays.DataDisplay;
 	import hex.Cartographer;
 	import hex.HexFactory;
 	import hex.HexGrid;
