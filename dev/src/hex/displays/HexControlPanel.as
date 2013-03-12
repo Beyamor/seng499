@@ -3,6 +3,7 @@ package hex.displays
 	import common.Assets;
 	import common.displays.ControlPanel;
 	import common.ui.Button;
+	import hex.HexView;
 	import map.MapView;
 	import model.Game;
 	import net.flashpunk.FP;
@@ -15,7 +16,7 @@ package hex.displays
 	 */
 	public class HexControlPanel extends ControlPanel 
 	{		
-		public function HexControlPanel(parent:World, game:Game) 
+		public function HexControlPanel(parent:HexView, game:Game) 
 		{
 			super(parent);
 			
@@ -25,7 +26,7 @@ package hex.displays
 			.withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
 			.whenClicked(function():void {
 
-				FP.world = new MapView(game);
+				parent.returnToMapView();
 			})
 			.build());
 		}

@@ -1,5 +1,6 @@
 package hex 
 {
+	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import common.NeptuneWorld;
 	import common.ui.DataDisplay;
@@ -19,6 +20,7 @@ package hex
 	import hex.controllers.HexController;
 	import hex.controllers.ControllerFactory;
 	import hex.math.SpaceConverter;
+	import undersea.UnderseaView;
 	
 	/**
 	 * ...
@@ -27,21 +29,40 @@ package hex
 	public class HexView extends NeptuneWorld 
 	{
 		public var  controller:HexController;
+		private var	controlPanel:ControlPanel;
+		private var game:Game;
 		
 		public function HexView(game:Game, mapX:Number, mapY:Number)
 		{
 			super();
 
-			controller = (new ControllerFactory).createFor(game, this);
+			this.game	= game;
+			controller	= (new ControllerFactory).createFor(game, this);
 			
-			var hexControlPanel:Display	= new HexControlPanel(this, game).thatSlidesOn;
-			var hexDisplay:Display		= new HexDisplay(this, game, mapX, mapY).withRightEdgeExpandingTo(hexControlPanel);
+			controlPanel = new HexControlPanel(this, game).thatSlidesOn;
+			var hexDisplay:Display = new HexDisplay(this, game, mapX, mapY).withRightEdgeExpandingTo(controlPanel);
 			
 			displays.push(
 				hexDisplay,
-				hexControlPanel,
+				controlPanel,
 				new DataDisplay(this, game.data)
 			);
+		}
+		
+		public function returnToMapView():void {
+			
+			controlPanel.slideOff(function():void {
+				
+				FP.world = new MapView(game);
+			});
+		}
+		
+		public function goToUnderseaView(tile:HexTile):void {
+			
+			controlPanel.slideOff(function():void {
+				
+				FP.world = new UnderseaView(tile, game);
+			});
 		}
 	}
 

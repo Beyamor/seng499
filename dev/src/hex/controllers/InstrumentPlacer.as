@@ -37,7 +37,7 @@ package hex.controllers {
 			view.removeCursor();
 
             // Okay. Switch out of instrument placement I guess?
-            view.controller = new TileViewer(game);
+            view.controller = new TileViewer(view, game);
 
         }
     }

@@ -18,7 +18,7 @@ package hex.controllers {
             }
 
             else {
-                return new TileViewer(game);
+                return new TileViewer(hexView, game);
             }
         }
 

@@ -1,6 +1,7 @@
 package map 
 {
 	//import common.ui.ButtonBuilder;
+	import common.displays.ControlPanel;
 	import common.displays.Display;
 	import common.NeptuneWorld;
 	import common.ui.Button;
@@ -29,6 +30,7 @@ package map
 	{
 		private var game:Game;
 		public var mapDisplay:MapDisplay;
+		private var inventoryDisplay:ControlPanel;
 		
 		public var _controller:MapController;
 		public function get controller():MapController { return _controller; }
@@ -62,7 +64,7 @@ package map
 						
 			controller = new ControllerFactory(this).build();
 			
-			var inventoryDisplay:Display	= new InventoryDisplay(this, game.data).thatSlidesOn;
+			inventoryDisplay = new InventoryDisplay(this, game.data).thatSlidesOn;
 			
 			mapDisplay = new MapDisplay(this, game);
 			mapDisplay.expandRightEdgeTo(inventoryDisplay);	
@@ -85,7 +87,10 @@ package map
 		
 		public function goToHexViewFromNode(node:NodeEntity):void {
 			
-			FP.world = new HexView(game, node.mapX, node.mapY);
+			inventoryDisplay.slideOff(function():void {
+			
+				FP.world = new HexView(game, node.mapX, node.mapY);
+			});
 		}
 	}
 

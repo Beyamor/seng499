@@ -27,14 +27,14 @@ package common.displays
 			x = FP.width; // Right of screen
 			
 			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "x", SCREEN_X, 0.5, Ease.quadOut);
+			tween.tween(this, "x", SCREEN_X, 0.35, Ease.cubeOut);
 			parent.addTween(tween, true);
 		}
 		
 		public function slideOff(callback:Function=null):void {
 						
 			var tween:VarTween = new VarTween(callback);
-			tween.tween(this, "x", FP.width, 0.5, Ease.quadIn);
+			tween.tween(this, "x", FP.width, 0.35, Ease.cubeIn);
 			parent.addTween(tween, true);
 		}
 		
