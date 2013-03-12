@@ -23,6 +23,7 @@ package common.displays
 		
 		private var text:Text;
 		private var textEntity:Entity;
+		private var autoclearAlarm:Alarm;
 		
 		public function InstructionDisplay(parent:World)
 		{
@@ -44,9 +45,16 @@ package common.displays
 				isShown = true;
 			}
 			
+			if (autoclearAlarm) {
+				
+				parent.removeTween(autoclearAlarm);
+				autoclearAlarm = null;
+			}
+			
 			if (autoclear) {
 				
-				parent.addTween(new Alarm(DISPLAY_TIME, function():void { hide(); } ), true);
+				autoclearAlarm = new Alarm(DISPLAY_TIME, function():void { hide(); } );
+				parent.addTween(autoclearAlarm, true);
 			}
 		}
 		
