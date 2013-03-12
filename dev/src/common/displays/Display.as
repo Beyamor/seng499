@@ -39,6 +39,9 @@ package common.displays {
         public var x:int;
         public var y:int;
 		
+		public function get halfWidth():Number { return width / 2; }
+		public function get halfHeight():Number { return height / 2; }
+		
 		private var rightEdgePin:* = null;
 
         public function get center():Point { return new Point(width/2, height/2); }

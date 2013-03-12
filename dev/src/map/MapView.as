@@ -3,6 +3,7 @@ package map
 	//import common.ui.ButtonBuilder;
 	import common.displays.ControlPanel;
 	import common.displays.Display;
+	import common.displays.InstructionDisplay;
 	import common.NeptuneWorld;
 	import common.ui.Button;
 	import common.Assets;
@@ -31,6 +32,7 @@ package map
 		private var game:Game;
 		public var mapDisplay:MapDisplay;
 		private var inventoryDisplay:ControlPanel;
+		public var instructionDisplay:InstructionDisplay;
 		
 		public var _controller:MapController;
 		public function get controller():MapController { return _controller; }
@@ -67,12 +69,15 @@ package map
 			inventoryDisplay = new InventoryDisplay(this, game.data).thatSlidesOn;
 			
 			mapDisplay = new MapDisplay(this, game);
-			mapDisplay.expandRightEdgeTo(inventoryDisplay);	
+			mapDisplay.expandRightEdgeTo(inventoryDisplay);
+			
+			instructionDisplay = new InstructionDisplay(this);
 				
 			displays.push(
 				mapDisplay,
 				inventoryDisplay,
-				new DataDisplay(this, game.data));
+				new DataDisplay(this, game.data),
+				instructionDisplay);
 		}
 		
 		public function getGame():Game 

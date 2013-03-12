@@ -61,6 +61,9 @@ package inventory
 								mapWorld.getGame().state.setInstrumentBeingPlaced(data);
 								mapWorld.controller = new ControllerFactory(mapWorld).build();
 								
+								if (data.isNode())	mapWorld.instructionDisplay.show("select a location");
+								else				mapWorld.instructionDisplay.show("select a node");
+								
 								FP.console.log("clicked "+data.getName());
 
 							})

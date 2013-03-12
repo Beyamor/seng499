@@ -1,7 +1,9 @@
 package common.displays 
 {
 	import common.displays.Display;
+	import data.DataTally;
 	import model.PlayerData;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
 	import time.Calendar;
@@ -14,27 +16,37 @@ package common.displays
 	{
 		public static const	WIDTH:Number	= 600;
 		public static const	HEIGHT:Number	= 50;
-		private var			data:PlayerData;
+		private var			playerData:PlayerData;
 		
-		private var			moneyDisplay:Text	= new Text("placeholder text", 400, 10);
-		private var			seasonDisplay:Text	= new Text("placeholder text", 10, 10);
+		// Re: the palceholder text: I don't want to specify the actual widths. Ain't nobody got time for that
+		private var			moneyDisplay:Text	= new Text("some great placeholder text", 350, 25);
+		private var			dataDisplay:Text	= new Text("some placeholder text", 350, 5);
+		private var			seasonDisplay:Text	= new Text("some placeholder text", 10, 5);
+		private var			yearDisplay:Text	= new Text("some placeholder text", 10, 25);
 		
-		public function DataDisplay(parent:World, data:PlayerData)
+		private var			tallier:DataTally;
+		
+		public function DataDisplay(parent:World, playerData:PlayerData)
 		{
-			super(parent, 0, 0, WIDTH, HEIGHT);
-			this.data = data;
+			super(parent, 0, FP.height - HEIGHT, WIDTH, HEIGHT);
+			this.playerData = playerData;
 			clearColor = 0x88FFFFFF;
+			tallier = new DataTally(playerData);
 			
 			addGraphic(moneyDisplay);
+			addGraphic(dataDisplay);
 			addGraphic(seasonDisplay);
+			addGraphic(yearDisplay);
 		}
 		
 		override public function update():void 
 		{
 			super.update();
 			
-			moneyDisplay.text	= "money: " + data.money;
-			seasonDisplay.text	= "season: " + Calendar.seasonName(data.calendar.season);
+			moneyDisplay.text	= "Money:\t\t\t\t$" + playerData.money;
+			dataDisplay.text	= "Data production:\t" + tallier.sum;
+			seasonDisplay.text	= "Season:\t" + Calendar.seasonName(playerData.calendar.season);
+			yearDisplay.text	= "Year:\t\t" + playerData.calendar.year;
 		}
 	}
 
