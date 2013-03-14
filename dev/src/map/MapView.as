@@ -11,7 +11,7 @@ package map
 	import common.displays.DataDisplay;
 	import hex.HexView;
 	import inventory.displays.InventoryDisplay;
-	import inventory.InventoryItemSelector;
+	import inventory.ui.InventoryItemSelector;
 	import map.controllers.ControllerFactory;
 	import map.controllers.MapController;
 	import map.displays.MapDisplay;
@@ -31,7 +31,7 @@ package map
 	{
 		private var game:Game;
 		public var mapDisplay:MapDisplay;
-		private var inventoryDisplay:ControlPanel;
+		public var inventoryDisplay:InventoryDisplay;
 		public var instructionDisplay:InstructionDisplay;
 		
 		public var _controller:MapController;
@@ -66,7 +66,8 @@ package map
 						
 			controller = new ControllerFactory(this).build();
 			
-			inventoryDisplay = new InventoryDisplay(this, game.data).thatSlidesOn;
+			inventoryDisplay = new InventoryDisplay(this, game.data);
+			inventoryDisplay.slideOn();
 			
 			mapDisplay = new MapDisplay(this, game);
 			mapDisplay.expandRightEdgeTo(inventoryDisplay);

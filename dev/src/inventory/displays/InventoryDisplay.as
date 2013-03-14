@@ -2,7 +2,7 @@ package inventory.displays
 {
 	import common.displays.ControlPanel;
 	import common.displays.Display;
-	import inventory.InventoryItemSelector;
+	import inventory.ui.InventoryItemSelector;
 	import map.MapView;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
@@ -10,9 +10,10 @@ package inventory.displays
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
-		import net.flashpunk.tweens.misc.VarTween;
-		import net.flashpunk.utils.Ease;
-        import observatory.ComponentData;
+	import net.flashpunk.tweens.misc.VarTween;
+	import net.flashpunk.utils.Ease;
+	import observatory.ComponentData;
+	
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -39,16 +40,24 @@ package inventory.displays
 			{
 				for (var j:int = 0; j < inventoryWidth && (i*inventoryWidth)+j < inventoryList.length - inventoryOffset; j++)
 				{
-					var selector:InventoryItemSelector = new InventoryItemSelector(10 +(j*100)
+					var selector:InventoryItemSelector = new InventoryItemSelector(this
+																				, 10 +(j*100)
 																				, 50 + (i*100)
 																				, inventoryList[(i*inventoryWidth)+j])
 					instrumentSelectors.push(selector);
-					add(selector.getButton());
+					add(selector);
 				}
 				
 				if (i * inventoryWidth >= inventoryList.length - inventoryOffset)
 					break;
 			}
+		}
+		
+		public function updateSelectors():void {
+			
+			// TODO: This is pretty grody. Make a widget or something.
+			for each (var selector:InventoryItemSelector in instrumentSelectors) remove(selector);
+			fillInventoryDisplay();
 		}
 	}
 
