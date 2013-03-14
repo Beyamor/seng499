@@ -20,6 +20,8 @@ package common.displays
 		private var tweener:InOutTweener;
 		private var numberOfStandardButtons:int = 0;
 		
+		private var subDisplay:Display;
+		
 		public function ControlPanel(parent:World) 
 		{
 			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);			

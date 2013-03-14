@@ -2,8 +2,10 @@ package common.displays
 {
 	import common.Assets;
 	import common.ui.Button;
+	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
 	/**
 	 * ...
@@ -17,10 +19,12 @@ package common.displays
 			// Just going to assume the popup should be centered
 			super(
 				parent,
-				FP.halfWidth - width / 2,
-				FP.halfHeight - height / 2,
+				0, 0, // Sucks, but parent height and width not set until after super call
 				width,
 				height);
+			
+			x = parentHalfWidth - width / 2;
+			y = parentHalfHeight - height / 2;
 				
 			addCloseButton();
 		}
@@ -39,7 +43,7 @@ package common.displays
 			var closeButton:Button	= Button.description()
 											.withImage(closeImage)
 											.at(width - closeImage.width - magicButtonBorder, magicButtonBorder)
-											.whenClicked(function():void { close(); } )
+											.whenClicked(function():void { close(); trace("derp derp");  } )
 											.build();
 			add(closeButton);
 		}
