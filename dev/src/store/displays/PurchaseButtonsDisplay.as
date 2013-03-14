@@ -48,7 +48,15 @@ package store.displays {
 
              return function():void {
 
-                if (stack) stack.push(new PrePurchaseDisplay(parent, playerData, component));
+				 if (playerData.canAfford(component)) {
+					
+					 stack.push(new PrePurchaseDisplay(parent, playerData, component));
+				 }
+				 
+				 else {
+					 
+					 stack.push(new InsufficientFundsDisplay(parent, component));
+				 }
              }
          }
          

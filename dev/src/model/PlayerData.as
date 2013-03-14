@@ -142,6 +142,19 @@ package model
 			
 			return _money;
 		}
+		
+		public function canAfford(component:ComponentData):Boolean {
+			
+			return money >= GameTables.instrumentByName(component.getName()).cost;
+		}
+		
+		public function purchase(component:ComponentData):void {
+			
+			if (!canAfford(component)) throw new Error("Can't afford " + component.getName() + "; check first!");
+			
+			_money -= GameTables.instrumentByName(component.getName()).cost;
+			addToInventory(component);
+		}
 	}
 
 }

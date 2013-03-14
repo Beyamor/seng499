@@ -12,6 +12,9 @@ package observatory.properties {
 
         private var _isNode:Boolean;
         public function get isNode():Boolean { return _isNode; }
+		
+		private var _cost:uint;
+        public function get cost():uint { return _cost; }
 
         private var _dataTerrainTypes:Vector.<String> = new Vector.<String>;
 
@@ -19,12 +22,14 @@ package observatory.properties {
             name:String,
             image:Class,
             isNode:Boolean,
-            dataTerrainTypes:Vector.<String>) {
+            dataTerrainTypes:Vector.<String>,
+			cost:uint) {
 
             _name               = name;
             _image              = image;
             _isNode             = isNode;
             _dataTerrainTypes   = dataTerrainTypes;
+			_cost				= cost;
         }
 
         public function producesDataFor(terrain:Terrain):Boolean {

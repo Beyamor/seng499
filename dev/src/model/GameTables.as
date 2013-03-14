@@ -18,11 +18,13 @@ package model
                     InstrumentProperties.describe("A")
                         .image(Assets.IMG_TESTINSTRUMENT)
                         .producesDataOn(hex.terrain.Types.SAND)
+						.costs(30)
                         .finish(),
 
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
                         .isNode()
+						.costs(100)
                         .finish()
                 );
 				

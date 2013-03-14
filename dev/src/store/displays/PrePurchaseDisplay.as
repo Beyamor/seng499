@@ -25,48 +25,48 @@ package store.displays
 		
 		public function PrePurchaseDisplay(parent:World, data:PlayerData, component:ComponentData)
 		{
-                        var background:Image = new Image(Assets.IMG_PREPURCHASE_DISPLAY);
+			var background:Image = new Image(Assets.IMG_PREPURCHASE_DISPLAY);
 
 			playerData      = data;
-                        this.component  = component;
-			
+			this.component  = component;
+
 			super(
-                            parent,
-                            FP.width/2 - background.width/2,
-                            FP.height/2 - background.height/2,
-                            background.width,
-                            background.height);
-			
-			super.addGraphic(background, 100);
+				parent,
+				FP.width/2 - background.width/2,
+				FP.height/2 - background.height/2,
+				background.width,
+				background.height);
+
+			addGraphic(background, 100);
 
 			addDisplayButtons();
 
-                        componentImage = addGraphic(component.getImage());
-                        componentImage.layer = -9003;
+			componentImage = addGraphic(component.getImage());
+			componentImage.layer = -9003;
 
-                        // This is all junk. Gotta it at some point.
-                        componentImage.x = center.x;
-                        componentImage.y = center.y;
+			// This is all junk. Gotta it at some point.
+			componentImage.x = center.x;
+			componentImage.y = center.y;
 
-                        blocksUpdates = true;
+			blocksUpdates = true;
 		}
 		
 		private function buyButtonClicked():void
 		{
-			playerData.addToInventory(component);
+			playerData.purchase(component);
 			FP.console.log("added to inventory: " + component.getName());
-                        close();
+			close();
 		}
 
-                public function close():void {
+		public function close():void {
 
-                    // Just gunna assume this is the top of the stack
-                    if (stack && stack.top == this) stack.pop();
-                }
+			// Just gunna assume this is the top of the stack
+			stack.pop();
+		}
 		
 		private function addDisplayButtons():void
 		{
-                        var img:Image = new Image(Assets.IMG_BUY);
+			var img:Image = new Image(Assets.IMG_BUY);
 
 			buyButton =  Button.description()
 						.at(center.x - img.width/2, center.y + height/2 - img.height)
@@ -78,12 +78,12 @@ package store.displays
 			add(buyButton);
 		}
 		
-                override public function update():void {
+		override public function update():void {
 
-                    super.update();
+			super.update();
 
-                    if (Input.mousePressed && !containsMouse) close();
-                }
+			if (Input.mousePressed && !containsMouse) close();
+		}
 	}
 
 }

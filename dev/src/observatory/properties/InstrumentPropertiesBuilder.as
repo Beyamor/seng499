@@ -6,6 +6,7 @@ package observatory.properties {
         private var _image:Class;
         private var _isNode:Boolean                     = false;
         private var _dataTerrainTypes:Vector.<String>   = new Vector.<String>;
+		private var _cost:uint;
 
         public function InstrumentPropertiesBuilder(name:String) {
 
@@ -33,16 +34,24 @@ package observatory.properties {
             _isNode = true;
             return this;
         }
+		
+		public function costs(costs:uint):InstrumentPropertiesBuilder {
+			
+			_cost = costs;
+			return this;
+		}
 
         public function finish():InstrumentProperties {
 
             if (!_image) throw new Error("Image not set");
+			if (!_cost) throw new Error("Cost not set");
 
             return new InstrumentProperties(
                 _name,
                 _image,
                 _isNode,
-                _dataTerrainTypes
+                _dataTerrainTypes,
+				_cost
             );
         }
     }
