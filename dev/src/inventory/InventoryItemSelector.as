@@ -1,6 +1,7 @@
 package inventory 
 {
 	import common.ui.Button;
+	import common.ui.Cursor;
 	import map.MapView;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
@@ -10,6 +11,7 @@ package inventory
 	import model.GameState;
 	import model.Game;
 	import common.Assets;
+		import net.flashpunk.World;
         import observatory.ComponentData;
 	/**
 	 * ...
@@ -52,11 +54,12 @@ package inventory
 							.withGraphicList(assembleGraphic())
 							.fixedAt(x, y)
 							.whenClicked(function():void {
-								//DO NOT REMOVE. Statements need to be fixed.
-								if ((FP.world as MapView).getGame().state.isPlacing()==false)
-								{
-									(FP.world as MapView).getGame().state.setInstrumentBeingPlaced(data);
-								}
+								
+								var mapWorld:MapView = (FP.world as MapView);
+								
+								mapWorld.getGame().state.setInstrumentBeingPlaced(data);
+								mapWorld.setCursor(Cursor.forPlacingInstrument(data));
+								
 								FP.console.log("clicked "+data.getName());
 
 							})

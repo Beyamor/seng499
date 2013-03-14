@@ -63,83 +63,98 @@ package common.displays {
 
         public function Display(parent:World, x:int, y:int, width:int, height:int) {
 
-            super();
+			super();
 
-            _parent     = parent;
-            _x          = x;
-            _y          = y;
-            _width      = width;
-            _height     = height;
+			_parent     = parent;
+			_x          = x;
+			_y          = y;
+			_width      = width;
+			_height     = height;
 
-            _buffer     = new BitmapData(width, height, true, 0);
-        }
+			_buffer     = new BitmapData(width, height, true, 0);
+		}
 
-        override public function add(e:Entity):Entity {
+		override public function add(e:Entity):Entity {
 
-            super.add(e);
-            e.renderTarget = _buffer;
-            return e;
-        }
+			super.add(e);
+			e.renderTarget = _buffer;
+			return e;
+		}
 
-        override public function remove(e:Entity):Entity {
+		override public function remove(e:Entity):Entity {
 
-            e.renderTarget = null;
-            return super.remove(e);
-        }
+			e.renderTarget = null;
+			return super.remove(e);
+		}
 
-        private function clearBuffer():void {
+		private function clearBuffer():void {
 
-            _buffer.fillRect(_buffer.rect, clearColor);
-        }
+			_buffer.fillRect(_buffer.rect, clearColor);
+		}
 
-        override public function render():void {
+		override public function render():void {
 
-            clearBuffer();
+			clearBuffer();
 
-            // This is mega hack
-            // So that entities render to the buffer with consideration for the display's x and y,
-            // we need to offset the camera point.
-            // Might be worth changing the Entity render function to account for world's camera?
-            var xOffset:Number = camera.x;
-            var yOffset:Number = camera.y;
+			// This is mega hack
+			// So that entities render to the buffer with consideration for the display's x and y,
+			// we need to offset the camera point.
+			// Might be worth changing the Entity render function to account for world's camera?
+			var xOffset:Number = camera.x;
+			var yOffset:Number = camera.y;
 
-            FP.camera.x += xOffset;
-            FP.camera.y += yOffset;
+			FP.camera.x += xOffset;
+			FP.camera.y += yOffset;
 
-            super.render();
+			super.render();
 
-            FP.camera.x -= xOffset;
-            FP.camera.y -= yOffset;
+			FP.camera.x -= xOffset;
+			FP.camera.y -= yOffset;
 
-            FP.buffer.copyPixels(
-                _buffer,
-                new Rectangle(0, 0, width, height),
-                new Point(x, y));
-        }
+			FP.buffer.copyPixels(
+				_buffer,
+				new Rectangle(0, 0, width, height),
+				new Point(x, y));
+		}
+		
+		public function containsPoint(someX:Number, someY:Number):Boolean {
+			
+			return	x <= someX &&
+					y <= someY &&
+					x + width >= someX &&
+					y + height >= someY;
+		}
 
-        public function get containsMouse():Boolean {
+		public function get containsMouse():Boolean {
 
-            return FP.screen.mouseX >= x &&
-                   FP.screen.mouseX <= x + width &&
-                   FP.screen.mouseY >= y &&
-                   FP.screen.mouseY <= y + height;
-        }
+			return containsPoint(FP.screen.mouseX, FP.screen.mouseY);
+		}
+		
+		
 
-	/**
-	 * X position of the mouse in the World.
-	 */
-	override public function get mouseX():int
-	{
-		return FP.screen.mouseX + FP.camera.x - x;
-	}
+		/**
+		 * X position of the mouse in the World.
+		 */
+		override public function get mouseX():int
+		{
+			return FP.screen.mouseX + FP.camera.x - x + camera.x;
+		}
+		
+		/**
+		 * Y position of the mouse in the world.
+		 */
+		override public function get mouseY():int
+		{
+			return FP.screen.mouseY + FP.camera.y - y + camera.y;
+		}
 	
-	/**
-	 * Y position of the mouse in the world.
-	 */
-	override public function get mouseY():int
-	{
-		return FP.screen.mouseY + FP.camera.y - y;
-	}
+		public function get isFirstDisplayContaingMouse():Boolean {
+			
+			if (!containsMouse) return false;
+			if (!stack) return true;
+			
+			return stack.isFirstDisplayContainingPoint(this, FP.screen.mouseX, FP.screen.mouseY);
+		}
 
     }
 }

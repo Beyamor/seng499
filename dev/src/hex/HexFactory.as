@@ -1,5 +1,6 @@
 package hex {
 
+	import flash.geom.Point;
     import model.PlayerData;
 
     /**
@@ -19,15 +20,16 @@ package hex {
             _playerData     = playerData;
         }
 
-        public function create(indices:HexIndices, x:Number, y:Number, radius:Number):HexTile {
+        public function create(camera:Point, indices:HexIndices, x:Number, y:Number, radius:Number):HexTile {
 
             if (!playerData.hexDataExists(indices)) {
 
-                playerData.setHexData(indices,
-                    cartographer.generateData(indices));
-            }
+				playerData.setHexData(indices,
+					cartographer.generateData(indices));
+			}
 
             return new HexTile(
+						camera,
                         playerData.getHexData(indices),
                         indices,
                         x, y,

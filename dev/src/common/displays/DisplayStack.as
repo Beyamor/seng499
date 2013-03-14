@@ -67,5 +67,19 @@ package common.displays {
 
             return this;
         }
+		
+		/**
+		 * From the top of the stack down to the bottom, checks if the provided display is the first
+		 * which contains the given point
+		 */
+		public function isFirstDisplayContainingPoint(display:Display, x:Number, y:Number):Boolean {
+			
+			for (var displayIndex:int = displays.length - 1; displayIndex >= 0; --displayIndex) {
+
+                if (displays[displayIndex].containsPoint(x, y)) return (displays[displayIndex] == display);
+            }
+			
+			return false;
+		}
     }
 }

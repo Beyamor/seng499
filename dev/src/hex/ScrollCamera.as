@@ -1,5 +1,6 @@
 package hex {
 
+	import common.displays.Display;
     import flash.geom.Rectangle;
     import net.flashpunk.FP;
     import net.flashpunk.utils.Input;
@@ -11,18 +12,20 @@ package hex {
 
         private var x:Number, y:Number, minX:Number, maxX:Number, minY:Number, maxY:Number;
         private var speed:Number;
+		private var display:Display;
     
-        public function ScrollCamera(speed:Number, minX:Number, minY:Number, maxX:Number, maxY:Number) {
+        public function ScrollCamera(display:Display, speed:Number, minX:Number, minY:Number, maxX:Number, maxY:Number) {
 
-           x = FP.camera.x;
-           y = FP.camera.y;
+			this.display = display;
+			x = display.camera.x;
+			y = display.camera.y;
 
-           this.minX = minX;
-           this.minY = minY;
-           this.maxX = maxX;
-           this.maxY = maxY;
+			this.minX = minX;
+			this.minY = minY;
+			this.maxX = maxX;
+			this.maxY = maxY;
 
-           this.speed = speed;
+			this.speed = speed;
         }
 
         public function update():void {
@@ -43,11 +46,11 @@ package hex {
             x += dx * speed * FP.elapsed;
             y += dy * speed * FP.elapsed;
 
-            x = FP.clamp(x, minX, maxX - FP.width);
-            y = FP.clamp(y, minY, maxY - FP.height);
+            x = FP.clamp(x, minX, maxX - display.width);
+            y = FP.clamp(y, minY, maxY - display.height);
 
-            FP.camera.x = x;
-            FP.camera.y = y;
+            display.camera.x = x;
+            display.camera.y = y;
         }
     }
 }

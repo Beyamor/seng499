@@ -2,14 +2,15 @@ package model
 {
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
-	import observatory.Node;
-	import observatory.Instrument;
 	import hex.math.SpaceConverter;
 	import hex.HexData;
 	import net.flashpunk.FP;
 	import hex.terrain.Terrain;
 	import hex.HexIndices;
 	import observatory.ComponentData;
+	import observatory.Instrument;
+	import observatory.Node;
+	import time.Calendar;
 
 	/**
 	 * ...
@@ -23,6 +24,8 @@ package model
 		public var nodeList:Vector.<Node> = new Vector.<Node>();//Instruments will be added here.
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
+		public var calendar:Calendar = new Calendar;
+		private var _money:uint = 0;
 		
 		
 		public function PlayerData()
@@ -30,7 +33,7 @@ package model
 			populateStoreList();
 			addDummyData();
 			
-            addNode(new Node(70, 70));
+            //addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -54,7 +57,7 @@ package model
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
-                        getHexData(hexCoords).addObservatoryComponent(node);
+			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
 		}
 		
 		public function populateStoreList():void
@@ -88,32 +91,59 @@ package model
 			return nextId++;
 		}
 
-                public function hexDataExists(indices:HexIndices):Boolean {
+		public function hexDataExists(indices:HexIndices):Boolean {
 
-                    if (!hexData[indices.x])            return false;
-                    if (!hexData[indices.x][indices.y]) return false;
-                    return true;
-                }
+			if (!hexData[indices.x])            return false;
+			if (!hexData[indices.x][indices.y]) return false;
+			return true;
+		}
 
-                public function setHexData(indices:HexIndices, data:HexData):void {
+		public function setHexData(indices:HexIndices, data:HexData):void {
  
 			if (!hexData[indices.x]) hexData[indices.x] = new Object;
 			hexData[indices.x][indices.y] = data;
-                }
+		}
 
-                private function createHexDataIfNecessary(indices:HexIndices):void {
+		private function createHexDataIfNecessary(indices:HexIndices):void {
 
-			if (!hexData[indices.x])            hexData[indices.x]            = new Object;
-			if (!hexData[indices.x][indices.y]) hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
-                }
+			if (!hexData[indices.x])            
+				hexData[indices.x]            = new Object;
+			if (!hexData[indices.x][indices.y]) 
+				hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
+		}
 
-                public function getHexData(indices:HexIndices):HexData {
+		public function getHexData(indices:HexIndices):HexData {
 
-                    // For the sake of adding nodes to hexes, we'll still create hex data if necessary
-                    // However, we need to figure out what to do about stuff like the node hex's terrain
-                    createHexDataIfNecessary(indices);
-                    return hexData[indices.x][indices.y];
-                }
+			// For the sake of adding nodes to hexes, we'll still create hex data if necessary
+			// However, we need to figure out what to do about stuff like the node hex's terrain
+			createHexDataIfNecessary(indices);
+			return hexData[indices.x][indices.y];
+		}
+		
+		public function get hexes():Vector.<HexData> {
+			
+			var hexes:Vector.<HexData> = new Vector.<HexData>;
+			
+			for (var xIndex:String in hexData) {
+				for (var yIndex:String in hexData[xIndex]) {
+					
+					hexes.push(hexData[xIndex][yIndex]);
+				}
+			}
+			
+			return hexes;
+		}
+		
+		public function addMoney(amount:uint) {
+			
+			_money += amount;
+		}
+		
+		public function get money():uint {
+			
+			return _money;
+		}
 	}
 
 }
+

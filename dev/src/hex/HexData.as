@@ -1,7 +1,10 @@
 package hex {
 
+	import observatory.Connectable;
     import observatory.Node;
     import hex.terrain.Terrain;
+	import model.GameTables;
+	import observatory.ComponentData;
     import observatory.ObservatoryComponent;
 
     /**
@@ -12,7 +15,7 @@ package hex {
     public class HexData {
 
         private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
-
+		private var freeSpace:int = GameConstants.DEFAULT_FREE_SPACE;
         private var _terrain:Terrain;
         public function get terrain():Terrain { return _terrain; }
 
@@ -32,11 +35,11 @@ package hex {
             return components;
         }
 
-        public function get hasNode():Boolean {
+        public function get hasConnectors():Boolean {
 
             for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
 
-                if (observatoryComponent is Node) { // Wut
+                if (observatoryComponent is Connectable){ // Changed this to check other stuff
 
                     return true;
                 }
@@ -44,5 +47,31 @@ package hex {
 
             return false;
         }
+		
+		public function hasSubImages():Boolean {
+
+            for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+
+                if (observatoryComponent.isSeenFromHexGrid()){ // Changed this to check other stuff
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+		
+		public function hasNode():Boolean
+		{
+			for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+
+                if (observatoryComponent.isNode()){ // Changed this to check other stuff
+
+                    return true;
+                }
+            }
+
+            return false;
+		}
     }
 }

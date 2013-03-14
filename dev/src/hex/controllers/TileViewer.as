@@ -3,6 +3,7 @@ package hex.controllers {
     import hex.HexTile;
     import net.flashpunk.FP;
     import model.Game;
+	import observatory.Connectable;
 	import undersea.UnderseaView;
 
 
@@ -22,5 +23,10 @@ package hex.controllers {
 
             FP.world = new UnderseaView(tile, game);
         }
+		
+		public function connectInstrument(con:Connectable):void
+		{
+			//doNothing
+		}
     }
 }

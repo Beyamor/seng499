@@ -12,18 +12,23 @@ package observatory.properties {
 
         private var _isNode:Boolean;
         public function get isNode():Boolean { return _isNode; }
+		
+		private var _isSeenOnHexGrid:Boolean;
+		public function get isSeenOnHexGrid():Boolean { return _isSeenOnHexGrid; }
 
         private var _dataTerrainTypes:Vector.<String> = new Vector.<String>;
 
         public function InstrumentProperties(
             name:String,
             image:Class,
-            isNode:Boolean,
-            dataTerrainTypes:Vector.<String>) {
+			dataTerrainTypes:Vector.<String>,
+            isNode:Boolean = false,
+			isSeenOnHexGrid:Boolean = false) {
 
             _name               = name;
             _image              = image;
             _isNode             = isNode;
+			_isSeenOnHexGrid	= isSeenOnHexGrid;
             _dataTerrainTypes   = dataTerrainTypes;
         }
 

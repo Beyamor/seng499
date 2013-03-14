@@ -1,8 +1,10 @@
 package map 
 {
 	//import common.ui.ButtonBuilder;
+	import common.NeptuneWorld;
 	import common.ui.Button;
 	import common.Assets;
+	import common.ui.Cursor;
 	import inventory.InventoryDisplay;
 	import inventory.InventoryItemSelector;
 	import model.Game;
@@ -12,20 +14,20 @@ package map
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
 	import store.StoreView;
+	import time.TimeProgressionView;
 	import observatory.Node;
-	
 	/**
 	 * ...
 	 * @author Lambwatt
 	 */
-	public class MapView extends World
+	public class MapView extends NeptuneWorld
 	{
 		private const WIDTH:int = 1440;
 		private const HEIGHT:int = 640;
 		private var game:Game;
 		
 		public function MapView(game:Game)
-		{
+		{			
 			this.game = game;
 			add(new MapEntity(0, 0));
 			
@@ -49,6 +51,16 @@ package map
 						.withDepth( -1)
 						.whenClicked(function():void{FP.world = new StoreView(game)})
 						.build());
+			
+			// TODO: Less suck button
+			add(Button.description()
+						.fixedAt(FP.width - 58, FP.height - 100)
+						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Time"))
+						.withDepth( -1)
+						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
+						.build());
+						
+			if (game.state.isPlacing()) setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
 			
 		}
 		
@@ -78,8 +90,9 @@ package map
 				{
 					if (Input.mousePressed == true && FP.world.mouseX - camera.x < 600)//TODO make a proper check for wether click is over the display.
 					{
-						game.data.addNode(new Node(FP.world.mouseX, FP.world.mouseY));
+						game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),FP.world.mouseX, FP.world.mouseY));
 						game.state.stopPlacingInstrument();
+						removeCursor();
 						add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1]));
 						//FP.console.log("Added a node.  Do you see it?");
 					}
@@ -94,3 +107,4 @@ package map
 	}
 
 }
+

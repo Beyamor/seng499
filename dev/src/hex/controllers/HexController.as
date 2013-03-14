@@ -1,6 +1,7 @@
 package hex.controllers {
 
     import hex.HexTile;
+	import observatory.Connectable;
 
     /**
      *  A hex controller responds to actions in the HexView.
@@ -9,5 +10,6 @@ package hex.controllers {
     public interface HexController {
 
         function hexSelected(tile:HexTile):void;
+		function connectInstrument(connection:Connectable):void;
     }
 }

@@ -23,8 +23,27 @@ package model
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
                         .isNode()
+						.isSeenOnHexGrid()
                         .finish()
                 );
+				
+				public static function instrumentIDByName(name:String):uint {
+					
+					name = name.toLowerCase();
+					
+					// TODO: Think about why these things aren't keyed by name anyway
+					for (var id:int = 0; id < instruments.length; ++id) {
+						
+						if (instruments[id].name.toLowerCase() == name) return id;
+					}
+					
+					throw new Error("Unknown instrument name: " + name);
+				}
+				
+				public static function instrumentByName(name:String):InstrumentProperties {
+					
+					return instruments[instrumentIDByName(name)];
+				}
 	}
 
 }

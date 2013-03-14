@@ -23,6 +23,11 @@ package model
 		{
 			return placing != GameConstants.NOT_PLACING;
 		}
+		
+		public function isSelectingNode()
+		{
+			return placing == GameConstants.SELECTING_NODE_ON_MAP;
+		}
 
 		public function getInstrumentBeingPlaced():ComponentData
 		{
@@ -53,14 +58,19 @@ package model
 			return connectionPoint;
 		}
 		
-		public function selectNode()
+		public function selectNode():Boolean
 		{
-			placing = GameConstants.SELECTING_CONNECTION_ON_HEX;
+			return placing = GameConstants.SELECTING_CONNECTION_ON_HEX;
 		}
 		
-		public function isConnecting()
+		public function isConnecting():Boolean
 		{
 			return placing == GameConstants.SELECTING_CONNECTION_ON_HEX;
+		}
+		
+		public function isSelectingHex():Boolean
+		{
+			return placing == GameConstants.PLACING_ON_HEX;
 		}
 	}
 

@@ -1,7 +1,9 @@
 package 
 {
+	import common.Assets;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.media.Sound;
 	import hex.HexView;
 	import map.MapView;
 	import model.Game;
@@ -10,6 +12,7 @@ package
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import store.StoreView;
+	import title.TitleView;
 	
 	/**
 	 * ...
@@ -28,8 +31,10 @@ package
 			super.init();
 			
 			initModel();
+			initSound();
 			
-			FP.console.enable();
+			// You don't need it
+			//FP.console.enable();
 			
 			Input.define("debug-hex-start",		Key.DIGIT_0);
 			Input.define("debug-map-start",		Key.DIGIT_1);
@@ -38,6 +43,8 @@ package
 			Input.define("hex-scroll-down",		Key.S, Key.DOWN);
 			Input.define("hex-scroll-left",		Key.A, Key.LEFT);
 			Input.define("hex-scroll-right",	Key.D, Key.RIGHT);
+			
+			FP.world = new TitleView(game);
 		}
 		
 		override public function update():void 
@@ -53,6 +60,12 @@ package
 		{
 			game = new Game();
 		}
-	}
+
+		private function initSound():void
+		{
+			var sound:Sound = (new Assets.SOUND_NEPTUNE) as Sound;
+			sound.play();
+		}
+}
 	
 }

@@ -1,16 +1,19 @@
 package hex 
 {
 	import flash.geom.Vector3D;
+	import hex.controllers.HexSubhitbox;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
-        import hex.terrain.Tables;
-        import common.Assets;
-        import net.flashpunk.graphics.Image;
-        import net.flashpunk.graphics.Graphiclist;
+	import observatory.Node;
+	import observatory.ObservatoryComponent;
+	import hex.terrain.Tables;
+	import common.Assets;
+	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Graphiclist;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -19,9 +22,12 @@ package hex
 	 */
 	public class HexTile extends Entity 
 	{
-                // Data!
-                private var _data:HexData;
-                public function get data():HexData { return _data; }
+		// Data!
+		private var _data:HexData;
+		public function get data():HexData { return _data; }
+		
+		private var _subHitboxes:Vector.<HexSubhitbox>;
+		public function get subHitboxes():Vector.<HexSubhitbox> { return _subHitboxes; } 
 
 		// The radius of the hexgon.
 		private var _radius:Number;
@@ -33,29 +39,73 @@ package hex
 
 		// The indices in the grid
 		private var _indices:HexIndices;
-                public function get indices():HexIndices { return _indices; }
+		public function get indices():HexIndices { return _indices; }
+		
+		// Da camera
+		private var _camera:Point;
+		private function get camera():Point { return _camera; }
 
 		/**
 		 * Creates a new hex tile.
 		 */
-		public function HexTile(data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
+		public function HexTile(camera:Point, data:HexData, indices:HexIndices, x:Number, y:Number, radius:Number)
 		{
 			super(x, y);
 
-                        _data = data;
-                        _indices = indices;
+			_data = data;
+			_indices = indices;
 			_radius = radius;
 			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
+			_camera = camera;
 
-                        var graphics:Graphiclist = new Graphiclist;
-                        graphics.add(new HexSprite(radius, color));
+			var graphics:Graphiclist = new Graphiclist;
+			graphics.add(new HexSprite(radius, color));
 
-                        if (data.hasNode) {
-
-                            graphics.add(new Image(Assets.IMG_NODE));
-                        }
-
-                        graphic = graphics;
+			if (data.hasSubImages()) {
+				
+				for (var i:int = 0; i < data.observatoryComponents.length; i++)
+				{
+					//component = 
+					if( data.observatoryComponents[i] is Node)
+					{
+						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
+						subImage.x = x - subImage.width / 2;
+						subImage.y = y - subImage.height / 2;
+						
+						var image:Image = subImage.image;
+						image.x = - subImage.width / 2;
+						image.y =  - subImage.height / 2;
+						graphics.add(image);
+						break;
+					}
+					else if (data.observatoryComponents[i].isSeenFromHexGrid)
+					{
+						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
+						var image:Image = subImage.image;
+						
+						if (i == 0)
+						{
+							subImage.x = x -subImage.width - 5;
+							subImage.y = y -subImage.height - 5;
+							
+							image.x = -subImage.width - 5;
+							image.y = subImage.height - 5;
+						}
+						else if(i == 1)
+						{
+							subImage.x = 5;
+							subImage.y = 5;
+							
+							image.x = 5;
+							image.x = 5;
+						}
+						graphics.add(image);
+					}
+				}
+			}
+			/*if (data.hasNode())
+				graphics.add(new Image(Assets.IMG_NODE));
+			*/graphic = graphics;
 		}
 
 		/**
@@ -65,8 +115,8 @@ package hex
 		{			
 			return collideRect(
 				x, y,
-				FP.camera.x	- radius,
-				FP.camera.y	- radius,
+				camera.x	- radius,
+				camera.y	- radius,
 				FP.width	+ radius * 2,
 				FP.height	+ radius * 2);
 		}
@@ -91,6 +141,8 @@ package hex
 			// First, get the relative vector from the center of the hexagon
 			const relX:Number = x - this.x;
 			const relY:Number = y - this.y;
+			
+			FP.log(relX + ", " + relY);
 			
 			// Now, so we only have to check one case
 			// (as opposed to each combination of positive and negative x and y),
