@@ -1,12 +1,14 @@
 package store.displays
 {
 	import common.ui.Button;
+	import model.GameTables;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
 	import flash.geom.Point;
+		import net.flashpunk.graphics.Text;
         import observatory.ComponentData;
         import common.displays.Display;
         import net.flashpunk.World;
@@ -40,6 +42,10 @@ package store.displays
 			addGraphic(background, 100);
 
 			addDisplayButtons();
+			
+			var description:Text = new Text(component.getName() + " - $" + GameTables.instrumentByName(component.getName()).cost);
+			description.color = 0;
+			addGraphic(description, 0, 10, 10);
 
 			componentImage = addGraphic(component.getImage());
 			componentImage.layer = -9003;
