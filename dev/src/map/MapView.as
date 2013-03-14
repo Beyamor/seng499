@@ -10,7 +10,7 @@ package map
 	import common.ui.Cursor;
 	import common.displays.DataDisplay;
 	import hex.HexView;
-	import inventory.InventoryDisplay;
+	import inventory.displays.InventoryDisplay;
 	import inventory.InventoryItemSelector;
 	import map.controllers.ControllerFactory;
 	import map.controllers.MapController;

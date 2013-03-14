@@ -32,8 +32,11 @@ package hex.controllers {
 			
 			var addedInstrument:Instrument = new Instrument(instrument, tile)
 			game.state.getConnectionPoint().connect(addedInstrument);
+			
+			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
             game.data.getHexData(tile.indices).addObservatoryComponent(instrument);
             game.state.stopPlacingInstrument();
+			
 			view.removeCursor();
 
             // Okay. Switch out of instrument placement I guess?

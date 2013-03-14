@@ -1,7 +1,8 @@
-package inventory 
+package inventory.displays 
 {
 	import common.displays.ControlPanel;
 	import common.displays.Display;
+	import inventory.InventoryItemSelector;
 	import map.MapView;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
