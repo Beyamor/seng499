@@ -25,7 +25,7 @@ package model
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
-		private var _money:uint = 0;
+		private var _money:uint = 50;
 		
 		
 		public function PlayerData()

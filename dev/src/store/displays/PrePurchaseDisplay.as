@@ -1,5 +1,6 @@
 package store.displays
 {
+	import common.displays.Popup;
 	import common.ui.Button;
 	import model.GameTables;
 	import model.PlayerData;
@@ -17,7 +18,7 @@ package store.displays
 	 * ...
 	 * @author ColtonPhillips
 	 */
-	public class PrePurchaseDisplay extends Display
+	public class PrePurchaseDisplay extends Popup
 	{
 		private var displayIsVisible:Boolean = false;
 		private var buyButton:Button = null;
@@ -34,8 +35,6 @@ package store.displays
 
 			super(
 				parent,
-				FP.width/2 - background.width/2,
-				FP.height/2 - background.height/2,
 				background.width,
 				background.height);
 
@@ -63,12 +62,6 @@ package store.displays
 			FP.console.log("added to inventory: " + component.getName());
 			close();
 		}
-
-		public function close():void {
-
-			// Just gunna assume this is the top of the stack
-			stack.pop();
-		}
 		
 		private function addDisplayButtons():void
 		{
@@ -82,13 +75,6 @@ package store.displays
 						.build();
 						
 			add(buyButton);
-		}
-		
-		override public function update():void {
-
-			super.update();
-
-			if (Input.mousePressed && !containsMouse) close();
 		}
 	}
 

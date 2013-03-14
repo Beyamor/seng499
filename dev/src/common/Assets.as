@@ -21,6 +21,7 @@ package common{
 		[Embed(source = "../assets/store/back.png")] public static const IMG_BACK:Class
 		[Embed(source = "../assets/store/bg.png")] public static const IMG_BG:Class
 		[Embed(source = "../assets/store/buy.png")] public static const IMG_BUY:Class
+		[Embed(source = "../assets/store/close.png")] public static const IMG_CLOSE:Class
 		[Embed(source = "../assets/store/instrument_image.png")] public static const IMG_INSTRUMENT_IMAGE:Class
 		[Embed(source = "../assets/store/left.png")] public static const IMG_LEFT:Class
 		[Embed(source = "../assets/store/prepurchase-display.png")] public static const IMG_PREPURCHASE_DISPLAY:Class
