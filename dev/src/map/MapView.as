@@ -47,23 +47,6 @@ package map
 		public function MapView(game:Game)
 		{			
 			this.game = game;
-			
-			// TODO: Think pretty seriously about moving these guys into the "inventory" display
-			// Or at least, like, make a more coherent side panel thing
-			add(Button.description()
-						.fixedAt(FP.width - 58, FP.height - 42)
-						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Store"))
-						.withDepth( -1)
-						.whenClicked(function():void { goToStore(); } )
-						.build());
-			
-			// TODO: Less suck button
-			add(Button.description()
-						.fixedAt(FP.width - 58, FP.height - 100)
-						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("Time"))
-						.withDepth( -1)
-						.whenClicked(function():void{FP.world = new TimeProgressionView(game)})
-						.build());
 						
 			controller = new ControllerFactory(this).build();
 			
@@ -80,7 +63,15 @@ package map
 				inventoryDisplay,
 				new DataDisplay(this, game.data),
 				instructionDisplay);
-
+			
+			// TODO: Move this into the inventory display?
+			inventoryDisplay.addStandardButton(
+						"Store",
+						function():void { goToStore(); } );
+						
+			inventoryDisplay.addStandardButton(
+						"Time",
+						function():void { FP.world = new TimeProgressionView(game); } );
 		}
 		
 		public function getGame():Game 
@@ -90,7 +81,10 @@ package map
 		
 		public function goToStore():void {
 			
-			FP.world = new StoreView(game);
+			inventoryDisplay.slideOff(function():void {
+			
+				FP.world = new StoreView(game);
+			});
 		}
 		
 		public function goToHexViewFromNode(node:NodeEntity):void {

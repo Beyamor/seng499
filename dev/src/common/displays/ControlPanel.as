@@ -2,8 +2,10 @@ package common.displays
 {
 	import common.Assets;
 	import common.tweens.InOutTweener;
+	import common.ui.Button;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.tweens.misc.VarTween;
 	import net.flashpunk.utils.Ease;
 	import net.flashpunk.World;
@@ -16,6 +18,7 @@ package common.displays
 		public static const SCREEN_X:int = 600;
 		public static const SCREEN_Y:int = 0;
 		private var tweener:InOutTweener;
+		private var numberOfStandardButtons:int = 0;
 		
 		public function ControlPanel(parent:World) 
 		{
@@ -37,6 +40,19 @@ package common.displays
 		
 		// Totally redundant, but it reads better
 		public function get thatSlidesOn():ControlPanel { slideOn(); return this; }
+		
+		public function addStandardButton(label:String, onClick:Function):void {
+			
+			var image:Image = new Image(Assets.IMG_MAPBUTTONBACKGROUND);
+			
+			add(Button.description()
+					.withImageAndText(image, new Text(label))
+					.at(halfWidth - image.width/2, height - 50 - 50 * numberOfStandardButtons)
+					.whenClicked(onClick)
+					.build());
+					
+			++numberOfStandardButtons;
+		}
 	}
 
 }
