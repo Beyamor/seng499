@@ -69,7 +69,7 @@ package store.displays {
                         purchaseButtons.push(Button.description()
                                             .withDepth(-1)
                                             .withImageAndText(
-                                                Assets.IMG_MAPBUTTONBACKGROUND,
+                                                component.getImage(),
                                                 new Text(component.getName()))
                                             .whenClicked(purchaseFunction(component))
                                             .build());
