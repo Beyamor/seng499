@@ -58,6 +58,8 @@ package inventory.ui
 			else				mapView.instructionDisplay.show("select a node");;
 		}
 		
+		public function get item():ComponentData { return data; }
+		
 	}
 
 }

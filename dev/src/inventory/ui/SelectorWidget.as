@@ -63,15 +63,14 @@ package inventory.ui
 		
 		override public function update():void 
 		{
-			super.update();
 			paginator.update();
-		}
-		
-		public function updateSelectors():void {
 			
-			for each (var selector:Button in selectors) remove(selector);
-			addSelectors();
-			paginator.resetList(selectors);
+			// This pattern of mouse-containment-dependent entity updating is getting repeated a lot
+			// Maybe make this a thing in the display superclass.
+			// No entity updates if not containg mouse.
+			// No time to make a better ui system, of course.
+			if (!isFirstDisplayContaingMouse) return;				
+			super.update();
 		}
 		
 		private function addSelectors():void 
@@ -80,6 +79,28 @@ package inventory.ui
 			for each (var item:ComponentData in playerData.getInventory()) selectors.push(new InventoryItemSelector(mapView, item));
 			
 			for each (var selector:Button in selectors) add(selector);
+		}
+		
+		public function removeItem(item:ComponentData):void {
+			
+			var itemIndex:int;
+			for (itemIndex = 0; itemIndex < selectors.length; ++itemIndex) {
+				
+				if ((selectors[itemIndex] as InventoryItemSelector).item == item) break;
+			}
+			
+			if (itemIndex >= selectors.length) return; // Not found
+			
+			// HACK: Ughhhhh
+			// The selectors, when removed, will "flash" on the screen when removeed
+			// I think it's because the render target is immediately removed, but the entity still gets rendered for a frame,
+			// With no render target, the entity draws to FP's buffer.
+			// For the time being, it's not worth trying to fix this. If it becomes an issue again, let's tackle it.
+			selectors[itemIndex].visible = false;
+			
+			remove(selectors[itemIndex]);
+			selectors.splice(itemIndex, 1);
+			paginator.resetList(selectors);
 		}
 	}
 

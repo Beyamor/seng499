@@ -33,11 +33,12 @@ package map.controllers
 		
 		public function emptySpaceClicked(mapX:Number, mapY:Number):void {
 			
+			// This is such a crappy dependency
+			mapView.inventoryDisplay.selectorWidget.removeItem(game.state.getInstrumentBeingPlaced());
+			
 			game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY));
 			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
 			game.state.stopPlacingInstrument();
-			
-			mapView.inventoryDisplay.selectorWidget.updateSelectors();
 			
 			mapView.removeCursor();
 			mapView.mapDisplay.add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));

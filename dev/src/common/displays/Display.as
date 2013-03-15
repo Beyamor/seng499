@@ -183,6 +183,7 @@ package common.displays {
 		public function get isFirstDisplayContaingMouse():Boolean {
 			
 			if (!containsMouse) return false;
+			if (parentIsDisplay && !parentAsDisplay.isFirstDisplayContaingMouse) return false;
 			if (!stack) return true;
 			
 			return stack.isFirstDisplayContainingPoint(this, FP.screen.mouseX, FP.screen.mouseY);
