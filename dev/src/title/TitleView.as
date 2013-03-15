@@ -20,17 +20,21 @@ package title
 		
 		public function TitleView(game:Game)
 		{
-			addGraphic(new Image(Assets.IMG_SCIENTIST_1),0,160,150);
-			addGraphic(new Text("SUPER GREAT NEPTUNE GAME"), 0, 180, 400);
-			addGraphic(new Text("(press any key)"), 0, 220, 420);
+			addGraphic(new Image(Assets.IMG_TITLE),0,0,0);
+			addGraphic(new Text("SUPER GREAT NEPTUNE GAME"), 0, 520, 500);
+			addGraphic(new Text("(press any key)"), 0, 560, 520);
 			this.game = game;
+			
+			camera.y = 130;
 		}
 		
 		override public function update():void 
 		{
 			super.update();
 			
-			if (Input.check(Key.ANY)) FP.world = new MapView(game);
+			if (Input.check(Key.ANY) || Input.mousePressed) FP.world = new MapView(game);
+			
+			if (camera.y > 0) camera.y = camera.y - 0.5;
 		}
 	}
 
