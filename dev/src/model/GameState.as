@@ -1,5 +1,6 @@
 package model 
 {
+	import flash.geom.Point;
 	import observatory.Connectable;
     import observatory.ComponentData;
 	//import GameConstants;
@@ -13,6 +14,8 @@ package model
 		private var placing:int = GameConstants.NOT_PLACING;
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
+		private var lastViewedHexX:int = 0;
+		private var lastViewedHexY:int = 0;
 		
 		public function GameState() 
 		{
@@ -24,7 +27,7 @@ package model
 			return placing != GameConstants.NOT_PLACING;
 		}
 		
-		public function isSelectingNode()
+		public function isSelectingNode():Boolean
 		{
 			return placing == GameConstants.SELECTING_NODE_ON_MAP;
 		}
@@ -71,6 +74,17 @@ package model
 		public function isSelectingHex():Boolean
 		{
 			return placing == GameConstants.PLACING_ON_HEX;
+		}
+		
+		public function getLastViewedHex():Point
+		{
+			return new Point(lastViewedHexX, lastViewedHexY);
+		}
+		
+		public function setLastViewedHex(x:int,y:int):void
+		{
+				lastViewedHexX = x;
+				lastViewedHexY = y;
 		}
 	}
 

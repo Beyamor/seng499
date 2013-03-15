@@ -42,7 +42,7 @@ package undersea
 		
 		private function clickedBack():void
 		{
-			FP.world = new HexView(game, 0, 0);
+			FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
 		}
 		
 		private function setUpButtons():void

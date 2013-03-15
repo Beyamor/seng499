@@ -35,7 +35,7 @@ package hex
 		public function HexView(game:Game, mapX:Number, mapY:Number)
 		{
 			super();
-
+			game.state.setLastViewedHex(mapX, mapY);
 			this.game	= game;
 			controller	= (new ControllerFactory).createFor(game, this);
 			
