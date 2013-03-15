@@ -1,6 +1,7 @@
 package model 
 {
 	import flash.geom.Point;
+	import hex.HexIndices;
 	import observatory.Connectable;
     import observatory.ComponentData;
 	//import GameConstants;
@@ -14,8 +15,7 @@ package model
 		private var placing:int = GameConstants.NOT_PLACING;
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
-		private var lastViewedHexX:int = 0;
-		private var lastViewedHexY:int = 0;
+		private var lastViewedHex:HexIndices = null;
 		
 		public function GameState() 
 		{
@@ -76,15 +76,14 @@ package model
 			return placing == GameConstants.PLACING_ON_HEX;
 		}
 		
-		public function getLastViewedHex():Point
+		public function getLastViewedHex():HexIndices
 		{
-			return new Point(lastViewedHexX, lastViewedHexY);
+			return lastViewedHex;
 		}
 		
 		public function setLastViewedHex(x:int,y:int):void
 		{
-				lastViewedHexX = x;
-				lastViewedHexY = y;
+				lastViewedHex = new HexIndices(x,y);
 		}
 	}
 

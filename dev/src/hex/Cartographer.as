@@ -3,6 +3,7 @@ package hex {
     import hex.terrain.Terrain;
     import hex.terrain.Types;
     import model.PlayerData;
+	import map.terrain.TerrainForce;
 
     /**
      *      This class generates hex data for the hex view.

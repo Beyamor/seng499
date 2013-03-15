@@ -11,6 +11,7 @@ package model
 	import observatory.Instrument;
 	import observatory.Node;
 	import time.Calendar;
+	import map.terrain.TerrainForce;
 
 	/**
 	 * ...
@@ -26,7 +27,7 @@ package model
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 50;
-		
+		private var activeTerrainForces:Vector.<TerrainForce> = null;	
 		
 		public function PlayerData()
 		{

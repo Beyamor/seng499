@@ -23,7 +23,7 @@ package model
 		
 		public function addFeatures()
 		{
-			terrainFeatures.push(new Feature(new LocationPoint(0,0),200,new Terrain(Types.SAND)));
+			terrainFeatures.push(new Feature(new LocationPoint(0,0),200,new Terrain(Types.SAND),null,0,0,0));
 		}
 		
 		public function getFeatures()
