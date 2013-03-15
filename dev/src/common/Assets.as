@@ -10,6 +10,7 @@ package common{
 
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
+		[Embed(source = "../assets/title.png")] public static const IMG_TITLE:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
 		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class
