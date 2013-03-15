@@ -37,6 +37,8 @@ package map.controllers
 			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
 			game.state.stopPlacingInstrument();
 			
+			mapView.inventoryDisplay.selectorWidget.updateSelectors();
+			
 			mapView.removeCursor();
 			mapView.mapDisplay.add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));
 			mapView.controller = new HexViewer(mapView);

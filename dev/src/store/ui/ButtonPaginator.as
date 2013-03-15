@@ -122,5 +122,11 @@ package store.ui {
 			calculateScrollSpeed();
 		}
 		
+		public function resetList(buttons:Vector.<Button>):void {
+			
+			this.buttons = buttons;			
+			positionButtons();
+			if (pageIndex >= highestPageIndex) setTargetToPage(highestPageIndex - 1);
+		}
     }
 }

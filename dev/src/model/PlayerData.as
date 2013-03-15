@@ -89,6 +89,12 @@ package model
 		{
 			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
 			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
 		}
 		
 		public function getInventory():Vector.<ComponentData>

@@ -29,14 +29,15 @@ package inventory.displays
 		private const inventoryOffset:int = 0;
 		
 		private var widgets:DisplayStack;
+		public var selectorWidget:SelectorWidget;
 
 		public function InventoryDisplay(mapView:MapView, data:PlayerData) 
 		{
 			super(mapView);
 			inventoryList = data.getInventory();
 			
-			widgets = new DisplayStack(
-						new SelectorWidget(this, mapView, data.getInventory()));
+			selectorWidget = new SelectorWidget(this, mapView, data);
+			widgets = new DisplayStack(selectorWidget);
 		}
 		
 		override public function update():void 

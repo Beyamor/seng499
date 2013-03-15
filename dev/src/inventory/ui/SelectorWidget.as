@@ -5,6 +5,7 @@ package inventory.ui
 	import common.ui.Button;
 	import flash.geom.Rectangle;
 	import map.MapView;
+	import model.PlayerData;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	import observatory.ComponentData;
@@ -21,23 +22,17 @@ package inventory.ui
 		public static const WIDTH:int				= SELECTORS_WIDTH + 20;
 		public static const HEIGHT:int				= SELECTORS_HEIGHT + 50;
 		
-		public var paginator:ButtonPaginator;
+		private var paginator:ButtonPaginator;
+		private var selectors:Vector.<Button>;
+		private var playerData:PlayerData;
+		private var mapView:MapView;
 		
-		public function SelectorWidget(parent:Display, mapView:MapView, inventoryList:Vector.<ComponentData>)
-		{
-			var selectors:Vector.<Button> = new Vector.<Button>;
-			for each (var item:ComponentData in inventoryList) selectors.push(new InventoryItemSelector(mapView, item));
-			
+		public function SelectorWidget(parent:Display, mapView:MapView, playerData:PlayerData)
+		{			
 			super(parent, (parent.width - WIDTH) / 2, 100, WIDTH, HEIGHT);
-			
-			for each (var selector:Button in selectors) add(selector);
-			
-			var selectorMargin:Number = (WIDTH - SELECTORS_WIDTH) / 2;
-			paginator = new ButtonPaginator(
-							this,
-							new Rectangle(selectorMargin, selectorMargin, SELECTORS_WIDTH, SELECTORS_HEIGHT),
-							2, 2,
-							selectors);
+			this.playerData	= playerData;
+			this.mapView	= mapView;
+			clearColor		= 0xFFFFFFFF;
 			
 			var leftImage:Image		= new Image(Assets.IMG_SMALL_LEFT);
 			var rightImage:Image	= new Image(Assets.IMG_SMALL_RIGHT);
@@ -55,14 +50,36 @@ package inventory.ui
 					.withImage(rightImage)
 					.whenClicked(function():void { paginator.goToNextPage(); } )
 					.build());
-							
-			clearColor = 0xFFFFFFFF;
+					
+			addSelectors();
+			
+			var selectorMargin:Number = (WIDTH - SELECTORS_WIDTH) / 2;
+			paginator = new ButtonPaginator(
+							this,
+							new Rectangle(selectorMargin, selectorMargin, SELECTORS_WIDTH, SELECTORS_HEIGHT),
+							2, 2,
+							selectors);
 		}
 		
 		override public function update():void 
 		{
 			super.update();
 			paginator.update();
+		}
+		
+		public function updateSelectors():void {
+			
+			removeList(selectors);
+			addSelectors();
+			paginator.resetList(selectors);
+		}
+		
+		private function addSelectors():void 
+		{
+			selectors = new Vector.<Button>;
+			for each (var item:ComponentData in playerData.getInventory()) selectors.push(new InventoryItemSelector(mapView, item));
+			
+			for each (var selector:Button in selectors) add(selector);
 		}
 	}
 
