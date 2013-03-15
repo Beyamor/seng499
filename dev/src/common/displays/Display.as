@@ -57,6 +57,8 @@ package common.displays {
 		public function get parentHeight():int { return parentIsDisplay? parentAsDisplay.height : FP.height; }
 		public function get parentHalfWidth():Number { return parentIsDisplay? parentAsDisplay.halfWidth : FP.halfWidth; }
 		public function get parentHalfHeight():Number { return parentIsDisplay? parentAsDisplay.halfHeight : FP.halfHeight; }
+		public function get parentX():Number { return parentIsDisplay? parentAsDisplay.x : 0 }
+		public function get parentY():Number { return parentIsDisplay? parentAsDisplay.y : 0 }
 
         /**
          *      Whether this display prevents the ones below it from updating.
@@ -150,10 +152,10 @@ package common.displays {
 		
 		public function containsPoint(someX:Number, someY:Number):Boolean {
 			
-			return	x <= someX &&
-					y <= someY &&
-					x + width >= someX &&
-					y + height >= someY;
+			return	parentX + x <= someX &&
+					parentY + y <= someY &&
+					parentX + x + width >= someX &&
+					parentY + y + height >= someY;
 		}
 
 		public function get containsMouse():Boolean {
@@ -166,7 +168,8 @@ package common.displays {
 		 */
 		override public function get mouseX():int
 		{
-			return FP.screen.mouseX + FP.camera.x - x + camera.x;
+			// TODO: Should FP.camera be included in this? Whatever
+			return FP.screen.mouseX - parentX - x + camera.x;
 		}
 		
 		/**
@@ -174,7 +177,7 @@ package common.displays {
 		 */
 		override public function get mouseY():int
 		{
-			return FP.screen.mouseY + FP.camera.y - y + camera.y;
+			return FP.screen.mouseY - parentY - y + camera.y;
 		}
 	
 		public function get isFirstDisplayContaingMouse():Boolean {

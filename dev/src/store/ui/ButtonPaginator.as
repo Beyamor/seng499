@@ -21,18 +21,18 @@ package store.ui {
         private function get numberPerPage():uint { return horizontalNumber * verticalNumber; }
         private var buttonWidth:Number;
         private var buttonHeight:Number;
-	private var pageIndex:int = 0;
-	private var scrollSpeed:Number = 0;
-	private var cameraTargetPoint:Point = new Point(0, 0);
+		private var pageIndex:int = 0;
+		private var scrollSpeed:Number = 0;
+		private var cameraTargetPoint:Point = new Point(0, 0);
         private function get camera():Point { return world.camera; }
 	
         // TODO: Figure out page separation. Maybe supply in constructor?
         private function get pageSeparation():Number { return 2 * view.width; }
 
-        public function ButtonPaginator(world:World, view:Rectangle, horizontalNumber:uint, verticalNumber:uint, buttons:Vector.<Button>) {
+        public function ButtonPaginator(world:World, bounds:Rectangle, horizontalNumber:uint, verticalNumber:uint, buttons:Vector.<Button>) {
 
             this.world              = world;
-            this.view               = view;
+            this.view               = bounds;
             this.horizontalNumber   = horizontalNumber;
             this.verticalNumber     = verticalNumber;
             this.buttons            = buttons;
@@ -83,7 +83,7 @@ package store.ui {
             }
         }
 
-	public function update():void
+		public function update():void
         {
                 FP.stepTowards(camera, cameraTargetPoint.x, cameraTargetPoint.y, scrollSpeed);
         }
@@ -95,32 +95,32 @@ package store.ui {
 	
         public function goToNextPage():void {
 
-		if (pageIndex < highestPageIndex) 
-		{
-			pageIndex++;
-			setTargetToPage(pageIndex);
-		}
+			if (pageIndex < highestPageIndex) 
+			{
+				pageIndex++;
+				setTargetToPage(pageIndex);
+			}
         }
 	  
         public function goToPreviousPage():void {
 
-		if (pageIndex > 0) 
-		{
-			pageIndex--;
-			setTargetToPage(pageIndex);
-		}
+			if (pageIndex > 0) 
+			{
+				pageIndex--;
+				setTargetToPage(pageIndex);
+			}
         }
 	   
-	private function calculateScrollSpeed():void
-	{
-			scrollSpeed = Math.abs(cameraTargetPoint.x - camera.x) / SCROLL_SCALING_FACTOR;
-	}
-	
-	public function setTargetToPage(pageIndex:int):void
-	{
-		cameraTargetPoint.x = pageIndex * pageSeparation;
-		calculateScrollSpeed();
-	}
+		private function calculateScrollSpeed():void
+		{
+				scrollSpeed = Math.abs(cameraTargetPoint.x - camera.x) / SCROLL_SCALING_FACTOR;
+		}
+		
+		public function setTargetToPage(pageIndex:int):void
+		{
+			cameraTargetPoint.x = pageIndex * pageSeparation;
+			calculateScrollSpeed();
+		}
 		
     }
 }

@@ -22,12 +22,12 @@ package inventory.ui
 	public class InventoryItemSelector extends Button
 	{
 		private var data:ComponentData;
-		private var inventoryDisplay:InventoryDisplay;
+		private var mapView:MapView;
 		
-		public function InventoryItemSelector(inventoryDisplay:InventoryDisplay, x:int, y:int,data:ComponentData) 
+		public function InventoryItemSelector(mapView:MapView, data:ComponentData) 
 		{
 			this.data = data
-			this.inventoryDisplay = inventoryDisplay;
+			this.mapView = mapView;
 			
 			var background:Image = new Image(Assets.IMG_ITEMBACKGROUND);
 			
@@ -51,13 +51,11 @@ package inventory.ui
 		
 		private function whenClicked():void {
 			
-			var mapWorld:MapView = (FP.world as MapView);
+			mapView.getGame().state.setInstrumentBeingPlaced(data);
+			mapView.controller = new ControllerFactory(mapView).build();
 			
-			mapWorld.getGame().state.setInstrumentBeingPlaced(data);
-			mapWorld.controller = new ControllerFactory(mapWorld).build();
-			
-			if (data.isNode())	mapWorld.instructionDisplay.show("select a location");
-			else				mapWorld.instructionDisplay.show("select a node");;
+			if (data.isNode())	mapView.instructionDisplay.show("select a location");
+			else				mapView.instructionDisplay.show("select a node");;
 		}
 		
 	}
