@@ -1,4 +1,4 @@
-package store.ui {
+package common.ui {
 
     import flash.geom.Rectangle;
     import flash.geom.Point;
@@ -126,7 +126,7 @@ package store.ui {
 			
 			this.buttons = buttons;			
 			positionButtons();
-			if (pageIndex >= highestPageIndex) setTargetToPage(highestPageIndex - 1);
+			if (pageIndex > highestPageIndex) setTargetToPage(highestPageIndex);
 		}
     }
 }

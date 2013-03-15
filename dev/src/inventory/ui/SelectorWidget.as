@@ -9,7 +9,7 @@ package inventory.ui
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	import observatory.ComponentData;
-	import store.ui.ButtonPaginator;
+	import common.ui.ButtonPaginator;
 	
 	/**
 	 * ...
@@ -69,7 +69,7 @@ package inventory.ui
 		
 		public function updateSelectors():void {
 			
-			removeList(selectors);
+			for each (var selector:Button in selectors) remove(selector);
 			addSelectors();
 			paginator.resetList(selectors);
 		}
