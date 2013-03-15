@@ -1,7 +1,7 @@
 package hex.displays 
 {
 	import common.displays.Display;
-	import common.ui.DataDisplay;
+	import common.displays.DataDisplay;
 	import hex.Cartographer;
 	import hex.controllers.HexSubhitbox;
 	import hex.HexFactory;
@@ -9,7 +9,7 @@ package hex.displays
 	import hex.HexTile;
 	import hex.HexView;
     import flash.geom.Point;
-	import hex.ScrollCamera;
+	import common.ScrollCamera;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -39,7 +39,7 @@ package hex.displays
 		
 		public function HexDisplay(hexParent:HexView, game:Game, mapX:Number, mapY:Number)
 		{
-			super(hexParent, 0, 0, FP.width - 100, FP.height);
+			super(hexParent, 0, 0, FP.width, FP.height);
 			
 			view					= hexParent;
 			const WIDTH:uint        = GameConstants.HEX_VIEW_WIDTH;
@@ -80,8 +80,11 @@ package hex.displays
 						{
 							for each (var sub:HexSubhitbox in tile.subHitboxes)
 							{
-								if (sub.component is Connectable &&  sub.containsPoint(mouseX, mouseY))
+								if (sub.component is Connectable)
+								{
+									if (sub.containsPoint(mouseX, mouseY))
 									view.controller.connectInstrument(sub.component as Connectable);
+								}
 							}
 						}
 						else

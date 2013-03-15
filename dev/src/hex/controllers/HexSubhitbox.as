@@ -18,16 +18,17 @@ package hex.controllers
 		
 		public function HexSubhitbox(component:ObservatoryComponent) 
 		{
-			component = component;
+			this.component = component;
 			image = component.getImage();
 			width = image.width;
 			height = image.height;
 		}
 		
-		public function containsPoint(x:int, y:int)
+		public function containsPoint(x:int, y:int):Boolean
 		{
 			if (x < this.x+width && x > this.x && y < this.y+height && y > this.y)
 				return true;
+			return false;
 		}
 	}
 

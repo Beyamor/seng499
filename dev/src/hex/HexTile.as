@@ -61,6 +61,7 @@ package hex
 			var graphics:Graphiclist = new Graphiclist;
 			graphics.add(new HexSprite(radius, color));
 
+			_subHitboxes = new Vector.<HexSubhitbox>;
 			if (data.hasSubImages()) {
 				
 				for (var i:int = 0; i < data.observatoryComponents.length; i++)
@@ -76,6 +77,8 @@ package hex
 						image.x = - subImage.width / 2;
 						image.y =  - subImage.height / 2;
 						graphics.add(image);
+						
+						_subHitboxes.push(subImage)
 						break;
 					}
 					else if (data.observatoryComponents[i].isSeenFromHexGrid)
@@ -99,13 +102,12 @@ package hex
 							image.x = 5;
 							image.x = 5;
 						}
+						_subHitboxes.push(subImage)
 						graphics.add(image);
 					}
 				}
 			}
-			/*if (data.hasNode())
-				graphics.add(new Image(Assets.IMG_NODE));
-			*/graphic = graphics;
+			graphic = graphics;
 		}
 
 		/**

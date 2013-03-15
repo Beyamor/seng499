@@ -25,10 +25,15 @@ package observatory
 		
 		override public function getName():String
 		{
-			// Let me mention that appending the producing data thing to the name
-			// shouldn't stick around. That's just a temporary display thing.
-			return component.getName() + (isProducingData? " - Recording data" : " - Recording Noise");
+			return component.getName();
 		}
+		
+		// Let me mention that appending the producing data thing to the name
+		// shouldn't stick around. That's just a temporary display thing.
+		//public function getStatusString():String
+		//{
+			//return component.getName() + (isProducingData? " - Recording data" : " - Recording Noise");
+		//}
 		
 		public function getTile():HexTile {
 			return tile;

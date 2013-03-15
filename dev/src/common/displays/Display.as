@@ -34,17 +34,15 @@ package common.displays {
 
         private var _buffer:BitmapData;
 
-        private var _width:int;
-        public function get width():int { return _width; }
-
-        private var _height:int;
-        public function get height():int { return _height; }
-
-        private var _x:int;
-        private var _y:int;
-
-        public function get x():int { return _x; }
-        public function get y():int { return _y; }
+        public var width:int;
+        public var height:int;
+        public var x:int;
+        public var y:int;
+		
+		public function get halfWidth():Number { return width / 2; }
+		public function get halfHeight():Number { return height / 2; }
+		
+		private var rightEdgePin:* = null;
 
         public function get center():Point { return new Point(width/2, height/2); }
 
@@ -66,10 +64,10 @@ package common.displays {
 			super();
 
 			_parent     = parent;
-			_x          = x;
-			_y          = y;
-			_width      = width;
-			_height     = height;
+			this.x          = x;
+			this.y          = y;
+			this.width      = width;
+			this.height     = height;
 
 			_buffer     = new BitmapData(width, height, true, 0);
 		}
@@ -90,6 +88,13 @@ package common.displays {
 		private function clearBuffer():void {
 
 			_buffer.fillRect(_buffer.rect, clearColor);
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			
+			if (rightEdgePin) width = rightEdgePin.x - x;
 		}
 
 		override public function render():void {
@@ -156,5 +161,7 @@ package common.displays {
 			return stack.isFirstDisplayContainingPoint(this, FP.screen.mouseX, FP.screen.mouseY);
 		}
 
+		public function expandRightEdgeTo(something:*):void { rightEdgePin = something; }
+		public function withRightEdgeExpandingTo(something:*):Display { expandRightEdgeTo(something); return this; }
     }
 }

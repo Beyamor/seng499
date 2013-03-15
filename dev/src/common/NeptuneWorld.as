@@ -39,6 +39,8 @@ package common
 			
 			if (cursor) remove(cursor);
 			cursor = newCursor;
+			cursor.x = mouseX;
+			cursor.y = mouseY;
 			cursor.show();
 			add(cursor);
 		}

@@ -25,7 +25,7 @@ package model
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
-		private var _money:uint = 0;
+		private var _money:uint = 50;
 		
 		
 		public function PlayerData()
@@ -134,14 +134,28 @@ package model
 			return hexes;
 		}
 		
-		public function addMoney(amount:uint) {
+		public function addMoney(amount:uint):PlayerData {
 			
 			_money += amount;
+			return this;
 		}
 		
 		public function get money():uint {
 			
 			return _money;
+		}
+		
+		public function canAfford(component:ComponentData):Boolean {
+			
+			return money >= GameTables.instrumentByName(component.getName()).cost;
+		}
+		
+		public function purchase(component:ComponentData):void {
+			
+			if (!canAfford(component)) throw new Error("Can't afford " + component.getName() + "; check first!");
+			
+			_money -= GameTables.instrumentByName(component.getName()).cost;
+			addToInventory(component);
 		}
 	}
 

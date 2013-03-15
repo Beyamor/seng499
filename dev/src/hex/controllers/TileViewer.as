@@ -1,6 +1,7 @@
 package hex.controllers {
 
     import hex.HexTile;
+	import hex.HexView;
     import net.flashpunk.FP;
     import model.Game;
 	import observatory.Connectable;
@@ -13,15 +14,17 @@ package hex.controllers {
     public class TileViewer implements HexController {
 
         private var game:Game;
+		private var view:HexView;
 
-        public function TileViewer(game:Game) {
+        public function TileViewer(view:HexView, game:Game) {
 
             this.game = game;
+			this.view = view;
         }
 
         public function hexSelected(tile:HexTile):void {
 
-            FP.world = new UnderseaView(tile, game);
+            view.goToUnderseaView(tile);
         }
 		
 		public function connectInstrument(con:Connectable):void

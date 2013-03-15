@@ -7,6 +7,7 @@ package observatory.properties {
 		private var _isSeenOnHexGrid:Boolean			= false;
         private var _isNode:Boolean                     = false;
         private var _dataTerrainTypes:Vector.<String>   = new Vector.<String>;
+		private var _cost:uint;
 
         public function InstrumentPropertiesBuilder(name:String) {
 
@@ -35,22 +36,32 @@ package observatory.properties {
             return this;
         }
 		
+
 		public function isSeenOnHexGrid():InstrumentPropertiesBuilder {
 			
 			_isSeenOnHexGrid = true;
+			return this;
+		}
+		
+		public function costs(costs:uint):InstrumentPropertiesBuilder {
+			
+			_cost = costs;
 			return this;
 		}
 
         public function finish():InstrumentProperties {
 
             if (!_image) throw new Error("Image not set");
+			if (!_cost) throw new Error("Cost not set");
 
             return new InstrumentProperties(
                 _name,
                 _image,
                 _dataTerrainTypes,
+				_cost,
 				_isNode,
 				_isSeenOnHexGrid
+
             );
         }
     }
