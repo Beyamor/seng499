@@ -15,7 +15,7 @@ package model
 		private var placing:int = GameConstants.NOT_PLACING;
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
-		private var lastViewedHex:HexIndices = null;
+		private var lastViewedHex:Point = null;
 		
 		public function GameState() 
 		{
@@ -76,14 +76,14 @@ package model
 			return placing == GameConstants.PLACING_ON_HEX;
 		}
 		
-		public function getLastViewedHex():HexIndices
+		public function getLastViewedHex():Point
 		{
 			return lastViewedHex;
 		}
 		
 		public function setLastViewedHex(x:int,y:int):void
 		{
-				lastViewedHex = new HexIndices(x,y);
+				lastViewedHex = new Point(x,y);
 		}
 	}
 
