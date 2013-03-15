@@ -6,7 +6,7 @@ package map.displays
 	import flash.events.ContextMenuEvent;
 	import map.MapEntity;
 	import map.MapView;
-	import map.Node;
+	import observatory.Node;
 	import map.NodeEntity;
 	import model.Game;
 	import net.flashpunk.FP;

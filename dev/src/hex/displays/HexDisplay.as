@@ -3,6 +3,7 @@ package hex.displays
 	import common.displays.Display;
 	import common.displays.DataDisplay;
 	import hex.Cartographer;
+	import hex.controllers.HexSubhitbox;
 	import hex.HexFactory;
 	import hex.HexGrid;
 	import hex.HexTile;
@@ -22,6 +23,7 @@ package hex.displays
 	import hex.controllers.HexController;
 	import hex.controllers.ControllerFactory;
 	import hex.math.SpaceConverter;
+	import observatory.Connectable;
 	
 	/**
 	 * ...
@@ -57,6 +59,8 @@ package hex.displays
 
             var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
 			grid = new HexGrid(factory, this, camera, HEX_RADIUS, WIDTH, HEIGHT);
+		
+			this.game = game;
 		}
 		
 		override public function update():void 
@@ -72,7 +76,21 @@ package hex.displays
 
 					if (tile.containsPoint(mouseX, mouseY)) {
 						
-						view.controller.hexSelected(tile);
+						if (game.state.isConnecting())
+						{
+							for each (var sub:HexSubhitbox in tile.subHitboxes)
+							{
+								if (sub.component is Connectable)
+								{
+									if (sub.containsPoint(mouseX, mouseY))
+									view.controller.connectInstrument(sub.component as Connectable);
+								}
+							}
+						}
+						else
+						{
+							view.controller.hexSelected(tile);
+						}
 					}
 				}
 			}		

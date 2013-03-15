@@ -4,6 +4,7 @@ package observatory.properties {
 
         private var _name:String;
         private var _image:Class;
+		private var _isSeenOnHexGrid:Boolean			= false;
         private var _isNode:Boolean                     = false;
         private var _dataTerrainTypes:Vector.<String>   = new Vector.<String>;
 		private var _cost:uint;
@@ -35,6 +36,13 @@ package observatory.properties {
             return this;
         }
 		
+
+		public function isSeenOnHexGrid():InstrumentPropertiesBuilder {
+			
+			_isSeenOnHexGrid = true;
+			return this;
+		}
+		
 		public function costs(costs:uint):InstrumentPropertiesBuilder {
 			
 			_cost = costs;
@@ -49,9 +57,11 @@ package observatory.properties {
             return new InstrumentProperties(
                 _name,
                 _image,
-                _isNode,
                 _dataTerrainTypes,
-				_cost
+				_cost,
+				_isNode,
+				_isSeenOnHexGrid
+
             );
         }
     }

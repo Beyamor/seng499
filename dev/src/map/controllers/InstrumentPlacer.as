@@ -26,7 +26,7 @@ package map.controllers
 		
 		public function nodeClicked(node:NodeEntity):void {
 		
-			game.state.setConnectionPoint(node.data);
+			game.state.selectNode();
 			mapView.goToHexViewFromNode(node);
 		}
 		

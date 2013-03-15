@@ -23,6 +23,7 @@ package map
 	import net.flashpunk.FP;
 	import store.StoreView;
 	import time.TimeProgressionView;
+	import observatory.Node;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -79,6 +80,7 @@ package map
 				inventoryDisplay,
 				new DataDisplay(this, game.data),
 				instructionDisplay);
+
 		}
 		
 		public function getGame():Game 
@@ -101,3 +103,4 @@ package map
 	}
 
 }
+

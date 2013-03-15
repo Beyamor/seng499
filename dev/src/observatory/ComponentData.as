@@ -35,5 +35,10 @@ package observatory
 		{
 			return GameTables.instruments[key].isNode;
 		}
+		
+		public function isSeenInHexGrid():Boolean
+		{
+			return GameTables.instruments[key].isSeenOnHexGrid;
+		}		
 	}
 }

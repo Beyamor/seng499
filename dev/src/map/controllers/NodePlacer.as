@@ -3,7 +3,7 @@ package map.controllers
 	import common.ui.Cursor;
 	import map.displays.MapDisplay;
 	import map.MapView;
-	import map.Node;
+	import observatory.Node;
 	import map.NodeEntity;
 	import model.Game;
 	/**
@@ -33,8 +33,7 @@ package map.controllers
 		
 		public function emptySpaceClicked(mapX:Number, mapY:Number):void {
 			
-			game.data.addNode(new Node(mapX, mapY));
-			
+			game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY));
 			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
 			game.state.stopPlacingInstrument();
 			

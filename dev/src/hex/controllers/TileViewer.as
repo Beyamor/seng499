@@ -4,6 +4,7 @@ package hex.controllers {
 	import hex.HexView;
     import net.flashpunk.FP;
     import model.Game;
+	import observatory.Connectable;
 	import undersea.UnderseaView;
 
 
@@ -25,5 +26,10 @@ package hex.controllers {
 
             view.goToUnderseaView(tile);
         }
+		
+		public function connectInstrument(con:Connectable):void
+		{
+			//doNothing
+		}
     }
 }

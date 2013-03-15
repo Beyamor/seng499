@@ -10,6 +10,7 @@ package map
 	import model.Game;
 	import common.Assets;
     import hex.HexView;
+	import observatory.Node;
 	
 	/**
 	 * ...

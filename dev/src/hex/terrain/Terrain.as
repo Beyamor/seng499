@@ -9,7 +9,6 @@ package hex.terrain {
         public function get type():String { return _type; }
 
         public function Terrain(type:String=null) {
-
             _type = type? type : Types.getAny();
         }
     }

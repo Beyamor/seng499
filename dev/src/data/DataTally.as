@@ -25,7 +25,7 @@ package data
 			
 			for each (var hexData:HexData in playerData.hexes) {
 				
-				for each (var component:ComponentData in hexData.observatoryComponents) {
+				for each (var component:ObservatoryComponent in hexData.observatoryComponents) {
 					
 					if (component.isNode()) continue;
 					

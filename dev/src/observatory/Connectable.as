@@ -7,8 +7,9 @@ package observatory
 	public class Connectable extends ObservatoryComponent
 	{
 		private var connections:Vector.<ObservatoryComponent>;
-		public function Connectable() 
+		public function Connectable(d:ComponentData) 
 		{
+			super(d);
 			connections = new Vector.<ObservatoryComponent>;
 		}
 		

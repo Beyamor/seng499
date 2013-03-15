@@ -17,6 +17,7 @@ package undersea
 	import net.flashpunk.FP;
 	import common.Assets;
 	import observatory.ComponentData;
+	import observatory.Instrument;
     import observatory.ObservatoryComponent;
 	
 	/**
@@ -56,12 +57,15 @@ package undersea
 		
 		private function setUpInstruments():void
 		{
-			var instrument:ComponentData;
-			var instruments:Vector.<ComponentData> = game.data.getHexData(tile.indices).observatoryComponents;
+			var instrument:ObservatoryComponent;
+			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
 			
 			for (var i:uint = 0; i < instruments.length; i++)
 			{
 				instrument = instruments[i];
+				var status:String = instrument.getName();
+				if (instrument is Instrument)
+					status += (instrument as Instrument).isProducingData? " - Recording data" : " - Recording Noise";
 				addGraphic(new Text(instrument.getName(), 20, 30 + 20 * i));
 			}
 		}

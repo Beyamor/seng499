@@ -2,7 +2,6 @@ package model
 {
 	import common.Assets;
 	import net.flashpunk.graphics.Image;
-	import map.Node;
 	import hex.math.SpaceConverter;
 	import hex.HexData;
 	import net.flashpunk.FP;
@@ -10,6 +9,7 @@ package model
 	import hex.HexIndices;
 	import observatory.ComponentData;
 	import observatory.Instrument;
+	import observatory.Node;
 	import time.Calendar;
 
 	/**
@@ -33,7 +33,7 @@ package model
 			populateStoreList();
 			addDummyData();
 			
-                        addNode(new Node(70, 70));
+            //addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -65,7 +65,7 @@ package model
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
 
-			getHexData(hexCoords).addObservatoryComponent(new ComponentData(GameTables.instrumentIDByName("node")));
+			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
 		}
 		
 		public function populateStoreList():void
@@ -114,8 +114,10 @@ package model
 
 		private function createHexDataIfNecessary(indices:HexIndices):void {
 
-			if (!hexData[indices.x])            hexData[indices.x]            = new Object;
-			if (!hexData[indices.x][indices.y]) hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
+			if (!hexData[indices.x])            
+				hexData[indices.x]            = new Object;
+			if (!hexData[indices.x][indices.y]) 
+				hexData[indices.x][indices.y] = new HexData(new hex.terrain.Terrain);
 		}
 
 		public function getHexData(indices:HexIndices):HexData {
@@ -166,3 +168,4 @@ package model
 	}
 
 }
+

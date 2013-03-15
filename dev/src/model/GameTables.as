@@ -24,6 +24,7 @@ package model
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
                         .isNode()
+						.isSeenOnHexGrid()
 						.costs(100)
                         .finish()
                 );

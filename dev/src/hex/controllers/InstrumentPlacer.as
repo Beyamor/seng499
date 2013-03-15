@@ -5,6 +5,7 @@ package hex.controllers {
     import hex.HexTile;
     import net.flashpunk.FP;
     import hex.HexView;
+	import observatory.Connectable;
     import observatory.ObservatoryComponent;
     import observatory.Instrument;
     import observatory.ComponentData;
@@ -30,18 +31,22 @@ package hex.controllers {
 
         public function hexSelected(tile:HexTile):void {
 			
-			var addedInstrument:Instrument = new Instrument(instrument, tile)
+			var addedInstrument:ObservatoryComponent = new Instrument(instrument, tile)
 			game.state.getConnectionPoint().connect(addedInstrument);
-			
+            game.data.getHexData(tile.indices).addObservatoryComponent(addedInstrument);
 			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
-            game.data.getHexData(tile.indices).addObservatoryComponent(instrument);
             game.state.stopPlacingInstrument();
 			
 			view.removeCursor();
 
             // Okay. Switch out of instrument placement I guess?
-            view.controller = new TileViewer(view, game);
 
-        }
+			view.controller = new TileViewer(view, game);
+		}
+			
+		public function connectInstrument(connection:Connectable):void
+		{
+			game.state.setConnectionPoint(connection);
+		}
     }
 }

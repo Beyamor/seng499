@@ -1,6 +1,7 @@
 package hex {
 
-    import map.Node;
+	import observatory.Connectable;
+    import observatory.Node;
     import hex.terrain.Terrain;
 	import model.GameTables;
 	import observatory.ComponentData;
@@ -13,8 +14,8 @@ package hex {
      */
     public class HexData {
 
-        private var components:Vector.<ComponentData> = new Vector.<ComponentData>;
-
+        private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
+		private var freeSpace:int = GameConstants.DEFAULT_FREE_SPACE;
         private var _terrain:Terrain;
         public function get terrain():Terrain { return _terrain; }
 
@@ -23,22 +24,22 @@ package hex {
             _terrain = terrain;
         }
 
-        public function addObservatoryComponent(component:ComponentData):void {
+        public function addObservatoryComponent(component:ObservatoryComponent):void {
 
             components.push(component);
         }
 
-        public function get observatoryComponents():Vector.<ComponentData> {
+        public function get observatoryComponents():Vector.<ObservatoryComponent> {
 
             // ugh should make a copy but whatever just don't modify this
             return components;
         }
 
-        public function get hasNode():Boolean {
+        public function get hasConnectors():Boolean {
 
-            for each (var observatoryComponent:ComponentData in observatoryComponents) {
+            for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
 
-                if (observatoryComponent.isNode()) { // Wut
+                if (observatoryComponent is Connectable){ // Changed this to check other stuff
 
                     return true;
                 }
@@ -46,5 +47,31 @@ package hex {
 
             return false;
         }
+		
+		public function hasSubImages():Boolean {
+
+            for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+
+                if (observatoryComponent.isSeenFromHexGrid()){ // Changed this to check other stuff
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+		
+		public function hasNode():Boolean
+		{
+			for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+
+                if (observatoryComponent.isNode()){ // Changed this to check other stuff
+
+                    return true;
+                }
+            }
+
+            return false;
+		}
     }
 }

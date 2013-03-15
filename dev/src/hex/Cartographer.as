@@ -22,8 +22,8 @@ package hex {
 
             var terrainType:String = Types.NOT_SAND;
 
-            if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode) ||
-                (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode)) {
+            if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode()) ||
+                (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode())) {
 
                 terrainType = Types.SAND;
             }

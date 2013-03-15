@@ -1,16 +1,19 @@
 package hex 
 {
 	import flash.geom.Vector3D;
+	import hex.controllers.HexSubhitbox;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
-        import hex.terrain.Tables;
-        import common.Assets;
-        import net.flashpunk.graphics.Image;
-        import net.flashpunk.graphics.Graphiclist;
+	import observatory.Node;
+	import observatory.ObservatoryComponent;
+	import hex.terrain.Tables;
+	import common.Assets;
+	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Graphiclist;
 	
 	/**
 	 * So, a hex (HexTile) is sort of the atom of the hex-based game view.
@@ -22,6 +25,9 @@ package hex
 		// Data!
 		private var _data:HexData;
 		public function get data():HexData { return _data; }
+		
+		private var _subHitboxes:Vector.<HexSubhitbox>;
+		public function get subHitboxes():Vector.<HexSubhitbox> { return _subHitboxes; } 
 
 		// The radius of the hexgon.
 		private var _radius:Number;
@@ -55,11 +61,52 @@ package hex
 			var graphics:Graphiclist = new Graphiclist;
 			graphics.add(new HexSprite(radius, color));
 
-			if (data.hasNode) {
-
-				graphics.add(new Image(Assets.IMG_NODE));
+			_subHitboxes = new Vector.<HexSubhitbox>;
+			if (data.hasSubImages()) {
+				
+				for (var i:int = 0; i < data.observatoryComponents.length; i++)
+				{
+					//component = 
+					if( data.observatoryComponents[i] is Node)
+					{
+						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
+						subImage.x = x - subImage.width / 2;
+						subImage.y = y - subImage.height / 2;
+						
+						var image:Image = subImage.image;
+						image.x = - subImage.width / 2;
+						image.y =  - subImage.height / 2;
+						graphics.add(image);
+						
+						_subHitboxes.push(subImage)
+						break;
+					}
+					else if (data.observatoryComponents[i].isSeenFromHexGrid)
+					{
+						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
+						var image:Image = subImage.image;
+						
+						if (i == 0)
+						{
+							subImage.x = x -subImage.width - 5;
+							subImage.y = y -subImage.height - 5;
+							
+							image.x = -subImage.width - 5;
+							image.y = subImage.height - 5;
+						}
+						else if(i == 1)
+						{
+							subImage.x = 5;
+							subImage.y = 5;
+							
+							image.x = 5;
+							image.x = 5;
+						}
+						_subHitboxes.push(subImage)
+						graphics.add(image);
+					}
+				}
 			}
-
 			graphic = graphics;
 		}
 

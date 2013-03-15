@@ -1,4 +1,4 @@
-package map 
+package observatory 
 {
         import observatory.Connectable;
 	
@@ -11,8 +11,9 @@ package map
 		private var mapX:int;
 		private var mapY:int;
 		
-		public function Node(x:int, y:int) 
+		public function Node(d:ComponentData,x:int, y:int) 
 		{
+			super(d);
 			mapX = x;
 			mapY = y;		
 		}
