@@ -51,6 +51,14 @@ package model
 			instrumentsInventory.push(data);
 		}
 		
+		public function removeFromInventory(data:ComponentData):void
+		{
+			var dataIndex:int = instrumentsInventory.indexOf(data);
+			if (dataIndex < 0) return;
+			
+			instrumentsInventory.splice(dataIndex, 1);
+		}
+		
 		public function addNode(node:Node):void
 		{
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
