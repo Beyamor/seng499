@@ -20,6 +20,7 @@ package store.displays {
  
         private static const HORIZONTAL_NUMBER:uint         = 2;
         private static const VERTICAL_NUMBER:uint           = 2;
+		private static const MAGIC_BOX_VALUE:uint			= 50;
 
         private var playerData:PlayerData;
         private var pages:ButtonPaginator;
@@ -65,7 +66,7 @@ package store.displays {
                 var purchaseButtons:Vector.<Button> = new Vector.<Button>;
                 
                 for each (var component:ComponentData in playerData.storeList) {
-
+						
                         purchaseButtons.push(Button.description()
                                             .withDepth(-1)
                                             .withImageAndText(
@@ -73,13 +74,14 @@ package store.displays {
                                                 new Text(component.getName()))
                                             .whenClicked(purchaseFunction(component))
                                             .build());
+						
                 };
 
                 for each (var button:Button in purchaseButtons) add(button);
                 
                 pages = new ButtonPaginator(
                                         this,
-                                        new Rectangle(0, 0, width, height),
+                                        new Rectangle(MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 2*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
                                         purchaseButtons);
         }
