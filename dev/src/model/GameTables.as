@@ -10,6 +10,8 @@ package model
 	 */
 	public class GameTables 
 	{
+		
+		
                 // Ugggh.
                 // I would love to make a class for this - InstrumentPropertyList?
                 public static var instruments:Vector.<InstrumentProperties> = new Vector.<InstrumentProperties>;
@@ -26,28 +28,27 @@ package model
 					InstrumentProperties.describe("Hydraphone")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
 						.costs(40)
                         .finish(),
-						
 					InstrumentProperties.describe("CTB")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
 						.costs(70)
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
 						.costs(100)
                         .finish(),
 						
 					InstrumentProperties.describe("ADCR")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
 						.costs(130)
                         .finish()
                 );

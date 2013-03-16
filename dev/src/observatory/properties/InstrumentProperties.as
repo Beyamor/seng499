@@ -1,6 +1,7 @@
 package observatory.properties {
 
     import hex.terrain.Terrain;
+	import hex.terrain.Types;
 
     public class InstrumentProperties {
 
