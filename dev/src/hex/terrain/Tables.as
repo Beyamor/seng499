@@ -4,8 +4,9 @@ package hex.terrain {
 
         public static const TYPE_COLORS:Object = {
 
-            "SAND":     0xcfbc53,
-            "NOT_SAND": 0x5376cf
+            "MUD":     0xcfbc53,
+            "NOT_SAND": 0x5376cf,
+			"REEF":	0x336600
         };
     }
 }

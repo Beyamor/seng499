@@ -21,12 +21,12 @@ package hex {
 
         public function generateData(indices:HexIndices):HexData {
 
-            var terrainType:String = Types.NOT_SAND;
+            var terrainType:String = Types.NOT_MUD;
 
             if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode()) ||
                 (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode())) {
 
-                terrainType = Types.SAND;
+                terrainType = Types.MUD;
             }
 
             return new HexData(new Terrain(terrainType));
