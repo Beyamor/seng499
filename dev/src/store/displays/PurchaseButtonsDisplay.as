@@ -81,7 +81,7 @@ package store.displays {
                 
                 pages = new ButtonPaginator(
                                         this,
-                                        new Rectangle(MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 2*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
+                                        new Rectangle(2*MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 4*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
                                         purchaseButtons);
         }
