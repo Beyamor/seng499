@@ -12,7 +12,7 @@ package store.displays {
     import net.flashpunk.World;
     import common.ui.Button;
     import common.Assets;
-    import store.ui.ButtonPaginator;
+    import common.ui.ButtonPaginator;
     import observatory.ComponentData;
     import common.displays.Display;
 

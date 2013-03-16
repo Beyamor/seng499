@@ -20,15 +20,7 @@ package hex.displays
 		{
 			super(parent);
 			
-			add(Button.description()
-			.fixedAt(50, 30)
-			.withDepth(-1)
-			.withImage(new Image(Assets.IMG_MAP_FROM_HEX_BUTTON))
-			.whenClicked(function():void {
-
-				parent.returnToMapView();
-			})
-			.build());
+			addStandardButton("Map", function():void { parent.returnToMapView(); } );
 		}
 		
 	}

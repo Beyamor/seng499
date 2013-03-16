@@ -65,13 +65,13 @@ package common.ui
 		
 		public override function update():void
 		{
-                        if (isFixed) {
+			if (isFixed) {
 
-				x = FP.camera.x + screenX;
-				y = FP.camera.y + screenY;
-                        }
+				x = FP.camera.x + world.camera.x + screenX;
+				y = FP.camera.y + world.camera.y + screenY;
+			}
 
-                        if (!enabled) return;
+			if (!enabled) return;
 
 			if (wasClicked())
 			{

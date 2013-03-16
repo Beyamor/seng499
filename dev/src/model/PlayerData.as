@@ -87,8 +87,14 @@ package model
 		
 		public function addDummyData():void
 		{
-			addToInventory(new ComponentData(0));
-			instrumentsInventory.push(new ComponentData(1));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
 		}
 		
 		public function getInventory():Vector.<ComponentData>

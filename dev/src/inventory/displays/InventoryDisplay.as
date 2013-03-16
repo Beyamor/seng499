@@ -2,7 +2,9 @@ package inventory.displays
 {
 	import common.displays.ControlPanel;
 	import common.displays.Display;
+	import common.displays.DisplayStack;
 	import inventory.ui.InventoryItemSelector;
+	import inventory.ui.SelectorWidget;
 	import map.MapView;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
@@ -25,39 +27,29 @@ package inventory.displays
 		private const inventoryWidth:int = 2;
 		private const inventoryHeight:int = 2;
 		private const inventoryOffset:int = 0;
+		
+		private var widgets:DisplayStack;
+		public var selectorWidget:SelectorWidget;
 
 		public function InventoryDisplay(mapView:MapView, data:PlayerData) 
 		{
 			super(mapView);
 			inventoryList = data.getInventory();
-			fillInventoryDisplay();
-		}
-		
-		public function fillInventoryDisplay():void
-		{
-			instrumentSelectors = new Vector.<InventoryItemSelector>;
-			for (var i:int = 0; i < inventoryHeight; i++ )
-			{
-				for (var j:int = 0; j < inventoryWidth && (i*inventoryWidth)+j < inventoryList.length - inventoryOffset; j++)
-				{
-					var selector:InventoryItemSelector = new InventoryItemSelector(this
-																				, 10 +(j*100)
-																				, 50 + (i*100)
-																				, inventoryList[(i*inventoryWidth)+j])
-					instrumentSelectors.push(selector);
-					add(selector);
-				}
-				
-				if (i * inventoryWidth >= inventoryList.length - inventoryOffset)
-					break;
-			}
-		}
-		
-		public function updateSelectors():void {
 			
-			// TODO: This is pretty grody. Make a widget or something.
-			for each (var selector:InventoryItemSelector in instrumentSelectors) remove(selector);
-			fillInventoryDisplay();
+			selectorWidget = new SelectorWidget(this, mapView, data);
+			widgets = new DisplayStack(selectorWidget);
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+			widgets.update();
+		}
+		
+		override protected function renderBody():void 
+		{
+			super.renderBody();
+			widgets.render();
 		}
 	}
 

@@ -29,9 +29,6 @@ package common.displays {
      */
     public class Display extends World {
 
-        private var _parent:World;
-        public function get parent():World { return _parent; }
-
         private var _buffer:BitmapData;
 
         public var width:int;
@@ -47,6 +44,21 @@ package common.displays {
         public function get center():Point { return new Point(width/2, height/2); }
 
         public var stack:DisplayStack = null;
+				
+		// Display nesting stuff
+		private var _parent:World;
+        public function get parent():World { return _parent; }
+		
+		private function get parentIsDisplay():Boolean { return parent is Display; }
+		private function get parentAsDisplay():Display { return parent as Display; }
+		
+		private function get parentBuffer():BitmapData { return parentIsDisplay? parentAsDisplay._buffer : FP.buffer; }
+		public function get parentWidth():int { return parentIsDisplay? parentAsDisplay.width : FP.width; }
+		public function get parentHeight():int { return parentIsDisplay? parentAsDisplay.height : FP.height; }
+		public function get parentHalfWidth():Number { return parentIsDisplay? parentAsDisplay.halfWidth : FP.halfWidth; }
+		public function get parentHalfHeight():Number { return parentIsDisplay? parentAsDisplay.halfHeight : FP.halfHeight; }
+		public function get parentX():Number { return parentIsDisplay? parentAsDisplay.x : 0 }
+		public function get parentY():Number { return parentIsDisplay? parentAsDisplay.y : 0 }
 
         /**
          *      Whether this display prevents the ones below it from updating.
@@ -93,7 +105,7 @@ package common.displays {
 		override public function update():void 
 		{
 			super.update();
-			
+						
 			if (rightEdgePin) width = rightEdgePin.x - x;
 		}
 
@@ -101,6 +113,19 @@ package common.displays {
 
 			clearBuffer();
 
+			renderBody();
+
+			parentBuffer.copyPixels(
+				_buffer,
+				new Rectangle(0, 0, width, height),
+				new Point(x, y));
+		}
+		
+		/**
+		 * Render the entities in this display
+		 */
+		protected function renderEntities():void {
+			
 			// This is mega hack
 			// So that entities render to the buffer with consideration for the display's x and y,
 			// we need to offset the camera point.
@@ -110,39 +135,41 @@ package common.displays {
 
 			FP.camera.x += xOffset;
 			FP.camera.y += yOffset;
-
+			
 			super.render();
-
+			
 			FP.camera.x -= xOffset;
 			FP.camera.y -= yOffset;
-
-			FP.buffer.copyPixels(
-				_buffer,
-				new Rectangle(0, 0, width, height),
-				new Point(x, y));
+		}
+		
+		/**
+		 * Actually renders whatever. Done after offsetting the camera and before copying pixels.
+		 */
+		protected function renderBody():void {
+			
+			renderEntities();
 		}
 		
 		public function containsPoint(someX:Number, someY:Number):Boolean {
 			
-			return	x <= someX &&
-					y <= someY &&
-					x + width >= someX &&
-					y + height >= someY;
+			return	parentX + x <= someX &&
+					parentY + y <= someY &&
+					parentX + x + width >= someX &&
+					parentY + y + height >= someY;
 		}
 
 		public function get containsMouse():Boolean {
 
 			return containsPoint(FP.screen.mouseX, FP.screen.mouseY);
 		}
-		
-		
 
 		/**
 		 * X position of the mouse in the World.
 		 */
 		override public function get mouseX():int
 		{
-			return FP.screen.mouseX + FP.camera.x - x + camera.x;
+			// TODO: Should FP.camera be included in this? Whatever
+			return FP.screen.mouseX - parentX - x + camera.x;
 		}
 		
 		/**
@@ -150,12 +177,13 @@ package common.displays {
 		 */
 		override public function get mouseY():int
 		{
-			return FP.screen.mouseY + FP.camera.y - y + camera.y;
+			return FP.screen.mouseY - parentY - y + camera.y;
 		}
 	
 		public function get isFirstDisplayContaingMouse():Boolean {
 			
 			if (!containsMouse) return false;
+			if (parentIsDisplay && !parentAsDisplay.isFirstDisplayContaingMouse) return false;
 			if (!stack) return true;
 			
 			return stack.isFirstDisplayContainingPoint(this, FP.screen.mouseX, FP.screen.mouseY);
