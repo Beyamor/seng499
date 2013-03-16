@@ -15,5 +15,7 @@ package {
 		public static const PLACING_ON_HEX:int = 3;
 		
 		public static const DEFAULT_FREE_SPACE:int = 2;
+		
+		public static const EXPO_RADIUS = 3;
     }
 }

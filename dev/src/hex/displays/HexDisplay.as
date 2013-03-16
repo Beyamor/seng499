@@ -58,7 +58,7 @@ package hex.displays
 			scrollCamera = new ScrollCamera(this, 350, 0, 0, WIDTH, HEIGHT);
 
             var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
-			grid = new HexGrid(factory, this, camera, HEX_RADIUS, WIDTH, HEIGHT);
+			grid = new HexGrid(factory, this, camera, HEX_RADIUS, WIDTH, HEIGHT, game);
 		
 			this.game = game;
 		}

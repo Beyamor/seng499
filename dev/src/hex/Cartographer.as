@@ -27,9 +27,12 @@ package hex {
                 (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode())) {
 
                 terrainType = Types.MUD;
+				
+				//temporary distinguishment between initialized mud tiles and uninitialized tiles
+				return new HexData(new Terrain(terrainType), true);
             }
 
-            return new HexData(new Terrain(terrainType));
+            return new HexData(new Terrain(terrainType), false);
         }
     }
 }

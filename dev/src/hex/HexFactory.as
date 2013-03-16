@@ -22,7 +22,7 @@ package hex {
 
         public function create(camera:Point, indices:HexIndices, x:Number, y:Number, radius:Number):HexTile {
 
-            if (!playerData.hexDataExists(indices)) {
+            if (!playerData.hexDataExists(indices) || !playerData.getHexData(indices).discovered) {
 
 				playerData.setHexData(indices,
 					cartographer.generateData(indices));

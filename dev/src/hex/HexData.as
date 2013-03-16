@@ -6,6 +6,7 @@ package hex {
 	import model.GameTables;
 	import observatory.ComponentData;
     import observatory.ObservatoryComponent;
+	import hex.terrain.Types;
 
     /**
      *      The data relevant to a single hex tile.
@@ -17,16 +18,22 @@ package hex {
         private var components:Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		private var freeSpace:int = GameConstants.DEFAULT_FREE_SPACE;
         private var _terrain:Terrain;
+		
+		private var _discovered:Boolean;
+		public function get discovered():Boolean { return _discovered; }
+		
         public function get terrain():Terrain { return _terrain; }
 
-        public function HexData(terrain:Terrain) {
+        public function HexData(terrain:Terrain ,disc:Boolean = false) {
 
             _terrain = terrain;
+			_discovered = disc;
         }
 
         public function addObservatoryComponent(component:ObservatoryComponent):void {
 
             components.push(component);
+			discover(new Terrain(Types.MUD));
         }
 
         public function get observatoryComponents():Vector.<ObservatoryComponent> {
@@ -72,6 +79,15 @@ package hex {
             }
 
             return false;
+		}
+		
+		/**
+		 * Sets permanent terrain value of tile.
+		 * @param	terrain
+		 */
+		public function discover(terrain:Terrain) {
+			_discovered = true;
+			_terrain = terrain;
 		}
     }
 }

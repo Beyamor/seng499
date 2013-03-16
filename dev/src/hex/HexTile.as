@@ -2,6 +2,7 @@ package hex
 {
 	import flash.geom.Vector3D;
 	import hex.controllers.HexSubhitbox;
+	import hex.terrain.Terrain;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;

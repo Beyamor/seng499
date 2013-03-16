@@ -1,5 +1,6 @@
 package hex 
 {
+	import model.Game;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
         import flash.geom.Point;
@@ -21,9 +22,9 @@ package hex
 		private var _camera:Point;
 		private function get camera():Point { return _camera; }
 
-                // How do we even make a hex tile
-                private var _factory:HexFactory;
-                private function get factory():HexFactory { return _factory; }
+		// How do we even make a hex tile
+		private var _factory:HexFactory;
+		private function get factory():HexFactory { return _factory; }
 
 		// Properties!
 		private var _hexProperties:HexGeometricProperties;
@@ -32,6 +33,10 @@ package hex
 		// Math
 		private var _gridMather:HexGridMather;
 		private function get gridMather():HexGridMather { return _gridMather; }
+		
+		//Game
+		private var _game:Game;
+		private function get game():Game { return _game; }
 
 		/**
 		 * Creates a new hex grid.
@@ -43,13 +48,15 @@ package hex
 					camera:Point,
                     hexagonRadius:Number,
                     widthInPixels:Number,
-                    heightInPixels:Number)
+                    heightInPixels:Number,
+					game:Game)
 		{
 			_camera = camera;
             _factory = factory;
 			_world = world;
 			_hexProperties	= HexGeometricProperties.getByRadius(hexagonRadius);
 			_gridMather  = new HexGridMather(hexagonRadius, widthInPixels, heightInPixels);
+			_game = game;
 
 			fillView();
 		}
@@ -119,6 +126,35 @@ package hex
 				maxYIndex: gridMather.upperYIndex(maxY)
 			};
 		}
+		
+		/**
+		 * Recursively propegate to tiles in clockwise circles
+		 */
+		public static function propegateToTiles(radius:int, storeForces:Boolean)
+		{
+			if (radius == 0)
+			{
+				if (storeForces);
+				//propegate forces to PlayerData
+				else;
+				//propegate forces to GameState
+			}
+			else
+				propegateToTiles(radius - 1, storeForces);
+		}
+		
+		 /**
+		 * Recursively set tile data in clockwise circles
+		 */
+		 public static function setTileData(radius:int)
+		{
+			if (radius == 0)
+			{
+				;//SetTileData
+			}
+			else
+				setTileData(radius - 1);
+		}
 
 		/**
 		 *  Ensures the view space is covered by tiles.
@@ -136,6 +172,12 @@ package hex
                                         }
 				}
 			}
+			
+			/*for (var r:int = 0; r < GameConstants.EXPO_RADIUS; r++ )
+			{
+				propegateToTiles(r, r == GameConstants.EXPO_RADIUS - 1);		
+				setTileData(r);
+			}*/
 		}
 
 		/**
