@@ -27,14 +27,14 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(hex.terrain.Types.ALL_TYPES)
-						.costs(50)
+						.costs(40)
                         .finish(),
 						
 					InstrumentProperties.describe("CTB")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(hex.terrain.Types.ALL_TYPES)
-						.costs(60)
+						.costs(70)
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
