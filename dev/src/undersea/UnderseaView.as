@@ -1,11 +1,9 @@
 package undersea 
 {
-	import flash.events.AsyncErrorEvent;
-	import flash.events.NetStatusEvent;
-	import flash.media.Video;
-	import flash.net.NetConnection;
-	import flash.net.NetStream;
-	import flash.utils.ByteArray;
+	import common.displays.BackgroundDisplay;
+	import common.displays.DisplayStack;
+	import common.displays.InstructionDisplay;
+	import common.NeptuneWorld;
 	import hex.HexTile;
 	import hex.HexView;
 	import model.Game;
@@ -19,121 +17,29 @@ package undersea
 	import observatory.ComponentData;
 	import observatory.Instrument;
     import observatory.ObservatoryComponent;
+	import undersea.displays.InstrumentDisplay;
+	import undersea.displays.UnderseaDisplay;
 	
 	/**
 	 * ...
 	 * @author Colton Phillips
 	 */
-	public class UnderseaView extends World
+	public class UnderseaView extends NeptuneWorld
 	{
 		private var game:Game;
-		private var color:uint;
 		private var tile:HexTile;
-
-		private var video:Video = new Video();
-		private var ns:NetStream;
 		
 		public function UnderseaView(tile:HexTile, game:Game) 
 		{
 			this.game = game;
-			this.color = tile.color;
 			this.tile = tile;
-		}
-		
-		private function clickedBack():void
-		{
-			FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
-		}
-		
-		private function setUpButtons():void
-		{
-			add(Button.description()
-						.fixedAt(FP.width - 58, FP.height - 42)
-						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("back"))
-						.withDepth(-1)
-						.whenClicked(clickedBack)
-						.build());
-		}
-		
-		private function setUpInstruments():void
-		{
-			var instrument:ObservatoryComponent;
-			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
 			
-			for (var i:uint = 0; i < instruments.length; i++)
-			{
-				instrument = instruments[i];
-				var status:String = instrument.getName();
-				if (instrument is Instrument)
-					status += (instrument as Instrument).isProducingData? " - Recording data" : " - Recording Noise";
-				addGraphic(new Text(instrument.getName(), 20, 30 + 20 * i));
-			}
-		}
-		
-		private function getMeta(mdata:Object):void
-		{
-			video.width = mdata.width / 2;
-			video.height = mdata.height / 2;
-		}
-		
-		private function onConnect(e:NetStatusEvent):void 
-		{
-			if (e.info.code == 'NetConnection.Connect.Success') {
-				trace(e.target as NetConnection);
-				ns = new NetStream(e.target as NetConnection);
-				
-				ns.client = {};
-				var file:ByteArray = new Assets.VIDEO_TEST();
-				ns.play(null);
-				
-				ns.appendBytes(file);
-				video.attachNetStream(ns);
-			}
-		}
-		
-		private function setUpFLVStream():void
-		{
-			FP.stage.addChild(video);
+			var backgroundDisplay:BackgroundDisplay = new BackgroundDisplay(this, Assets.IMG_UNDERSEA_BG);
+			var underseaDisplay:UnderseaDisplay = new UnderseaDisplay(this, game, tile);
 			
-			var nc:NetConnection = new NetConnection();
-			nc.addEventListener(NetStatusEvent.NET_STATUS, onConnect);
-			nc.addEventListener(AsyncErrorEvent.ASYNC_ERROR, trace);
-			
-			var metaSniffer:Object = new Object();
-			nc.client = metaSniffer;
-			metaSniffer.onMetaData = getMeta;
-			nc.connect(null);
-			
-			video.x = 300;
-			video.y = 300;
-		}
-		
-		override public function begin():void
-		{
-			super.begin();
-			
-			setUpButtons();
-			setUpInstruments();		
-			setUpFLVStream();
-		}
-		
-		override public function render():void
-		{
-			Draw.rect(0, 0, FP.width, FP.height, color);
-			super.render();
-		}
-		
-		override public function update():void
-		{
-			super.update();
-		}
-		
-		override public function end():void
-		{
-			super.end();
-			
-			FP.stage.removeChild(video);
-			ns.close();
+			displays = new DisplayStack(
+				backgroundDisplay,
+				underseaDisplay);
 		}
 		
 	}

@@ -37,6 +37,7 @@ package common.displays {
         public function pop():Display {
 
             var display:Display = displays.pop();
+			display.end();
             display.stack = null;
             return display;
         }
