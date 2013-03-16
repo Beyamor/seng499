@@ -37,7 +37,7 @@ package store.displays {
 								   
 								   
 			add(Button.description()
-									.fixedAt(0, 0)
+									.fixedAt(300, FP.height - 100)
 									.withDepth(-1)
 									.withImage(Assets.IMG_BACK)
 									.whenClicked(function():void {

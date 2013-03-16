@@ -33,7 +33,7 @@ package store.displays {
 
             populateStoreInventory();
 
-            clearColor = 0xff333333;
+            clearColor = 0xff000000;
         }
 
 		override public function update():void
