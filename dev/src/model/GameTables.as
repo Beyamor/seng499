@@ -17,7 +17,7 @@ package model
 
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
-						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+						.storeImage(Assets.IMG_STORE_NODE)
                         .isNode()
 						.isSeenOnHexGrid()
 						.costs(50)
