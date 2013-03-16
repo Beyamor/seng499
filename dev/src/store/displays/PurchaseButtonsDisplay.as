@@ -36,7 +36,7 @@ package store.displays {
             clearColor = 0xff333333;
         }
 
-	override public function update():void
+		override public function update():void
         {
                 super.update();
                 pages.update();
@@ -70,7 +70,7 @@ package store.displays {
                         purchaseButtons.push(Button.description()
                                             .withDepth(-1)
                                             .withImageAndText(
-                                                component.getImage(),
+                                                component.getStoreImage(),
                                                 new Text(component.getName()))
                                             .whenClicked(purchaseFunction(component))
                                             .build());
@@ -81,7 +81,7 @@ package store.displays {
                 
                 pages = new ButtonPaginator(
                                         this,
-                                        new Rectangle(MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 2*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
+                                        new Rectangle(2*MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 4*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
                                         purchaseButtons);
         }

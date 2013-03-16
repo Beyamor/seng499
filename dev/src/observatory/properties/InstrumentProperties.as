@@ -10,6 +10,9 @@ package observatory.properties {
         private var _image:Class;
         public function get image():Class { return _image; }
 
+        private var _storeImage:Class;
+        public function get storeImage():Class { return _storeImage; }
+		
         private var _isNode:Boolean;
         public function get isNode():Boolean { return _isNode; }
 		
@@ -25,6 +28,7 @@ package observatory.properties {
         public function InstrumentProperties(
             name:String,
             image:Class,
+			storeImage:Class,
 			dataTerrainTypes:Vector.<String>,
 			cost:uint, 
             isNode:Boolean = false,
@@ -33,6 +37,7 @@ package observatory.properties {
 
             _name               = name;
             _image              = image;
+			_storeImage			= storeImage
             _isNode             = isNode;
 			_isSeenOnHexGrid	= isSeenOnHexGrid;
             _dataTerrainTypes   = dataTerrainTypes;

@@ -1,5 +1,9 @@
 package time 
 {
+	import common.Assets;
+	import common.displays.BackgroundDisplay;
+	import common.displays.DisplayStack;
+	import common.NeptuneWorld;
 	import common.seq.DelayedCallback;
 	import common.seq.DelayItem;
 	import common.seq.Sequencer;
@@ -18,7 +22,7 @@ package time
 	 * 
 	 * @author beyamor
 	 */
-	public class TimeProgressionView extends World 
+	public class TimeProgressionView extends NeptuneWorld
 	{
 		private var game:Game;
 		private var timeProgress:TimeProgressWidget;
@@ -26,9 +30,30 @@ package time
 		private var moneyDisplay:Text;
 		private var seq:Sequencer;
 		
+		private function seasonToEventAsset(season:uint) 
+		{
+			switch (season) {
+				case 0:
+					return Assets.IMG_EVENT_1;
+					
+				case 1:
+					return Assets.IMG_EVENT_2;
+					
+				case 2:
+					return Assets.IMG_EVENT_3;
+					
+				case 3:
+					return Assets.IMG_EVENT_4;
+			}
+		}
+		
 		public function TimeProgressionView(game:Game)
 		{
 			this.game = game;
+
+			var backgroundDisplay:BackgroundDisplay = new BackgroundDisplay(this, seasonToEventAsset(game.data.calendar.season));
+			displays = new DisplayStack(
+				backgroundDisplay);
 			
 			timeProgress = new TimeProgressWidget(FP.halfWidth, FP.halfHeight, game.data.calendar);
 			add(timeProgress);

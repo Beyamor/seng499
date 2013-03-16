@@ -26,15 +26,12 @@ package model
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
-		private var _money:uint = 50;
+		private var _money:uint = 100;
 		private var activeTerrainForces:Vector.<TerrainForce> = null;	
 		
 		public function PlayerData()
 		{
 			populateStoreList();
-			addDummyData();
-			
-            //addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -71,30 +68,11 @@ package model
 		
 		public function populateStoreList():void
 		{
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-		}
-		
-		public function addDummyData():void
-		{
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Node")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydraphone")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTB")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Camera")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("ADCR")));
 		}
 		
 		public function getInventory():Vector.<ComponentData>
