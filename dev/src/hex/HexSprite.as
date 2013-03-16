@@ -28,7 +28,7 @@ package hex {
 		
 		private var _texture:BitmapData;
 		private function get texture():BitmapData { return _texture; }
-		private function get isTextured():Boolean { return _texture != null && _texture != undefined; }
+		private function get isTextured():Boolean { return _texture != null; }
 
         public function HexSprite(radius:Number, terrain:Terrain) {
 			
