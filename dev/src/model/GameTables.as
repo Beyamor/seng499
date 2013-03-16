@@ -17,7 +17,7 @@ package model
 
                     InstrumentProperties.describe("A")
                         .image(Assets.IMG_TESTINSTRUMENT)
-                        .producesDataOn(hex.terrain.Types.SAND)
+                        .producesDataOn(hex.terrain.Types.MUD)
 						.costs(30)
                         .finish(),
 
