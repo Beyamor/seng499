@@ -36,7 +36,7 @@ package store.displays {
             clearColor = 0xff333333;
         }
 
-	override public function update():void
+		override public function update():void
         {
                 super.update();
                 pages.update();
