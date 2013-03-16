@@ -33,16 +33,24 @@ package map.controllers
 		
 		public function emptySpaceClicked(mapX:Number, mapY:Number):void {
 			
-			// This is such a crappy dependency
-			mapView.inventoryDisplay.selectorWidget.removeItem(game.state.getInstrumentBeingPlaced());
+			if (mapView.nodePlacementValidator.isValidPlacement(mapX, mapY)) {
+				
+				// This is such a crappy dependency
+				mapView.inventoryDisplay.selectorWidget.removeItem(game.state.getInstrumentBeingPlaced());
+				
+				game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY));
+				game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
+				game.state.stopPlacingInstrument();
+				
+				mapView.removeCursor();
+				mapView.mapDisplay.add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));
+				mapView.controller = new HexViewer(mapView);
+			}
 			
-			game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY));
-			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
-			game.state.stopPlacingInstrument();
-			
-			mapView.removeCursor();
-			mapView.mapDisplay.add(new NodeEntity(game.data.nodeList[game.data.nodeList.length - 1], game));
-			mapView.controller = new HexViewer(mapView);
+			else {
+				
+				mapView.instructionDisplay.show("place on open water");
+			}
 		}
 	}
 

@@ -44,6 +44,8 @@ package map
 			controller.start();
 		}
 		
+		public function get nodePlacementValidator():NodePlacementValidator { return new NodePlacementValidator; }
+		
 		public function MapView(game:Game)
 		{			
 			this.game = game;
