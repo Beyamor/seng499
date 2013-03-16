@@ -11,6 +11,10 @@ package common{
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/title.png")] public static const IMG_TITLE:Class
+		[Embed(source = "../assets/event/event_1.png")] public static const IMG_EVENT_1:Class
+		[Embed(source = "../assets/event/event_2.png")] public static const IMG_EVENT_2:Class
+		[Embed(source = "../assets/event/event_3.png")] public static const IMG_EVENT_3:Class
+		[Embed(source = "../assets/event/event_4.png")] public static const IMG_EVENT_4:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
 		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class
@@ -19,7 +23,6 @@ package common{
 		[Embed(source = "../assets/map/NodeTargetRing.png")] public static const IMG_NODETARGETRING:Class
 		[Embed(source = "../assets/map/PlacingMouse.png")] public static const IMG_PLACINGMOUSE:Class
 		[Embed(source = "../assets/map/TestInstrument.png")] public static const IMG_TESTINSTRUMENT:Class
-		[Embed(source = "../assets/scientist/scientist_1.png")] public static const IMG_SCIENTIST_1:Class
 		[Embed(source = "../assets/store/back.png")] public static const IMG_BACK:Class
 		[Embed(source = "../assets/store/bg.png")] public static const IMG_BG:Class
 		[Embed(source = "../assets/store/buy.png")] public static const IMG_BUY:Class
