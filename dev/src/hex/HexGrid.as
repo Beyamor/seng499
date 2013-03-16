@@ -126,8 +126,7 @@ package hex
 				maxYIndex: gridMather.upperYIndex(maxY)
 			};
 		}
-		
-		
+
 		/**
 		 *  Ensures the view space is covered by tiles.
 		 */
@@ -144,6 +143,7 @@ package hex
                                         }
 				}
 			}
+			
 		}
 
 		/**

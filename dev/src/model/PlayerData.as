@@ -12,6 +12,7 @@ package model
 	import observatory.Node;
 	import time.Calendar;
 	import map.terrain.TerrainForce;
+	import hex.terrain.TerrainSetter;
 
 	/**
 	 * ...
@@ -62,7 +63,7 @@ package model
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
-
+			new TerrainSetter(this).setTerrain(hexCoords);
 			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
 		}
 		
@@ -88,6 +89,12 @@ package model
 
 			if (!hexData[indices.x])            return false;
 			if (!hexData[indices.x][indices.y]) return false;
+			return true;
+		}
+		
+		public function hexDataDiscovered(indices:HexIndices):Boolean {
+
+			if (!hexData[indices.x][indices.y].discovered) return false;
 			return true;
 		}
 

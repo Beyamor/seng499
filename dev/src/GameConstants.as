@@ -16,6 +16,6 @@ package {
 		
 		public static const DEFAULT_FREE_SPACE:int = 2;
 		
-		public static const EXPO_RADIUS = 3;
+		public static const EXPO_RADIUS:int = 3;
     }
 }
