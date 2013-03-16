@@ -8,6 +8,7 @@ package hex {
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
+	import hex.terrain.Terrain;
     import net.flashpunk.Graphic;
     import net.flashpunk.FP;
 
@@ -24,12 +25,17 @@ package hex {
 
         private function get centerX():Number { return radius; }
         private function get centerY():Number { return radius; }
+		
+		private var _texture:BitmapData;
+		private function get texture():BitmapData { return _texture; }
+		private function get isTextured():Boolean { return _texture != null && _texture != undefined; }
 
-        public function HexSprite(radius:Number, color:Number) {
-
-            _radius = radius;
-            _color  = color;
-            _buffer = new BitmapData(2 * radius, 2 * radius, true, 0);
+        public function HexSprite(radius:Number, terrain:Terrain) {
+			
+            _radius 	= radius;
+            _color 		= hex.terrain.Tables.TYPE_COLORS[terrain.type];
+			_texture	= hex.terrain.Tables.TYPE_TEXTURES[terrain.type];
+            _buffer		= new BitmapData(2 * radius, 2 * radius, true, 0);
 
             // Center the hexagon
             x = -centerX;
@@ -48,7 +54,7 @@ package hex {
 
             // Surface of hexagon
             graphics.lineStyle(0, 0, 0);
-            graphics.beginFill(_color);
+			isTextured?	graphics.beginBitmapFill(texture) : graphics.beginFill(_color);
             drawEdges(graphics);
             graphics.endFill();
 

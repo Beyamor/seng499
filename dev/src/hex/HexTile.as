@@ -1,5 +1,6 @@
 package hex 
 {
+	import flash.display.BitmapData;
 	import flash.geom.Vector3D;
 	import hex.controllers.HexSubhitbox;
 	import hex.terrain.Terrain;
@@ -34,10 +35,6 @@ package hex
 		private var _radius:Number;
 		private function get radius():Number { return _radius; }
 
-		// This hex's color. Probably a temporary feature.
-		private var _color:uint;
-		public function get color():uint { return _color; }
-
 		// The indices in the grid
 		private var _indices:HexIndices;
 		public function get indices():HexIndices { return _indices; }
@@ -53,14 +50,13 @@ package hex
 		{
 			super(x, y);
 
-			_data = data;
-			_indices = indices;
-			_radius = radius;
-			_color = hex.terrain.Tables.TYPE_COLORS[data.terrain.type];
-			_camera = camera;
+			_data		= data;
+			_indices	= indices;
+			_radius		= radius;
+			_camera		= camera;
 
 			var graphics:Graphiclist = new Graphiclist;
-			graphics.add(new HexSprite(radius, color));
+			graphics.add(new HexSprite(radius, data.terrain));
 
 			_subHitboxes = new Vector.<HexSubhitbox>;
 			if (data.hasSubImages()) {
