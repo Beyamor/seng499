@@ -27,7 +27,7 @@ package model
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 100;
-		private var activeTerrainForces:Vector.<TerrainForce> = null;	
+		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		
 		public function PlayerData()
 		{
@@ -149,6 +149,21 @@ package model
 			
 			_money -= GameTables.instrumentByName(component.getName()).cost;
 			addToInventory(component);
+		}
+		
+		/**
+		 * Used to store terrain forces that affect unknown tiles.
+		 * @param	force
+		 * @param	indecies
+		 */
+		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices)
+		{
+			_unresolvedTerrainForces[indecies.x][indecies.y].push(force);
+		}
+		
+		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
+		{
+			return _unresolvedTerrainForces[indecies.x][indecies.y];
 		}
 	}
 

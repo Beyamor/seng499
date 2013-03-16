@@ -127,35 +127,7 @@ package hex
 			};
 		}
 		
-		/**
-		 * Recursively propegate to tiles in clockwise circles
-		 */
-		public static function propegateToTiles(radius:int, storeForces:Boolean)
-		{
-			if (radius == 0)
-			{
-				if (storeForces);
-				//propegate forces to PlayerData
-				else;
-				//propegate forces to GameState
-			}
-			else
-				propegateToTiles(radius - 1, storeForces);
-		}
 		
-		 /**
-		 * Recursively set tile data in clockwise circles
-		 */
-		 public static function setTileData(radius:int)
-		{
-			if (radius == 0)
-			{
-				;//SetTileData
-			}
-			else
-				setTileData(radius - 1);
-		}
-
 		/**
 		 *  Ensures the view space is covered by tiles.
 		 */
@@ -172,12 +144,6 @@ package hex
                                         }
 				}
 			}
-			
-			/*for (var r:int = 0; r < GameConstants.EXPO_RADIUS; r++ )
-			{
-				propegateToTiles(r, r == GameConstants.EXPO_RADIUS - 1);		
-				setTileData(r);
-			}*/
 		}
 
 		/**

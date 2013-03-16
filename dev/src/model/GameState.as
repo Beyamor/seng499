@@ -2,6 +2,7 @@ package model
 {
 	import flash.geom.Point;
 	import hex.HexIndices;
+	import map.terrain.TerrainForce;
 	import observatory.Connectable;
     import observatory.ComponentData;
 	//import GameConstants;
@@ -16,6 +17,7 @@ package model
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
 		private var lastViewedHex:Point = null;
+		private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		
 		public function GameState() 
 		{
@@ -84,6 +86,21 @@ package model
 		public function setLastViewedHex(x:int,y:int):void
 		{
 				lastViewedHex = new Point(x,y);
+		}
+		
+		/**
+		 * Used to apply terrain forces to tiles when discovering the grid.
+		 * @param	force
+		 * @param	indecies
+		 */
+		public function addTerrainForce(force:TerrainForce, indecies:HexIndices)
+		{
+			_activeTerrainForces[indecies.x][indecies.y].push(force);
+		}
+		
+		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
+		{
+			return _activeTerrainForces[indecies.x][indecies.y];
 		}
 	}
 
