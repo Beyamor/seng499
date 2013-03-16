@@ -30,28 +30,11 @@ package time
 		private var moneyDisplay:Text;
 		private var seq:Sequencer;
 		
-		private function seasonToEventAsset(season:uint) 
-		{
-			switch (season) {
-				case 0:
-					return Assets.IMG_EVENT_1;
-					
-				case 1:
-					return Assets.IMG_EVENT_2;
-					
-				case 2:
-					return Assets.IMG_EVENT_3;
-					
-				case 3:
-					return Assets.IMG_EVENT_4;
-			}
-		}
-		
 		public function TimeProgressionView(game:Game)
 		{
 			this.game = game;
 
-			var backgroundDisplay:BackgroundDisplay = new BackgroundDisplay(this, seasonToEventAsset(game.data.calendar.season));
+			var backgroundDisplay:BackgroundDisplay = new BackgroundDisplay(this, Calendar.SEASON_PICTURE[game.data.calendar.season]);
 			displays = new DisplayStack(
 				backgroundDisplay);
 			

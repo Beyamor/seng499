@@ -1,5 +1,6 @@
 package time 
 {
+	import common.Assets;
 	/**
 	 * ...
 	 * @author beyamor
@@ -35,17 +36,19 @@ package time
 			if (_season >= NUMBER_OF_SEASONS) goToNextYear();
 		}
 		
-		public static function seasonName(season:int):String {
-			
-			switch (season) {
-				
-				case 0: return "Spring";
-				case 1: return "Summer";
-				case 2: return "Fall";
-				case 3: return "Winter";
-				default: throw new Error("Uknowkn season: " + season);
-			}
-		}
+		public static const SEASON_NAME:Vector.<String> = new <String>[
+			"Spring",
+			"Summer",
+			"Fall",
+			"Winter"
+		];
+		
+		public static const SEASON_PICTURE:Vector.<Class> = new <Class>[
+			Assets.IMG_EVENT_1,
+			Assets.IMG_EVENT_2,
+			Assets.IMG_EVENT_3,
+			Assets.IMG_EVENT_4
+		];
 	}
 
 }
