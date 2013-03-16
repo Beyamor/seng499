@@ -26,6 +26,11 @@ package observatory
 			return new Image(GameTables.instruments[key].image);
 		}
 		
+		public function getStoreImage():Image 
+		{
+			return new Image(GameTables.instruments[key].storeImage);
+		}
+		
 		public function getName():String
 		{
             return GameTables.instruments[key].name;

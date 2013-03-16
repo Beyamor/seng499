@@ -32,9 +32,6 @@ package model
 		public function PlayerData()
 		{
 			populateStoreList();
-			addDummyData();
-			
-            //addNode(new Node(70, 70));
 		}
 		
 		public function printInventory():void
@@ -71,30 +68,11 @@ package model
 		
 		public function populateStoreList():void
 		{
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-			storeList.push(new ComponentData(0));
-			storeList.push(new ComponentData(1));
-		}
-		
-		public function addDummyData():void
-		{
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("a")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
-			addToInventory(new ComponentData(GameTables.instrumentIDByName("node")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Node")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydraphone")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTB")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Camera")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("ADCR")));
 		}
 		
 		public function getInventory():Vector.<ComponentData>

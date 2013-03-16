@@ -15,17 +15,40 @@ package model
                 public static var instruments:Vector.<InstrumentProperties> = new Vector.<InstrumentProperties>;
                 instruments.push(
 
-                    InstrumentProperties.describe("A")
-                        .image(Assets.IMG_TESTINSTRUMENT)
-                        .producesDataOn(hex.terrain.Types.MUD)
-						.costs(30)
-                        .finish(),
-
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
+						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .isNode()
 						.isSeenOnHexGrid()
+						.costs(50)
+                        .finish(),
+						
+					InstrumentProperties.describe("Hydraphone")
+                        .image(Assets.IMG_TESTINSTRUMENT)
+						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+						.costs(50)
+                        .finish(),
+						
+					InstrumentProperties.describe("CTB")
+                        .image(Assets.IMG_TESTINSTRUMENT)
+						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+						.costs(60)
+                        .finish(),
+						
+					InstrumentProperties.describe("Camera")
+                        .image(Assets.IMG_TESTINSTRUMENT)
+						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
 						.costs(100)
+                        .finish(),
+						
+					InstrumentProperties.describe("ADCR")
+                        .image(Assets.IMG_TESTINSTRUMENT)
+						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+                        .producesDataOn(hex.terrain.Types.ALL_TYPES)
+						.costs(130)
                         .finish()
                 );
 				

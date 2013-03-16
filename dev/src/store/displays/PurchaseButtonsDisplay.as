@@ -70,7 +70,7 @@ package store.displays {
                         purchaseButtons.push(Button.description()
                                             .withDepth(-1)
                                             .withImageAndText(
-                                                component.getImage(),
+                                                component.getStoreImage(),
                                                 new Text(component.getName()))
                                             .whenClicked(purchaseFunction(component))
                                             .build());
