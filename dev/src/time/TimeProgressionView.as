@@ -8,6 +8,7 @@ package time
 	import common.seq.DelayItem;
 	import common.seq.Sequencer;
 	import common.ui.Button;
+	import common.ui.NeptuneButtons;
 	import data.DataConverter;
 	import flash.events.TextEvent;
 	import map.MapView;
@@ -51,12 +52,10 @@ package time
 			addGraphic(new Text(dataTally.activeInstrumentCount + " instruments producing data."), 0, 50, FP.halfHeight);
 			addGraphic(new Text("$" + moneyValue + " dollars earned."), 0, 50, FP.halfHeight + 20);
 			
-			var buttonBackground:Image = new Image(Assets.IMG_MAPBUTTONBACKGROUND); // TODO: Make this dude standard
-			add(Button.description()
-				.at(FP.width - buttonBackground.width - 50, FP.height - buttonBackground.height - 50)
-				.withImageAndText(buttonBackground, new Text("Continue"))
-				.whenClicked(function():void { FP.world = new MapView(game); } )
-				.build());
+			var backButton:Button = NeptuneButtons.standard("Continue", 0, 0, function():void { FP.world = new MapView(game); } );
+			backButton.x = FP.width - backButton.width - 50;
+			backButton.y = FP.height - backButton.height - 50;
+			add(backButton);
 		}
 	}
 

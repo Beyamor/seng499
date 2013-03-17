@@ -68,12 +68,12 @@ package map
 			
 			// TODO: Move this into the inventory display?
 			inventoryDisplay.addStandardButton(
-						"Store",
-						function():void { goToStore(); } );
+						"Change season",
+						function():void { FP.world = new TimeProgressionView(game); } );
 						
 			inventoryDisplay.addStandardButton(
-						"Time",
-						function():void { FP.world = new TimeProgressionView(game); } );
+						"Store",
+						function():void { goToStore(); } );
 		}
 		
 		public function getGame():Game 

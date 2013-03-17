@@ -3,6 +3,7 @@ package common.displays
 	import common.Assets;
 	import common.tweens.InOutTweener;
 	import common.ui.Button;
+	import common.ui.NeptuneButtons;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
@@ -44,14 +45,11 @@ package common.displays
 		public function get thatSlidesOn():ControlPanel { slideOn(); return this; }
 		
 		public function addStandardButton(label:String, onClick:Function):void {
-			
-			var image:Image = new Image(Assets.IMG_MAPBUTTONBACKGROUND);
-			
-			add(Button.description()
-					.withImageAndText(image, new Text(label))
-					.at(halfWidth - image.width/2, height - 50 - 50 * numberOfStandardButtons)
-					.whenClicked(onClick)
-					.build());
+						
+			var button:Button = NeptuneButtons.standard(label, 0, 0, onClick);
+			button.x = halfWidth - button.width / 2;
+			button.y = height - 50 - 50 * numberOfStandardButtons
+			add(button);
 					
 			++numberOfStandardButtons;
 		}
