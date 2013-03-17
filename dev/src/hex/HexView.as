@@ -2,6 +2,7 @@ package hex
 {
 	import common.displays.ControlPanel;
 	import common.displays.Display;
+	import common.displays.InstructionDisplay;
 	import common.NeptuneWorld;
 	import common.displays.DataDisplay;
     import flash.geom.Point;
@@ -33,6 +34,7 @@ package hex
 		private var controlPanel:ControlPanel;
 		private var game:Game;
 		public var hexDisplay:HexDisplay;
+		public var instructionDisplay:InstructionDisplay;
 		
 		public function HexView(game:Game, mapX:Number, mapY:Number)
 		{
@@ -45,11 +47,16 @@ package hex
 			hexDisplay		= new HexDisplay(this, game, mapX, mapY);
 			hexDisplay.expandRightEdgeTo(controlPanel);
 			
+			instructionDisplay = new InstructionDisplay(this);
+			
 			displays.push(
 				hexDisplay,
 				controlPanel,
-				new DataDisplay(this, game.data)
+				new DataDisplay(this, game.data),
+				instructionDisplay
 			);
+			
+			if (game.state.isConnecting()) instructionDisplay.show("select a node or junction box");
 		}
 		
 		public function returnToMapView():void {

@@ -38,10 +38,13 @@ package hex.controllers
 						view.controller					= new InstrumentPlacer(view, game);
 						view.hexDisplay.connectionCable	= new ConnectionCable(tile.x, tile.y);
 						
+						view.instructionDisplay.show("place instrument on a hex");						
 						return;
 					}
 				}
 			}
+			
+			view.instructionDisplay.show("select a node or junction box");
 		}
 	}
 
