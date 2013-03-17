@@ -13,7 +13,12 @@ package model
 	 */
 	public class GameState 
 	{
-		private var placing:int = GameConstants.NOT_PLACING;
+		public static const NOT_PLACING:int					= 0;
+		public static const SELECTING_NODE_ON_MAP:int		= 1;
+		public static const SELECTING_CONNECTION_ON_HEX:int	= 2;
+		public static const PLACING_ON_HEX:int				= 3;
+		
+		private var state:int = NOT_PLACING;
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
 		private var lastViewedHex:Point = null;
@@ -26,12 +31,12 @@ package model
 		
 		public function isPlacing():Boolean
 		{
-			return placing != GameConstants.NOT_PLACING;
+			return state != NOT_PLACING;
 		}
 		
 		public function isSelectingNode():Boolean
 		{
-			return placing == GameConstants.SELECTING_NODE_ON_MAP;
+			return state == SELECTING_NODE_ON_MAP;
 		}
 
 		public function getInstrumentBeingPlaced():ComponentData
@@ -42,20 +47,20 @@ package model
 		public function setInstrumentBeingPlaced(newInstrument:ComponentData):void
 		{
 			instrumentBeingPlaced = newInstrument;
-			placing = GameConstants.SELECTING_NODE_ON_MAP;
+			state = SELECTING_NODE_ON_MAP;
 		}
 
 		public function stopPlacingInstrument():void 
 		{
 			instrumentBeingPlaced = null;
 			connectionPoint = null;
-			placing = GameConstants.NOT_PLACING;
+			state = NOT_PLACING;
         }
 		
 		public function setConnectionPoint(con:Connectable):void
 		{
 			connectionPoint = con;
-			placing = GameConstants.PLACING_ON_HEX;
+			state = PLACING_ON_HEX;
 		}
 		
 		public function getConnectionPoint():Connectable
@@ -65,17 +70,17 @@ package model
 		
 		public function selectNode():Boolean
 		{
-			return placing = GameConstants.SELECTING_CONNECTION_ON_HEX;
+			return state = SELECTING_CONNECTION_ON_HEX;
 		}
 		
 		public function isConnecting():Boolean
 		{
-			return placing == GameConstants.SELECTING_CONNECTION_ON_HEX;
+			return state == SELECTING_CONNECTION_ON_HEX;
 		}
 		
 		public function isSelectingHex():Boolean
 		{
-			return placing == GameConstants.PLACING_ON_HEX;
+			return state == PLACING_ON_HEX;
 		}
 		
 		public function getLastViewedHex():Point

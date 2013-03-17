@@ -10,11 +10,14 @@ package hex.controllers {
 
         public function createFor(game:Game, hexView:HexView):HexController {
 
-            if (game.state.isPlacing()) {
+			if (game.state.isConnecting()) {
+				
+				return new ConnectionStarter(hexView, game);
+			}
+			
+            else if (game.state.isPlacing()) {
 
-                return new InstrumentPlacer(
-                                hexView,
-                                game);
+                return new InstrumentPlacer(hexView, game);
             }
 
             else {

@@ -22,14 +22,9 @@ package hex.controllers {
 			this.view = view;
         }
 
-        public function hexSelected(tile:HexTile):void {
+        public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
 
             view.goToUnderseaView(tile);
         }
-		
-		public function connectInstrument(con:Connectable):void
-		{
-			//doNothing
-		}
     }
 }

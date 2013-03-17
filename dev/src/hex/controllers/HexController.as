@@ -9,7 +9,6 @@ package hex.controllers {
      */
     public interface HexController {
 
-        function hexSelected(tile:HexTile):void;
-		function connectInstrument(connection:Connectable):void;
+        function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void;
     }
 }

@@ -7,6 +7,7 @@ package hex
     import flash.geom.Point;
 	import hex.displays.HexControlPanel;
 	import hex.displays.HexDisplay;
+	import hex.ui.ConnectionCable;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -28,9 +29,10 @@ package hex
 	 */5
 	public class HexView extends NeptuneWorld 
 	{
-		public var  controller:HexController;
-		private var	controlPanel:ControlPanel;
+		public var controller:HexController;
+		private var controlPanel:ControlPanel;
 		private var game:Game;
+		public var hexDisplay:HexDisplay;
 		
 		public function HexView(game:Game, mapX:Number, mapY:Number)
 		{
@@ -39,8 +41,9 @@ package hex
 			this.game	= game;
 			controller	= (new ControllerFactory).createFor(game, this);
 			
-			controlPanel = new HexControlPanel(this, game).thatSlidesOn;
-			var hexDisplay:Display = new HexDisplay(this, game, mapX, mapY).withRightEdgeExpandingTo(controlPanel);
+			controlPanel	= new HexControlPanel(this, game).thatSlidesOn;
+			hexDisplay		= new HexDisplay(this, game, mapX, mapY);
+			hexDisplay.expandRightEdgeTo(controlPanel);
 			
 			displays.push(
 				hexDisplay,

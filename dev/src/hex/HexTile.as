@@ -2,7 +2,7 @@ package hex
 {
 	import flash.display.BitmapData;
 	import flash.geom.Vector3D;
-	import hex.controllers.HexSubhitbox;
+	import hex.HexSubhitbox;
 	import hex.terrain.Terrain;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;

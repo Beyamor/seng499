@@ -3,13 +3,14 @@ package hex.displays
 	import common.displays.Display;
 	import common.displays.DataDisplay;
 	import hex.Cartographer;
-	import hex.controllers.HexSubhitbox;
+	import hex.HexSubhitbox;
 	import hex.HexFactory;
 	import hex.HexGrid;
 	import hex.HexTile;
 	import hex.HexView;
     import flash.geom.Point;
 	import common.ScrollCamera;
+	import hex.ui.ConnectionCable;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -36,6 +37,22 @@ package hex.displays
 		private var returningToMap:Boolean = false;
 		private var game:Game;
 		private var view:HexView;
+		
+		private var	_connectionCable:ConnectionCable;
+		public function set connectionCable(cable:ConnectionCable):void { 
+			
+			if (_connectionCable) remove(_connectionCable);
+			_connectionCable = cable;
+			add(_connectionCable);
+		}
+		public function removeConnectionCable():void {
+			
+			if (_connectionCable) {
+				
+				remove(_connectionCable);
+				_connectionCable = null;
+			}
+		}
 		
 		public function HexDisplay(hexParent:HexView, game:Game, mapX:Number, mapY:Number)
 		{
@@ -76,25 +93,10 @@ package hex.displays
 
 					if (tile.containsPoint(mouseX, mouseY)) {
 						
-						if (game.state.isConnecting())
-						{
-							for each (var sub:HexSubhitbox in tile.subHitboxes)
-							{
-								if (sub.component is Connectable)
-								{
-									if (sub.containsPoint(mouseX, mouseY))
-									view.controller.connectInstrument(sub.component as Connectable);
-								}
-							}
-						}
-						else
-						{
-							view.controller.hexSelected(tile);
-						}
+							view.controller.hexSelected(mouseX, mouseY, tile);
 					}
 				}
-			}		
-			
+			}			
 		}
 	}
 

@@ -29,7 +29,7 @@ package hex.controllers {
 			view.setCursor(Cursor.forPlacingInstrument(instrument));
         }
 
-        public function hexSelected(tile:HexTile):void {
+        public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
 			
 			var addedInstrument:ObservatoryComponent = new Instrument(instrument, tile)
 			game.state.getConnectionPoint().connect(addedInstrument);
@@ -38,15 +38,10 @@ package hex.controllers {
             game.state.stopPlacingInstrument();
 			
 			view.removeCursor();
+			view.hexDisplay.removeConnectionCable();
 
             // Okay. Switch out of instrument placement I guess?
-
 			view.controller = new TileViewer(view, game);
-		}
-			
-		public function connectInstrument(connection:Connectable):void
-		{
-			game.state.setConnectionPoint(connection);
 		}
     }
 }
