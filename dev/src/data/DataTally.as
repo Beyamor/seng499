@@ -19,9 +19,9 @@ package data
 			this.playerData = playerData;
 		}
 		
-		public function get sum():uint {
+		public function get activeInstrumentCount():uint {
 			
-			var sum:uint = 0;
+			var count:uint = 0;
 			
 			for each (var hexData:HexData in playerData.hexes) {
 				
@@ -32,11 +32,16 @@ package data
 					var componentProperties:InstrumentProperties = GameTables.instrumentByName(component.getName());
 					var isProducingData:Boolean = componentProperties.producesDataFor(hexData.terrain);
 					
-					if (isProducingData) ++sum;
+					if (isProducingData) ++count;
 				}
 			}
 			
-			return sum;
+			return count;
+		}
+		
+		public function get sum():uint {
+			
+			return activeInstrumentCount;
 		}
 	}
 

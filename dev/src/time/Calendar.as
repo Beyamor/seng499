@@ -49,6 +49,13 @@ package time
 			Assets.IMG_EVENT_3,
 			Assets.IMG_EVENT_4
 		];
+		
+		public static const SEASON_DESCRIPTION:Vector.<String> = new <String>[
+			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
+			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
+			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
+			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor."
+		];
 	}
 
 }
