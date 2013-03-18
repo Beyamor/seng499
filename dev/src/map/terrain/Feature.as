@@ -41,7 +41,7 @@ package map.terrain
 		
 		public function getTerrainForce(indecies:HexIndices):TerrainForce
 		{
-			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)), indecies, initialForce, spread, decayTick);
+			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)),  initialForce, spread, decayTick);
 		}
 	}
 

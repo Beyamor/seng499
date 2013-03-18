@@ -38,7 +38,7 @@ package map.controllers
 				// This is such a crappy dependency
 				mapView.inventoryDisplay.selectorWidget.removeItem(game.state.getInstrumentBeingPlaced());
 				
-				game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY));
+				game.data.addNode(new Node(game.state.getInstrumentBeingPlaced(),mapX, mapY), game);
 				game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
 				game.state.stopPlacingInstrument();
 				

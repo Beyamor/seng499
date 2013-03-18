@@ -58,12 +58,12 @@ package model
 			instrumentsInventory.splice(dataIndex, 1);
 		}
 		
-		public function addNode(node:Node):void
+		public function addNode(node:Node, game:Game):void
 		{
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
-			new TerrainSetter(this).setTerrain(hexCoords);
+			new TerrainSetter(game).setTerrain(hexCoords);//kinda hacky, but I need access to state for propegation.  We can clean this later
 			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
 		}
 		
@@ -171,6 +171,11 @@ package model
 		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
 		{
 			return _unresolvedTerrainForces[indecies.x][indecies.y];
+		}
+		
+		public function getAllTerrainData():Vector.< Vector.< Vector.<TerrainForce> > > 
+		{
+			return _unresolvedTerrainForces;
 		}
 	}
 
