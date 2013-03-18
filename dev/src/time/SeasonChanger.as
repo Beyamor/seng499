@@ -2,6 +2,7 @@ package time
 {
 	import data.DataConverter;
 	import data.DataTally;
+	import events.WorldEvent;
 	import model.Game;
 	/**
 	 * This guy wraps up whatever happens to the game models when a season changes.
@@ -23,6 +24,17 @@ package time
 			
 			game.data.calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
+			
+			var worldEvents:Vector.<WorldEvent> = game.data.worldEvents.concat(); // Copy so we can remove events
+			for each (var event:WorldEvent in worldEvents) {
+				
+				if (event.hasOccurred(game)) {
+					
+					if (event.wasAchieved(game)) event.giveRewards(game);
+
+					game.data.worldEvents.splice(game.data.worldEvents.indexOf(event), 1);
+				}
+			}
 		}
 	}
 

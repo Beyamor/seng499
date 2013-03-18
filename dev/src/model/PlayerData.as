@@ -1,6 +1,7 @@
 package model 
 {
 	import common.Assets;
+	import events.WorldEvent;
 	import net.flashpunk.graphics.Image;
 	import hex.math.SpaceConverter;
 	import hex.HexData;
@@ -29,6 +30,7 @@ package model
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 100;
 		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
+		public var worldEvents:Vector.<WorldEvent> = new Vector.<WorldEvent>;
 		
 		public function PlayerData()
 		{
