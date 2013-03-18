@@ -1,6 +1,7 @@
 package model 
 {
 	import common.Assets;
+	import events.world.SeasonalEvent;
 	import events.WorldEvent;
 	import net.flashpunk.graphics.Image;
 	import hex.math.SpaceConverter;
@@ -30,7 +31,11 @@ package model
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 100;
 		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
-		public var worldEvents:Vector.<WorldEvent> = new Vector.<WorldEvent>;
+		
+		// Initial evenets are temporary for testing
+		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[
+			new SeasonalEvent(Calendar.FALL, 500)
+		];
 		
 		public function PlayerData()
 		{

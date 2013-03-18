@@ -9,7 +9,11 @@ package time
 	 */
 	public class Calendar 
 	{
-		public static const NUMBER_OF_SEASONS:uint = 4;
+		public static const NUMBER_OF_SEASONS:uint	= 4;
+		public static const SPRING:uint				= 0;
+		public static const SUMMER:uint				= 1;
+		public static const FALL:uint				= 2;
+		public static const WINTER:uint				= 3;
 		
 		private var _season:int	= 0;
 		private var _year:int	= 0;
