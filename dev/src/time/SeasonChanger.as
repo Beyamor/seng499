@@ -2,6 +2,8 @@ package time
 {
 	import data.DataConverter;
 	import data.DataTally;
+	import events.displays.SeasonEventAnnouncement;
+	import events.world.SeasonalEvent;
 	import events.WorldEvent;
 	import model.Game;
 	/**
@@ -11,6 +13,7 @@ package time
 	public class SeasonChanger 
 	{
 		private var game:Game;
+		private function get calendar():Calendar { return game.data.calendar; }
 		
 		public function SeasonChanger(game:Game)
 		{
@@ -22,7 +25,7 @@ package time
 			var dataTally:DataTally		= new DataTally(game.data);
 			var moneyValue:uint			= new DataConverter(dataTally.sum).moneyValue;
 			
-			game.data.calendar.goToNextSeason();
+			calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
 			
 			var worldEvents:Vector.<WorldEvent> = game.data.worldEvents.concat(); // Copy so we can remove events
@@ -34,6 +37,15 @@ package time
 
 					game.data.worldEvents.splice(game.data.worldEvents.indexOf(event), 1);
 				}
+			}
+			
+			// Predefined, hardcoded events
+			if (calendar.season == Season.SUMMER && calendar.year == 0) {
+				
+				var springBloom:SeasonalEvent = new SeasonalEvent(Season.SPRING, 500);
+				
+				game.data.worldEvents.push(springBloom);
+				game.state.pushEventDisplay(new SeasonEventAnnouncement(springBloom));
 			}
 		}
 	}

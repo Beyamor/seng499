@@ -28,9 +28,7 @@ package model
 		private var lastViewedHex:Point = null;
 		private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		
-		private var eventDisplayQueue:Vector.<Display> = new <Display>[
-			new SeasonEventAnnouncement(new SeasonalEvent(Season.WINTER, 100))
-		];
+		private var eventDisplayQueue:Vector.<Display> = new <Display>[];
 		
 		public function GameState() 
 		{

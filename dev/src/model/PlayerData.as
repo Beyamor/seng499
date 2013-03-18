@@ -34,9 +34,7 @@ package model
 		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		
 		// Initial evenets are temporary for testing
-		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[
-		new SeasonalEvent(Season.FALL, 500)
-		];
+		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[];
 		
 		public function PlayerData()
 		{
