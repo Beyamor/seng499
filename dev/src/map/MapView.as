@@ -34,6 +34,7 @@ package map
 		public var mapDisplay:MapDisplay;
 		public var inventoryDisplay:InventoryDisplay;
 		public var instructionDisplay:InstructionDisplay;
+		private var whatDisplay:Display;
 		
 		public var _controller:MapController;
 		public function get controller():MapController { return _controller; }
@@ -74,6 +75,8 @@ package map
 			inventoryDisplay.addStandardButton(
 						"Store",
 						function():void { goToStore(); } );
+						
+			showNextEventDisplay();
 		}
 		
 		public function getGame():Game 
@@ -95,6 +98,19 @@ package map
 			
 				FP.world = new HexView(game, node.mapX, node.mapY);
 			});
+		}
+		
+		private function showNextEventDisplay():void {
+			
+			if (!game.state.hasEventDisplays) return;
+			
+			var eventDisplay:Display = game.state.popEventDisplay();
+			whatDisplay = eventDisplay;
+			
+			eventDisplay.addOnEndCallback(function():void { showNextEventDisplay(); } );
+			eventDisplay.parent = this;
+			
+			displays.push(eventDisplay);
 		}
 	}
 

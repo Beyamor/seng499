@@ -51,9 +51,9 @@ package
 		{
 			super.update();
 			
-			if (Input.pressed("debug-hex-start"))	FP.world = new HexView(game, 0, 0);
-			else if (Input.pressed("debug-map-start"))	FP.world = new MapView(game);
-			else if (Input.pressed("debug-store-start")) FP.world = new StoreView(game);
+			if (Input.pressed("debug-hex-start"))			FP.world = new HexView(game, 0, 0);
+			else if (Input.pressed("debug-map-start"))		FP.world = new MapView(game);
+			else if (Input.pressed("debug-store-start"))	FP.world = new StoreView(game);
 		}
 		
 		private function initModel():void

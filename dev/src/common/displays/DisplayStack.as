@@ -82,5 +82,13 @@ package common.displays {
 			
 			return false;
 		}
+		
+		public function popIfTop(display:Display):Boolean {
+			
+			if (display != top) return false;
+			
+			pop();
+			return true;
+		}
     }
 }

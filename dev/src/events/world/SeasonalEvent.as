@@ -10,8 +10,8 @@ package events.world
 	 */
 	public class SeasonalEvent implements WorldEvent 
 	{
-		private var season:Season;
-		private var moneyAward:uint;
+		public var season:Season;
+		public var moneyAward:uint;
 		
 		public function SeasonalEvent(season:Season, moneyAward:uint)
 		{
