@@ -15,6 +15,7 @@ package model
 	import time.Calendar;
 	import map.terrain.TerrainForce;
 	import hex.terrain.TerrainSetter;
+	import time.Season;
 
 	/**
 	 * ...
@@ -34,7 +35,7 @@ package model
 		
 		// Initial evenets are temporary for testing
 		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[
-			new SeasonalEvent(Calendar.FALL, 500)
+		new SeasonalEvent(Season.FALL, 500)
 		];
 		
 		public function PlayerData()

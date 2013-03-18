@@ -41,12 +41,12 @@ package time
 			var dataTally:DataTally		= new DataTally(game.data);
 			var moneyValue:uint			= new DataConverter(dataTally.sum).moneyValue;
 
-			var representativeImage:Image = new Image(Calendar.SEASON_PICTURE[calendar.season]);
+			var representativeImage:Image = new Image(calendar.season.picture);
 			representativeImage.scale = Math.min(200.0 / representativeImage.width, 200.0 / representativeImage.height);
 			addGraphic(representativeImage, 0, FP.width - representativeImage.scaledWidth - 50, 50);
 			
-			addGraphic(new Text(Calendar.SEASON_NAME[calendar.season].toUpperCase(), 50, 50));
-			addGraphic(new Text(Calendar.SEASON_DESCRIPTION[calendar.season], 50, 80));
+			addGraphic(new Text(calendar.season.name.toUpperCase(), 50, 50));
+			addGraphic(new Text(calendar.season.description, 50, 80));
 			
 			addGraphic(new Text(dataTally.activeInstrumentCount + " instruments producing data."), 0, 50, FP.halfHeight);
 			addGraphic(new Text("$" + moneyValue + " dollars earned."), 0, 50, FP.halfHeight + 20);

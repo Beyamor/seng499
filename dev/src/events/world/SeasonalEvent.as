@@ -2,6 +2,7 @@ package events.world
 {
 	import events.WorldEvent;
 	import model.Game;
+	import time.Season;
 	
 	/**
 	 * An event triggered by a particular season
@@ -9,10 +10,10 @@ package events.world
 	 */
 	public class SeasonalEvent implements WorldEvent 
 	{
-		private var season:uint;
+		private var season:Season;
 		private var moneyAward:uint;
 		
-		public function SeasonalEvent(season:uint, moneyAward:uint)
+		public function SeasonalEvent(season:Season, moneyAward:uint)
 		{
 			this.season		= season;
 			this.moneyAward	= moneyAward;
