@@ -1,6 +1,7 @@
 package common.ui
 {
 
+	import common.ImageHelper;
     import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Graphiclist;
     import net.flashpunk.graphics.Image;
@@ -60,9 +61,7 @@ package common.ui
          */
          public function withImage(image:*):ButtonBuilder {
 			 
-			 if (!(image is Image)) {
-				 image = new Image(image);
-			 }
+			 image = ImageHelper.asImage(image);
 
             impliedWidth    = image.width;
             impliedHeight   = image.height;
@@ -89,7 +88,7 @@ package common.ui
 		  */
 		 public function withImageAndText(image:*, text:Text):ButtonBuilder {
 			 
-                         if (!(image is Image)) image = new Image(image);
+            image = ImageHelper.asImage(image);
 
 			 impliedWidth = image.width;
 			 impliedHeight = image.height;
