@@ -36,11 +36,10 @@ package time
 		{
 			this.game = game;
 			
+			new SeasonChanger(game).changeSeason();
+			
 			var dataTally:DataTally		= new DataTally(game.data);
 			var moneyValue:uint			= new DataConverter(dataTally.sum).moneyValue;
-			
-			game.data.calendar.goToNextSeason();
-			game.data.addMoney(moneyValue);
 
 			var representativeImage:Image = new Image(Calendar.SEASON_PICTURE[calendar.season]);
 			representativeImage.scale = Math.min(200.0 / representativeImage.width, 200.0 / representativeImage.height);
