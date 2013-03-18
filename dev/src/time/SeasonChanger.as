@@ -40,9 +40,9 @@ package time
 			}
 			
 			// Predefined, hardcoded events
-			if (calendar.season == Season.SUMMER && calendar.year == 0) {
+			if (calendar.season == Seasons.SUMMER && calendar.year == 0) {
 				
-				var springBloom:SeasonalEvent = new SeasonalEvent(Season.SPRING, 500);
+				var springBloom:SeasonalEvent = new SeasonalEvent(Seasons.SPRING, 500);
 				
 				game.data.worldEvents.push(springBloom);
 				game.state.pushEventDisplay(new SeasonEventAnnouncement(springBloom));

@@ -18,7 +18,7 @@ package time
 		
 		public function Calendar(year:int = 0, season:Season = null)
 		{
-			this._season = season? season : Season.FIRST_SEASON;
+			this._season = season? season : Seasons.FIRST;
 			this._year	= year;
 		}
 		
@@ -29,9 +29,9 @@ package time
 		
 		public function goToNextSeason():void {
 			
-			_season = Season.next(_season);
+			_season = Seasons.next(_season);
 			
-			if (_season == Season.FIRST_SEASON) goToNextYear();
+			if (_season == Seasons.FIRST) goToNextYear();
 		}
 	}
 
