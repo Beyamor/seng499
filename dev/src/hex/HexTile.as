@@ -24,6 +24,10 @@ package hex
 	 */
 	public class HexTile extends Entity 
 	{
+		//wether tile has been discovered
+		private var _discovered:Boolean;
+		public function get discovered():Boolean { return _discovered; }
+		
 		// Data!
 		private var _data:HexData;
 		public function get data():HexData { return _data; }
@@ -51,6 +55,7 @@ package hex
 			super(x, y);
 
 			_data		= data;
+			_discovered = data.discovered;
 			_indices	= indices;
 			_radius		= radius;
 			_camera		= camera;
@@ -72,7 +77,7 @@ package hex
 						
 						var image:Image = subImage.image;
 						image.x = - subImage.width / 2;
-						image.y =  - subImage.height / 2;
+						image.y = - subImage.height / 2;
 						graphics.add(image);
 						
 						_subHitboxes.push(subImage)

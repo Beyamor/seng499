@@ -23,8 +23,8 @@ package hex.controllers {
         }
 
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
-
-            view.goToUnderseaView(tile);
+			if(tile.discovered)
+				view.goToUnderseaView(tile);
         }
     }
 }

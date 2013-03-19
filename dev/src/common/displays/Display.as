@@ -1,5 +1,6 @@
 package common.displays {
 
+	import common.PositionHelper;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import net.flashpunk.World;
@@ -44,10 +45,13 @@ package common.displays {
         public function get center():Point { return new Point(width/2, height/2); }
 
         public var stack:DisplayStack = null;
+		
+		private var onEndCallbacks:Vector.<Function> = new Vector.<Function>;
 				
 		// Display nesting stuff
 		private var _parent:World;
         public function get parent():World { return _parent; }
+        public function set parent(newParent:World):void { _parent = newParent; }
 		
 		private function get parentIsDisplay():Boolean { return parent is Display; }
 		private function get parentAsDisplay():Display { return parent as Display; }
@@ -191,5 +195,24 @@ package common.displays {
 
 		public function expandRightEdgeTo(something:*):void { rightEdgePin = something; }
 		public function withRightEdgeExpandingTo(something:*):Display { expandRightEdgeTo(something); return this; }
+		
+		public function centerOnParent():void {
+			
+			if (parentIsDisplay)	PositionHelper.centerOn(this, parentAsDisplay);
+			else					PositionHelper.centerOn(this, FP);
+		}
+		
+		public function addOnEndCallback(callback:Function):Display {
+			
+			onEndCallbacks.push(callback);
+			return this;
+		}
+		
+		override public function end():void 
+		{
+			super.end();
+			
+			for each (var callback:Function in onEndCallbacks) callback();
+		}
     }
 }

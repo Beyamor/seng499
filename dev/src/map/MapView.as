@@ -34,6 +34,7 @@ package map
 		public var mapDisplay:MapDisplay;
 		public var inventoryDisplay:InventoryDisplay;
 		public var instructionDisplay:InstructionDisplay;
+		private var whatDisplay:Display;
 		
 		public var _controller:MapController;
 		public function get controller():MapController { return _controller; }
@@ -53,7 +54,9 @@ package map
 			controller = new ControllerFactory(this).build();
 			
 			inventoryDisplay = new InventoryDisplay(this, game.data);
-			inventoryDisplay.slideOn();
+			inventoryDisplay.slideOn(function():void {
+				showNextEventDisplay();
+			});
 			
 			mapDisplay = new MapDisplay(this, game);
 			mapDisplay.expandRightEdgeTo(inventoryDisplay);
@@ -68,7 +71,7 @@ package map
 			
 			// TODO: Move this into the inventory display?
 			inventoryDisplay.addStandardButton(
-						"Change season",
+						"Next Season",
 						function():void { FP.world = new TimeProgressionView(game); } );
 						
 			inventoryDisplay.addStandardButton(
@@ -95,6 +98,19 @@ package map
 			
 				FP.world = new HexView(game, node.mapX, node.mapY);
 			});
+		}
+		
+		private function showNextEventDisplay():void {
+			
+			if (!game.state.hasEventDisplays) return;
+			
+			var eventDisplay:Display = game.state.popEventDisplay();
+			whatDisplay = eventDisplay;
+			
+			eventDisplay.addOnEndCallback(function():void { showNextEventDisplay(); } );
+			eventDisplay.parent = this;
+			
+			displays.push(eventDisplay);
 		}
 	}
 

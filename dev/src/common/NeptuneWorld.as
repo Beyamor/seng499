@@ -48,6 +48,7 @@ package common
 		override public function end():void 
 		{
 			super.end();
+			displays.end();
 			Cursor.hideActiveIfThis(cursor);
 		}
 	}

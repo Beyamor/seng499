@@ -4,6 +4,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.media.Sound;
+	import flash.utils.setTimeout;
 	import hex.HexView;
 	import map.MapView;
 	import model.Game;
@@ -51,9 +52,9 @@ package
 		{
 			super.update();
 			
-			if (Input.pressed("debug-hex-start"))	FP.world = new HexView(game, 0, 0);
-			else if (Input.pressed("debug-map-start"))	FP.world = new MapView(game);
-			else if (Input.pressed("debug-store-start")) FP.world = new StoreView(game);
+			if (Input.pressed("debug-hex-start"))			FP.world = new HexView(game, 0, 0);
+			else if (Input.pressed("debug-map-start"))		FP.world = new MapView(game);
+			else if (Input.pressed("debug-store-start"))	FP.world = new StoreView(game);
 		}
 		
 		private function initModel():void
@@ -65,6 +66,15 @@ package
 		{
 			var sound:Sound = (new Assets.SOUND_NEPTUNE) as Sound;
 			sound.play();
+			sound.addEventListener(Event.SOUND_COMPLETE, replaySound);
+			setTimeout(replaySound, sound.length);
+		}
+		
+		private function replaySound():void
+		{
+			var sound:Sound = (new Assets.SOUND_NATIVE_RAINFALL) as Sound;
+			sound.play();
+			setTimeout(replaySound, sound.length);
 		}
 }
 	

@@ -1,5 +1,6 @@
 package undersea.displays {
 
+	import flash.geom.Point;
     import flash.geom.Rectangle;
 	import hex.HexTile;
     import hex.HexView;
@@ -32,7 +33,7 @@ package undersea.displays {
 			
             super(parent, 0, 0, FP.width, FP.height);
 			
-			setUpButtons();
+			setUpNavigationButtons();
 			setUpInstruments();	
         }
 			
@@ -42,7 +43,7 @@ package undersea.displays {
 			
 		}
 		
-		private function setUpButtons():void
+		private function setUpNavigationButtons():void
 		{
 			add(Button.description()
 						.fixedAt(FP.width - 58, FP.height - 42)
@@ -51,30 +52,40 @@ package undersea.displays {
 						.whenClicked(clickedBack)
 						.build());
 		}
-				
+		
+		private function clickedInstrument(instrument:ObservatoryComponent):Function
+		{
+			return function():void {
+				stack.push(new InstrumentDisplay(parent, instrument));
+			
+             }
+		}
+		
 		private function setUpInstruments():void
 		{
-			var instrument:ObservatoryComponent;
 			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
 			
-			for (var i:uint = 0; i < instruments.length; i++)
+			for each (var instrument:ObservatoryComponent in instruments) 
 			{
-				instrument = instruments[i];
-				var status:String = instrument.getName();
-				if (instrument is Instrument)
-					status += (instrument as Instrument).isProducingData? " - Recording data" : " - Recording Noise";
-				addGraphic(new Text(instrument.getName(), 20, 30 + 20 * i));
+				// evenly spaced out on ground
+				var placePoint:Point = new Point((FP.width / (instruments.length + 1)) * (instruments.indexOf(instrument) + 1), 400);
+				var placeImage:Image = new Image(instrument.getImage());
+				placeImage.scale = 3.0;
+				add(Button.description()
+					.fixedAt(placePoint.x, placePoint.y)
+					.withImageAndText(
+						placeImage,
+						new Text(instrument.getName()))
+					.withDepth(-1)
+					.whenClicked(clickedInstrument(instrument))
+					.build());
 			}
+		
 		}
 		
 		override public function update():void
 		{
 			super.update();
-			
-			// if user clicks on the instrument in question.
-			if (Input.mouseDown && Input.check("hex-scroll-up")) {
-				stack.push(new InstrumentDisplay(parent));
-			}
 		}
 		
 		override public function render():void

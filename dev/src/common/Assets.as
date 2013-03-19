@@ -6,7 +6,9 @@ package common{
 		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
 
 		/* Generating mp3 assets! */
+		[Embed(source = "../assets/sound/native_rainfall.mp3")] public static const SOUND_NATIVE_RAINFALL:Class
 		[Embed(source = "../assets/sound/neptune.mp3")] public static const SOUND_NEPTUNE:Class
+		[Embed(source = "../assets/sound/uvic_gamedev_bumper.mp3")] public static const SOUND_UVIC_GAMEDEV_BUMPER:Class
 
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
@@ -24,7 +26,7 @@ package common{
 		[Embed(source = "../assets/map/Node.png")] public static const IMG_NODE:Class
 		[Embed(source = "../assets/map/NodeTargetRing.png")] public static const IMG_NODETARGETRING:Class
 		[Embed(source = "../assets/map/PlacingMouse.png")] public static const IMG_PLACINGMOUSE:Class
-		[Embed(source = "../assets/map/SeaLife.png")] public static const IMG_SEALIFE:Class
+		[Embed(source = "../assets/map/SeaLife.png")] public static const IMG_SEALIFE:Class		
 		[Embed(source = "../assets/map/TestInstrument.png")] public static const IMG_TESTINSTRUMENT:Class
 		[Embed(source = "../assets/store/back.png")] public static const IMG_BACK:Class
 		[Embed(source = "../assets/store/bg.png")] public static const IMG_BG:Class

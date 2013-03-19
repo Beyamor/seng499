@@ -9,53 +9,30 @@ package time
 	 */
 	public class Calendar 
 	{
-		public static const NUMBER_OF_SEASONS:uint = 4;
 		
-		private var _season:int	= 0;
-		private var _year:int	= 0;
+		private var _season:Season;
+		private var _year:int;
 		
-		public function get season():int { return _season; }
+		public function get season():Season { return _season; }
 		public function get year():int { return _year; }
 		
-		public function Calendar(year:int = 0, season:int = 0)
+		public function Calendar(year:int = 0, season:Season = null)
 		{
-			this._season = season;
+			this._season = season? season : Seasons.FIRST;
 			this._year	= year;
 		}
 		
 		private function goToNextYear():void {
 			
 			++_year;
-			_season = 0;
 		}
 		
 		public function goToNextSeason():void {
 			
-			++_season;
+			_season = Seasons.next(_season);
 			
-			if (_season >= NUMBER_OF_SEASONS) goToNextYear();
+			if (_season == Seasons.FIRST) goToNextYear();
 		}
-		
-		public static const SEASON_NAME:Vector.<String> = new <String>[
-			"Spring",
-			"Summer",
-			"Fall",
-			"Winter"
-		];
-		
-		public static const SEASON_PICTURE:Vector.<Class> = new <Class>[
-			Assets.IMG_EVENT_1,
-			Assets.IMG_EVENT_2,
-			Assets.IMG_EVENT_3,
-			Assets.IMG_EVENT_4
-		];
-		
-		public static const SEASON_DESCRIPTION:Vector.<String> = new <String>[
-			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
-			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
-			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor.",
-			"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.\nQuisque pretium auctor tortor,\neget vulputate lorem pulvinar in.\nSed viverra porttitor."
-		];
 	}
 
 }

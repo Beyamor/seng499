@@ -22,7 +22,7 @@ package title
 		{
 			addGraphic(new Image(Assets.IMG_TITLE),0,0,0);
 			addGraphic(new Text("SUPER GREAT NEPTUNE GAME"), 0, 520, 500);
-			addGraphic(new Text("(press any key)"), 0, 560, 520);
+			addGraphic(new Text("(click to start)"), 0, 560, 520);
 			this.game = game;
 			
 			camera.y = 130;
@@ -32,7 +32,10 @@ package title
 		{
 			super.update();
 			
-			if (Input.check(Key.ANY) || Input.mousePressed) FP.world = new MapView(game);
+			// Commenting out key pressing because we don't want to create *two* new map views
+			// Because they pop event displays in their constructors, we lose displays on subsequent map views.
+			// TODO: Dunno. Move the popping into the start method?
+			if (/*Input.check(Key.ANY) ||*/ Input.mousePressed) FP.world = new MapView(game);
 			
 			if (camera.y > 0) camera.y = camera.y - 0.5;
 		}

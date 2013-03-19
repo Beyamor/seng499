@@ -1,10 +1,14 @@
 package model 
 {
+	import common.displays.Display;
+	import events.displays.SeasonEventAnnouncement;
+	import events.world.SeasonalEvent;
 	import flash.geom.Point;
 	import hex.HexIndices;
 	import map.terrain.TerrainForce;
 	import observatory.Connectable;
     import observatory.ComponentData;
+	import time.Season;
 	//import GameConstants;
 	
 	/**
@@ -23,6 +27,8 @@ package model
 		private var connectionPoint:Connectable = null;
 		private var lastViewedHex:Point = null;
 		private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
+		
+		private var eventDisplayQueue:Vector.<Display> = new <Display>[];
 		
 		public function GameState() 
 		{
@@ -106,6 +112,24 @@ package model
 		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
 		{
 			return _activeTerrainForces[indecies.x][indecies.y];
+		}
+		
+		public function pushEventDisplay(display:Display):void {
+			
+			if (!display) return;
+			eventDisplayQueue.push(display);
+		}
+		
+		public function get hasEventDisplays():Boolean {
+			
+			return (eventDisplayQueue.length > 0)
+		}
+		
+		public function popEventDisplay():Display {
+			
+			if (!hasEventDisplays) return null;
+			
+			return eventDisplayQueue.shift();
 		}
 	}
 
