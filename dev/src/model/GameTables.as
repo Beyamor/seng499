@@ -29,12 +29,15 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
+						.isSeenOnHexGrid()
 						.costs(40)
                         .finish(),
+						
 					InstrumentProperties.describe("CTB")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
+						.isSeenOnHexGrid()
 						.costs(70)
                         .finish(),
 						
@@ -42,6 +45,7 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
+						.isSeenOnHexGrid()
 						.costs(100)
                         .finish(),
 						
@@ -49,6 +53,7 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
+						.isSeenOnHexGrid()
 						.costs(130)
                         .finish()
                 );
