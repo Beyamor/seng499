@@ -94,7 +94,7 @@ package hex
 							subImage.y = y -subImage.height - 5;
 							
 							image.x = -subImage.width - 5;
-							image.y = subImage.height - 5;
+							image.y = -subImage.height - 5;
 						}
 						else if(i == 1)
 						{
