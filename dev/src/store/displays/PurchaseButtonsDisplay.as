@@ -71,13 +71,9 @@ package store.displays {
 					var storeItemString:String = component.getName() 
 						+ " - " 
 						+ GameTables.instrumentByName(component.getName()).cost;
+						
 					var storeItemText:Text = new Text(storeItemString);
-					if (!playerData.canAfford(component)) {
-						// TODO: Why doesn't this change the color. I'll just make it less alpha for now, instead of red. - CP
-						storeItemText.color = 0x000000;
-						storeItemText.alpha = 0.3;
-					}
-					
+					storeItemText.color = playerData.canAfford(component)? 0x000000 : 0xff0000;					
 				
 					purchaseButtons.push(Button.description()
 										.withDepth(-1)
