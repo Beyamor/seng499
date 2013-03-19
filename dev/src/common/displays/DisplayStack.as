@@ -90,5 +90,10 @@ package common.displays {
 			pop();
 			return true;
 		}
+		
+		public function end():void 
+		{
+			for each (var display:Display in displays) display.end();
+		}
     }
 }
