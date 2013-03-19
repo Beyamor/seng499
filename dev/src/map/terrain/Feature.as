@@ -47,7 +47,7 @@ package map.terrain
 			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)),  initialForce, spread);
 		}
 		
-		public function get mapImage()
+		public function get mapImage():Image
 		{
 			return _mapImage;
 		}

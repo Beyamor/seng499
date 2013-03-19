@@ -21,12 +21,12 @@ package model
 		}
 		
 		//Aww fuck it, just move this to playerData asap.
-		public function addFeature(feature:Feature)
+		public function addFeature(feature:Feature):void
 		{
 			data.terrainFeatures.push(feature);
 		}
 		
-		public function getFeatures()
+		public function getFeatures():Vector.<Feature>
 		{
 			return data.terrainFeatures;
 		}

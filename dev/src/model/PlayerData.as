@@ -177,7 +177,7 @@ package model
 		 * @param	force
 		 * @param	indecies
 		 */
-		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices)
+		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices):void
 		{
 			_unresolvedTerrainForces[indecies.x][indecies.y].push(force);
 		}
@@ -192,7 +192,7 @@ package model
 			return _unresolvedTerrainForces;
 		}
 		
-		private function addStaticTerrainFeatures() 
+		private function addStaticTerrainFeatures():void
 		{
 			//Add the geological features here.  For now I'm using it to add our sea life terrain for testing.
 			terrainFeatures.push(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))

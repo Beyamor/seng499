@@ -85,7 +85,7 @@ package hex {
 		 * Sets permanent terrain value of tile.
 		 * @param	terrain
 		 */
-		public function discover(terrain:Terrain) {
+		public function discover(terrain:Terrain):void {
 			_discovered = true;
 			_terrain = terrain;
 		}

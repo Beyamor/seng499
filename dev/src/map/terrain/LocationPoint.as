@@ -21,14 +21,14 @@ package map.terrain
 		
 		public function angleToPoint(point:Point):Number
 		{
-			var diff = this.point.subtract(point);
+			var diff:Point = this.point.subtract(point);
 			return getAngleMultipleOf(diff,30);
 		}
 		
 		//returns an angle that is a multiple of interval.  Assumes y is negative up and positive down.
 		public function getAngleMultipleOf(diff:Point, interval:int):int
 		{	
-			var angle = 0;
+			var angle:Number = 0;
 			if (diff.x == 0)
 			{
 				if (diff.y > 0) angle = 270;
@@ -41,13 +41,13 @@ package map.terrain
 			}
 			else 
 			{
-				var tmp_angle = Math.atan(Math.abs(diff.y) / Math.abs(diff.x)) * 180 / Math.PI;
-				var rem = tmp_angle % interval;
+				var tmp_angle:Number = Math.atan(Math.abs(diff.y) / Math.abs(diff.x)) * 180 / Math.PI;
+				var rem:Number = tmp_angle % interval;
 				
 				if (Math.floor(rem / Math.floor(interval / 2)) < 1) tmp_angle -= rem;
 				else 												tmp_angle += interval - rem;
 				
-				var switch_var = 0
+				var switch_var:int = 0
 				if (diff.x > 0) switch_var += 1;
 				if (diff.y > 0) switch_var += 2;
 				

@@ -17,7 +17,7 @@ package map
 			
 		}
 		
-		public function isValidPlacement(mapX:int, mapY:int) {
+		public function isValidPlacement(mapX:int, mapY:int):Boolean {
 			
 			return PLACEMENT_MASK.getPixel(mapX, mapY) == VALID_PLACEMENT_COLOR;
 		}
