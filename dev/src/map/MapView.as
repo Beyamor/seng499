@@ -54,7 +54,9 @@ package map
 			controller = new ControllerFactory(this).build();
 			
 			inventoryDisplay = new InventoryDisplay(this, game.data);
-			inventoryDisplay.slideOn();
+			inventoryDisplay.slideOn(function():void {
+				showNextEventDisplay();
+			});
 			
 			mapDisplay = new MapDisplay(this, game);
 			mapDisplay.expandRightEdgeTo(inventoryDisplay);
@@ -75,8 +77,6 @@ package map
 			inventoryDisplay.addStandardButton(
 						"Store",
 						function():void { goToStore(); } );
-						
-			showNextEventDisplay();
 		}
 		
 		public function getGame():Game 
