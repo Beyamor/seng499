@@ -32,7 +32,9 @@ package undersea.displays {
         public function InstrumentDisplay(parent:World) 
 		{
             super(parent,FP.width - 200, FP.height - 200);
-			setUpFLVStream()
+			setUpFLVStream();
+			
+			addOnEndCallback(onEnd);
         }
 
 		private function getMeta(mdata:Object):void
@@ -56,6 +58,12 @@ package undersea.displays {
 			}
 		}
 		
+		private function onEnd():void
+		{
+			FP.stage.removeChild(video);
+			ns.close();
+		}
+		
 		private function setUpFLVStream():void
 		{
 			FP.stage.addChild(video);
@@ -76,7 +84,6 @@ package undersea.displays {
 		override public function begin():void
 		{
 			super.begin();
-			setUpFLVStream();
 		}
 		
 		override public function update():void
@@ -90,12 +97,5 @@ package undersea.displays {
 			super.render();
 		}
 		
-		override public function end():void
-		{
-			super.end();
-			
-			FP.stage.removeChild(video);
-			ns.close();
-		}
     }
 }
