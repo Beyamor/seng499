@@ -197,11 +197,11 @@ package model
 			//Add the geological features here.  For now I'm using it to add our sea life terrain for testing.
 			terrainFeatures.push(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))
 														.setLocationStructure(new LocationPoint(1000, 400))
-														.setImageCoordinates(9974, 374)
+														.setImageCoordinates(974, 374)
 														.setRange(100)
 														.setTerrainForceSpread(1)
 														.setTerrainInitialForce(1)
-														.setTerrainTile(new Terrain(Types.REEF))
+														.setTerrainTile(new Terrain(Types.NOT_MUD))
 														.build()
 								);
 			
