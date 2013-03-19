@@ -116,6 +116,7 @@ package model
 		
 		public function pushEventDisplay(display:Display):void {
 			
+			if (!display) return;
 			eventDisplayQueue.push(display);
 		}
 		

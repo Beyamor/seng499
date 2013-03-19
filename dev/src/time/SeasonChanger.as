@@ -33,7 +33,16 @@ package time
 				
 				if (event.hasOccurred(game)) {
 					
-					if (event.wasAchieved(game)) event.giveRewards(game);
+					if (event.wasAchieved(game)) {
+						
+						event.giveRewards(game);
+						game.state.pushEventDisplay(event.achievementDisplay);
+					}
+				
+					else {
+						
+						game.state.pushEventDisplay(event.failureDisplay);
+					}
 
 					game.data.worldEvents.splice(game.data.worldEvents.indexOf(event), 1);
 				}
@@ -45,7 +54,7 @@ package time
 				var springBloom:SeasonalEvent = new SeasonalEvent(Seasons.SPRING, 500, "The Spring Bloom will happen next spring.\nGet you some.");
 				
 				game.data.worldEvents.push(springBloom);
-				game.state.pushEventDisplay(new SeasonEventAnnouncement(springBloom));
+				game.state.pushEventDisplay(springBloom.announcementDisplay);
 			}
 		}
 	}
