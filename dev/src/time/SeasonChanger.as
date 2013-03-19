@@ -42,7 +42,7 @@ package time
 			// Predefined, hardcoded events
 			if (calendar.season == Seasons.SUMMER && calendar.year == 0) {
 				
-				var springBloom:SeasonalEvent = new SeasonalEvent(Seasons.SPRING, 500);
+				var springBloom:SeasonalEvent = new SeasonalEvent(Seasons.SPRING, 500, "The Spring Bloom will happen next spring.\nGet you some.");
 				
 				game.data.worldEvents.push(springBloom);
 				game.state.pushEventDisplay(new SeasonEventAnnouncement(springBloom));

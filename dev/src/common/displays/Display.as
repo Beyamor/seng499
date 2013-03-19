@@ -1,5 +1,6 @@
 package common.displays {
 
+	import common.PositionHelper;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import net.flashpunk.World;
@@ -195,16 +196,10 @@ package common.displays {
 		public function expandRightEdgeTo(something:*):void { rightEdgePin = something; }
 		public function withRightEdgeExpandingTo(something:*):Display { expandRightEdgeTo(something); return this; }
 		
-		public function centerOn(something:*):void {
-			
-			x = something.width / 2 - halfWidth;
-			y = something.height / 2 - halfHeight;
-		}
-		
 		public function centerOnParent():void {
 			
-			if (parentIsDisplay)	centerOn(parentAsDisplay);
-			else					centerOn(FP);
+			if (parentIsDisplay)	PositionHelper.centerOn(this, parentAsDisplay);
+			else					PositionHelper.centerOn(this, FP);
 		}
 		
 		public function addOnEndCallback(callback:Function):Display {

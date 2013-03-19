@@ -1,6 +1,9 @@
 package events.displays 
 {
 	import common.displays.Display;
+	import common.PositionHelper;
+	import common.ui.Button;
+	import common.ui.NeptuneButtons;
 	import events.world.SeasonalEvent;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -15,12 +18,24 @@ package events.displays
 	{
 		public function SeasonEventAnnouncement(event:SeasonalEvent)
 		{
-			super(null, 0, 0, 400, 300);
+			super(null, 0, 0, 450, 300);
 			
-			clearColor		= Math.round( Math.random() * 0xFFFFFF ) | 0xFF000000;
+			// TODO: Figure out what we're doing with colours.
+			clearColor		= 0x88FFFFFF;
 			blocksUpdates	= true;
 			
-			addGraphic(new Text(event.season.name + " - " + event.moneyAward));
+			var instructionText:Text = new Text("Complete by " + event.season.name + " to earn $" + event.moneyAward + ".");
+			PositionHelper.centerXOn(instructionText, this);
+			instructionText.y = height - 65;
+			addGraphic(instructionText);
+			
+			var that:SeasonEventAnnouncement = this;
+			var closeButton:Button = NeptuneButtons.standard("close", 0, height - 35, function():void { stack.popIfTop(that); } );
+			PositionHelper.centerXOn(closeButton, this);
+			add(closeButton);
+			
+			var descriptionText:Text = new Text(event.description, 10, 10);
+			addGraphic(descriptionText);
 		}
 		
 		override public function set parent(value:World):void 
@@ -28,13 +43,6 @@ package events.displays
 			super.parent = value;
 			
 			centerOnParent();
-		}
-		
-		override public function update():void 
-		{
-			super.update();
-			
-			if (Input.mousePressed && stack) stack.popIfTop(this);
 		}
 	}
 

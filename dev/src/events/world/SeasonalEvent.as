@@ -12,11 +12,13 @@ package events.world
 	{
 		public var season:Season;
 		public var moneyAward:uint;
+		public var description:String;
 		
-		public function SeasonalEvent(season:Season, moneyAward:uint)
+		public function SeasonalEvent(season:Season, moneyAward:uint, description:String)
 		{
-			this.season		= season;
-			this.moneyAward	= moneyAward;
+			this.season			= season;
+			this.moneyAward		= moneyAward;
+			this.description	= description;
 		}
 		
 		public function hasOccurred(game:Game):Boolean 
