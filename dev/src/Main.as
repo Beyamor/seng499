@@ -4,6 +4,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.media.Sound;
+	import flash.utils.setTimeout;
 	import hex.HexView;
 	import map.MapView;
 	import model.Game;
@@ -65,6 +66,15 @@ package
 		{
 			var sound:Sound = (new Assets.SOUND_NEPTUNE) as Sound;
 			sound.play();
+			sound.addEventListener(Event.SOUND_COMPLETE, replaySound);
+			setTimeout(replaySound, sound.length);
+		}
+		
+		private function replaySound():void
+		{
+			var sound:Sound = (new Assets.SOUND_NATIVE_RAINFALL) as Sound;
+			sound.play();
+			setTimeout(replaySound, sound.length);
 		}
 }
 	

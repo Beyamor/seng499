@@ -6,7 +6,9 @@ package common{
 		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
 
 		/* Generating mp3 assets! */
+		[Embed(source = "../assets/sound/native_rainfall.mp3")] public static const SOUND_NATIVE_RAINFALL:Class
 		[Embed(source = "../assets/sound/neptune.mp3")] public static const SOUND_NEPTUNE:Class
+		[Embed(source = "../assets/sound/uvic_gamedev_bumper.mp3")] public static const SOUND_UVIC_GAMEDEV_BUMPER:Class
 
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
