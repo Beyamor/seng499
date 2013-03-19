@@ -23,19 +23,35 @@ package undersea.displays {
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 	import flash.utils.ByteArray;
+	import observatory.ObservatoryComponent;
 
     public class InstrumentDisplay extends Popup 
 	{
 		private var video:Video = new Video();
 		private var ns:NetStream;
 		
-        public function InstrumentDisplay(parent:World) 
+		private var instrument:ObservatoryComponent;
+		
+        public function InstrumentDisplay(parent:World, instrument:ObservatoryComponent) 
 		{
-            super(parent,FP.width - 200, FP.height - 200);
+			this.instrument = instrument;
+			clearColor = 0xff000000;
+			blocksUpdates = true;
+			
+            super(parent, FP.width - 100, FP.height - 100);
+			
 			setUpFLVStream();
+			setUpInstrumentInformation();
 			
 			addOnEndCallback(onEnd);
+			
         }
+		
+		private function setUpInstrumentInformation():void 
+		{
+			addGraphic(new Text(instrument.getName(), 400, 200));
+			addGraphic(new Text("A description of the instrument\n in question.", 400, 300));
+		}
 
 		private function getMeta(mdata:Object):void
 		{
@@ -77,24 +93,8 @@ package undersea.displays {
 			metaSniffer.onMetaData = getMeta;
 			nc.connect(null);
 			
-			video.x = x;
-			video.y = y;
-		}
-		
-		override public function begin():void
-		{
-			super.begin();
-		}
-		
-		override public function update():void
-        {
-            super.update();
-        }
-		
-		override public function render():void
-		{
-			Draw.rect(100, 100, width, height,0xFFAAFF);
-			super.render();
+			video.x = x + 10;
+			video.y = y + 10;
 		}
 		
     }
