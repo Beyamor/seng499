@@ -3,6 +3,9 @@ package model
 	import common.Assets;
 	import events.world.SeasonalEvent;
 	import events.WorldEvent;
+	import hex.terrain.Types;
+	import map.terrain.FeatureBuilder;
+	import map.terrain.LocationPoint;
 	import net.flashpunk.graphics.Image;
 	import hex.math.SpaceConverter;
 	import hex.HexData;
@@ -16,6 +19,7 @@ package model
 	import map.terrain.TerrainForce;
 	import hex.terrain.TerrainSetter;
 	import time.Season;
+	import map.terrain.Feature;
 
 	/**
 	 * ...
@@ -33,12 +37,16 @@ package model
 		private var _money:uint = 100;
 		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		
+		//let's all be nice and not touch this outside of the game's access to it 
+		public var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
+		
 		// Initial evenets are temporary for testing
 		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[];
 		
 		public function PlayerData()
 		{
 			populateStoreList();
+			addStaticTerrainFeatures();
 		}
 		
 		public function printInventory():void
@@ -182,6 +190,22 @@ package model
 		public function getAllTerrainData():Vector.< Vector.< Vector.<TerrainForce> > > 
 		{
 			return _unresolvedTerrainForces;
+		}
+		
+		private function addStaticTerrainFeatures() 
+		{
+			//Add the geological features here.  For now I'm using it to add our sea life terrain for testing.
+			terrainFeatures.push(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))
+														.setLocationStructure(new LocationPoint(1000, 400))
+														.setImageCoordinates(9974, 374)
+														.setRange(100)
+														.setTerrainForceSpread(1)
+														.setTerrainInitialForce(1)
+														.setTerrainTile(new Terrain(Types.REEF))
+														.build()
+								);
+			
+														
 		}
 	}
 

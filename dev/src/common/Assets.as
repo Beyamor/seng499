@@ -26,7 +26,7 @@ package common{
 		[Embed(source = "../assets/map/Node.png")] public static const IMG_NODE:Class
 		[Embed(source = "../assets/map/NodeTargetRing.png")] public static const IMG_NODETARGETRING:Class
 		[Embed(source = "../assets/map/PlacingMouse.png")] public static const IMG_PLACINGMOUSE:Class
-		[Embed(source = "../assets/map/SeaLife.png")] public static const IMG_SEALIFE:Class		
+		[Embed(source = "../assets/map/SeaLife.png")] public static const IMG_SEALIFE:Class
 		[Embed(source = "../assets/map/TestInstrument.png")] public static const IMG_TESTINSTRUMENT:Class
 		[Embed(source = "../assets/store/back.png")] public static const IMG_BACK:Class
 		[Embed(source = "../assets/store/bg.png")] public static const IMG_BG:Class

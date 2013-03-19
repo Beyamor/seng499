@@ -17,21 +17,24 @@ package map.terrain
 		private var location:LocationStructure;
 		private var range:Number;
 		private var terrain:Terrain;
-		private var mapImage:Image;
-		private var decayTick:int;
+		private var _mapImage:Image;
 		private var spread:int;
 		private var initialForce:int;
+		public var x:int;
+		public var y:int;
+		
 		
 		//we'll eventually need a fluent setup for this too.
-		public function Feature(location:LocationStructure, range:Number, terrain:Terrain, mapImage:Image, force:int, spread:int, decayRate:int) 
+		public function Feature(location:LocationStructure, range:Number, terrain:Terrain, mapImage:Image, force:int, spread:int, x:int, y:int) 
 		{
 			this.location = location;
 			this.range = range;
 			this.terrain = terrain;
-			this.mapImage = mapImage;
-			this.decayTick = decayTick;
+			this._mapImage = mapImage;
 			this.spread = spread;
 			this.initialForce = force;
+			this.x = x;
+			this.y = y;
 		}
 		
 		public function isInRange(point:Point):Boolean
@@ -41,7 +44,12 @@ package map.terrain
 		
 		public function getTerrainForce(indecies:HexIndices):TerrainForce
 		{
-			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)),  initialForce, spread, decayTick);
+			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)),  initialForce, spread);
+		}
+		
+		public function get mapImage()
+		{
+			return _mapImage;
 		}
 	}
 

@@ -13,22 +13,22 @@ package model
 	{
 		public var state:GameState = new GameState();
 		public var data:PlayerData = new PlayerData();
-		private var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
 		public function Game() 
 		{
 			state = new GameState();
 			data = new PlayerData();
-			addFeatures();
+			//addFeatures();
 		}
 		
-		public function addFeatures()
+		//Aww fuck it, just move this to playerData asap.
+		public function addFeature(feature:Feature)
 		{
-			terrainFeatures.push(new Feature(new LocationPoint(0,0),200,new Terrain(Types.MUD),null,0,0,0));
+			data.terrainFeatures.push(feature);
 		}
 		
 		public function getFeatures()
 		{
-			return terrainFeatures;
+			return data.terrainFeatures;
 		}
 	}
 }

@@ -6,11 +6,13 @@ package map.displays
 	import flash.events.ContextMenuEvent;
 	import map.MapEntity;
 	import map.MapView;
+	import map.terrain.Feature;
 	import observatory.Node;
 	import map.NodeEntity;
 	import model.Game;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
+	import map.terrain.TerrainImageEntity;
 	
 	/**
 	 * ...
@@ -35,6 +37,11 @@ package map.displays
 			scrollCamera		= new ScrollCamera(this, 350, 0, 0, WIDTH, HEIGHT);
 			
 			add(new MapEntity(0, 0));
+			
+			for each (var feature:Feature in game.getFeatures())
+			{
+				add(new TerrainImageEntity(feature));
+			}
 			
 			for (var i:int = 0 ; i < game.data.nodeList.length; i++ )
 			{

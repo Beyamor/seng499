@@ -11,21 +11,17 @@ package map.terrain
 	{
 		private var direction:int;
 		private var terrain:Terrain;
-		//private var rootHex:HexIndices;
 		private var spread:int;
-		private var decay:int;
 		private var force:int;
 		private var _alreadyPropegated:Boolean = false;
 		public function get alreadyPropegated():Boolean { return _alreadyPropegated; }
 		
 		//Don't worry Tom, I'm planning a fluent constructor for this later.  This is just a stand in.
-		public function TerrainForce(terrain:Terrain, direction:int, /*root:HexIndices,*/ force:int, spread:int, decay:int) 
+		public function TerrainForce(terrain:Terrain, direction:int, force:int, spread:int) 
 		{
 			this.terrain = terrain;
 			this.direction = direction;
-			//this.rootHex = root;
 			this.spread = spread;
-			this.decay = decay;
 			this.force = force;
 		}	
 		
@@ -37,7 +33,7 @@ package map.terrain
 				var newTargets:Vector.<HexIndices> = getPropegationList(indecies);
 				
 				//replace with use of fluent constructor?
-				var childForce:TerrainForce = new TerrainForce(terrain,direction,force-decay,spread,decay);
+				var childForce:TerrainForce = new TerrainForce(terrain,direction,force-1,spread);
 				
 				for each (var target:HexIndices in newTargets)
 				{
@@ -46,18 +42,11 @@ package map.terrain
 			}
 		}
 		
-		//I need to think more about how these will work with our system.
-		/*public function inSpread(indecies:HexIndices):Boolean
-		{
-			var angle:int  = Math.atan2(indecies.y-rootHex.y,indecies.x-rootHex.x) * 180 / Math.PI;
-			translate
-			return false;
-		}*/
-		
 		//Caculates whether a given hex is in range
 		public function getPropegationList(indecies:HexIndices):Vector.<HexIndices>
 		{
 			var hexes:Vector.<HexIndices> = new Vector.<HexIndices>;
+			//Need to change this to make use of spread.
 			switch(direction)
 			{
 				case 0:

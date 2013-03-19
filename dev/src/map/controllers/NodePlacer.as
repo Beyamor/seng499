@@ -47,7 +47,7 @@ package map.controllers
 				mapView.controller = new HexViewer(mapView);
 			}
 			
-			else {
+			else {	
 				
 				mapView.instructionDisplay.show("place on open water");
 			}
