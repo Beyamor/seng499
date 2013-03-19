@@ -4,6 +4,7 @@ package time
 	import data.DataTally;
 	import events.displays.SeasonEventAnnouncement;
 	import events.world.SeasonalEvent;
+	import events.world.SpecialEvents;
 	import events.WorldEvent;
 	import model.Game;
 	/**
@@ -48,13 +49,11 @@ package time
 				}
 			}
 			
-			// Predefined, hardcoded events
-			if (calendar.season == Seasons.SUMMER && calendar.year == 0) {
+			// Special events triggered by date
+			for each (var dateTriggeredEvent:WorldEvent in SpecialEvents.triggeredByDate(calendar)) {
 				
-				var springBloom:SeasonalEvent = new SeasonalEvent(Seasons.SPRING, 500, "The Spring Bloom will happen next spring.\nGet you some.");
-				
-				game.data.worldEvents.push(springBloom);
-				game.state.pushEventDisplay(springBloom.announcementDisplay);
+				game.data.worldEvents.push(dateTriggeredEvent);
+				game.state.pushEventDisplay(dateTriggeredEvent.announcementDisplay);
 			}
 		}
 	}
