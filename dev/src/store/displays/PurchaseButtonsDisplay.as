@@ -5,6 +5,7 @@ package store.displays {
     import hex.HexView;
     import map.MapView;
     import model.PlayerData;
+	import model.GameTables;
     import net.flashpunk.FP;
     import net.flashpunk.Graphic;
     import net.flashpunk.graphics.Image;
@@ -66,20 +67,31 @@ package store.displays {
                 var purchaseButtons:Vector.<Button> = new Vector.<Button>;
                 
                 for each (var component:ComponentData in playerData.storeList) {
-						
-                        purchaseButtons.push(Button.description()
-                                            .withDepth(-1)
-                                            .withImageAndText(
-                                                component.getStoreImage(),
-                                                new Text(component.getName()))
-                                            .whenClicked(purchaseFunction(component))
-                                            .build());
-						
+									
+					var storeItemString:String = component.getName() 
+						+ " - " 
+						+ GameTables.instrumentByName(component.getName()).cost;
+					var storeItemText:Text = new Text(storeItemString);
+					if (!playerData.canAfford(component)) {
+						// TODO: Why doesn't this change the color. I'll just make it less alpha for now, instead of red. - CP
+						storeItemText.color = 0x000000;
+						storeItemText.alpha = 0.3;
+					}
+					
+				
+					purchaseButtons.push(Button.description()
+										.withDepth(-1)
+										.withImageAndText(
+											component.getStoreImage(),
+											storeItemText)
+										.whenClicked(purchaseFunction(component))
+										.build());
+					
                 };
 
                 for each (var button:Button in purchaseButtons) add(button);
                 
-                pages = new ButtonPaginator(
+					pages = new ButtonPaginator(
                                         this,
                                         new Rectangle(2*MAGIC_BOX_VALUE, MAGIC_BOX_VALUE, width- 4*MAGIC_BOX_VALUE, height- 2*MAGIC_BOX_VALUE),
                                         HORIZONTAL_NUMBER, VERTICAL_NUMBER,
