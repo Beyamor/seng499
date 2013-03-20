@@ -14,9 +14,9 @@ package map.terrain
 			this.point = new Point(x, y);
 		}
 		
-		public function distanceToPoint(point:Point):Number
+		public function distanceToPoint(x:int,y:int):Number
 		{
-			return Point.distance(this.point,point);
+			return Point.distance(this.point,new Point(x as Number, y as Number));
 		}
 		
 		public function angleToPoint(point:Point):Number

@@ -37,14 +37,14 @@ package map.terrain
 			this.y = y;
 		}
 		
-		public function isInRange(point:Point):Boolean
+		public function isInRange(x:int,y:int):Boolean
 		{
-			return location.distanceToPoint(point) < range;
+			return location.distanceToPoint(x,y) < range;
 		}
 		
-		public function getTerrainForce(indecies:HexIndices):TerrainForce
+		public function getTerrainForce(x:int,y:int):TerrainForce
 		{
-			return new TerrainForce( terrain, location.angleToPoint(new Point(indecies.x,indecies.y)),  initialForce, spread);
+			return new TerrainForce( terrain, location.angleToPoint(new Point(x as Number,y as Number)),  initialForce, spread);
 		}
 		
 		public function get mapImage()

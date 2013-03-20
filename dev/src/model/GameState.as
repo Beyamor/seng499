@@ -26,8 +26,8 @@ package model
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
 		private var lastViewedHex:Point = null;
-		private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
-		
+		//private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
+		private var _activeTerrainForces:Object = new Object;
 		private var eventDisplayQueue:Vector.<Display> = new <Display>[];
 		
 		public function GameState() 
@@ -106,11 +106,22 @@ package model
 		 */
 		public function addTerrainForce(force:TerrainForce, indecies:HexIndices)
 		{
+			if (!_activeTerrainForces[indecies.x])
+			{
+				_activeTerrainForces[indecies.x] = new Object;
+				//_activeTerrainForces[indecies.x][indecies.y].push(force);
+			}
+			if (!_activeTerrainForces[indecies.x][indecies.y])
+			{
+				_activeTerrainForces[indecies.x][indecies.y] = new Vector.<TerrainForce>;
+			}
 			_activeTerrainForces[indecies.x][indecies.y].push(force);
 		}
 		
 		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
 		{
+			if (!_activeTerrainForces[indecies.x])				return new Vector.<TerrainForce>;
+			if (!_activeTerrainForces[indecies.x][indecies.y])	return new Vector.<TerrainForce>;
 			return _activeTerrainForces[indecies.x][indecies.y];
 		}
 		

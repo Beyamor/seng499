@@ -30,18 +30,19 @@ package hex.terrain
 		/**
 		 * Recursively propegate to tiles in clockwise circles
 		 */
-		public function propegateToTiles(radius:int,  indecies:HexIndices)
+		private function propegateToTiles(radius:int,  indecies:HexIndices):void
 		{
-			if (radius == 0)
+			/*if (radius <= 0)
 			{
 				//propegate forces to PlayerData
 				for each (var force:TerrainForce in _state.getTerrainForces(indecies))
 				{
-					if(force.alreadyPropegated)
+					if(!force.alreadyPropegated)
 						force.propegate(_data.getAllTerrainData(), indecies);
 				}
 			}
 			else
+			{
 				//propegate forces to GameState
 				for each (var force:TerrainForce in _state.getTerrainForces(indecies))
 				{
@@ -56,17 +57,17 @@ package hex.terrain
 				propegateToTiles(radius - 1, indecies.south);
 				propegateToTiles(radius - 1, indecies.southWest);
 				propegateToTiles(radius - 1, indecies.northWest);
-				
-				
+			}	
+			*/	
 			
 		}
 		
 		 /**
 		 * Recursively set tile data in clockwise circles
 		 */
-		 public function setTileData(radius:int, indices:HexIndices):void
+		 private function setTileData(radius:int, indices:HexIndices):void
 		{
-			if (radius == 0)
+			/*if (radius == 0)
 			{
 				return;//SetTileData
 			}
@@ -88,12 +89,29 @@ package hex.terrain
 				setTileData(radius - 1, indices.south);
 				setTileData(radius - 1, indices.southWest);
 				setTileData(radius - 1, indices.northWest);
+			}*/
+			
+			var iter:HexIterator = new HexIterator(indices, radius);
+			var currIndecies:HexIndices;
+			while(true) 
+			{
+				currIndecies = iter.step();
+				if(currIndecies!=null)
+					_data.getHexData(currIndecies).discover(new Terrain(Types.MUD));
+				else
+					break;
 			}
+			
 		}
 		
 		public function setTerrain(indecies:HexIndices):void
 		{
 			setTileData(GameConstants.EXPO_RADIUS, indecies);
+		}
+		
+		public function setTerrainForces(indecies:HexIndices):void
+		{
+			propegateToTiles(GameConstants.EXPO_RADIUS, indecies);
 		}
 		
 	}

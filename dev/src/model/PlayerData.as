@@ -3,6 +3,7 @@ package model
 	import common.Assets;
 	import events.world.SeasonalEvent;
 	import events.WorldEvent;
+	import flash.geom.Point;
 	import hex.terrain.Types;
 	import map.terrain.FeatureBuilder;
 	import map.terrain.LocationPoint;
@@ -77,7 +78,14 @@ package model
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
 			nodeList.push(node);
-			new TerrainSetter(game).setTerrain(hexCoords);//kinda hacky, but I need access to state for propegation.  We can clean this later
+			for each (var feature:Feature in terrainFeatures)
+			{
+				if (feature.isInRange(node.getMapX(),node.getMapY()))
+					game.state.addTerrainForce(feature.getTerrainForce(node.getMapX(),node.getMapY()),hexCoords);
+			}
+			var setter:TerrainSetter = new TerrainSetter(game)
+			setter.setTerrainForces(hexCoords)
+			setter.setTerrain(hexCoords);//kinda hacky, but I need access to state for propegation.  We can clean this later
 			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
 		}
 		
@@ -192,7 +200,7 @@ package model
 			return _unresolvedTerrainForces;
 		}
 		
-		private function addStaticTerrainFeatures() 
+		private function addStaticTerrainFeatures():void 
 		{
 			//Add the geological features here.  For now I'm using it to add our sea life terrain for testing.
 			terrainFeatures.push(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))
@@ -201,7 +209,7 @@ package model
 														.setRange(100)
 														.setTerrainForceSpread(1)
 														.setTerrainInitialForce(1)
-														.setTerrainTile(new Terrain(Types.NOT_MUD))
+														.setTerrainTile(new Terrain(Types.NOT_MUD))//At least I know this when I
 														.build()
 								);
 			

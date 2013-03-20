@@ -7,7 +7,7 @@ package map.terrain
 	 */
 	public interface LocationStructure 
 	{
-		function distanceToPoint(point:Point):Number;
+		function distanceToPoint(x:int,y:int):Number;
 		function angleToPoint(point:Point):Number;
 	}
 }
