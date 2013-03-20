@@ -127,8 +127,13 @@ package hex.terrain
 			{
 				currIndecies = iter.step();
 				if (currIndecies != null)
-					for each(var terr:TerrainForce in _data.getTerrainForces(currIndecies))
-						_data.getHexData(currIndecies).discover(terr.terrain);
+					if (_data.getTerrainForces(currIndecies).length > 0)
+					{
+						for each(var terr:TerrainForce in _data.getTerrainForces(currIndecies))
+							_data.getHexData(currIndecies).discover(terr.terrain);
+					}
+					else
+						_data.getHexData(currIndecies).discover(new Terrain(Types.REEF));
 				else
 					break;
 			}

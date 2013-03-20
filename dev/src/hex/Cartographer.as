@@ -23,14 +23,14 @@ package hex {
 
             var terrainType:String = Types.NOT_MUD;
 
-            if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode()) ||
+            /*if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode()) ||
                 (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode())) {
 
                 terrainType = Types.MUD;
 				
 				//temporary distinguishment between initialized mud tiles and uninitialized tiles
 				return new HexData(new Terrain(terrainType), true);
-            }
+            }*/
 
             return new HexData(new Terrain(terrainType), false);
         }
