@@ -10,7 +10,8 @@ package map.terrain
 	public class TerrainForce 
 	{
 		private var direction:int;
-		private var terrain:Terrain;
+		private var _terrain:Terrain;
+		public function get terrain():Terrain { return _terrain; }
 		private var spread:int;
 		private var force:int;
 		private var _alreadyPropegated:Boolean = false;
@@ -19,21 +20,21 @@ package map.terrain
 		//Don't worry Tom, I'm planning a fluent constructor for this later.  This is just a stand in.
 		public function TerrainForce(terrain:Terrain, direction:int, force:int, spread:int) 
 		{
-			this.terrain = terrain;
+			this._terrain = terrain;
 			this.direction = direction;
 			this.spread = spread;
 			this.force = force;
 		}	
 		
 		//called when a terrain force is going to create a child.
-		public function propegate(forceData:Vector.<Vector.<Vector.<TerrainForce> > >,indecies:HexIndices):void
+		public function propegate(forceData:Object/*Vector.<Vector.<Vector.<TerrainForce> > >*/,indecies:HexIndices):void
 		{
 			if (force > 0)
 			{
 				var newTargets:Vector.<HexIndices> = getPropegationList(indecies);
 				
 				//replace with use of fluent constructor?
-				var childForce:TerrainForce = new TerrainForce(terrain,direction,force-1,spread);
+				var childForce:TerrainForce = new TerrainForce(_terrain,direction,force-1,spread);
 				
 				for each (var target:HexIndices in newTargets)
 				{
@@ -46,57 +47,47 @@ package map.terrain
 		public function getPropegationList(indecies:HexIndices):Vector.<HexIndices>
 		{
 			var hexes:Vector.<HexIndices> = new Vector.<HexIndices>;
-			//Need to change this to make use of spread.
-			switch(direction)
+			
+			//get the initial spread limits
+			var maxClockwise:int = direction - spread * 30;
+			var maxCounterClockwise:int = direction + spread * 30;
+			
+			//directions divisible by 60 are on the line rather than the face, 
+			//so expand by 30 degrees in each direction to include that face.
+			if (direction % 60 == 0)
 			{
-				case 0:
-					hexes.push(indecies.northEast);
-					hexes.push(indecies.southEast);
-					break;
-				case 30:
-					hexes.push(indecies.northEast);
-					break;
-				case 60:
-					hexes.push(indecies.north);
-					hexes.push(indecies.northEast);
-					break;
-				case 90:
-					hexes.push(indecies.north);
-					break;
-				case 120:
-					hexes.push(indecies.north);
-					hexes.push(indecies.northWest);
-					break;
-				case 150:
-					hexes.push(indecies.northWest);
-					break;
-				case 180:
-					hexes.push(indecies.northWest);
-					hexes.push(indecies.southWest);
-					break;
-				case 210:
-					hexes.push(indecies.southWest);
-					break;
-				case 240:
-					hexes.push(indecies.south);
-					hexes.push(indecies.southWest);
-					break;
-				case 270:
-					hexes.push(indecies.south);
-					break;
-				case 300:
-					hexes.push(indecies.south);
-					hexes.push(indecies.southEast);
-					break;
-				case 330:
-					hexes.push(indecies.southEast);
-					break;
-				case 360://duplicate case, but just in case it isn't caught.
-					hexes.push(indecies.northEast);
-					hexes.push(indecies.southEast);
-					break;
-				default:
+				maxClockwise -= 30;
+				maxCounterClockwise += 30
 			}
+			
+			//gather the applicable directions
+			for (var i:int = maxClockwise;  i <= maxCounterClockwise; i += 60 )
+			{
+				switch(i)
+				{
+					case 30:
+						hexes.push(indecies.northEast);
+						break;
+					case 90:
+						hexes.push(indecies.north);
+						break;
+					case 150:
+						hexes.push(indecies.northWest);
+						break;
+					case 210:
+						hexes.push(indecies.southWest);
+						break;
+					case 270:
+						hexes.push(indecies.south);
+						break;
+					case 330:
+						hexes.push(indecies.southEast);
+						break;
+					default:
+				}
+			}
+			
+			
 			return hexes;
 		}
 	}

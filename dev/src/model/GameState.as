@@ -118,11 +118,16 @@ package model
 			_activeTerrainForces[indecies.x][indecies.y].push(force);
 		}
 		
-		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
+		/*public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
 		{
-			if (!_activeTerrainForces[indecies.x])				return new Vector.<TerrainForce>;
-			if (!_activeTerrainForces[indecies.x][indecies.y])	return new Vector.<TerrainForce>;
+			if (!_activeTerrainForces[indecies.x]) _activeTerrainForces[indecies.x] = new Vector.<TerrainForce>; 
+			if (!_activeTerrainForces[indecies.x][indecies.y])	_activeTerrainForces[indecies.x][indecies.y] = new Vector.<TerrainForce>;
 			return _activeTerrainForces[indecies.x][indecies.y];
+		}*/
+		
+		public function getActiveTerrainForces():Object//Vector.< Vector.< Vector.<TerrainForce>>>
+		{
+			return _activeTerrainForces;
 		}
 		
 		public function pushEventDisplay(display:Display):void {

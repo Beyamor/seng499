@@ -33,6 +33,31 @@ package hex.terrain
 
 		private function propegateToTiles(radius:int,  indecies:HexIndices):void
 		{	
+			var iter:HexIterator = new HexIterator(indecies, radius);
+			var currIndecies:HexIndices;
+			var force:TerrainForce;
+			while(true) 
+			{
+				currIndecies = iter.step();
+				if (currIndecies != null)
+					for each (force in _data.getTerrainForces(indecies))
+					{
+						if (!force.alreadyPropegated)
+						{
+							//if(iter.radius==radius)
+								force.propegate(_data.getAllTerrainData(), indecies);
+							/*else
+								force.propegate(_state.getActiveTerrainForces(), indecies);*/
+						}
+					}
+					//_data.getHexData(currIndecies).discover(new Terrain(Types.MUD));
+					//if(data.ge)
+				else
+				{
+					if(iter.isDone())
+						break;
+				}
+			}
 			/*
 			var force:TerrainForce;
 			
@@ -101,8 +126,9 @@ package hex.terrain
 			while(true) 
 			{
 				currIndecies = iter.step();
-				if(currIndecies!=null)
-					_data.getHexData(currIndecies).discover(new Terrain(Types.MUD));
+				if (currIndecies != null)
+					for each(var terr:TerrainForce in _data.getTerrainForces(currIndecies))
+						_data.getHexData(currIndecies).discover(terr.terrain);
 				else
 					break;
 			}

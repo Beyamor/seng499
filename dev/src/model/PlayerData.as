@@ -36,7 +36,7 @@ package model
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 100;
-		private var _unresolvedTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
+		private var _unresolvedTerrainForces:Object = new Object;	
 		
 		//let's all be nice and not touch this outside of the game's access to it 
 		public var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
@@ -81,7 +81,7 @@ package model
 			for each (var feature:Feature in terrainFeatures)
 			{
 				if (feature.isInRange(node.getMapX(),node.getMapY()))
-					game.state.addTerrainForce(feature.getTerrainForce(node.getMapX(),node.getMapY()),hexCoords);
+					game.data.storeTerrainForce(feature.getTerrainForce(node.getMapX(),node.getMapY()),hexCoords);
 			}
 			var setter:TerrainSetter = new TerrainSetter(game)
 			setter.setTerrainForces(hexCoords)
@@ -187,15 +187,19 @@ package model
 		 */
 		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices):void
 		{
+			if 	(!_unresolvedTerrainForces[indecies.x]) 			_unresolvedTerrainForces[indecies.x] = new Object;
+			if	(!_unresolvedTerrainForces[indecies.x][indecies.y]) _unresolvedTerrainForces[indecies.x][indecies.y] = new Vector.<TerrainForce>;
 			_unresolvedTerrainForces[indecies.x][indecies.y].push(force);
 		}
 		
 		public function getTerrainForces(indecies:HexIndices):Vector.<TerrainForce>
 		{
+			if 	(!_unresolvedTerrainForces[indecies.x]) 			_unresolvedTerrainForces[indecies.x] = new Object;
+			if	(!_unresolvedTerrainForces[indecies.x][indecies.y]) _unresolvedTerrainForces[indecies.x][indecies.y] = new Vector.<TerrainForce>;
 			return _unresolvedTerrainForces[indecies.x][indecies.y];
 		}
 		
-		public function getAllTerrainData():Vector.< Vector.< Vector.<TerrainForce> > > 
+		public function getAllTerrainData():Object
 		{
 			return _unresolvedTerrainForces;
 		}
@@ -209,7 +213,7 @@ package model
 														.setRange(100)
 														.setTerrainForceSpread(1)
 														.setTerrainInitialForce(1)
-														.setTerrainTile(new Terrain(Types.NOT_MUD))//At least I know this when I
+														.setTerrainTile(new Terrain(Types.REEF))//At least I know this when I
 														.build()
 								);
 			
