@@ -1,5 +1,6 @@
 package store.displays {
 
+	import common.displays.DisplayStack;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import hex.HexView;
@@ -16,6 +17,8 @@ package store.displays {
     import common.ui.ButtonPaginator;
     import observatory.ComponentData;
     import common.displays.Display;
+	import store.StoreView;
+	import store.ui.PurchaseComponentButton;
 
     public class PurchaseButtonsDisplay extends Display {
  
@@ -25,12 +28,14 @@ package store.displays {
 
         private var playerData:PlayerData;
         private var pages:ButtonPaginator;
+		private var storeView:StoreView;
 
-        public function PurchaseButtonsDisplay(parent:World, playerData:PlayerData) {
+        public function PurchaseButtonsDisplay(parent:StoreView, playerData:PlayerData) {
 
             super(parent, 100, 100, FP.width - 200, 350);
 
             this.playerData = playerData;
+			this.storeView	= parent;
 
             populateStoreInventory();
 
@@ -45,22 +50,6 @@ package store.displays {
 
         public function goToPreviousPage():void { pages.goToPreviousPage(); }
         public function goToNextPage():void { pages.goToNextPage(); }
-
-        private function purchaseFunction(component:ComponentData):Function {
-
-             return function():void {
-
-				 if (playerData.canAfford(component)) {
-					
-					 stack.push(new PrePurchaseDisplay(parent, playerData, component));
-				 }
-				 
-				 else {
-					 
-					 stack.push(new InsufficientFundsDisplay(parent, component));
-				 }
-             }
-         }
          
         public function populateStoreInventory():void
         {
@@ -68,25 +57,10 @@ package store.displays {
                 
                 for each (var component:ComponentData in playerData.storeList) {
 									
-					var storeItemString:String = component.getName() 
-						+ " - " 
-						+ GameTables.instrumentByName(component.getName()).cost;
-					var storeItemText:Text = new Text(storeItemString);
-					if (!playerData.canAfford(component)) {
-						// TODO: Why doesn't this change the color. I'll just make it less alpha for now, instead of red. - CP
-						storeItemText.color = 0x000000;
-						storeItemText.alpha = 0.3;
-					}
-					
-				
-					purchaseButtons.push(Button.description()
-										.withDepth(-1)
-										.withImageAndText(
-											component.getStoreImage(),
-											storeItemText)
-										.whenClicked(purchaseFunction(component))
-										.build());
-					
+					purchaseButtons.push(new PurchaseComponentButton(
+						playerData,
+						storeView,
+						component));					
                 };
 
                 for each (var button:Button in purchaseButtons) add(button);

@@ -60,7 +60,7 @@ package map.terrain
 			return this;
 		}
 		
-		public function setTerrainTile(terr:Terrain)
+		public function setTerrainTile(terr:Terrain):FeatureBuilder
 		{
 			terrain = terr;
 			return this;

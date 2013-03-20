@@ -30,12 +30,17 @@ package hex.terrain
 		/**
 		 * Recursively propegate to tiles in clockwise circles
 		 */
+
 		private function propegateToTiles(radius:int,  indecies:HexIndices):void
-		{
-			/*if (radius <= 0)
+		{	
+			/*
+			var force:TerrainForce;
+			
+			if (radius <= 0)
+
 			{
 				//propegate forces to PlayerData
-				for each (var force:TerrainForce in _state.getTerrainForces(indecies))
+				for each (force in _state.getTerrainForces(indecies))
 				{
 					if(!force.alreadyPropegated)
 						force.propegate(_data.getAllTerrainData(), indecies);
@@ -44,7 +49,7 @@ package hex.terrain
 			else
 			{
 				//propegate forces to GameState
-				for each (var force:TerrainForce in _state.getTerrainForces(indecies))
+				for each (force in _state.getTerrainForces(indecies))
 				{
 					if(force.alreadyPropegated)	
 						force.propegate(_data.getAllTerrainData(),indecies);

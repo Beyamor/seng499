@@ -93,9 +93,6 @@ package common.ui
 			 impliedWidth = image.scaledWidth;
 			 impliedHeight = image.scaledHeight;
 			 
-			 text.color = 0x000000;
-			 text.y = 5;
-			 
 			 var list:Graphiclist = new Graphiclist();
 			 list.add(image);
 			 list.add(text);

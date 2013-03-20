@@ -1,5 +1,6 @@
 package undersea.displays {
 
+	import common.ui.NeptuneButtons;
 	import flash.geom.Point;
     import flash.geom.Rectangle;
 	import hex.HexTile;
@@ -45,12 +46,7 @@ package undersea.displays {
 		
 		private function setUpNavigationButtons():void
 		{
-			add(Button.description()
-						.fixedAt(FP.width - 58, FP.height - 42)
-						.withImageAndText(new Image(Assets.IMG_MAPBUTTONBACKGROUND), new Text("back"))
-						.withDepth(-1)
-						.whenClicked(clickedBack)
-						.build());
+			add(NeptuneButtons.standard("back", width - 58, height - 42, clickedBack));
 		}
 		
 		private function clickedInstrument(instrument:ObservatoryComponent):Function

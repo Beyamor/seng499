@@ -43,7 +43,7 @@ package common.displays
 			var closeButton:Button	= Button.description()
 											.withImage(closeImage)
 											.at(width - closeImage.width - magicButtonBorder, magicButtonBorder)
-											.whenClicked(function():void { close(); trace("derp derp");  } )
+											.whenClicked(function():void { close();  } )
 											.build();
 			add(closeButton);
 		}

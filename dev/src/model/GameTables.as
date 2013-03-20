@@ -20,40 +20,35 @@ package model
                     InstrumentProperties.describe("Node")
                         .image(Assets.IMG_NODE)
 						.storeImage(Assets.IMG_STORE_NODE)
-                        .isNode()
-						.isSeenOnHexGrid()
+                        .isNode
 						.costs(50)
                         .finish(),
 						
 					InstrumentProperties.describe("Hydraphone")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
-						.isSeenOnHexGrid()
+                        .producesDataOnAllTerrain
 						.costs(40)
                         .finish(),
 						
 					InstrumentProperties.describe("CTB")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
-						.isSeenOnHexGrid()
+						.producesDataOnAllTerrain
 						.costs(70)
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
-						.isSeenOnHexGrid()
+						.producesDataOnAllTerrain
 						.costs(100)
                         .finish(),
 						
 					InstrumentProperties.describe("ADCR")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
-                        .producesDataOn(Types.MUD, Types.NOT_MUD, Types.REEF)
-						.isSeenOnHexGrid()
+						.producesDataOnAllTerrain
 						.costs(130)
                         .finish()
                 );

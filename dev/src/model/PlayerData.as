@@ -185,7 +185,7 @@ package model
 		 * @param	force
 		 * @param	indecies
 		 */
-		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices)
+		public function storeTerrainForce(force:TerrainForce, indecies:HexIndices):void
 		{
 			_unresolvedTerrainForces[indecies.x][indecies.y].push(force);
 		}

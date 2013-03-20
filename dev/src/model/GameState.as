@@ -74,9 +74,9 @@ package model
 			return connectionPoint;
 		}
 		
-		public function selectNode():Boolean
+		public function selectNode():void
 		{
-			return state = SELECTING_CONNECTION_ON_HEX;
+			state = SELECTING_CONNECTION_ON_HEX;
 		}
 		
 		public function isConnecting():Boolean
@@ -104,7 +104,7 @@ package model
 		 * @param	force
 		 * @param	indecies
 		 */
-		public function addTerrainForce(force:TerrainForce, indecies:HexIndices)
+		public function addTerrainForce(force:TerrainForce, indecies:HexIndices):void
 		{
 			if (!_activeTerrainForces[indecies.x])
 			{

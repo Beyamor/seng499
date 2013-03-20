@@ -63,6 +63,8 @@ package hex
 			var graphics:Graphiclist = new Graphiclist;
 			graphics.add(new HexSprite(radius, data.terrain));
 
+			var subImage:HexSubhitbox;
+			var image:Image;
 			_subHitboxes = new Vector.<HexSubhitbox>;
 			if (data.hasSubImages()) {
 				
@@ -71,11 +73,11 @@ package hex
 					//component = 
 					if( data.observatoryComponents[i] is Node)
 					{
-						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
+						subImage = new HexSubhitbox(data.observatoryComponents[i]);
 						subImage.x = x - subImage.width / 2;
 						subImage.y = y - subImage.height / 2;
 						
-						var image:Image = subImage.image;
+						image = subImage.image;
 						image.x = - subImage.width / 2;
 						image.y = - subImage.height / 2;
 						graphics.add(image);
@@ -83,10 +85,10 @@ package hex
 						_subHitboxes.push(subImage)
 						break;
 					}
-					else if (data.observatoryComponents[i].isSeenFromHexGrid)
+					else if (data.observatoryComponents[i].isSeenFromHexGrid())
 					{
-						var subImage:HexSubhitbox = new HexSubhitbox(data.observatoryComponents[i]);
-						var image:Image = subImage.image;
+						subImage= new HexSubhitbox(data.observatoryComponents[i]);
+						image = subImage.image;
 						
 						if (i == 0)
 						{
