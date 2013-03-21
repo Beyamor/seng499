@@ -3,7 +3,7 @@ package events.world
 	import common.displays.Display;
 	import common.displays.Popup;
 	import events.displays.SeasonEventAnnouncement;
-	import events.WorldEvent;
+	import events.GameEvent;
 	import model.Game;
 	import net.flashpunk.graphics.Text;
 	import time.Season;
@@ -12,7 +12,7 @@ package events.world
 	 * An event triggered by a particular season
 	 * @author beyamor
 	 */
-	public class SeasonalEvent implements WorldEvent 
+	public class SeasonalEvent implements GameEvent 
 	{
 		public var season:Season;
 		public var moneyAward:uint;

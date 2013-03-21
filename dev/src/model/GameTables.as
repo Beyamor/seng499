@@ -2,6 +2,7 @@ package model
 {
 	import common.Assets;
         import hex.terrain.Types;
+		import observatory.DataTypes;
         import observatory.properties.InstrumentProperties;
 
 	/**
@@ -28,13 +29,15 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOnAllTerrain
+						.produces(DataTypes.AUDIO)
 						.costs(40)
                         .finish(),
 						
-					InstrumentProperties.describe("CTB")
+					InstrumentProperties.describe("CTD")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
+						.produces(DataTypes.CTD_DATA)
 						.costs(70)
                         .finish(),
 						
@@ -42,13 +45,15 @@ package model
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
+						.produces(DataTypes.VIDEO)
 						.costs(100)
                         .finish(),
 						
-					InstrumentProperties.describe("ADCR")
+					InstrumentProperties.describe("ADCP")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
+						.produces(DataTypes.PROFILES)
 						.costs(130)
                         .finish()
                 );

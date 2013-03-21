@@ -44,6 +44,11 @@ package observatory
 		public function isSeenInHexGrid():Boolean
 		{
 			return GameTables.instruments[key].isSeenOnHexGrid;
-		}		
+		}	
+	
+		public function get dataType():String {
+			
+			return GameTables.instruments[key].dataType;
+		}
 	}
 }
