@@ -210,9 +210,9 @@ package model
 			terrainFeatures.push(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))
 														.setLocationStructure(new LocationPoint(1000, 400))
 														.setImageCoordinates(974, 374)
-														.setRange(100)
-														.setTerrainForceSpread(1)
-														.setTerrainInitialForce(1)
+														.setRange(300)
+														.setTerrainForceSpread(2)
+														.setTerrainInitialForce(4)
 														.setTerrainTile(new Terrain(Types.REEF))//At least I know this when I
 														.build()
 								);

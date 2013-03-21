@@ -45,52 +45,15 @@ package hex.terrain
 					{
 						if (!force.alreadyPropegated)
 						{
-							//if(iter.radius==radius)
 								force.propegate(_data.getAllTerrainData(), indecies);
-							/*else
-								force.propegate(_state.getActiveTerrainForces(), indecies);*/
 						}
 					}
-					//_data.getHexData(currIndecies).discover(new Terrain(Types.MUD));
-					//if(data.ge)
 				else
 				{
 					if(iter.isDone())
 						break;
 				}
-			}
-			/*
-			var force:TerrainForce;
-			
-			if (radius <= 0)
-
-			{
-				//propegate forces to PlayerData
-				for each (force in _state.getTerrainForces(indecies))
-				{
-					if(!force.alreadyPropegated)
-						force.propegate(_data.getAllTerrainData(), indecies);
-				}
-			}
-			else
-			{
-				//propegate forces to GameState
-				for each (force in _state.getTerrainForces(indecies))
-				{
-					if(force.alreadyPropegated)	
-						force.propegate(_data.getAllTerrainData(),indecies);
-				}
-				
-				//same ugly recursion as before.
-				propegateToTiles(radius - 1, indecies.north);
-				propegateToTiles(radius - 1, indecies.northEast);
-				propegateToTiles(radius - 1, indecies.southEast);
-				propegateToTiles(radius - 1, indecies.south);
-				propegateToTiles(radius - 1, indecies.southWest);
-				propegateToTiles(radius - 1, indecies.northWest);
-			}	
-			*/	
-			
+			}			
 		}
 		
 		 /**
@@ -98,30 +61,6 @@ package hex.terrain
 		 */
 		 private function setTileData(radius:int, indices:HexIndices):void
 		{
-			/*if (radius == 0)
-			{
-				return;//SetTileData
-			}
-			else
-			{
-				//initialize a clockwise circle
-				if (!_data.hexDataExists(indices.north)||!_data.getHexData(indices.north).discovered) _data.setHexData(indices.north, new HexData(new Terrain(Types.MUD), true));
-				if (!_data.hexDataExists(indices.northEast)||!_data.getHexData(indices.northEast).discovered) _data.getHexData(indices.northEast).discover(new Terrain(Types.MUD));
-				if (!_data.hexDataExists(indices.southEast)||!_data.getHexData(indices.southEast).discovered) _data.getHexData(indices.southEast).discover(new Terrain(Types.MUD));
-				if (!_data.hexDataExists(indices.south)||!_data.getHexData(indices.south).discovered) _data.getHexData(indices.south).discover(new Terrain(Types.MUD));
-				if (!_data.hexDataExists(indices.southWest)||!_data.getHexData(indices.southWest).discovered) _data.getHexData(indices.southWest).discover(new Terrain(Types.MUD));
-				if (!_data.hexDataExists(indices.northWest)||!_data.getHexData(indices.southEast).discovered) _data.getHexData(indices.northWest).discover(new Terrain(Types.MUD));
-					
-				//man this is ugly. I thought recursions were supposed to be beutiful.
-				//I think I'll clean this up later
-				setTileData(radius - 1, indices.north);
-				setTileData(radius - 1, indices.northEast);
-				setTileData(radius - 1, indices.southEast);
-				setTileData(radius - 1, indices.south);
-				setTileData(radius - 1, indices.southWest);
-				setTileData(radius - 1, indices.northWest);
-			}*/
-			
 			var iter:HexIterator = new HexIterator(indices, radius);
 			var currIndecies:HexIndices;
 			while(true) 

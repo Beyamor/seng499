@@ -33,7 +33,8 @@ package hex {
         public function addObservatoryComponent(component:ObservatoryComponent):void {
 
             components.push(component);
-			//discover(new Terrain(Types.MUD));
+			if(component.isNode())
+				discover(new Terrain(Types.MUD));
         }
 
         public function get observatoryComponents():Vector.<ObservatoryComponent> {
