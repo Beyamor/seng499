@@ -3,6 +3,7 @@ package undersea.displays {
 	import common.ui.NeptuneButtons;
 	import flash.geom.Point;
     import flash.geom.Rectangle;
+	import hex.HexData;
 	import hex.HexTile;
     import hex.HexView;
     import map.MapView;
@@ -21,16 +22,19 @@ package undersea.displays {
     import common.displays.Display;
 	import observatory.Instrument;
 	import net.flashpunk.utils.Input;
+	import undersea.UnderseaView;
 
     public class UnderseaDisplay extends Display 
 	{
 		private var game:Game;
-		private var tile:HexTile;
+		private var hexData:HexData;
+		private var underseaView:UnderseaView
 		
-        public function UnderseaDisplay(parent:World, game:Game, tile:HexTile) 
+        public function UnderseaDisplay(view:UnderseaView, game:Game, hexData:HexData) 
 		{
-			this.game = game;
-			this.tile = tile;
+			this.underseaView	= view;
+			this.game			= game;
+			this.hexData		= hexData;
 			
             super(parent, 0, 0, FP.width, FP.height);
 			
@@ -49,19 +53,19 @@ package undersea.displays {
 			add(NeptuneButtons.standard("back", width - 58, height - 42, clickedBack));
 		}
 		
-		private function clickedInstrument(instrument:ObservatoryComponent):Function
+		private function clickedInstrument(instrument:Instrument):Function
 		{
 			return function():void {
-				stack.push(new InstrumentDisplay(parent, instrument));
-			
+				
+				underseaView.showInstrumentDisplay(instrument);
              }
 		}
 		
 		private function setUpInstruments():void
 		{
-			var instruments:Vector.<ObservatoryComponent> = game.data.getHexData(tile.indices).observatoryComponents;
+			var instruments:Vector.<Instrument> = hexData.instruments;
 			
-			for each (var instrument:ObservatoryComponent in instruments) 
+			for each (var instrument:Instrument in instruments) 
 			{
 				// evenly spaced out on ground
 				var placePoint:Point = new Point((FP.width / (instruments.length + 1)) * (instruments.indexOf(instrument) + 1), 400);

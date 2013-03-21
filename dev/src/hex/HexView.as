@@ -71,7 +71,7 @@ package hex
 			
 			controlPanel.slideOff(function():void {
 				
-				FP.world = new UnderseaView(tile, game);
+				FP.world = new UnderseaView(tile.data, game);
 			});
 		}
 	}

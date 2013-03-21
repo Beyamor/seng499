@@ -30,7 +30,7 @@ package events.instruments
 				var hexData:HexData					= hexInstrumentPair.hex;
 				var instrumentWithEvent:Instrument	= hexInstrumentPair.instrument;
 				
-				game.state.pushEventDisplay(new InstrumentEventDisplay(hexData, instrumentWithEvent));
+				game.state.pushEventDisplay(new InstrumentEventDisplay(game, hexData, instrumentWithEvent));
 			}
 		}
 	}
