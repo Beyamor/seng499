@@ -38,6 +38,11 @@ package observatory
 		public function getTile():HexTile {
 			return tile;
 		}
+		
+		public function get dataType():String {
+			
+			return component.dataType;
+		}
 	}
 
 }

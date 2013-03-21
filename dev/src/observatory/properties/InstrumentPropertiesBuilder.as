@@ -10,6 +10,7 @@ package observatory.properties {
         private var _isNode:Boolean                     = false;
         private var _dataTerrainTypes:Vector.<String>   = new Vector.<String>;
 		private var _cost:uint;
+		private var _dataTypeProduced:String;
 
         public function InstrumentPropertiesBuilder(name:String) {
 
@@ -62,11 +63,18 @@ package observatory.properties {
 			_cost = costs;
 			return this;
 		}
+		
+		public function produces(dataType:String):InstrumentPropertiesBuilder {
+			
+			_dataTypeProduced = dataType;
+			return this;
+		}
 
         public function finish():InstrumentProperties {
 
             if (!_image) throw new Error("Image not set");
 			if (!_cost) throw new Error("Cost not set");
+			if (!_dataTypeProduced && !_isNode) throw new Error("Data production type not set");
 
             return new InstrumentProperties(
                 _name,
@@ -75,8 +83,8 @@ package observatory.properties {
                 _dataTerrainTypes,
 				_cost,
 				_isNode,
-				_isSeenOnHexGrid
-
+				_isSeenOnHexGrid,
+				_dataTypeProduced
             );
         }
     }

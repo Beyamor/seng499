@@ -22,6 +22,9 @@ package observatory.properties {
 
 		private var _cost:uint;
         public function get cost():uint { return _cost; }
+		
+		private var _dataTypeProduced:String;
+		public function get dataType():String { return _dataTypeProduced; }
 
 
         private var _dataTerrainTypes:Vector.<String> = new Vector.<String>;
@@ -33,7 +36,8 @@ package observatory.properties {
 			dataTerrainTypes:Vector.<String>,
 			cost:uint, 
             isNode:Boolean = false,
-			isSeenOnHexGrid:Boolean = false) {
+			isSeenOnHexGrid:Boolean = false,
+			dataType:String="") {
 
 
             _name               = name;
@@ -43,6 +47,7 @@ package observatory.properties {
 			_isSeenOnHexGrid	= isSeenOnHexGrid;
             _dataTerrainTypes   = dataTerrainTypes;
 			_cost				= cost;
+			_dataTypeProduced	= dataType;
         }
 
         public function producesDataFor(terrain:Terrain):Boolean {

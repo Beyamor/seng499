@@ -93,9 +93,9 @@ package model
 		{
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Node")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydraphone")));
-			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTB")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTD")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Camera")));
-			storeList.push(new ComponentData(GameTables.instrumentIDByName("ADCR")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("ADCP")));
 		}
 		
 		public function getInventory():Vector.<ComponentData>
