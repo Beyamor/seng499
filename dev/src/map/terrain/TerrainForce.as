@@ -38,6 +38,8 @@ package map.terrain
 				
 				for each (var target:HexIndices in newTargets)
 				{
+					if (!forceData[target.x]) 			forceData[target.x] = new Object;
+					if (!forceData[target.x][target.y])	forceData[target.x][target.y] = new Vector.<TerrainForce>
 					forceData[target.x][target.y].push(childForce);
 				}
 			}
@@ -49,14 +51,18 @@ package map.terrain
 			var hexes:Vector.<HexIndices> = new Vector.<HexIndices>;
 			
 			//get the initial spread limits
-			var maxClockwise:int = direction - spread * 30;
-			var maxCounterClockwise:int = direction + spread * 30;
+			var maxClockwise:int = direction - (spread * 30);
+			var maxCounterClockwise:int = direction + (spread * 30);
 			
 			//directions divisible by 60 are on the line rather than the face, 
 			//so expand by 30 degrees in each direction to include that face.
-			if (direction % 60 == 0)
+			if (maxClockwise % 60 == 0)
 			{
 				maxClockwise -= 30;
+			}
+			
+			if (maxCounterClockwise % 60 == 0)
+			{
 				maxCounterClockwise += 30
 			}
 			

@@ -40,6 +40,7 @@ package hex.terrain
 			{
 				currIndecies = iter.step();
 				if (currIndecies != null)
+				//should forces still be propegated to discovered terrain?
 					for each (force in _data.getTerrainForces(indecies))
 					{
 						if (!force.alreadyPropegated)
@@ -127,13 +128,18 @@ package hex.terrain
 			{
 				currIndecies = iter.step();
 				if (currIndecies != null)
-					if (_data.getTerrainForces(currIndecies).length > 0)
+				{
+					if (!_data.hexDataExists(currIndecies) || !_data.hexDataDiscovered(currIndecies))
 					{
-						for each(var terr:TerrainForce in _data.getTerrainForces(currIndecies))
-							_data.getHexData(currIndecies).discover(terr.terrain);
+						if (_data.getTerrainForces(currIndecies).length > 0)
+						{
+							for each(var terr:TerrainForce in _data.getTerrainForces(currIndecies))
+								_data.getHexData(currIndecies).discover(terr.terrain);
+						}
+						else
+							_data.getHexData(currIndecies).discover(new Terrain(Types.MUD));
 					}
-					else
-						_data.getHexData(currIndecies).discover(new Terrain(Types.REEF));
+				}
 				else
 					break;
 			}
