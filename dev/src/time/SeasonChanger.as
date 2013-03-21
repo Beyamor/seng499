@@ -29,7 +29,6 @@ package time
 			
 			calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
-			(new InstrumentEventCoordinator).coordinateEvents(game);
 			
 			var GameEvents:Vector.<GameEvent> = game.data.GameEvents.concat(); // Copy so we can remove events
 			for each (var event:GameEvent in GameEvents) {
@@ -58,6 +57,10 @@ package time
 				game.data.GameEvents.push(dateTriggeredEvent);
 				game.state.pushEventDisplay(dateTriggeredEvent.announcementDisplay);
 			}
+			
+			// Instrument events.
+			// Note that this should happen after other events so its messages are lower in the queue
+			(new InstrumentEventCoordinator).coordinateEvents(game);
 		}
 	}
 

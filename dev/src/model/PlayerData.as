@@ -217,10 +217,7 @@ package model
 			
 			for each (var hexData:HexData in hexes) {
 				
-				for each (var observatoryComponent:ObservatoryComponent in hexData.observatoryComponents) {
-					
-					if (observatoryComponent is Instrument) instruments.push(observatoryComponent as Instrument);
-				}
+				instruments.concat(hexData.instruments);
 			}
 			
 			return instruments;

@@ -1,6 +1,7 @@
 package hex {
 
 	import observatory.Connectable;
+	import observatory.Instrument;
     import observatory.Node;
     import hex.terrain.Terrain;
 	import model.GameTables;
@@ -80,6 +81,18 @@ package hex {
             }
 
             return false;
+		}
+		
+		public function get instruments():Vector.<Instrument> {
+			
+			var instruments:Vector.<Instrument> = new Vector.<Instrument>;
+			
+			for each (var observatoryComponent:ObservatoryComponent in observatoryComponents) {
+				
+				if (observatoryComponent is Instrument) instruments.push(observatoryComponent as Instrument);
+			}
+			
+			return instruments;
 		}
 		
 		/**
