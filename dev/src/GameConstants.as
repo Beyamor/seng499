@@ -12,5 +12,8 @@ package {
 		public static const DEFAULT_FREE_SPACE:int = 2;
 		
 		public static const EXPO_RADIUS:int = 3;
+		
+		// The chance that *an* instrument (any instrument) gets an event at the start of a season
+		public static const INSTRUMENT_EVENT_PROBABILITY:Number	= 0.3;
     }
 }

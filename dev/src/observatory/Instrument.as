@@ -1,5 +1,6 @@
 package observatory
 {
+	import adobe.utils.CustomActions;
 	import hex.controllers.TileViewer;
 	import hex.HexTile;
         import model.GameTables;
@@ -12,6 +13,9 @@ package observatory
 		private var tile:HexTile;
 		public var id:int;
         public var isProducingData:Boolean;
+		
+		private var _interestingEventIsOccurring:Boolean = false;
+		public function get interestingEventIsOccurring():Boolean { return _interestingEventIsOccurring; }
 				
 		public function Instrument(instrument:ComponentData, tile:HexTile) 
 
@@ -42,6 +46,16 @@ package observatory
 		public function get dataType():String {
 			
 			return component.dataType;
+		}
+		
+		public function startInterestingEvent():void {
+			
+			_interestingEventIsOccurring = true;
+		}
+		
+		public function endInterestingEvent():void {
+			
+			_interestingEventIsOccurring = false;
 		}
 	}
 

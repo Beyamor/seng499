@@ -16,6 +16,7 @@ package model
 	import observatory.ComponentData;
 	import observatory.Instrument;
 	import observatory.Node;
+	import observatory.ObservatoryComponent;
 	import time.Calendar;
 	import map.terrain.TerrainForce;
 	import hex.terrain.TerrainSetter;
@@ -208,6 +209,21 @@ package model
 		{
 			//Add the geological features here.  For now I'm using it to add our sea life terrain for testing.
 			terrainFeatures.push(feature);							
+		}
+		
+		public function get instruments():Vector.<Instrument> {
+			
+			var instruments:Vector.<Instrument> = new Vector.<Instrument>;
+			
+			for each (var hexData:HexData in hexes) {
+				
+				for each (var observatoryComponent:ObservatoryComponent in hexData.observatoryComponents) {
+					
+					if (observatoryComponent is Instrument) instruments.push(observatoryComponent as Instrument);
+				}
+			}
+			
+			return instruments;
 		}
 	}
 

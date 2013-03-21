@@ -3,6 +3,7 @@ package time
 	import data.DataConverter;
 	import data.DataTally;
 	import events.displays.SeasonEventAnnouncement;
+	import events.instruments.InstrumentEventCoordinator;
 	import events.world.SeasonalEvent;
 	import events.world.SpecialEvents;
 	import events.GameEvent;
@@ -28,6 +29,7 @@ package time
 			
 			calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
+			(new InstrumentEventCoordinator).coordinateEvents(game);
 			
 			var GameEvents:Vector.<GameEvent> = game.data.GameEvents.concat(); // Copy so we can remove events
 			for each (var event:GameEvent in GameEvents) {
