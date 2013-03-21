@@ -43,6 +43,7 @@ package events.world
 		
 		public function get announcementDisplay():Display {
 			
+			
 			return new SeasonEventAnnouncement(this);
 		}
 		
@@ -61,6 +62,11 @@ package events.world
 			display.addGraphic(new Text("Event missed!"));
 			display.clearColor = 0xFF000000;
 			return display;
+		}
+		
+		public function wasAnnounced(game:Game):void
+		{
+			//Do things in extensions
 		}
 	}
 

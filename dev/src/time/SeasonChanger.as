@@ -52,6 +52,7 @@ package time
 			// Special events triggered by date
 			for each (var dateTriggeredEvent:GameEvent in SpecialEvents.triggeredByDate(calendar)) {
 				
+				dateTriggeredEvent.wasAnnounced(game);
 				game.data.GameEvents.push(dateTriggeredEvent);
 				game.state.pushEventDisplay(dateTriggeredEvent.announcementDisplay);
 			}

@@ -2,6 +2,7 @@ package events.world
 {
 	import events.GameEvent;
 	import flash.accessibility.ISearchableText;
+	import model.Game;
 	import time.Calendar;
 	import time.Season;
 	import time.Seasons;
@@ -17,7 +18,7 @@ package events.world
 		new SpecialEventDate(Seasons.SUMMER, 0,
 			new SpringBloom())
 		]
-		
+
 		public static function triggeredByDate(calendar:Calendar):Vector.<GameEvent> {
 			
 			var triggeredEvents:Vector.<GameEvent> = new Vector.<GameEvent>;
