@@ -26,6 +26,9 @@ package model
                         .finish(),
 						
 					InstrumentProperties.describe("Hydraphone")
+						.displayDescription("Hydates phones")
+						.dataDescription("Look, some data")
+						.interestingDataDescription("Look, some more interesting data")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOnAllTerrain
@@ -34,6 +37,7 @@ package model
                         .finish(),
 						
 					InstrumentProperties.describe("CTD")
+						.displayDescription("Cees those dees")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
@@ -42,6 +46,7 @@ package model
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
+						.displayDescription("Takes pictures of things or whatever")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
@@ -50,6 +55,7 @@ package model
                         .finish(),
 						
 					InstrumentProperties.describe("ADCP")
+						.displayDescription("Does it all, baby")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain

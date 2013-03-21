@@ -23,6 +23,7 @@ package undersea.displays {
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 	import flash.utils.ByteArray;
+	import observatory.Instrument;
 	import observatory.ObservatoryComponent;
 
     public class InstrumentDisplay extends Popup 
@@ -30,9 +31,9 @@ package undersea.displays {
 		private var video:Video = new Video();
 		private var ns:NetStream;
 		
-		private var instrument:ObservatoryComponent;
+		private var instrument:Instrument;
 		
-        public function InstrumentDisplay(parent:World, instrument:ObservatoryComponent) 
+        public function InstrumentDisplay(parent:World, instrument:Instrument) 
 		{
 			this.instrument = instrument;
 			clearColor = 0xff000000;
@@ -50,10 +51,8 @@ package undersea.displays {
 		private function setUpInstrumentInformation():void 
 		{
 			addGraphic(new Text(instrument.getName(), 400, 200));
-			addGraphic(new Text("A description of the instrument\n in question.", 400, 300));
-		
-			//addGraphic(new Text(instrument.getDescription(), 400, 200))
-			
+			addGraphic(new Text(instrument.description, 400, 300));
+			addGraphic(new Text(instrument.dataDescription, 400, 400));
 		}
 
 		private function getMeta(mdata:Object):void

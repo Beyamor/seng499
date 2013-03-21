@@ -25,7 +25,15 @@ package observatory.properties {
 		
 		private var _dataTypeProduced:String;
 		public function get dataType():String { return _dataTypeProduced; }
+		
+		private var _displayDescription:String;
+		public function get description():String { return _displayDescription; }
+		
+		private var _dataDescription:String;
+		public function get dataDescription():String { return _dataDescription; }
 
+		private var _interestingDataDescription:String;
+		public function get interestingDataDescription():String { return _interestingDataDescription; }
 
         private var _dataTerrainTypes:Vector.<String> = new Vector.<String>;
 
@@ -35,19 +43,25 @@ package observatory.properties {
 			storeImage:Class,
 			dataTerrainTypes:Vector.<String>,
 			cost:uint, 
-            isNode:Boolean = false,
-			isSeenOnHexGrid:Boolean = false,
-			dataType:String="") {
+            isNode:Boolean,
+			isSeenOnHexGrid:Boolean,
+			dataType:String,
+			description:String,
+			dataDescription:String,
+			interestingDataDescription:String) {
 
 
-            _name               = name;
-            _image              = image;
-			_storeImage			= storeImage
-            _isNode             = isNode;
-			_isSeenOnHexGrid	= isSeenOnHexGrid;
-            _dataTerrainTypes   = dataTerrainTypes;
-			_cost				= cost;
-			_dataTypeProduced	= dataType;
+            _name               		= name;
+            _image              		= image;
+			_storeImage					= storeImage
+            _isNode             		= isNode;
+			_isSeenOnHexGrid			= isSeenOnHexGrid;
+            _dataTerrainTypes   		= dataTerrainTypes;
+			_cost						= cost;
+			_dataTypeProduced			= dataType;
+			_displayDescription				= description;
+			_dataDescription			= dataDescription;
+			_interestingDataDescription	= interestingDataDescription;
         }
 
         public function producesDataFor(terrain:Terrain):Boolean {

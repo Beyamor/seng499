@@ -11,6 +11,9 @@ package observatory.properties {
         private var _dataTerrainTypes:Vector.<String>   = new Vector.<String>;
 		private var _cost:uint;
 		private var _dataTypeProduced:String;
+		private var _displayDescription:String;
+		private var _dataDescription:String;
+		private var _interestingDataDescription:String;
 
         public function InstrumentPropertiesBuilder(name:String) {
 
@@ -69,12 +72,36 @@ package observatory.properties {
 			_dataTypeProduced = dataType;
 			return this;
 		}
+		
+		public function displayDescription(descrption:String):InstrumentPropertiesBuilder {
+			
+			_displayDescription = descrption;
+			return this;
+		}
+		
+		public function dataDescription(descrption:String):InstrumentPropertiesBuilder {
+			
+			_dataDescription = descrption;
+			return this;
+		}
+		
+		public function interestingDataDescription(descrption:String):InstrumentPropertiesBuilder {
+			
+			_interestingDataDescription = descrption;
+			return this;
+		}
 
         public function finish():InstrumentProperties {
 
             if (!_image) throw new Error("Image not set");
 			if (!_cost) throw new Error("Cost not set");
-			if (!_dataTypeProduced && !_isNode) throw new Error("Data production type not set");
+			
+			// Instruments only
+			if (!_isNode) {
+				
+				if (!_dataTypeProduced) throw new Error("Data production type not set");
+				if (!_displayDescription) throw new Error("Instrument description not provided");
+			}
 
             return new InstrumentProperties(
                 _name,
@@ -84,7 +111,10 @@ package observatory.properties {
 				_cost,
 				_isNode,
 				_isSeenOnHexGrid,
-				_dataTypeProduced
+				_dataTypeProduced,
+				_displayDescription,
+				_dataDescription? _dataDescription : ("Description not provided for " + _name),
+				_interestingDataDescription? _interestingDataDescription : ("Interesting data description not provided for " + _name)
             );
         }
     }

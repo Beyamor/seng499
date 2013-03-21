@@ -57,6 +57,13 @@ package observatory
 			
 			_interestingEventIsOccurring = false;
 		}
+		
+		public function get dataDescription():String {
+			
+			return interestingEventIsOccurring?
+						component.properties.interestingDataDescription
+						: component.properties.dataDescription;
+		}
 	}
 
 }

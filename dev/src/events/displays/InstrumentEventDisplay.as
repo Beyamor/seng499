@@ -36,7 +36,7 @@ package events.displays
 			PositionHelper.centerOn(eventText, this);
 			addGraphic(eventText);
 			
-			var viewButton:Button = NeptuneButtons.standard("Check it out", 0, 0, function() {
+			var viewButton:Button = NeptuneButtons.standard("Check it out", 0, 0, function():void {
 				
 				FP.world = UnderseaView.createForInstrument(game, hexData, instrument);
 			});

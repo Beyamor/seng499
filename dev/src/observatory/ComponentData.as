@@ -3,6 +3,7 @@ package observatory
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	import model.GameTables;
+	import observatory.properties.InstrumentProperties;
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -49,6 +50,15 @@ package observatory
 		public function get dataType():String {
 			
 			return GameTables.instruments[key].dataType;
+		}
+		
+		/**
+		 * Is the component data deprecated with the introduction of instrument properties? 
+		 * For the sake of not writing a bunch of accessors, I'm just going to access the properties directly.
+		 */
+		public function get properties():InstrumentProperties {
+			
+			return GameTables.instruments[key];
 		}
 	}
 }

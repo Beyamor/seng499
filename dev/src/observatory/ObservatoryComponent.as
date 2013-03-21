@@ -33,6 +33,11 @@ package observatory
 		{
 			return component.isNode();
 		}
+		
+		public function get description():String {
+			
+			return component.properties.description;
+		}
 	}
 
 }
