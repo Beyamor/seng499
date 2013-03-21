@@ -1,6 +1,6 @@
 package events.world 
 {
-	import events.WorldEvent;
+	import events.GameEvent;
 	import flash.accessibility.ISearchableText;
 	import time.Calendar;
 	import time.Season;
@@ -18,9 +18,9 @@ package events.world
 			new SeasonalEvent(Seasons.SPRING, 500, "The Spring Bloom will happen next spring.\nGet you some."))
 		]
 		
-		public static function triggeredByDate(calendar:Calendar):Vector.<WorldEvent> {
+		public static function triggeredByDate(calendar:Calendar):Vector.<GameEvent> {
 			
-			var triggeredEvents:Vector.<WorldEvent> = new Vector.<WorldEvent>;
+			var triggeredEvents:Vector.<GameEvent> = new Vector.<GameEvent>;
 			
 			for each (var eventDate:SpecialEventDate in DATE_TRIGGERED_EVENTS) {
 				

@@ -1,6 +1,6 @@
 package events.world 
 {
-	import events.WorldEvent;
+	import events.GameEvent;
 	import time.Calendar;
 	import time.Season;
 	/**
@@ -11,9 +11,9 @@ package events.world
 	{
 		private var season:Season;
 		private var year:uint;
-		public var event:WorldEvent;
+		public var event:GameEvent;
 		
-		public function SpecialEventDate(triggerSeason:Season, triggerYear:uint, event:WorldEvent) {
+		public function SpecialEventDate(triggerSeason:Season, triggerYear:uint, event:GameEvent) {
 			
 			season		= triggerSeason;
 			year		= triggerYear;

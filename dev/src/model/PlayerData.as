@@ -2,7 +2,7 @@ package model
 {
 	import common.Assets;
 	import events.world.SeasonalEvent;
-	import events.WorldEvent;
+	import events.GameEvent;
 	import flash.geom.Point;
 	import hex.terrain.Types;
 	import map.terrain.FeatureBuilder;
@@ -42,7 +42,7 @@ package model
 		public var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
 		
 		// Initial evenets are temporary for testing
-		public var worldEvents:Vector.<WorldEvent> = new <WorldEvent>[];
+		public var GameEvents:Vector.<GameEvent> = new <GameEvent>[];
 		
 		public function PlayerData()
 		{

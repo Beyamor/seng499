@@ -5,7 +5,7 @@ package time
 	import events.displays.SeasonEventAnnouncement;
 	import events.world.SeasonalEvent;
 	import events.world.SpecialEvents;
-	import events.WorldEvent;
+	import events.GameEvent;
 	import model.Game;
 	/**
 	 * This guy wraps up whatever happens to the game models when a season changes.
@@ -29,8 +29,8 @@ package time
 			calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
 			
-			var worldEvents:Vector.<WorldEvent> = game.data.worldEvents.concat(); // Copy so we can remove events
-			for each (var event:WorldEvent in worldEvents) {
+			var GameEvents:Vector.<GameEvent> = game.data.GameEvents.concat(); // Copy so we can remove events
+			for each (var event:GameEvent in GameEvents) {
 				
 				if (event.hasOccurred(game)) {
 					
@@ -45,14 +45,14 @@ package time
 						game.state.pushEventDisplay(event.failureDisplay);
 					}
 
-					game.data.worldEvents.splice(game.data.worldEvents.indexOf(event), 1);
+					game.data.GameEvents.splice(game.data.GameEvents.indexOf(event), 1);
 				}
 			}
 			
 			// Special events triggered by date
-			for each (var dateTriggeredEvent:WorldEvent in SpecialEvents.triggeredByDate(calendar)) {
+			for each (var dateTriggeredEvent:GameEvent in SpecialEvents.triggeredByDate(calendar)) {
 				
-				game.data.worldEvents.push(dateTriggeredEvent);
+				game.data.GameEvents.push(dateTriggeredEvent);
 				game.state.pushEventDisplay(dateTriggeredEvent.announcementDisplay);
 			}
 		}

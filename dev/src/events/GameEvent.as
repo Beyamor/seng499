@@ -6,9 +6,10 @@ package events
 	/**
 	 * I dunno what to call this, man.
 	 * Events that, y'know, occur in the world.
+	 * This is in contrast to the one-off random instrument events we mentioned.
 	 * @author beyamor
 	 */
-	public interface WorldEvent 
+	public interface GameEvent 
 	{
 		function hasOccurred(game:Game):Boolean;
 		function wasAchieved(game:Game):Boolean;
