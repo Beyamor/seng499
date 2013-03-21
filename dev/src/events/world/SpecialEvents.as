@@ -15,7 +15,7 @@ package events.world
 
 		// Spring bloom
 		new SpecialEventDate(Seasons.SUMMER, 0,
-			new SeasonalEvent(Seasons.SPRING, 500, "The Spring Bloom will happen next spring.\nGet you some."))
+			new SpringBloom())
 		]
 		
 		public static function triggeredByDate(calendar:Calendar):Vector.<GameEvent> {
