@@ -51,6 +51,9 @@ package undersea.displays {
 		{
 			addGraphic(new Text(instrument.getName(), 400, 200));
 			addGraphic(new Text("A description of the instrument\n in question.", 400, 300));
+		
+			//addGraphic(new Text(instrument.getDescription(), 400, 200))
+			
 		}
 
 		private function getMeta(mdata:Object):void

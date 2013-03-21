@@ -211,7 +211,7 @@ package model
 														.setLocationStructure(new LocationPoint(1000, 400))
 														.setImageCoordinates(974, 374)
 														.setRange(300)
-														.setTerrainForceSpread(2)
+														.setTerrainForceSpread(1)
 														.setTerrainInitialForce(4)
 														.setTerrainTile(new Terrain(Types.REEF))//At least I know this when I
 														.build()
