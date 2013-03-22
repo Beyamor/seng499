@@ -27,7 +27,7 @@ package store.displays
 			text.centerOO();
 			addGraphic(text, 0, halfWidth, halfHeight);
 			
-			clearColor = 0xFF000000;
+			clearColor		= 0x88000000;
 			blocksUpdates = true;
 		}
 	}

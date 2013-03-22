@@ -22,6 +22,8 @@ package hex.displays
 		
 		public function HexControlPanel(parent:HexView, game:Game) 
 		{
+			clearColor		= 0x88FFFFFF;
+			
 			super(parent);
 			
 			addStandardButton("Map", function():void { parent.returnToMapView(); } );

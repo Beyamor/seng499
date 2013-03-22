@@ -26,9 +26,10 @@ package common.displays
 		
 		public function ControlPanel(parent:World) 
 		{
-			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);			
-			super(parent, FP.width, VERTICAL_MARGIN, backgroundImage.width, backgroundImage.height - VERTICAL_MARGIN * 2);			
-			addGraphic(backgroundImage);
+			clearColor		= 0x88FFFFFF;
+					
+			super(parent, FP.width, VERTICAL_MARGIN, 200, 600 - VERTICAL_MARGIN * 2);	
+
 			tweener = InOutTweener.forX(parent, this, SCREEN_X, FP.width);
 		}
 		

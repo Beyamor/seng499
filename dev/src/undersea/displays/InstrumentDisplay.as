@@ -36,7 +36,7 @@ package undersea.displays {
         public function InstrumentDisplay(parent:World, instrument:Instrument) 
 		{
 			this.instrument = instrument;
-			clearColor = 0xff000000;
+			clearColor		= 0xDD000000;
 			blocksUpdates = true;
 			
             super(parent, FP.width - 100, FP.height - 100);
