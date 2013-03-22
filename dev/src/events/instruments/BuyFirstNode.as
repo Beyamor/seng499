@@ -1,5 +1,6 @@
 package events.instruments 
 {
+	import events.displays.EventResultPopup;
 	import events.world.SeasonalEvent;
 	import model.Game;
 	import hex.HexData;
@@ -56,26 +57,20 @@ package events.instruments
 		
 		override public function get achievementDisplay():Display {
 			
-			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("Well done.  Now you have a \n"
+			return new EventResultPopup("Well done.  Now you have a \n"
 										+"starting point for the rest\n"
 										+"of your network.  Now it's\n"
 										+"time to start adding\n"
-										+"instruments."));
-			display.clearColor = 0xFF000000; // seriously dude, colours?
-			return display;
+										+"instruments.");
 		}
 		
 		override public function get failureDisplay():Display {
 			
-			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("Woops.  You will need to \n" 
+			return new EventResultPopup("Woops.  You will need to \n" 
 										+"purchace and place a node to\n"
-										+"build your network."));
-			display.clearColor = 0xFF000000;
-			return display;
+										+"build your network.");
 		}
 	}
 
