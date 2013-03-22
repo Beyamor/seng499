@@ -21,7 +21,7 @@ package hex.terrain.ui
 		public function Legend(parent:Display)
 		{
 			super(parent, (parent.width - WIDTH) / 2, 100, WIDTH, HEIGHT);
-			clearColor = 0xFFFFFFFF;
+			clearColor		= 0xEEFFFFFF;
 			
 			var y:uint = 10;
 			

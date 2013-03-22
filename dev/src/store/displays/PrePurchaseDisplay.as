@@ -28,18 +28,17 @@ package store.displays
 		
 		public function PrePurchaseDisplay(parent:World, data:PlayerData, component:ComponentData)
 		{
-			var background:Image = new Image(Assets.IMG_PREPURCHASE_DISPLAY);
-
+			
+			clearColor		= 0x88FFFFFF;
+			
 			playerData      = data;
 			this.component  = component;
 
 			super(
 				parent,
-				background.width,
-				background.height);
-
-			addGraphic(background, 100);
-
+				700,
+				500);
+				
 			addDisplayButtons();
 			
 			var description:Text = new Text(component.getName() + " - $" + GameTables.instrumentByName(component.getName()).cost);

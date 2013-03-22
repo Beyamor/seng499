@@ -28,11 +28,12 @@ package inventory.ui
 		private var mapView:MapView;
 		
 		public function SelectorWidget(parent:Display, mapView:MapView, playerData:PlayerData)
-		{			
+		{	
+		
 			super(parent, (parent.width - WIDTH) / 2, 100, WIDTH, HEIGHT);
 			this.playerData	= playerData;
 			this.mapView	= mapView;
-			clearColor		= 0xFFFFFFFF;
+			clearColor		= 0x44FFFFFF;
 			
 			var leftImage:Image		= new Image(Assets.IMG_SMALL_LEFT);
 			var rightImage:Image	= new Image(Assets.IMG_SMALL_RIGHT);
