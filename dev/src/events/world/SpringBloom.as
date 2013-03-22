@@ -12,6 +12,11 @@ package events.world
 	import hex.terrain.Terrain;
 	import hex.terrain.Types;
 	import map.terrain.LocationPoint;
+	import common.displays.Display;
+	import common.displays.Popup;
+	import events.displays.SeasonEventAnnouncement;
+	import net.flashpunk.graphics.Text;
+	
 	/**
 	 * ...
 	 * @author beyamor
@@ -21,7 +26,10 @@ package events.world
 		
 		public function SpringBloom() 
 		{
-			super(Seasons.SUMMER, 500, "The Spring Bloom will happen next spring.\nGet a camera on a reef to capture the event!");
+			//							"								"
+			super(Seasons.SUMMER, 500, "The Spring Bloom will happen next spring.\n"
+										+"Get a camera on a reef to capture the\n"
+										+"event!");
 			
 		}
 		
@@ -56,6 +64,35 @@ package events.world
 			}
 			
 			return false;
+		}
+		
+		override public function get achievementDisplay():Display {
+			
+			// TODO: Better achievement and failure displays
+			var display:Popup = new Popup(null, 380, 300);
+			//							"								"
+			display.addGraphic(new Text("Excellent! The video from the\n"
+										+"reef is some of the most\n"
+										+"amazing ever captured.  The\n"
+										+"science communityhas donated\n"
+										+"$" + moneyAward + " to develop\n"
+										+"the observatory."));
+			display.clearColor = 0xFF000000; // seriously dude, colours?
+			return display;
+		}
+		
+		override public function get failureDisplay():Display {
+			
+			var display:Popup = new Popup(null, 380, 300);
+			//							"								"
+			display.addGraphic(new Text("We fell short of our goal to\n"
+										+"capture reef video by this\n"
+										+"Summer.  We'll have to\n"
+										+"continue buildingand try to\n"
+										+"gather more support for the\n"
+										+"project."));
+			display.clearColor = 0xFF000000;
+			return display;
 		}
 	}
 

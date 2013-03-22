@@ -14,6 +14,10 @@ package events.instruments
 	import hex.terrain.Terrain;
 	import hex.terrain.Types;
 	import map.terrain.LocationPoint;
+	import common.displays.Display;
+	import common.displays.Popup;
+	import events.displays.SeasonEventAnnouncement;
+	import net.flashpunk.graphics.Text;
 	
 	/**
 	 * ...
@@ -24,14 +28,14 @@ package events.instruments
 		
 		public function BuyFirstInstrument() 
 		{//							"										  "	
-			super(Seasons.FALL, 0, "You'll need more money to get another node.\n"
-									+"Luckily, there are many scientists interested\n"
-									+"in NEPTUNE's research and will pay to\n"
-									+"support it's growth if it shows promising\n" 
-									+"data.  To demonstrate this, you will have\n"
-									+"to add new instruments to the array.  Go\n"
-									+"to the store and buy an instrument, then\n"
-									+"place it at the node.");
+			super(Seasons.FALL, 0, "You'll need more money to get another\n"
+									+"node. Luckily, there are many scientists\n"
+									+"interested in NEPTUNE's research and will\n"
+									+"pay to support it's growth if it shows\n"
+									+"promising data.  To demonstrate this, you\n" 
+									+"will have to add new instruments to the\n"
+									+"array.  Go to the store and buy an \n"
+									+"instrument, then place it at the node.\n");
 		}
 		
 		override public function wasAnnounced(game:Game):void
@@ -51,6 +55,34 @@ package events.instruments
 			}
 			
 			return false;
+		}
+		
+		override public function get achievementDisplay():Display {
+			
+			// TODO: Better achievement and failure displays
+			var display:Popup = new Popup(null, 380, 300);
+			//							"								"
+			display.addGraphic(new Text("Well done.  Now that you have\n"
+										+"the hang of it, Keep adding\n"
+										+"to the array so you can add a\n"
+										+"node near the reef."));
+			display.clearColor = 0xFF000000; // seriously dude, colours?
+			return display;
+		}
+		
+		override public function get failureDisplay():Display {
+			
+			var display:Popup = new Popup(null, 380, 300);
+			//							"								"
+			display.addGraphic(new Text("Woops.  If you don't have any\n"
+										+"instruments, you can't \n"
+										+"demonstrate the network's\n"
+										+"potential for research.  Try\n"
+										+"buying an instrument and adding\n"
+										+"it to your node to raise\n"
+										+"interest and money."));
+			display.clearColor = 0xFF000000;
+			return display;
 		}
 		
 	}

@@ -50,7 +50,7 @@ package events.world
 		public function get achievementDisplay():Display {
 			
 			// TODO: Better achievement and failure displays
-			var display:Popup = new Popup(null, 400, 300);
+			var display:Popup = new Popup(null, 380, 300);
 			display.addGraphic(new Text("Event completed! Earned $" + moneyAward + "."));
 			display.clearColor = 0xFF000000; // seriously dude, colours?
 			return display;
@@ -58,7 +58,7 @@ package events.world
 		
 		public function get failureDisplay():Display {
 			
-			var display:Popup = new Popup(null, 400, 300);
+			var display:Popup = new Popup(null, 380, 300);
 			display.addGraphic(new Text("Event missed!"));
 			display.clearColor = 0xFF000000;
 			return display;

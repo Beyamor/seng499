@@ -6,7 +6,7 @@ package data
 	 */
 	public class DataConverter 
 	{
-		public static const DATA_TO_MONEY_FACTOR:Number	= 50;
+		public static const DATA_TO_MONEY_FACTOR:Number	= 75;
 		
 		private var tally:DataTally
 		

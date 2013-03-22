@@ -26,7 +26,7 @@ package events.displays
 			this.instrument	= instrument;
 			this.hexData	= hexData;
 			
-			super(null, 450, 300);
+			super(null, 380, 300);
 			
 			// TODO: Figure out what we're doing with colours.
 			clearColor		= 0x88FFFFFF;
@@ -47,7 +47,8 @@ package events.displays
 		
 		private function get eventMessage():String {
 			
-			return "Your " + instrument.getName() + " is recording an interesting event!";
+			return "Your " + instrument.getName() + " is recording\n"
+					+"an interesting event!";
 		}
 	}
 

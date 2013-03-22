@@ -18,7 +18,7 @@ package events.displays
 	{
 		public function SeasonEventAnnouncement(event:SeasonalEvent)
 		{
-			super(null, 0, 0, 450, 300);
+			super(null, 0, 0, 380, 300);
 			
 			// TODO: Figure out what we're doing with colours.
 			clearColor		= 0x88FFFFFF;
