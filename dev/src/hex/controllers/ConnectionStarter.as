@@ -1,11 +1,13 @@
 package hex.controllers 
 {
 	import common.ui.Cursor;
+	import hex.entities.HexComponentEntity;
 	import hex.HexSubhitbox;
 	import hex.HexTile;
 	import hex.HexView;
 	import hex.ui.ConnectionCable;
 	import model.Game;
+	import net.flashpunk.Entity;
 	import observatory.Connectable;
 	/**
 	 * This guys sets the connection point for the intstrument being placed
@@ -27,7 +29,7 @@ package hex.controllers
 		
 		public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
 			
-			for each (var hitbox:HexSubhitbox in tile.subHitboxes)
+			for each (var hitbox:HexComponentEntity in tile.hexSubEntities)
 			{
 				if (hitbox.component is Connectable)
 				{

@@ -95,6 +95,7 @@ package hex
 			var pos:Point = gridMather.positionByIndices(indices);
 			var tile:HexTile = factory.create(camera, indices, pos.x, pos.y, hexProperties.radius);
 			world.add(tile);
+			tile.addImageEntities(world);
 			addToGrid(indices, tile);
 		}
 

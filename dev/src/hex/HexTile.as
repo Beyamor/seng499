@@ -2,14 +2,19 @@ package hex
 {
 	import flash.display.BitmapData;
 	import flash.geom.Vector3D;
+	import hex.entities.HexComponentEntity;
+	import hex.entities.HexInstrumentImage;
+	import hex.entities.HexNodeImage;
 	import hex.HexSubhitbox;
 	import hex.terrain.Terrain;
+	import map.NodeEntity;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import flash.geom.Point;
 	import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
+	import net.flashpunk.World;
 	import observatory.Node;
 	import observatory.ObservatoryComponent;
 	import hex.terrain.Tables;
@@ -32,8 +37,8 @@ package hex
 		private var _data:HexData;
 		public function get data():HexData { return _data; }
 		
-		private var _subHitboxes:Vector.<HexSubhitbox>;
-		public function get subHitboxes():Vector.<HexSubhitbox> { return _subHitboxes; } 
+		private var _hexSubEntities:Vector.<HexComponentEntity>;
+		public function get hexSubEntities():Vector.<HexComponentEntity> { return _hexSubEntities; } 
 
 		// The radius of the hexgon.
 		private var _radius:Number;
@@ -65,55 +70,48 @@ package hex
 
 			var subImage:HexSubhitbox;
 			var image:Image;
-			_subHitboxes = new Vector.<HexSubhitbox>;
-			if (data.hasSubImages()) {
-				
-				for (var i:int = 0; i < data.observatoryComponents.length; i++)
+			_hexSubEntities = new Vector.<HexComponentEntity>;
+			
+			for (var i:int = 0; i < data.observatoryComponents.length; i++)
+			{
+				if( data.observatoryComponents[i] is Node)
 				{
-					//component = 
-					if( data.observatoryComponents[i] is Node)
+					var nodeEnt:HexNodeImage = new HexNodeImage(data.observatoryComponents[i],
+																x - data.observatoryComponents[i].getImage().width / 2,
+																y - data.observatoryComponents[i].getImage().height / 2);
+					_hexSubEntities.push(nodeEnt);
+					break;
+				}
+				else if (data.observatoryComponents[i].isSeenFromHexGrid())
+				{
+					var instEnt:HexInstrumentImage;
+					if (i == 0)
 					{
-						subImage = new HexSubhitbox(data.observatoryComponents[i]);
-						subImage.x = x - subImage.width / 2;
-						subImage.y = y - subImage.height / 2;
-						
-						image = subImage.image;
-						image.x = - subImage.width / 2;
-						image.y = - subImage.height / 2;
-						graphics.add(image);
-						
-						_subHitboxes.push(subImage)
-						break;
+						instEnt = new HexInstrumentImage(data.observatoryComponents[i],
+														x - data.observatoryComponents[i].getImage().width - 5,
+														y - data.observatoryComponents[i].getImage().height - 5);
+						_hexSubEntities.push(instEnt);
 					}
-					else if (data.observatoryComponents[i].isSeenFromHexGrid())
+					else if(i == 1)
 					{
-						subImage= new HexSubhitbox(data.observatoryComponents[i]);
-						image = subImage.image;
-						
-						if (i == 0)
-						{
-							subImage.x = x -subImage.width - 5;
-							subImage.y = y -subImage.height - 5;
-							
-							image.x = -subImage.width - 5;
-							image.y = -subImage.height - 5;
-						}
-						else if(i == 1)
-						{
-							subImage.x = 5;
-							subImage.y = 5;
-							
-							image.x = 5;
-							image.x = 5;
-						}
-						_subHitboxes.push(subImage)
-						graphics.add(image);
+						instEnt = new HexInstrumentImage(data.observatoryComponents[i], 5, 5);
+						_hexSubEntities.push(instEnt);
 					}
 				}
 			}
+				
 			graphic = graphics;
+			layer = 3;
 		}
 
+		public function addImageEntities(world:World):void
+		{
+			for each(var image:HexComponentEntity in _hexSubEntities)
+			{
+				world.add(image);
+			}
+		}
+		
 		/**
 		 * Checks if the hex is onscreen.
 		 */
