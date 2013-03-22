@@ -19,10 +19,7 @@ package map.displays
 	 * @author beyamor
 	 */
 	public class MapDisplay extends Display 
-	{
-		private static const WIDTH:int = 1440;
-		private static const HEIGHT:int = 640;
-		
+	{		
 		private var scrollCamera:ScrollCamera;
 		private var game:Game;
 		private var mapView:MapView;
@@ -34,7 +31,9 @@ package map.displays
 			
 			this.game			= game;
 			this.mapView		= mapView;
-			scrollCamera		= new ScrollCamera(this, 350, 0, 0, WIDTH, HEIGHT);
+			
+			camera.x			= GameConstants.MAP_PIXEL_HEIGHT;
+			scrollCamera		= new ScrollCamera(this, 350, 0, 0, GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT);
 			
 			add(new MapEntity(0, 0));
 			
