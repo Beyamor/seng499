@@ -49,7 +49,7 @@ package common.displays
 						
 			var button:Button = NeptuneButtons.standard(label, 0, 0, onClick);
 			button.x = halfWidth - button.width / 2;
-			button.y = height - 100 - 50 * numberOfStandardButtons
+			button.y = height - 50 - 30 * numberOfStandardButtons
 			add(button);
 					
 			++numberOfStandardButtons;
