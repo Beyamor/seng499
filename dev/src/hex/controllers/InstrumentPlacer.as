@@ -30,18 +30,20 @@ package hex.controllers {
         }
 
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
-			
-			var addedInstrument:ObservatoryComponent = new Instrument(instrument, tile)
-			game.state.getConnectionPoint().connect(addedInstrument);
-            game.data.getHexData(tile.indices).addObservatoryComponent(addedInstrument);
-			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
-            game.state.stopPlacingInstrument();
-			
-			view.removeCursor();
-			view.hexDisplay.removeConnectionCable();
+			if (tile.data.instruments.length < 2)
+			{
+				var addedInstrument:ObservatoryComponent = new Instrument(instrument, tile)
+				game.state.getConnectionPoint().connect(addedInstrument);
+				game.data.getHexData(tile.indices).addObservatoryComponent(addedInstrument);
+				game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());
+				game.state.stopPlacingInstrument();
+				
+				view.removeCursor();
+				view.hexDisplay.removeConnectionCable();
 
-            // Okay. Switch out of instrument placement I guess?
-			view.controller = new TileViewer(view, game);
+				// Okay. Switch out of instrument placement I guess?
+				view.controller = new TileViewer(view, game);
+			}
 		}
     }
 }

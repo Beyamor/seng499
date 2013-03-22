@@ -24,10 +24,13 @@ package events.displays
 			clearColor		= 0x88FFFFFF;
 			blocksUpdates	= true;
 			
-			var instructionText:Text = new Text("Complete by " + event.season.name + " to earn $" + event.moneyAward + ".");
-			PositionHelper.centerXOn(instructionText, this);
-			instructionText.y = height - 65;
-			addGraphic(instructionText);
+			if (event.moneyAward > 0)
+			{
+				var instructionText:Text = new Text("Complete by " + event.season.name + " to earn $" + event.moneyAward + ".");
+				PositionHelper.centerXOn(instructionText, this);
+				instructionText.y = height - 65;
+				addGraphic(instructionText);
+			}
 			
 			var that:SeasonEventAnnouncement = this;
 			var closeButton:Button = NeptuneButtons.standard("close", 0, height - 35, function():void { stack.popIfTop(that); } );
