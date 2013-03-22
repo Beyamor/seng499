@@ -217,7 +217,10 @@ package model
 			
 			for each (var hexData:HexData in hexes) {
 				
-				instruments.concat(hexData.instruments);
+				if (hexData.instruments.length > 0) {
+				
+					instruments = instruments.concat(hexData.instruments);
+				}
 			}
 			
 			return instruments;

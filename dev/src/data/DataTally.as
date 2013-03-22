@@ -3,6 +3,7 @@ package data
 	import model.GameTables;
 	import model.PlayerData;
 	import observatory.ComponentData;
+	import observatory.Instrument;
 	import observatory.ObservatoryComponent;
 	import observatory.properties.InstrumentProperties;
 	import hex.HexData;
@@ -23,25 +24,30 @@ package data
 			
 			var count:uint = 0;
 			
-			for each (var hexData:HexData in playerData.hexes) {
+			for each (var instrument:Instrument in playerData.instruments) {
 				
-				for each (var component:ObservatoryComponent in hexData.observatoryComponents) {
-					
-					if (component.isNode()) continue;
-					
-					var componentProperties:InstrumentProperties = GameTables.instrumentByName(component.getName());
-					var isProducingData:Boolean = componentProperties.producesDataFor(hexData.terrain);
-					
-					if (isProducingData) ++count;
-				}
+				if (instrument.isProducingData) ++count;			
 			}
 			
 			return count;
 		}
 		
-		public function get sum():uint {
+		public function get baseSum():uint {
 			
 			return activeInstrumentCount;
+		}
+		
+		public function get bonusSum():uint {
+			
+			var count:uint = 0;
+			
+			for each (var instrument:Instrument in playerData.instruments) {
+				
+				if (instrument.interestingEventIsOccurring)
+					++count;
+			}
+			
+			return count;
 		}
 	}
 
