@@ -39,7 +39,9 @@ package time
 			new SeasonChanger(game).changeSeason();
 			
 			var dataTally:DataTally		= new DataTally(game.data);
-			var moneyValue:uint			= new DataConverter(dataTally.sum).moneyValue;
+			var dataMoney:DataConverter	= new DataConverter(dataTally);
+			var moneyValue:uint			= dataMoney.baseValue;
+			var bonusValue:uint			= dataMoney.bonusValue;
 
 			var representativeImage:Image = new Image(calendar.season.picture);
 			representativeImage.scale = Math.min(200.0 / representativeImage.width, 200.0 / representativeImage.height);
@@ -50,6 +52,12 @@ package time
 			
 			addGraphic(new Text(dataTally.activeInstrumentCount + " instruments producing data."), 0, 50, FP.halfHeight);
 			addGraphic(new Text("$" + moneyValue + " dollars earned."), 0, 50, FP.halfHeight + 20);
+			
+			if (bonusValue > 0) {
+				
+				addGraphic(new Text("An instrument detected an interesting event"), 0, 50, FP.halfHeight + 40);
+				addGraphic(new Text("$" + bonusValue + " bonus dollars earned."), 0, 50, FP.halfHeight + 60);
+			}
 			
 			var backButton:Button = NeptuneButtons.standard("Continue", 0, 0, function():void { FP.world = new MapView(game); } );
 			backButton.x = FP.width - backButton.width - 50;

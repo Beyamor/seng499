@@ -11,7 +11,6 @@ package observatory
 	public class Instrument extends ObservatoryComponent
 	{
 		private var tile:HexTile;
-		public var id:int;
         public var isProducingData:Boolean;
 		
 		private var _interestingEventIsOccurring:Boolean = false;
@@ -24,7 +23,7 @@ package observatory
 			//this.component = instrument;
 			this.tile = tile;
 
-			isProducingData = GameTables.instruments[id].producesDataFor(tile.data.terrain);
+			isProducingData = instrument.properties.producesDataFor(tile.data.terrain);
 		}
 		
 		override public function getName():String

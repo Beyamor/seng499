@@ -8,16 +8,26 @@ package data
 	{
 		public static const DATA_TO_MONEY_FACTOR:Number	= 100;
 		
-		private var dataSum:uint;
+		private var tally:DataTally
 		
-		public function DataConverter(dataSum:uint)
+		public function DataConverter(dataTally:DataTally)
 		{
-			this.dataSum = dataSum;
+			tally = dataTally;
 		}
 		
-		public function get moneyValue():uint {
+		public function get totalValue():uint {
 			
-			return dataSum * DATA_TO_MONEY_FACTOR;
+			return baseValue + bonusValue;
+		}
+		
+		public function get baseValue():uint {
+			
+			return tally.baseSum * DATA_TO_MONEY_FACTOR;
+		}
+		
+		public function get bonusValue():uint {
+			
+			return tally.bonusSum * DATA_TO_MONEY_FACTOR;
 		}
 	}
 

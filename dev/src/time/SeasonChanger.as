@@ -24,12 +24,9 @@ package time
 		
 		public function changeSeason():void {
 			
-			var dataTally:DataTally		= new DataTally(game.data);
-			var moneyValue:uint			= new DataConverter(dataTally.sum).moneyValue;
-			
 			calendar.goToNextSeason();
-			game.data.addMoney(moneyValue);
 			
+			// Check active game events
 			var GameEvents:Vector.<GameEvent> = game.data.GameEvents.concat(); // Copy so we can remove events
 			for each (var event:GameEvent in GameEvents) {
 				
@@ -61,6 +58,12 @@ package time
 			// Instrument events.
 			// Note that this should happen after other events so its messages are lower in the queue
 			(new InstrumentEventCoordinator).coordinateEvents(game);
+			
+			// Cool. Now, get dat sweet cheddar.
+			var dataTally:DataTally		= new DataTally(game.data);
+			var moneyValue:uint			= new DataConverter(dataTally).totalValue;
+			
+			game.data.addMoney(moneyValue);
 		}
 	}
 

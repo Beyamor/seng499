@@ -44,7 +44,7 @@ package common.displays
 			super.update();
 			
 			moneyDisplay.text	= "Money:\t\t\t\t$" + playerData.money;
-			dataDisplay.text	= "Data production:\t" + tallier.sum;
+			dataDisplay.text	= "Data production:\t" + tallier.baseSum;
 			seasonDisplay.text	= "Season:\t" + playerData.calendar.season.name;
 			yearDisplay.text	= "Year:\t\t" + playerData.calendar.year;
 		}
