@@ -71,6 +71,11 @@ package hex
 
 			return (tiles[indices.x][indices.y] != null);
 		}
+		
+		private function tileChanged(indices:HexIndices):Boolean
+		{
+			return tiles[indices.x][indices.y].changed;
+		}
 
 		/**
 		 *  Adds a created tile to the grid.
@@ -90,13 +95,17 @@ package hex
 		 */
 		private function createIfNecessary(indices:HexIndices):void {
 
-			if (tileExists(indices)) return;
+			if (tileExists(indices)) 
+			{
+				if (!tileChanged(indices)) return;
+			}
 
 			var pos:Point = gridMather.positionByIndices(indices);
 			var tile:HexTile = factory.create(camera, indices, pos.x, pos.y, hexProperties.radius);
 			world.add(tile);
 			tile.addImageEntities(world);
 			addToGrid(indices, tile);
+			tile.changed = false;
 		}
 
 		/**

@@ -33,6 +33,9 @@ package hex
 		private var _discovered:Boolean;
 		public function get discovered():Boolean { return _discovered; }
 		
+		//wether something was recently changed
+		public var changed:Boolean = false;
+		
 		// Data!
 		private var _data:HexData;
 		public function get data():HexData { return _data; }
