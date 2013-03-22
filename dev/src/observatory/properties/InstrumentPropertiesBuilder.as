@@ -14,6 +14,7 @@ package observatory.properties {
 		private var _displayDescription:String;
 		private var _dataDescription:String;
 		private var _interestingDataDescription:String;
+		private var _dataValue:int						= 0;
 
         public function InstrumentPropertiesBuilder(name:String) {
 
@@ -90,6 +91,11 @@ package observatory.properties {
 			_interestingDataDescription = descrption;
 			return this;
 		}
+		
+		public function dataValue(value:int):InstrumentPropertiesBuilder{
+			_dataValue = value;
+			return this;
+		}
 
         public function finish():InstrumentProperties {
 
@@ -114,7 +120,8 @@ package observatory.properties {
 				_dataTypeProduced,
 				_displayDescription,
 				_dataDescription? _dataDescription : ("Description not provided for " + _name),
-				_interestingDataDescription? _interestingDataDescription : ("Interesting data description not provided for " + _name)
+				_interestingDataDescription? _interestingDataDescription : ("Interesting data description not provided for " + _name),
+				_dataValue
             );
         }
     }

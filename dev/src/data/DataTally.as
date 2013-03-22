@@ -26,7 +26,11 @@ package data
 			
 			for each (var instrument:Instrument in playerData.instruments) {
 				
-				if (instrument.isProducingData) ++count;			
+				if (instrument.isProducingData)
+				{
+					if (instrument.interestingEventIsOccurring) count += 2 * instrument.getDataValue();
+					else count += instrument.getDataValue()
+				}
 			}
 			
 			return count;

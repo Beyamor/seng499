@@ -63,6 +63,10 @@ package observatory
 						component.properties.interestingDataDescription
 						: component.properties.dataDescription;
 		}
+		
+		public function getDataValue():int {
+			return component.properties.dataValue
+		}
 	}
 
 }

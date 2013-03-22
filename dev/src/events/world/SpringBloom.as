@@ -27,7 +27,7 @@ package events.world
 		public function SpringBloom() 
 		{
 			//							"								"
-			super(Seasons.SUMMER, 500, "The Spring Bloom will happen next spring.\n"
+			super(Seasons.SUMMER, 500000, "The Spring Bloom will happen next spring.\n"
 										+"Get a camera on a reef to capture the\n"
 										+"event!");
 			

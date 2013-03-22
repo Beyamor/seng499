@@ -23,7 +23,7 @@ package model
                         .image(Assets.IMG_NODE)
 						.storeImage(Assets.IMG_STORE_NODE)
                         .isNode
-						.costs(500/*000*/)
+						.costs(500000)
                         .finish(),
 						
 					InstrumentProperties.describe("Hydraphone")
@@ -34,7 +34,8 @@ package model
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOnAllTerrain
 						.produces(DataTypes.AUDIO)
-						.costs(50/*000*/)
+						.costs(50000)
+						.dataValue(2)
                         .finish(),
 						
 					InstrumentProperties.describe("CTD")
@@ -45,7 +46,8 @@ package model
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
 						.produces(DataTypes.CTD_DATA)
-						.costs(100/*000*/)
+						.costs(100000)
+						.dataValue(4)
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
@@ -56,7 +58,8 @@ package model
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
 						.produces(DataTypes.VIDEO)
-						.costs(200/*000*/)
+						.costs(200000)
+						.dataValue(8)
                         .finish(),
 						
 					InstrumentProperties.describe("ADCP")
@@ -68,6 +71,7 @@ package model
 						.producesDataOnAllTerrain
 						.produces(DataTypes.PROFILES)
 						.costs(400000)
+						.dataValue(10)
                         .finish()
                 );
 				

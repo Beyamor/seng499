@@ -35,6 +35,10 @@ package observatory.properties {
 		private var _interestingDataDescription:String;
 		public function get interestingDataDescription():String { return _interestingDataDescription; }
 
+		private var _dataValue:int;
+		public function get dataValue():int { return _dataValue; }
+		
+		
         private var _dataTerrainTypes:Vector.<String> = new Vector.<String>;
 
         public function InstrumentProperties(
@@ -48,7 +52,8 @@ package observatory.properties {
 			dataType:String,
 			description:String,
 			dataDescription:String,
-			interestingDataDescription:String) {
+			interestingDataDescription:String,
+			dataValue:int){
 
 
             _name               		= name;
@@ -59,9 +64,10 @@ package observatory.properties {
             _dataTerrainTypes   		= dataTerrainTypes;
 			_cost						= cost;
 			_dataTypeProduced			= dataType;
-			_displayDescription				= description;
+			_displayDescription			= description;
 			_dataDescription			= dataDescription;
 			_interestingDataDescription	= interestingDataDescription;
+			_dataValue					= dataValue;
         }
 
         public function producesDataFor(terrain:Terrain):Boolean {
