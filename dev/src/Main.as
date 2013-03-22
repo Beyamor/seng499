@@ -4,6 +4,7 @@ package
 	import common.displays.InstructionDisplay;
 	import common.displays.Popup;
 	import events.displays.SeasonEventAnnouncement;
+	import events.instruments.BuyFirstNode;
 	import events.world.SeasonalEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -66,7 +67,7 @@ package
 		{
 			game = new Game();	
 			
-			var chince:SeasonalEvent = new SeasonalEvent(
+			/*var chince:SeasonalEvent = new SeasonalEvent(
 				Seasons.SUMMER, 
 				500, 
 				"The government of Canada has recognized that\n"
@@ -75,7 +76,9 @@ package
 				+ "They have decided to give you\n"
 				+ "$500 in the coming season to purchase a Node.\n"
 				+ "Remember! You need a Node before you can attach\n"
-				+ "instruments to collect interesting data!");
+				+ "instruments to collect interesting data!");*/
+				
+			var chince:SeasonalEvent = new BuyFirstNode();
 			
 			game.state.pushEventDisplay(new SeasonEventAnnouncement(chince));
 			game.data.gameEvents.push(chince);

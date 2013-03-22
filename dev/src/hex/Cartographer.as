@@ -21,7 +21,7 @@ package hex {
 
         public function generateData(indices:HexIndices):HexData {
 
-            var terrainType:String = Types.NOT_MUD;
+            var terrainType:String = Types.UNDISCOVERED;
 
             /*if ((playerData.hexDataExists(indices.northWest) && playerData.getHexData(indices.northWest).hasNode()) ||
                 (playerData.hexDataExists(indices.southWest) && playerData.getHexData(indices.southWest).hasNode())) {

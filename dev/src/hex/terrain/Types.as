@@ -3,12 +3,12 @@ package hex.terrain {
     public class Types {
 
         public static const MUD:String         = "MUD";
-        public static const NOT_MUD:String     = "NOT_MUD";
+        public static const UNDISCOVERED:String     = "UNDISCOVERED";
 		public static const REEF:String			= "REEF"
 
         public static const ALL_TYPES:Vector.<String> = new <String>[
 			MUD,
-			NOT_MUD,
+			UNDISCOVERED,
 			REEF
 		];
 

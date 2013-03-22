@@ -36,7 +36,7 @@ package model
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
-		private var _money:uint = 50;
+		private var _money:uint = 500/*000*/;
 		private var _unresolvedTerrainForces:Object = new Object;	
 		
 		//let's all be nice and not touch this outside of the game's access to it 
@@ -93,6 +93,10 @@ package model
 		public function populateStoreList():void
 		{
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Node")));
+		}
+		
+		public function FinishStoreList():void 
+		{
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydraphone")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTD")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Camera")));

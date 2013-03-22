@@ -6,6 +6,8 @@ package events.world
 	import time.Calendar;
 	import time.Season;
 	import time.Seasons;
+	import events.instruments.BuyFirstInstrument;
+	import events.instruments.BuyFirstNode;
 	/**
 	 * Special hard-coded events
 	 * @author beyamor
@@ -14,9 +16,15 @@ package events.world
 	{
 		private static var DATE_TRIGGERED_EVENTS:Vector.<SpecialEventDate> = new <SpecialEventDate>[
 
+		//new SpecialEventDate(Seasons.SPRING, 0,
+		//	new BuyFirstNode()),
+		
 		// Spring bloom
 		new SpecialEventDate(Seasons.SUMMER, 0,
-			new SpringBloom()) 
+			new SpringBloom()), 
+		
+		new SpecialEventDate(Seasons.SUMMER, 0,
+			new BuyFirstInstrument())
 		]
 
 		public static function triggeredByDate(calendar:Calendar):Vector.<GameEvent> {
