@@ -1,5 +1,6 @@
 package events.instruments 
 {
+	import events.displays.EventResultPopup;
 	import events.world.SeasonalEvent;
 	import model.Game;
 	import hex.HexData;
@@ -59,30 +60,23 @@ package events.instruments
 		
 		override public function get achievementDisplay():Display {
 			
-			// TODO: Better achievement and failure displays
-			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("Well done.  Now that you have\n"
+			return new EventResultPopup("Well done.  Now that you have\n"
 										+"the hang of it, Keep adding\n"
 										+"to the array so you can add a\n"
-										+"node near the reef."));
-			display.clearColor = 0xFF000000; // seriously dude, colours?
-			return display;
+										+"node near the reef.");
 		}
 		
 		override public function get failureDisplay():Display {
 			
-			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("Woops.  If you don't have any\n"
+			return new EventResultPopup("Woops.  If you don't have any\n"
 										+"instruments, you can't \n"
 										+"demonstrate the network's\n"
 										+"potential for research.  Try\n"
 										+"buying an instrument and adding\n"
 										+"it to your node to raise\n"
-										+"interest and money."));
-			display.clearColor = 0xFF000000;
-			return display;
+										+"interest and money.");
 		}
 		
 	}

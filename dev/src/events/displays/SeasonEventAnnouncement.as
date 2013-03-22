@@ -14,15 +14,11 @@ package events.displays
 	 * ...
 	 * @author beyamor
 	 */
-	public class SeasonEventAnnouncement extends Display 
+	public class SeasonEventAnnouncement extends EventPopup 
 	{
 		public function SeasonEventAnnouncement(event:SeasonalEvent)
 		{
-			super(null, 0, 0, 380, 300);
-			
-			// TODO: Figure out what we're doing with colours.
-			clearColor		= 0x88FFFFFF;
-			blocksUpdates	= true;
+			super();
 			
 			if (event.moneyAward > 0)
 			{
@@ -39,13 +35,6 @@ package events.displays
 			
 			var descriptionText:Text = new Text(event.description, 10, 10);
 			addGraphic(descriptionText);
-		}
-		
-		override public function set parent(value:World):void 
-		{
-			super.parent = value;
-			
-			centerOnParent();
 		}
 	}
 

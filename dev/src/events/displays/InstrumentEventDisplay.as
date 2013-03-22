@@ -16,7 +16,7 @@ package events.displays
 	 * ...
 	 * @author beyamor
 	 */
-	public class InstrumentEventDisplay extends Popup 
+	public class InstrumentEventDisplay extends EventPopup 
 	{
 		private var instrument:Instrument;
 		private var hexData:HexData;
@@ -26,15 +26,7 @@ package events.displays
 			this.instrument	= instrument;
 			this.hexData	= hexData;
 			
-			super(null, 380, 300);
-			
-			// TODO: Figure out what we're doing with colours.
-			clearColor		= 0x88FFFFFF;
-			blocksUpdates	= true;
-			
-			var eventText:Text = new Text(eventMessage);
-			PositionHelper.centerOn(eventText, this);
-			addGraphic(eventText);
+			super(eventMessage, true);
 			
 			var viewButton:Button = NeptuneButtons.standard("Check it out", 0, 0, function():void {
 				

@@ -1,5 +1,6 @@
 package events.world 
 {
+	import events.displays.EventResultPopup;
 	import hex.HexData;
 	import model.Game;
 	import observatory.DataTypes;
@@ -68,31 +69,25 @@ package events.world
 		
 		override public function get achievementDisplay():Display {
 			
-			// TODO: Better achievement and failure displays
-			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("Excellent! The video from the\n"
+			return new EventResultPopup("Excellent! The video from the\n"
 										+"reef is some of the most\n"
 										+"amazing ever captured.  The\n"
 										+"science communityhas donated\n"
 										+"$" + moneyAward + " to develop\n"
-										+"the observatory."));
-			display.clearColor = 0xFF000000; // seriously dude, colours?
-			return display;
+										+"the observatory.");
 		}
 		
 		override public function get failureDisplay():Display {
 			
 			var display:Popup = new Popup(null, 380, 300);
 			//							"								"
-			display.addGraphic(new Text("We fell short of our goal to\n"
+			return new EventResultPopup("We fell short of our goal to\n"
 										+"capture reef video by this\n"
 										+"Summer.  We'll have to\n"
 										+"continue buildingand try to\n"
 										+"gather more support for the\n"
-										+"project."));
-			display.clearColor = 0xFF000000;
-			return display;
+										+"project.");
 		}
 	}
 
