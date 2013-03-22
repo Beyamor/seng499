@@ -16,8 +16,9 @@ package common.displays
 	 */
 	public class ControlPanel extends Display 
 	{
-		public static const SCREEN_X:int = 600;
-		public static const SCREEN_Y:int = 0;
+		public static const SCREEN_X:int		= 600;
+		public static const VERTICAL_MARGIN:int	= 80;
+		
 		private var tweener:InOutTweener;
 		private var numberOfStandardButtons:int = 0;
 		
@@ -26,7 +27,7 @@ package common.displays
 		public function ControlPanel(parent:World) 
 		{
 			var backgroundImage:Image = new Image(Assets.IMG_INVENTORYBACKGOUND);			
-			super(parent, FP.width, SCREEN_Y, backgroundImage.width, backgroundImage.height);			
+			super(parent, FP.width, VERTICAL_MARGIN, backgroundImage.width, backgroundImage.height - VERTICAL_MARGIN * 2);			
 			addGraphic(backgroundImage);
 			tweener = InOutTweener.forX(parent, this, SCREEN_X, FP.width);
 		}

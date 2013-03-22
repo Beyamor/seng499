@@ -45,7 +45,6 @@ package hex
 			
 			controlPanel	= new HexControlPanel(this, game).thatSlidesOn;
 			hexDisplay		= new HexDisplay(this, game, mapX, mapY);
-			hexDisplay.expandRightEdgeTo(controlPanel);
 			
 			instructionDisplay = new InstructionDisplay(this);
 			

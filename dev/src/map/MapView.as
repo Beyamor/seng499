@@ -58,9 +58,7 @@ package map
 				showNextEventDisplay();
 			});
 			
-			mapDisplay = new MapDisplay(this, game);
-			mapDisplay.expandRightEdgeTo(inventoryDisplay);
-			
+			mapDisplay = new MapDisplay(this, game);			
 			instructionDisplay = new InstructionDisplay(this);
 				
 			displays.push(
