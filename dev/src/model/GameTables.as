@@ -19,48 +19,55 @@ package model
                 instruments.push(
 
                     InstrumentProperties.describe("Node")
+						.displayDescription("A node is a central hub of communication between NEPTUNE instruments.")
                         .image(Assets.IMG_NODE)
 						.storeImage(Assets.IMG_STORE_NODE)
                         .isNode
-						.costs(50)
+						.costs(500)
                         .finish(),
 						
 					InstrumentProperties.describe("Hydraphone")
-						.displayDescription("Hydates phones")
-						.dataDescription("Look, some data")
-						.interestingDataDescription("Look, some more interesting data")
+						.displayDescription("Hydraphones capture audio data. Neat!")
+						.dataDescription("This is just audio data. Not that there's anything wrong with that.")
+						.interestingDataDescription("You're capturing some interesting data for great science!")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
                         .producesDataOnAllTerrain
 						.produces(DataTypes.AUDIO)
-						.costs(40)
+						.costs(50)
                         .finish(),
 						
 					InstrumentProperties.describe("CTD")
-						.displayDescription("Cees those dees")
+						.displayDescription("A CTD!")
+						.dataDescription("CTDs capture conductivity, temperature, and depth.")
+						.interestingDataDescription("Oh my! Look at that huge drop in depth and temperature!")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
 						.produces(DataTypes.CTD_DATA)
-						.costs(70)
+						.costs(100)
                         .finish(),
 						
 					InstrumentProperties.describe("Camera")
-						.displayDescription("Takes pictures of things or whatever")
+						.displayDescription("Takes video of things under the ocean.")
+						.dataDescription("High definition video streams available 24/7 on the Internet.")
+						.interestingDataDescription("What is going on in that video stream!?")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
 						.produces(DataTypes.VIDEO)
-						.costs(100)
+						.costs(200)
                         .finish(),
 						
 					InstrumentProperties.describe("ADCP")
-						.displayDescription("Does it all, baby")
+						.displayDescription("Acoustic doppler current profiler")
+						.dataDescription("similar to a sonar, attempting to measure water current velocities over a depth range using the Doppler effect of sound waves scattered back from particles within the water column")
+						.interestingDataDescription("Check out that effect! So doppler!")
                         .image(Assets.IMG_TESTINSTRUMENT)
 						.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 						.producesDataOnAllTerrain
 						.produces(DataTypes.PROFILES)
-						.costs(130)
+						.costs(400)
                         .finish()
                 );
 				

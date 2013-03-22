@@ -1,6 +1,10 @@
 package 
 {
 	import common.Assets;
+	import common.displays.InstructionDisplay;
+	import common.displays.Popup;
+	import events.displays.SeasonEventAnnouncement;
+	import events.world.SeasonalEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.media.Sound;
@@ -13,6 +17,7 @@ package
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import store.StoreView;
+	import time.Seasons;
 	import title.TitleView;
 	
 	/**
@@ -59,7 +64,21 @@ package
 		
 		private function initModel():void
 		{
-			game = new Game();
+			game = new Game();	
+			
+			var chince:SeasonalEvent = new SeasonalEvent(
+				Seasons.SUMMER, 
+				500, 
+				"The government of Canada has recognized that\n"
+				+ "the NEPTUNE Canada project\n" 
+				+ "is important for science!\n"
+				+ "They have decided to give you\n"
+				+ "$500 in the coming season to purchase a Node.\n"
+				+ "Remember! You need a Node before you can attach\n"
+				+ "instruments to collect interesting data!");
+			
+			game.state.pushEventDisplay(new SeasonEventAnnouncement(chince));
+			game.data.gameEvents.push(chince);
 		}
 
 		private function initSound():void

@@ -30,8 +30,8 @@ package time
 			calendar.goToNextSeason();
 			game.data.addMoney(moneyValue);
 			
-			var GameEvents:Vector.<GameEvent> = game.data.GameEvents.concat(); // Copy so we can remove events
-			for each (var event:GameEvent in GameEvents) {
+			var gameEvents:Vector.<GameEvent> = game.data.gameEvents.concat(); // Copy so we can remove events
+			for each (var event:GameEvent in gameEvents) {
 				
 				if (event.hasOccurred(game)) {
 					
@@ -46,7 +46,7 @@ package time
 						game.state.pushEventDisplay(event.failureDisplay);
 					}
 
-					game.data.GameEvents.splice(game.data.GameEvents.indexOf(event), 1);
+					game.data.gameEvents.splice(game.data.gameEvents.indexOf(event), 1);
 				}
 			}
 			
@@ -54,7 +54,7 @@ package time
 			for each (var dateTriggeredEvent:GameEvent in SpecialEvents.triggeredByDate(calendar)) {
 				
 				dateTriggeredEvent.wasAnnounced(game);
-				game.data.GameEvents.push(dateTriggeredEvent);
+				game.data.gameEvents.push(dateTriggeredEvent);
 				game.state.pushEventDisplay(dateTriggeredEvent.announcementDisplay);
 			}
 			

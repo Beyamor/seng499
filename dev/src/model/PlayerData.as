@@ -36,14 +36,14 @@ package model
 		private var nextId:uint = 0; //This will need to be treated differently when loading a saved game.
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
-		private var _money:uint = 100;
+		private var _money:uint = 50;
 		private var _unresolvedTerrainForces:Object = new Object;	
 		
 		//let's all be nice and not touch this outside of the game's access to it 
 		public var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
 		
 		// Initial evenets are temporary for testing
-		public var GameEvents:Vector.<GameEvent> = new <GameEvent>[];
+		public var gameEvents:Vector.<GameEvent> = new <GameEvent>[];
 		
 		public function PlayerData()
 		{

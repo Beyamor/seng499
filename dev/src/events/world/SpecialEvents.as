@@ -16,7 +16,7 @@ package events.world
 
 		// Spring bloom
 		new SpecialEventDate(Seasons.SUMMER, 0,
-			new SpringBloom())
+			new SpringBloom()) 
 		]
 
 		public static function triggeredByDate(calendar:Calendar):Vector.<GameEvent> {
