@@ -63,13 +63,7 @@ package inventory.ui
 		
 		override public function update():void 
 		{
-			paginator.update();
-			
-			// This pattern of mouse-containment-dependent entity updating is getting repeated a lot
-			// Maybe make this a thing in the display superclass.
-			// No entity updates if not containg mouse.
-			// No time to make a better ui system, of course.
-			if (!isFirstDisplayContaingMouse) return;				
+			paginator.update();			
 			super.update();
 		}
 		

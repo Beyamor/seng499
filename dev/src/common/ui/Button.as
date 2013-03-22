@@ -1,5 +1,6 @@
 package common.ui
 {
+	import common.displays.Display;
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
@@ -16,7 +17,9 @@ package common.ui
 		private var screenX:int;
 		private var screenY:int;
 		private var clickFunc:Function;
-                private var enabled:Boolean = true;
+		private var enabled:Boolean = true;
+		private function get worldIsDisplay():Boolean { return world && world is Display }
+		private function get worldAsDisplay():Display { return world as Display; }
 
 		// Making this public so that you can toggle it externally if needed.
 		public var isFixed:Boolean;
@@ -45,6 +48,8 @@ package common.ui
 		
 		public function wasClicked():Boolean
 		{
+			if (worldIsDisplay && !worldAsDisplay.containsMouse) return false;
+			
 			if (Input.mousePressed)
 			{
 				if ( world.mouseX >= x && world.mouseX <= x + width)
