@@ -18,6 +18,7 @@ package common{
 		[Embed(source = "../assets/event/event_3.png")] public static const IMG_EVENT_3:Class
 		[Embed(source = "../assets/event/event_4.png")] public static const IMG_EVENT_4:Class
 		[Embed(source = "../assets/hex/mud-texture.png")] public static const IMG_MUD_TEXTURE:Class
+		[Embed(source = "../assets/hex/reef-texture.png")] public static const IMG_REEF_TEXTURE:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
 		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class

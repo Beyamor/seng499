@@ -32,7 +32,7 @@ package map.displays
 			this.game			= game;
 			this.mapView		= mapView;
 			
-			camera.x			= GameConstants.MAP_PIXEL_HEIGHT;
+			camera.x			= GameConstants.MAP_INITIAL_CAMERA_POS;
 			scrollCamera		= new ScrollCamera(this, 350, 0, 0, GameConstants.MAP_PIXEL_WIDTH, GameConstants.MAP_PIXEL_HEIGHT);
 			
 			add(new MapEntity(0, 0));

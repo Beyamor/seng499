@@ -13,7 +13,8 @@ package hex.terrain {
 		
 		public static const TYPE_TEXTURES:Object = {
 			
-			"MUD":		FP.getBitmap(Assets.IMG_MUD_TEXTURE)
+			"MUD":		FP.getBitmap(Assets.IMG_MUD_TEXTURE),
+			"REEF":		FP.getBitmap(Assets.IMG_REEF_TEXTURE)
 		}
     }
 }
