@@ -1,5 +1,7 @@
 package hex.entities 
 {
+	import common.PositionHelper;
+	import hex.HexTile;
 	import net.flashpunk.Entity;
 	import observatory.ObservatoryComponent;
 	
@@ -10,9 +12,11 @@ package hex.entities
 	public class HexNodeImage extends HexComponentEntity 
 	{
 		
-		public function HexNodeImage(instrument:ObservatoryComponent,x:int,y:int) 
+		public function HexNodeImage(instrument:ObservatoryComponent, tile:HexTile)
 		{
-			super(instrument, x, y);
+			super(instrument, tile)
+			
+			PositionHelper.centerOn(this, tile);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package hex.entities 
 {
+	import hex.HexTile;
 	import net.flashpunk.Entity;
 	import observatory.ObservatoryComponent;
 	import net.flashpunk.graphics.Image;
@@ -12,10 +13,11 @@ package hex.entities
 	{
 		public var component:ObservatoryComponent;
 		public var image:Image;
+		protected var tile:HexTile;
 		
-		public function HexComponentEntity(component:ObservatoryComponent, x:int, y:int) 
+		public function HexComponentEntity(component:ObservatoryComponent, tile:HexTile) 
 		{
-			super(x,y)
+			this.tile = tile;
 			this.component = component;
 			image = component.getImage();
 			width = image.width;

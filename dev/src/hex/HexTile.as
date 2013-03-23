@@ -14,6 +14,7 @@ package hex
 	import net.flashpunk.utils.Input;
 	import flash.utils.getTimer;
 	import net.flashpunk.World;
+	import observatory.Instrument;
 	import observatory.Node;
 	import observatory.ObservatoryComponent;
 	import hex.terrain.Tables;
@@ -31,9 +32,6 @@ package hex
 		//wether tile has been discovered
 		private var _discovered:Boolean;
 		public function get discovered():Boolean { return _discovered; }
-		
-		//wether something was recently changed
-		public var changed:Boolean = false;
 		
 		// Data!
 		private var _data:HexData;
@@ -73,43 +71,50 @@ package hex
 			var image:Image;
 			_hexSubEntities = new Vector.<HexComponentEntity>;
 			
-			for (var i:int = 0; i < data.observatoryComponents.length; i++)
+			for each (var observatoryComponent:ObservatoryComponent in data.observatoryComponents)
 			{
-				if( data.observatoryComponents[i] is Node)
-				{
-					var nodeEnt:HexNodeImage = new HexNodeImage(data.observatoryComponents[i],
-																x - data.observatoryComponents[i].getImage().width / 2,
-																y - data.observatoryComponents[i].getImage().height / 2);
-					_hexSubEntities.push(nodeEnt);
-					break;
-				}
-				else if (data.observatoryComponents[i].isSeenFromHexGrid())
-				{
-					var instEnt:HexInstrumentImage;
-					if (i == 0)
-					{
-						instEnt = new HexInstrumentImage(data.observatoryComponents[i],
-														x - data.observatoryComponents[i].getImage().width - 5,
-														y - data.observatoryComponents[i].getImage().height - 5);
-						_hexSubEntities.push(instEnt);
-					}
-					else if(i == 1)
-					{
-						instEnt = new HexInstrumentImage(data.observatoryComponents[i], 5, 5);
-						_hexSubEntities.push(instEnt);
-					}
-				}
+				addObservatoryEntity(observatoryComponent);
 			}
 				
 			graphic = graphics;
 			layer = 3;
 		}
-
-		public function addImageEntities(world:World):void
+		
+		private function addObservatoryEntity(observatoryComponent:ObservatoryComponent):void {
+			
+			if (!observatoryComponent.isSeenFromHexGrid()) return;
+			
+			var subEntity:HexComponentEntity;
+			
+			if (observatoryComponent is Node)				subEntity = new HexNodeImage(observatoryComponent, this);
+			else if (observatoryComponent is Instrument)	subEntity = new HexInstrumentImage(observatoryComponent, this);
+			else throw new Error("Unexpected observatory component type");
+			
+			hexSubEntities.push(subEntity);
+			if (world) world.add(subEntity);
+		}
+		
+		public function addInstrument(instrument:Instrument):void {
+			
+			addObservatoryEntity(instrument);
+			data.addObservatoryComponent(instrument);
+		}
+		
+		override public function added():void 
 		{
-			for each(var image:HexComponentEntity in _hexSubEntities)
-			{
-				world.add(image);
+			super.added();
+			for each (var subEntity:HexComponentEntity in hexSubEntities) {
+				
+				world.add(subEntity);
+			}
+		}
+		
+		override public function removed():void 
+		{
+			super.removed();
+			for each (var subEntity:HexComponentEntity in hexSubEntities) {
+				
+				if (subEntity.world) subEntity.world.remove(subEntity);
 			}
 		}
 		
