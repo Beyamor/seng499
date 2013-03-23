@@ -16,12 +16,24 @@ package common{
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/title.png")] public static const IMG_TITLE:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000.330Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130320T000000.330Z_1D726_SCALAR:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000.330Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130320T000000.330Z_1D726_UVWBS:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136.180Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130321T225136.180Z_1D726_SCALAR:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136.180Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130321T225136.180Z_1D726_UVWBS:Class
+		[Embed(source = "../assets/CTD/CTDstorm_temp_salinity.png")] public static const IMG_CTDSTORM_TEMP_SALINITY:Class
+		[Embed(source = "../assets/CTD/CTDtemperature.png")] public static const IMG_CTDTEMPERATURE:Class
+		[Embed(source = "../assets/CTD/CTDtides_pressure.png")] public static const IMG_CTDTIDES_PRESSURE:Class
+		[Embed(source = "../assets/CTD/CTDtsunami_pressure.png")] public static const IMG_CTDTSUNAMI_PRESSURE:Class
 		[Embed(source = "../assets/event/event_1.png")] public static const IMG_EVENT_1:Class
 		[Embed(source = "../assets/event/event_2.png")] public static const IMG_EVENT_2:Class
 		[Embed(source = "../assets/event/event_3.png")] public static const IMG_EVENT_3:Class
 		[Embed(source = "../assets/event/event_4.png")] public static const IMG_EVENT_4:Class
 		[Embed(source = "../assets/hex/mud-texture.png")] public static const IMG_MUD_TEXTURE:Class
 		[Embed(source = "../assets/hex/reef-texture.png")] public static const IMG_REEF_TEXTURE:Class
+		[Embed(source = "../assets/Hydrophone/HydrophoneEarthquake.png")] public static const IMG_HYDROPHONEEARTHQUAKE:Class
+		[Embed(source = "../assets/Hydrophone/HydrophoneShipping.png")] public static const IMG_HYDROPHONESHIPPING:Class
+		[Embed(source = "../assets/Hydrophone/HydrophoneUnidentified.png")] public static const IMG_HYDROPHONEUNIDENTIFIED:Class
+		[Embed(source = "../assets/Hydrophone/HydrophoneWhales.png")] public static const IMG_HYDROPHONEWHALES:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
 		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class
@@ -44,6 +56,10 @@ package common{
 		[Embed(source = "../assets/store/small-right.png")] public static const IMG_SMALL_RIGHT:Class
 		[Embed(source = "../assets/store/store_node.png")] public static const IMG_STORE_NODE:Class
 		[Embed(source = "../assets/undersea/undersea-bg.png")] public static const IMG_UNDERSEA_BG:Class
+		[Embed(source = "../assets/video/VideoBoring.png")] public static const IMG_VIDEOBORING:Class
+		[Embed(source = "../assets/video/VideoCrabSnail.png")] public static const IMG_VIDEOCRABSNAIL:Class
+		[Embed(source = "../assets/video/VideoReef.png")] public static const IMG_VIDEOREEF:Class
+		[Embed(source = "../assets/video/VideoSablefishHagfish.png")] public static const IMG_VIDEOSABLEFISHHAGFISH:Class
 
 	}
 }

@@ -1,0 +1,26 @@
+CTDtsunami_pressure:  (event data)
+The pressure sensor on the CTD has recorded the arrival of a tsunami.
+CTDstorm_temp_salinity:  (event data)
+The effects of a storm can be seen in the temperature and pressure sensors on the CTD.
+CTDtemperature:  (normal data)
+The temperature recorded by the CTD varies from 3.7-4.2 degrees C.
+CTDtides_pressure: (normal data)
+The CTD pressure sensor records the tidal cycle.
+
+VideoBoring.png:
+No animals were recorded in this video.
+VideoCrabSnail:
+The video camera captured 3 crabs and a deep-sea snail.
+VideoSablefishHagfish:
+Two sablefish, a hagfish and a gastropod visit the video camera.
+VideoReef:
+Diverse life is visible on the reef with the video camera.
+
+HydrophoneWhale:
+The hydrophone recorded whale calls.
+HydrophoneShipping:
+A ship with a distinctive whine in its engine was recorded.
+HydrophoneEarthquake:
+The low frequency rumble of an earthquake was recorded by the hydrophone.
+HydrophoneUnidentified:
+Scientists have not identified the strange sounds in this hydrophone recording.
