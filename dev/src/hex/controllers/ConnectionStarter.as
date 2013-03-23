@@ -2,7 +2,6 @@ package hex.controllers
 {
 	import common.ui.Cursor;
 	import hex.entities.HexComponentEntity;
-	import hex.HexSubhitbox;
 	import hex.HexTile;
 	import hex.HexView;
 	import hex.ui.ConnectionCable;

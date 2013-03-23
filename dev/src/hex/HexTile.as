@@ -5,7 +5,6 @@ package hex
 	import hex.entities.HexComponentEntity;
 	import hex.entities.HexInstrumentImage;
 	import hex.entities.HexNodeImage;
-	import hex.HexSubhitbox;
 	import hex.terrain.Terrain;
 	import map.NodeEntity;
 	import net.flashpunk.Entity;
@@ -71,7 +70,6 @@ package hex
 			var graphics:Graphiclist = new Graphiclist;
 			graphics.add(new HexSprite(radius, data.terrain));
 
-			var subImage:HexSubhitbox;
 			var image:Image;
 			_hexSubEntities = new Vector.<HexComponentEntity>;
 			
