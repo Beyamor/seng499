@@ -37,7 +37,9 @@ package model
         private var hexData:Object = new Object;//Vector.<ObservatoryComponent> = new Vector.<ObservatoryComponent>;
 		public var calendar:Calendar = new Calendar;
 		private var _money:uint = 550000;
-		private var _unresolvedTerrainForces:Object = new Object;	
+		private var _unresolvedTerrainForces:Object = new Object;
+		public var nodesPlacedThisSeason:uint = 0;
+		public var instrumentsPlaceThisSeason:uint = 0;
 		
 		//let's all be nice and not touch this outside of the game's access to it 
 		public var terrainFeatures:Vector.<Feature> = new Vector.<Feature>;
@@ -228,6 +230,11 @@ package model
 			}
 			
 			return instruments;
+		}
+		
+		public function clearSeasonTotals():void {
+			nodesPlacedThisSeason = 0;
+			instrumentsPlaceThisSeason = 0;
 		}
 	}
 

@@ -39,6 +39,7 @@ package time
 			new SeasonChanger(game).changeSeason();
 			
 			var dataTally:DataTally		= new DataTally(game.data);
+			//var insTally:InstrumentTally = new InstrumentTally(game.data);
 			var dataMoney:DataConverter	= new DataConverter(dataTally);
 			var moneyValue:uint			= dataMoney.baseValue;
 			var bonusValue:uint			= dataMoney.bonusValue;
@@ -48,11 +49,18 @@ package time
 			addGraphic(representativeImage, 0, FP.width - representativeImage.scaledWidth - 50, 50);
 			
 			addGraphic(new Text(calendar.season.name.toUpperCase(), 50, 50));
-			addGraphic(new Text(calendar.season.description, 50, 80));
+			//this description will be replaced with a larger, more detailed stats display
+			//addGraphic(new Text(calendar.season.description, 50, 80));
 			
-			addGraphic(new Text(dataTally.activeInstrumentCount + " instruments producing data."), 0, 50, FP.halfHeight);
+			addGraphic(new Text("Nodes placed this season:        " + dataTally.NodesPlaced, 50, 80));
+			addGraphic(new Text("Instruments placed this season: " + dataTally.InstrumentsPlaced, 50, 100));
+			
+			//Put special data here
+			
+			addGraphic(new Text(dataTally.totalDataCount + " gigs of data produced by "+dataTally.activeInstrumentCount+" instruments producing data."), 0, 50, FP.halfHeight);
 			addGraphic(new Text("$" + moneyValue + " dollars earned."), 0, 50, FP.halfHeight + 20);
 			
+			//need to replace this with more detailed stuff.
 			if (bonusValue > 0) {
 				
 				addGraphic(new Text("An instrument detected an interesting event"), 0, 50, FP.halfHeight + 40);
@@ -63,6 +71,8 @@ package time
 			backButton.x = FP.width - backButton.width - 50;
 			backButton.y = FP.height - backButton.height - 50;
 			add(backButton);
+			
+			game.data.clearSeasonTotals();
 		}
 	}
 
