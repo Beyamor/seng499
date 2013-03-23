@@ -8,6 +8,9 @@ package common{
 		/* Generating mp3 assets! */
 		[Embed(source = "../assets/sound/native_rainfall.mp3")] public static const SOUND_NATIVE_RAINFALL:Class
 		[Embed(source = "../assets/sound/neptune.mp3")] public static const SOUND_NEPTUNE:Class
+		[Embed(source = "../assets/sound/ontouch.mp3")] public static const SOUND_ONTOUCH:Class
+		[Embed(source = "../assets/sound/ontouch2.mp3")] public static const SOUND_ONTOUCH2:Class
+		[Embed(source = "../assets/sound/ontouch3.mp3")] public static const SOUND_ONTOUCH3:Class
 		[Embed(source = "../assets/sound/uvic_gamedev_bumper.mp3")] public static const SOUND_UVIC_GAMEDEV_BUMPER:Class
 
 		/* Generating png assets! */

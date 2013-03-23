@@ -1,6 +1,8 @@
 package common.ui
 {
+	import common.Assets;
 	import common.displays.Display;
+	import flash.media.Sound;
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.FP;
@@ -48,6 +50,8 @@ package common.ui
 		
 		public function wasClicked():Boolean
 		{
+			
+			
 			if (worldIsDisplay && !worldAsDisplay.containsMouse) return false;
 			
 			if (Input.mousePressed)
@@ -56,6 +60,11 @@ package common.ui
 				{
 					if (world.mouseY >= y && world.mouseY <= y + height)
 					{
+						// you dont gatta ask me to fixdis!- CP
+						var chinceAsset:Class = FP.choose(Assets.SOUND_ONTOUCH, Assets.SOUND_ONTOUCH2, Assets.SOUND_ONTOUCH3); 
+						var chinceSound:Sound = (new chinceAsset) as Sound;
+						chinceSound.play();
+						
 						return true;
 					}
 				}
