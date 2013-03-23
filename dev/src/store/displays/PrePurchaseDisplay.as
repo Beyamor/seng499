@@ -14,21 +14,23 @@ package store.displays
         import common.displays.Display;
         import net.flashpunk.World;
         import net.flashpunk.utils.Input;
+		import store.StoreView;
 	/**
 	 * ...
 	 * @author ColtonPhillips
 	 */
 	public class PrePurchaseDisplay extends Popup
 	{
+		private var storeView:StoreView;
 		private var displayIsVisible:Boolean = false;
 		private var buyButton:Button = null;
 		private var playerData:PlayerData;
-                private var component:ComponentData;
-                private var componentImage:Entity;
+        private var component:ComponentData;
+        private var componentImage:Entity;
 		
-		public function PrePurchaseDisplay(parent:World, data:PlayerData, component:ComponentData)
+		public function PrePurchaseDisplay(storeView:StoreView, data:PlayerData, component:ComponentData)
 		{
-			
+			this.storeView  = storeView;
 			clearColor		= 0x88FFFFFF;
 			
 			playerData      = data;
@@ -57,6 +59,9 @@ package store.displays
 		
 		private function buyButtonClicked():void
 		{
+			
+			storeView.instructionDisplay.show("added to inventory: " + component.getName());
+			
 			playerData.purchase(component);
 			FP.console.log("added to inventory: " + component.getName());
 			close();
