@@ -44,7 +44,8 @@ package store
 				displays = new DisplayStack(
 					background,
 					purchaseButtons,
-					navButtons);
+					navButtons,
+					instructionDisplay);
 			}
         }
 }

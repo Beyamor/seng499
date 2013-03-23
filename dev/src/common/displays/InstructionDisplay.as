@@ -17,8 +17,8 @@ package common.displays
 	public class InstructionDisplay extends Display 
 	{
 		public static const WIDTH:Number		= 300;
-		public static const HEIGHT:Number		= 50;
-		public static const DISPLAY_TIME:Number	= 2;
+		public static const HEIGHT:Number		= 100;
+		public static const DISPLAY_TIME:Number	= 4;
 		
 		private var isShown:Boolean = false;
 		
@@ -30,7 +30,7 @@ package common.displays
 		public function InstructionDisplay(parent:World)
 		{
 			super(parent, FP.halfWidth - WIDTH / 2, -HEIGHT, WIDTH, HEIGHT);
-			clearColor = 0x88FFFFFF;
+			clearColor = 0x88000000;
 			tweener = InOutTweener.forY(parent, this, 0, -HEIGHT);
 		}
 		
