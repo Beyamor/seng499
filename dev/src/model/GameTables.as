@@ -53,7 +53,7 @@ package model
 		instruments.push(
 
 			InstrumentProperties.describe("Node")
-				.displayDescription("A node is a central hub of communication between NEPTUNE instruments.")
+				.displayDescription("A node is a central hub of communication \nbetween NEPTUNE instruments.")
 				.image(Assets.IMG_NODE)
 				.storeImage(Assets.IMG_STORE_NODE)
 				.isNode
@@ -61,8 +61,8 @@ package model
 				.finish(),
 				
 			InstrumentProperties.describe("Hydrophone")
-				.displayDescription("Hydrophones capture audio data. Neat!")
-				.dataDescription("This is just audio data. Not that there's anything wrong with that.")
+				.displayDescription("Hydrophones capture audio data.\n Neat!")
+				.dataDescription("This is just audio data. \nNot that there's anything wrong with that.")
 				.interestingDataDescription("You're capturing some interesting data for great science!")
 				.image(Assets.IMG_TESTINSTRUMENT)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
@@ -86,7 +86,7 @@ package model
 				
 			InstrumentProperties.describe("Camera")
 				.displayDescription("Takes video of things under the ocean.")
-				.dataDescription("High definition video streams available 24/7 on the Internet.")
+				.dataDescription("High definition video streams \navailable 24/7 on the Internet.")
 				.interestingDataDescription("What is going on in that video stream!?")
 				.image(Assets.IMG_TESTINSTRUMENT)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
@@ -98,7 +98,7 @@ package model
 				
 			InstrumentProperties.describe("ADCP")
 				.displayDescription("Acoustic doppler current profiler")
-				.dataDescription("similar to a sonar, attempting to measure water current velocities over a depth range using the Doppler effect of sound waves scattered back from particles within the water column")
+				.dataDescription("similar to a sonar, attempting to measure\n water current velocities over a depth\n range using the Doppler effect of sound\n waves scattered back from \nparticles within the water column")
 				.interestingDataDescription("Check out that effect! So doppler!")
 				.image(Assets.IMG_TESTINSTRUMENT)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)

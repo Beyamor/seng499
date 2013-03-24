@@ -73,10 +73,6 @@ package store.displays
 			var descriptionDisplay:Text = new Text("Description: \n" + component.properties.description);
 			descriptionDisplay.color = 0xFFFFFF;
 			addGraphic(descriptionDisplay, 0, 250, 150);
-			
-			var dataDisplay:Text = new Text("Data description: \n" + component.properties.dataDescription);
-			dataDisplay.color = 0xFFFFFF;
-			addGraphic(dataDisplay, 0, 250, 200);
 		}
 
 	}
