@@ -16,10 +16,10 @@ package common{
 		/* Generating png assets! */
 		[Embed(source = "../assets/map-from-hex-button.png")] public static const IMG_MAP_FROM_HEX_BUTTON:Class
 		[Embed(source = "../assets/title.png")] public static const IMG_TITLE:Class
-		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000.330Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130320T000000.330Z_1D726_SCALAR:Class
-		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000.330Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130320T000000.330Z_1D726_UVWBS:Class
-		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136.180Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130321T225136.180Z_1D726_SCALAR:Class
-		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136.180Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130321T225136.180Z_1D726_UVWBS:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000330Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_SCALAR:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130320T000000330Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_UVWBS:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136180Z-1D726-scalar.png")] public static const IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_SCALAR:Class
+		[Embed(source = "../assets/ADCP/RDIADCP150WH8497_20130321T225136180Z-1D726-uvwbs.png")] public static const IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_UVWBS:Class
 		[Embed(source = "../assets/CTD/CTDstorm_temp_salinity.png")] public static const IMG_CTDSTORM_TEMP_SALINITY:Class
 		[Embed(source = "../assets/CTD/CTDtemperature.png")] public static const IMG_CTDTEMPERATURE:Class
 		[Embed(source = "../assets/CTD/CTDtides_pressure.png")] public static const IMG_CTDTIDES_PRESSURE:Class
