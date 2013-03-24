@@ -52,7 +52,7 @@ package time
 			//this description will be replaced with a larger, more detailed stats display
 			//addGraphic(new Text(calendar.season.description, 50, 80));
 			
-			addGraphic(new Text("Nodes placed this season:        " + dataTally.NodesPlaced, 50, 80));
+			addGraphic(new Text("Nodes placed this season:       " + dataTally.NodesPlaced, 50, 80));
 			addGraphic(new Text("Instruments placed this season: " + dataTally.InstrumentsPlaced, 50, 100));
 			
 			//Put special data here
