@@ -1,5 +1,6 @@
 package events.instruments 
 {
+	import common.Collections;
 	import data.DataSample;
 	import hex.HexData;
 	import model.Game;
@@ -38,31 +39,14 @@ package events.instruments
 						"hex": hexData,
 						"instrument": instrument
 					});
-					instrument.setDataSample(selectRandomSample(instrument.dataType,false));
 				}
 			}
 			
 			if (instrumentHexPairs.length == 0) return null;
 			
-			var randomIndex:uint			= Math.floor(Math.random() * instrumentHexPairs.length);
-			var instrumentHexPair:Object	= instrumentHexPairs[randomIndex];
-			
-			instrumentHexPair.instrument.setDataSample(selectRandomSample(instrumentHexPair.instrument.dataType,true));
-			//change instrument data here
-			
+			var instrumentHexPair:Object = Collections.any(instrumentHexPairs);
 			instrumentHexPair.instrument.startInterestingEvent();
 			return instrumentHexPair;
-		}
-		
-		public function selectRandomSample(type:String, interesting:Boolean):DataSample
-		{
-			var samples:Vector.<DataSample>;
-			if (interesting)	samples = GameTables.interestingDataSampleCollection[type];
-			else				samples = GameTables.boringDataSampleCollection[type];
-			
-			var randomSampleIndex:uint			= Math.floor(Math.random() * samples.length);
-			
-			return samples[randomSampleIndex];
 		}
 	}
 }

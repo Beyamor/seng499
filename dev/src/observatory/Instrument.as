@@ -1,6 +1,7 @@
 package observatory
 {
 	import adobe.utils.CustomActions;
+	import common.Collections;
 	import data.DataSample;
 	import hex.controllers.TileViewer;
 	import hex.HexTile;
@@ -14,7 +15,9 @@ package observatory
 	{
 		private var tile:HexTile;
         public var isProducingData:Boolean;
-		public var sample:DataSample;
+		
+		private var _sample:DataSample;
+		public function get sample():DataSample { return _sample; }
 		
 		private var _interestingEventIsOccurring:Boolean = false;
 		public function get interestingEventIsOccurring():Boolean { return _interestingEventIsOccurring; }
@@ -27,7 +30,7 @@ package observatory
 			this.tile = tile;
 
 			isProducingData = instrument.properties.producesDataFor(tile.data.terrain);
-			sample = GameTables.boringDataSampleCollection[dataType][0];
+			_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
 		}
 		
 		override public function getName():String
@@ -54,18 +57,17 @@ package observatory
 		public function startInterestingEvent():void {
 			
 			_interestingEventIsOccurring = true;
+			_sample = Collections.any(GameTables.interestingDataSampleCollection[dataType]);
 		}
 		
 		public function endInterestingEvent():void {
 			
 			_interestingEventIsOccurring = false;
+			_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
 		}
 		
 		public function get dataDescription():String {
 			
-			/*return interestingEventIsOccurring?
-						component.properties.interestingDataDescription
-						: component.properties.dataDescription;*/
 			return sample.description;
 		}
 		
@@ -76,11 +78,6 @@ package observatory
 		public function get mediaClip():Class//Not sure what this should be
 		{
 			return sample.media;
-		}
-		
-		public function setDataSample(sample:DataSample):void
-		{
-			this.sample = sample;
 		}
 	}
 
