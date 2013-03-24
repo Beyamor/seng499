@@ -2,6 +2,7 @@ package store.displays
 {
 	import common.displays.Popup;
 	import common.ui.Button;
+	import common.ui.NeptuneButtons;
 	import model.GameTables;
 	import model.PlayerData;
 	import net.flashpunk.Entity;
@@ -14,67 +15,70 @@ package store.displays
         import common.displays.Display;
         import net.flashpunk.World;
         import net.flashpunk.utils.Input;
+		import store.StoreView;
 	/**
 	 * ...
 	 * @author ColtonPhillips
 	 */
 	public class PrePurchaseDisplay extends Popup
 	{
-		private var displayIsVisible:Boolean = false;
-		private var buyButton:Button = null;
+		private var storeView:StoreView;
 		private var playerData:PlayerData;
-                private var component:ComponentData;
-                private var componentImage:Entity;
+        private var component:ComponentData;
+        private var componentDisplay:Image;
 		
-		public function PrePurchaseDisplay(parent:World, data:PlayerData, component:ComponentData)
+		public function PrePurchaseDisplay(storeView:StoreView, data:PlayerData, component:ComponentData)
 		{
-			
-			clearColor		= 0x88FFFFFF;
-			
-			playerData      = data;
-			this.component  = component;
+			this.storeView = storeView;
+			this.clearColor = 0xEE000000;
+			this.playerData = data;
+			this.component = component;
+			this.blocksUpdates = true;
 
 			super(
 				parent,
 				700,
 				500);
-				
-			addDisplayButtons();
 			
-			var description:Text = new Text(component.getName() + " - $" + GameTables.instrumentByName(component.getName()).cost);
-			description.color = 0;
-			addGraphic(description, 0, 10, 10);
-
-			componentImage = addGraphic(component.getImage());
-			componentImage.layer = -9003;
-
-			// This is all junk. Gotta it at some point.
-			componentImage.x = center.x;
-			componentImage.y = center.y;
-
-			blocksUpdates = true;
-		}
-		
-		private function buyButtonClicked():void
-		{
-			playerData.purchase(component);
-			FP.console.log("added to inventory: " + component.getName());
-			close();
-		}
-		
-		private function addDisplayButtons():void
-		{
-			var img:Image = new Image(Assets.IMG_BUY);
-
-			buyButton =  Button.description()
-						.at(center.x - img.width/2, center.y + height/2 - img.height)
-						.withDepth(-9002)
-						.withImage(img)
-						.whenClicked(buyButtonClicked)
-						.build();
-						
+			var componentDisplay:Image = new Image(component.getImage());
+			componentDisplay.scale = 4.0;
+			addGraphic(componentDisplay, 0, 50, 50)
+				
+			var buyButton:Button = NeptuneButtons.standard("Buy", width - 100, height - 80, function():void {
+				
+				storeView.instructionDisplay.show("added to inventory: " + component.getName());
+				playerData.purchase(component);
+				FP.console.log("added to inventory: " + component.getName());
+				close();
+				
+			});		
 			add(buyButton);
+			
+			var nameDisplay:Text = new Text(component.getName());
+			nameDisplay.color = 0xFFFFFF;
+			nameDisplay.scale = 3;
+			addGraphic(nameDisplay, 0, (width / 2) - (nameDisplay.scaledWidth / 2), 50);
+					
+			var costDisplay:Text = new Text("Cost: $" + component.properties.cost);
+			costDisplay.color = 0xFFFFFF;
+			addGraphic(costDisplay, 0, 50, 180);	
+			
+			// HACK: if we're making a list of things, it should be in a list, not hardcode - CP
+			if (component.dataType) {
+				var typeDisplay:Text = new Text("Type: " + component.dataType);
+				typeDisplay.color = 0xFFFFFF;
+				addGraphic(typeDisplay, 0, 50, 200);				
+			}
+
+			var descriptionDisplay:Text = new Text("Description: \n" + component.properties.description);
+			descriptionDisplay.color = 0xFFFFFF;
+			addGraphic(descriptionDisplay, 0, 250, 150);
+			
+			var dataDisplay:Text = new Text("Data description: \n" + component.properties.dataDescription);
+			dataDisplay.color = 0xFFFFFF;
+			addGraphic(dataDisplay, 0, 250, 200);
 		}
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package store
 {
+		import common.displays.InstructionDisplay;
 		import common.NeptuneWorld;
         import flash.geom.Point;
         import flash.geom.Rectangle;
@@ -29,10 +30,12 @@ package store
         public class StoreView extends NeptuneWorld { 
 
 			private var game:Game;
+			public var instructionDisplay:InstructionDisplay;
 
 			public function StoreView(game:Game)
 			{
 				this.game = game;
+				instructionDisplay = new InstructionDisplay(this);
 
 				var purchaseButtons:PurchaseButtonsDisplay  = new PurchaseButtonsDisplay(this, game.data);
 				var navButtons:NavButtonsDisplay            = new NavButtonsDisplay(this, game, purchaseButtons);
@@ -41,7 +44,8 @@ package store
 				displays = new DisplayStack(
 					background,
 					purchaseButtons,
-					navButtons);
+					navButtons,
+					instructionDisplay);
 			}
         }
 }

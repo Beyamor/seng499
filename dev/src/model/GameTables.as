@@ -26,8 +26,8 @@ package model
 		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTIDES_PRESSURE,"c"));
 		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDSTORM_TEMP_SALINITY,"c"));
 		
-		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136_180Z_1D726_SCALAR,"c"));
-		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136_180Z_1D726_UVWBS,"c"));
+		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_SCALAR,"c"));
+		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_UVWBS,"c"));
 		
 		public static var interestingDataSampleCollection:Object = new Object;
 		interestingDataSampleCollection[DataTypes.VIDEO]=new Vector.< DataSample>;
@@ -44,8 +44,8 @@ package model
 		
 		interestingDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTSUNAMI_PRESSURE,"c"));
 		
-		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000_330Z_1D726_SCALAR,"c"));
-		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000_330Z_1D726_UVWBS,"c"));
+		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_SCALAR,"c"));
+		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_UVWBS,"c"));
 		
 		// Ugggh.
 		// I would love to make a class for this - InstrumentPropertyList?

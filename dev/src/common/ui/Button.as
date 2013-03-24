@@ -60,10 +60,10 @@ package common.ui
 				{
 					if (world.mouseY >= y && world.mouseY <= y + height)
 					{
-						// you dont gatta ask me to fixdis!- CP
-						var chinceAsset:Class = FP.choose(Assets.SOUND_ONTOUCH, Assets.SOUND_ONTOUCH2, Assets.SOUND_ONTOUCH3); 
-						var chinceSound:Sound = (new chinceAsset) as Sound;
-						chinceSound.play();
+						// Highly doubt this be put here but does the trick for now - CP
+						var soundAsset:Class = FP.choose(Assets.SOUND_ONTOUCH, Assets.SOUND_ONTOUCH2, Assets.SOUND_ONTOUCH3); 
+						var clickSound:Sound = (new soundAsset) as Sound;
+						clickSound.play();
 						
 						return true;
 					}
