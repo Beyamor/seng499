@@ -15,7 +15,6 @@ package undersea.displays {
     import common.ui.Button;
     import common.Assets;
     import common.ui.ButtonPaginator;
-    import observatory.ComponentData;
     import common.displays.Display;
 	import flash.events.AsyncErrorEvent;
 	import flash.events.NetStatusEvent;
@@ -33,36 +32,37 @@ package undersea.displays {
 		private var video:Video = new Video();
 		private var ns:NetStream;
 		
-		private var component:ObservatoryComponent;
+		private var instrument:Instrument;
 		
-        public function InstrumentDisplay(parent:World, component:ObservatoryComponent) 
+        public function InstrumentDisplay(parent:World, instrument:Instrument) 
 		{
-			this.component = component;
+			this.instrument = instrument;
 			clearColor = 0xDD000000;
 			blocksUpdates = true;
 			
             super(parent, FP.width - 100, FP.height - 100);
 			
-			setUpFLVStream();
-			setUpInstrumentInformation();
+			// We don't have any videos yet - CP
+			//setUpFLVStream();
+			//addOnEndCallback(onEnd);
 			
-			addOnEndCallback(onEnd);
+			setUpinstrumentInformation();
 			
         }
 		
-		private function setUpInstrumentInformation():void 
+		private function setUpinstrumentInformation():void 
 		{
-			var componentName:Text = new Text(component.getName());
-			componentName.scale = 3;
-			addGraphic(componentName, 0, (width / 2) - (componentName.scaledWidth / 2), 20 );
+			var instrumentName:Text = new Text(instrument.getName());
+			instrumentName.scale = 3;
+			addGraphic(instrumentName, 0, (width / 2) - (instrumentName.scaledWidth / 2), 20 );
 			
-			var componentDescription:Text = new Text("Description:\n" + component.description, 150, 100);
-			addGraphic(componentDescription);
-			
-			// more like, if produces data - CP
-			if (!component.isNode()) {
-				addGraphic(new Text("Data:\n" + (component as Instrument).dataDescription, 350, 250));
-			}
+			var instrumentDescription:Text = new Text("Description:\n" + instrument.description, 150, 100);
+			addGraphic(instrumentDescription);
+
+			addGraphic(new Text("Data:\n" + instrument.sample.description, 350, 250));
+
+			//var instrumentDataImage:Image = new Image(instrument.sample.media);
+			//addGraphic(instrumentDataImage,0, 10, height - instrumentDataImage.height);
 		}
 
 		private function getMeta(mdata:Object):void
@@ -78,7 +78,8 @@ package undersea.displays {
 				ns = new NetStream(e.target as NetConnection);
 				
 				ns.client = {};
-				var file:ByteArray = new Assets.VIDEO_TEST();
+				//var file:ByteArray = new Assets.VIDEO_TEST();
+				var file:ByteArray = new (instrument as Instrument).sample.media;
 				ns.play(null);
 				
 				ns.appendBytes(file);

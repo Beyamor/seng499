@@ -50,11 +50,15 @@ package undersea.displays {
         }
 			
 		
-		private function clickedInstrument(component:ObservatoryComponent):Function
+		private function clickedComponent(component:ObservatoryComponent):Function
 		{
 			return function():void {
-				
-				underseaView.showInstrumentDisplay(component);
+				if (component.isNode()) {
+					underseaView.showNodeDisplay(component);
+				}
+				else {
+					underseaView.showInstrumentDisplay(component as Instrument);
+				}
              }
 		}
 		
@@ -85,7 +89,7 @@ package undersea.displays {
 						placeImage,
 						placeText)
 					.withDepth(-1)
-					.whenClicked(clickedInstrument(component))
+					.whenClicked(clickedComponent(component))
 					.build());
 			}
 		

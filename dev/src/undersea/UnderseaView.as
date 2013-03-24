@@ -19,6 +19,7 @@ package undersea
 	import observatory.Instrument;
     import observatory.ObservatoryComponent;
 	import undersea.displays.InstrumentDisplay;
+	import undersea.displays.NodeDisplay;
 	import undersea.displays.UnderseaDisplay;
 	
 	/**
@@ -46,10 +47,14 @@ package undersea
 			instructionDisplay.show("Click on an instrument to inspect");
 		}
 		
-		public function showInstrumentDisplay(component:ObservatoryComponent):void {
+		public function showInstrumentDisplay(instrument:Instrument):void {
 			
-			// TODO: Maybe change name to ObservatoryDisplay - CP
-			displays.push(new InstrumentDisplay(this, component));
+			displays.push(new InstrumentDisplay(this, instrument));
+		}
+		
+		public function showNodeDisplay(component:ObservatoryComponent):void {
+			
+			displays.push(new NodeDisplay(this, component));
 		}
 		
 		public static function createForInstrument(game:Game, hexData:HexData, instrument:Instrument):UnderseaView {
