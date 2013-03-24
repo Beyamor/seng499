@@ -99,7 +99,7 @@ package model
 		
 		public function FinishStoreList():void 
 		{
-			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydraphone")));
+			storeList.push(new ComponentData(GameTables.instrumentIDByName("Hydrophone")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("CTD")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("Camera")));
 			storeList.push(new ComponentData(GameTables.instrumentIDByName("ADCP")));
