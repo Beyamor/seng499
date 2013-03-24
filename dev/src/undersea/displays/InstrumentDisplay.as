@@ -1,6 +1,7 @@
 package undersea.displays {
 
 	import common.displays.Popup;
+	import common.ImageHelper;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import hex.HexView;
@@ -25,8 +26,6 @@ package undersea.displays {
 	import observatory.Instrument;
 	import observatory.ObservatoryComponent;
 
-	// Crackers. InstrumentDisplay is displaying non instrument things now. Whatever. - CP
-	
     public class InstrumentDisplay extends Popup 
 	{
 		private var video:Video = new Video();
@@ -61,8 +60,8 @@ package undersea.displays {
 
 			addGraphic(new Text("Data:\n" + instrument.sample.description, 350, 250));
 
-			//var instrumentDataImage:Image = new Image(instrument.sample.media);
-			//addGraphic(instrumentDataImage,0, 10, height - instrumentDataImage.height);
+			var instrumentDataImage:Image = new Image(instrument.sample.media);
+			addGraphic(ImageHelper.scaleTo(instrumentDataImage, 300 , 300), 0, 10, height - instrumentDataImage.scaledHeight - 10);
 		}
 
 		private function getMeta(mdata:Object):void

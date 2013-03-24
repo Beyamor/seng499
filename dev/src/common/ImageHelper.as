@@ -14,6 +14,13 @@ package common
 			
 			return (something is Image)? (something as Image) : (new Image(something));
 		}
+		
+		public static function scaleTo(image:Image, width:Number, height:Number):Image {
+			image.scaleX =  width / image.width;
+			image.scaleY = height / image.height;
+			
+			return image;
+		}
 	}
 
 }
