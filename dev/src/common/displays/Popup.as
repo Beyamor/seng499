@@ -17,6 +17,8 @@ package common.displays
 		
 		public function Popup(parent:World, width:uint, height:uint)
 		{
+			clearColor = 0xEE000000;
+			
 			// Just going to assume the popup should be centered
 			super(
 				parent,

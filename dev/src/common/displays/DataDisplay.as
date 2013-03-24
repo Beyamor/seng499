@@ -30,7 +30,7 @@ package common.displays
 		{
 			super(parent, 0, FP.height - HEIGHT, WIDTH, HEIGHT);
 			this.playerData = playerData;
-			clearColor = 0x88FFFFFF;
+			clearColor = 0x88000000;
 			tallier = new DataTally(playerData);
 			
 			addGraphic(moneyDisplay);

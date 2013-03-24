@@ -33,7 +33,7 @@ package inventory.ui
 			super(parent, (parent.width - WIDTH) / 2, 100, WIDTH, HEIGHT);
 			this.playerData	= playerData;
 			this.mapView	= mapView;
-			clearColor		= 0x44FFFFFF;
+			clearColor		= 0x44000000;
 			
 			var leftImage:Image		= new Image(Assets.IMG_SMALL_LEFT);
 			var rightImage:Image	= new Image(Assets.IMG_SMALL_RIGHT);

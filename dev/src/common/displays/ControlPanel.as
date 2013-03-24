@@ -26,7 +26,7 @@ package common.displays
 		
 		public function ControlPanel(parent:World) 
 		{
-			clearColor		= 0x88FFFFFF;
+			clearColor		= 0x88000000;
 					
 			super(parent, FP.width, VERTICAL_MARGIN, 200, 600 - VERTICAL_MARGIN * 2);	
 

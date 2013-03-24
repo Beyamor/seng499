@@ -14,7 +14,7 @@ package events.displays
 	{
 		public static const WIDTH:int	= 380,
 							HEIGHT:int	= 300,
-							COLOR:uint	= 0x88FFFFFF;
+							COLOR:uint	= 0x88000000;
 		
 		public function EventPopup(text:String = null, addCloseButton:Boolean = false)
 		{

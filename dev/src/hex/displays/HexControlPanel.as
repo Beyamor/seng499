@@ -22,7 +22,7 @@ package hex.displays
 		
 		public function HexControlPanel(parent:HexView, game:Game) 
 		{
-			clearColor		= 0x88FFFFFF;
+			clearColor		= 0x88000000;
 			
 			super(parent);
 			
