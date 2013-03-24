@@ -1,9 +1,11 @@
 package observatory
 {
 	import adobe.utils.CustomActions;
+	import data.DataSample;
 	import hex.controllers.TileViewer;
 	import hex.HexTile;
-        import model.GameTables;
+    import model.GameTables;
+	
 	/**
 	 * ...
 	 * @author Lambwatt
@@ -12,6 +14,7 @@ package observatory
 	{
 		private var tile:HexTile;
         public var isProducingData:Boolean;
+		public var sample:DataSample;
 		
 		private var _interestingEventIsOccurring:Boolean = false;
 		public function get interestingEventIsOccurring():Boolean { return _interestingEventIsOccurring; }
@@ -59,13 +62,24 @@ package observatory
 		
 		public function get dataDescription():String {
 			
-			return interestingEventIsOccurring?
+			/*return interestingEventIsOccurring?
 						component.properties.interestingDataDescription
-						: component.properties.dataDescription;
+						: component.properties.dataDescription;*/
+			return sample.description;
 		}
 		
 		public function getDataValue():int {
 			return component.properties.dataValue
+		}
+		
+		public function get mediaClip():Class//Not sure what this should be
+		{
+			return sample.media;
+		}
+		
+		public function setDataSample(sample:DataSample):void
+		{
+			this.sample = sample;
 		}
 	}
 

@@ -4,6 +4,8 @@ package events.instruments
 	import model.Game;
 	import observatory.Instrument;
 	import observatory.ObservatoryComponent;
+	import model.GameTables;
+	
 	/**
 	 * This dude, uh, gives instruments events?
 	 * @author beyamor
@@ -35,6 +37,7 @@ package events.instruments
 						"hex": hexData,
 						"instrument": instrument
 					});
+					instrument.setDataSample(GameTables.boringDataSampleCollection(instrument.dataType)[0]);
 				}
 			}
 			
@@ -42,6 +45,9 @@ package events.instruments
 			
 			var randomIndex:uint			= Math.floor(Math.random() * instrumentHexPairs.length);
 			var instrumentHexPair:Object	= instrumentHexPairs[randomIndex];
+			
+			instrumentHexPair.instrument.setDataSample(GameTables.interestingDataSampleCollection(instrument.dataType)[0]);
+			//change instrument data here
 			
 			instrumentHexPair.instrument.startInterestingEvent();
 			return instrumentHexPair;
