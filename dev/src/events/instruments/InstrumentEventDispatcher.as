@@ -1,5 +1,6 @@
 package events.instruments 
 {
+	import data.DataSample;
 	import hex.HexData;
 	import model.Game;
 	import observatory.Instrument;
@@ -37,7 +38,7 @@ package events.instruments
 						"hex": hexData,
 						"instrument": instrument
 					});
-					instrument.setDataSample(GameTables.boringDataSampleCollection(instrument.dataType)[0]);
+					instrument.setDataSample(selectRandomSample(instrument.dataType,false));
 				}
 			}
 			
@@ -46,12 +47,22 @@ package events.instruments
 			var randomIndex:uint			= Math.floor(Math.random() * instrumentHexPairs.length);
 			var instrumentHexPair:Object	= instrumentHexPairs[randomIndex];
 			
-			instrumentHexPair.instrument.setDataSample(GameTables.interestingDataSampleCollection(instrument.dataType)[0]);
+			instrumentHexPair.instrument.setDataSample(selectRandomSample(instrumentHexPair.instrument.dataType,true));
 			//change instrument data here
 			
 			instrumentHexPair.instrument.startInterestingEvent();
 			return instrumentHexPair;
 		}
+		
+		public function selectRandomSample(type:String, interesting:Boolean):DataSample
+		{
+			var samples:Vector.<DataSample>;
+			if (interesting)	samples = GameTables.interestingDataSampleCollection[type];
+			else				samples = GameTables.boringDataSampleCollection[type];
+			
+			var randomSampleIndex:uint			= Math.floor(Math.random() * samples.length);
+			
+			return samples[randomSampleIndex];
+		}
 	}
-
 }

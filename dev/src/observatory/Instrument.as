@@ -27,6 +27,7 @@ package observatory
 			this.tile = tile;
 
 			isProducingData = instrument.properties.producesDataFor(tile.data.terrain);
+			sample = GameTables.boringDataSampleCollection[dataType][0];
 		}
 		
 		override public function getName():String
