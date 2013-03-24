@@ -46,10 +46,10 @@ package undersea
 			instructionDisplay.show("Click on an instrument to inspect");
 		}
 		
-		public function showInstrumentDisplay(instrument:Instrument):void {
+		public function showInstrumentDisplay(component:ObservatoryComponent):void {
 			
-			// TODO: Should this be verifying that instrument is an Instrument? Yikes. Your move, CP.
-			displays.push(new InstrumentDisplay(this, instrument));
+			// TODO: Maybe change name to ObservatoryDisplay - CP
+			displays.push(new InstrumentDisplay(this, component));
 		}
 		
 		public static function createForInstrument(game:Game, hexData:HexData, instrument:Instrument):UnderseaView {

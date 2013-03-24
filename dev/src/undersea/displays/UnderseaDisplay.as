@@ -46,35 +46,46 @@ package undersea.displays {
 					FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
 				}));
 					
-			setUpInstruments();	
+			setUpComponents();	
         }
 			
 		
-		private function clickedInstrument(instrument:Instrument):Function
+		private function clickedInstrument(component:ObservatoryComponent):Function
 		{
 			return function():void {
 				
-				underseaView.showInstrumentDisplay(instrument);
+				underseaView.showInstrumentDisplay(component);
              }
 		}
 		
-		private function setUpInstruments():void
+		private function setUpComponents():void
 		{
-			var instruments:Vector.<Instrument> = hexData.instruments;
+			var components:Vector.<ObservatoryComponent> = hexData.observatoryComponents;
 			
-			for each (var instrument:Instrument in instruments) 
+			for each (var component:ObservatoryComponent in components) 
 			{
+				
 				// evenly spaced out on ground
-				var placePoint:Point = new Point((FP.width / (instruments.length + 1)) * (instruments.indexOf(instrument) + 1), 400);
-				var placeImage:Image = new Image(instrument.getImage());
+				var placePoint:Point = new Point((FP.width / (components.length + 1)) * (components.indexOf(component) + 1), 400);
+				var placeImage:Image = new Image(component.getImage());
 				placeImage.scale = 3.0;
+				var placeText:Text = new Text(component.getName());
+				placeText.color = 0x000000;
+				// HACK: Centering the 00 makes it look much better, but breaks the button - CP
+				//placeImage.centerOO();
+				placeText.centerOO();
+				placeText.x += (placeImage.scaledWidth / 2);
+				placeText.y += (placeImage.scaledHeight / 2); // remove these later - CP
+				
+				
+				
 				add(Button.description()
 					.fixedAt(placePoint.x, placePoint.y)
 					.withImageAndText(
 						placeImage,
-						new Text(instrument.getName()))
+						placeText)
 					.withDepth(-1)
-					.whenClicked(clickedInstrument(instrument))
+					.whenClicked(clickedInstrument(component))
 					.build());
 			}
 		

@@ -26,17 +26,19 @@ package undersea.displays {
 	import observatory.Instrument;
 	import observatory.ObservatoryComponent;
 
+	// Crackers. InstrumentDisplay is displaying non instrument things now. Whatever. - CP
+	
     public class InstrumentDisplay extends Popup 
 	{
 		private var video:Video = new Video();
 		private var ns:NetStream;
 		
-		private var instrument:Instrument;
+		private var component:ObservatoryComponent;
 		
-        public function InstrumentDisplay(parent:World, instrument:Instrument) 
+        public function InstrumentDisplay(parent:World, component:ObservatoryComponent) 
 		{
-			this.instrument = instrument;
-			clearColor		= 0xDD000000;
+			this.component = component;
+			clearColor = 0xDD000000;
 			blocksUpdates = true;
 			
             super(parent, FP.width - 100, FP.height - 100);
@@ -50,9 +52,13 @@ package undersea.displays {
 		
 		private function setUpInstrumentInformation():void 
 		{
-			addGraphic(new Text(instrument.getName(), 400, 200));
-			addGraphic(new Text(instrument.description, 400, 300));
-			addGraphic(new Text(instrument.dataDescription, 400, 400));
+			addGraphic(new Text(component.getName(), 400, 200));
+			addGraphic(new Text(component.description, 400, 300));
+			
+			// more like, if produces data - CP
+			if (!component.isNode()) {
+				addGraphic(new Text((component as Instrument).dataDescription, 400, 400));
+			}
 		}
 
 		private function getMeta(mdata:Object):void
