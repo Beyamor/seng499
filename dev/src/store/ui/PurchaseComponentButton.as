@@ -32,7 +32,7 @@ package store.ui
 			
 			var image:Image = component.getStoreImage();
 			
-			var storeItemString:String = component.getName() + " - " + cost;
+			var storeItemString:String = component.getName() + "\n - " + cost;
 			
 			text = new Text(storeItemString);
 			text.color = textColor;
