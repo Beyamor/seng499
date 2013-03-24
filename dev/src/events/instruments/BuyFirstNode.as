@@ -29,7 +29,7 @@ package events.instruments
 		
 		public function BuyFirstNode() 
 		{//								"									"
-			super(Seasons.SUMMER, 0, "Congradulations!  The governmant of\n"
+			super(Seasons.SUMMER, 0, "Congratulations!  The government of\n"
 										+"Canada has given you a substantial\n"
 										+"grant to build an ocean obervatory:\n"
 										+"a network of undersea instruments \n"

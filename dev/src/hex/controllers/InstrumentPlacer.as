@@ -31,7 +31,7 @@ package hex.controllers {
         }
 
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
-			if (tile.data.instruments.length < 2)
+			if (tile.data.observatoryComponents.length < 2 && !tile.data.hasNode())
 			{
 				var addedInstrument:Instrument = new Instrument(instrument, tile);
 				tile.addInstrument(addedInstrument);
