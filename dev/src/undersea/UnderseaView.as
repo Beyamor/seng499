@@ -28,17 +28,22 @@ package undersea
 	public class UnderseaView extends NeptuneWorld
 	{
 		private var game:Game;
+		public var instructionDisplay:InstructionDisplay;
 		
 		public function UnderseaView(hexData:HexData, game:Game) 
 		{
 			this.game = game;
 			
+			instructionDisplay = new InstructionDisplay(this);
 			var backgroundDisplay:BackgroundDisplay = new BackgroundDisplay(this, Assets.IMG_UNDERSEA_BG);
 			var underseaDisplay:UnderseaDisplay = new UnderseaDisplay(this, game, hexData);
 			
 			displays = new DisplayStack(
 				backgroundDisplay,
-				underseaDisplay);
+				underseaDisplay,
+				instructionDisplay);
+				
+			instructionDisplay.show("Click on an instrument to inspect");
 		}
 		
 		public function showInstrumentDisplay(instrument:Instrument):void {
