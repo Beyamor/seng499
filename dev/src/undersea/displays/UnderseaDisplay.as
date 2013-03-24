@@ -38,20 +38,17 @@ package undersea.displays {
 			
             super(parent, 0, 0, FP.width, FP.height);
 			
-			setUpNavigationButtons();
+			add(NeptuneButtons.standard(
+				"back", 
+				width - 58, 
+				height - 42, 
+				function():void {
+					FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
+				}));
+					
 			setUpInstruments();	
         }
 			
-		private function clickedBack():void
-		{
-			FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
-			
-		}
-		
-		private function setUpNavigationButtons():void
-		{
-			add(NeptuneButtons.standard("back", width - 58, height - 42, clickedBack));
-		}
 		
 		private function clickedInstrument(instrument:Instrument):Function
 		{
@@ -81,16 +78,6 @@ package undersea.displays {
 					.build());
 			}
 		
-		}
-		
-		override public function update():void
-		{
-			super.update();
-		}
-		
-		override public function render():void
-		{
-			super.render();
 		}
     }
 }
