@@ -52,12 +52,16 @@ package undersea.displays {
 		
 		private function setUpInstrumentInformation():void 
 		{
-			addGraphic(new Text(component.getName(), 400, 200));
-			addGraphic(new Text(component.description, 400, 300));
+			var componentName:Text = new Text(component.getName());
+			componentName.scale = 3;
+			addGraphic(componentName, 0, (width / 2) - (componentName.scaledWidth / 2), 20 );
+			
+			var componentDescription:Text = new Text("Description:\n" + component.description, 150, 100);
+			addGraphic(componentDescription);
 			
 			// more like, if produces data - CP
 			if (!component.isNode()) {
-				addGraphic(new Text((component as Instrument).dataDescription, 400, 400));
+				addGraphic(new Text("Data:\n" + (component as Instrument).dataDescription, 350, 250));
 			}
 		}
 
@@ -102,7 +106,7 @@ package undersea.displays {
 			nc.connect(null);
 			
 			video.x = x + 10;
-			video.y = y + 10;
+			video.y = height - video.height + 40;//huh
 		}
 		
     }

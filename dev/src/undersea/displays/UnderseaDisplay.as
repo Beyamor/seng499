@@ -40,8 +40,8 @@ package undersea.displays {
 			
 			add(NeptuneButtons.standard(
 				"back", 
-				width - 58, 
-				height - 42, 
+				width/2 - 48, 
+				height - 82, 
 				function():void {
 					FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
 				}));

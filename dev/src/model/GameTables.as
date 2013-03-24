@@ -62,7 +62,7 @@ package model
 				
 			InstrumentProperties.describe("Hydrophone")
 				.displayDescription("Hydrophones capture audio data.\n Neat!")
-				.dataDescription("This is just audio data. \nNot that there's anything wrong with that.")
+				.dataDescription("This is just audio data. \nNot that there's anything wrong \nwith that.")
 				.interestingDataDescription("You're capturing some interesting data for great science!")
 				.image(Assets.IMG_TESTINSTRUMENT)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
