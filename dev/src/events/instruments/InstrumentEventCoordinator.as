@@ -6,20 +6,16 @@ package events.instruments
 	import model.Game;
 	import observatory.Instrument;
 	/**
-	 * ...
+	 * This guy used to be responsible for ending interesting events as well as triggering the event dispatcher.
+	 * Its responsibilities have diminished somewhat. However, pushing the instrument event display gives it enough to do, kinda.
+	 * If more instrument event-y stuff needs to happen, beyond just starting an event, make it go here.
+	 * Otherwise, I dunno, consider scrapping this guy.
 	 * @author beyamor
 	 */
 	public class InstrumentEventCoordinator 
-	{
-		
-		public function InstrumentEventCoordinator() 
-		{
-			
-		}
-		
+	{		
 		public function coordinateEvents(game:Game):void {
 			
-			for each (var instrument:Instrument in game.data.instruments) instrument.endInterestingEvent();
 			var eventDispatcher:InstrumentEventDispatcher = new InstrumentEventDispatcher;
 			
 			var hexInstrumentPair:Object	= eventDispatcher.maybeDispatchInstrumentEvent(game);
