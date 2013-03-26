@@ -31,24 +31,18 @@ package hex.controllers {
 
 			view.setCursor(Cursor.forPlacingInstrument(instrument));
         }
-
-        public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
+		
+		private function stopConnecting():void {
 			
-			// Check tile population
-			if (tile.data.observatoryComponents.length >= 2 || tile.data.hasNode()) {
-				
-				view.instructionDisplay.show("tile is full, place on another");
-				return;
-			}
+			view.hexDisplay.removeConnectionCable();
+			game.state.unsetConnectionPoint();
+			view.removeCursor();
 			
-			// Check tile discovery
-			if (!tile.data.discovered) {
-				
-				view.instructionDisplay.show("place on a discovered tile");
-				return;
-			}
+			view.controller = new ConnectionStarter(view, game);
+		}
+		
+		private function placeInstrument(tile:HexTile):void {
 			
-			// Okay. Actually place the dang thing
 			var addedInstrument:Instrument = new Instrument(instrument, tile);
 			tile.addInstrument(addedInstrument);
 			
@@ -63,6 +57,33 @@ package hex.controllers {
 			
 			// Okay. Switch out of instrument placement I guess?
 			view.controller = new TileViewer(view, game);
+		}
+
+        public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
+			
+			// Okay. Uh. CP suggested that clicking on the connection point again would unset it
+			if (tile.data.hasNode()) {
+				
+				stopConnecting();
+			}
+			
+			// Check tile population
+			else if (tile.data.observatoryComponents.length >= 2) {
+				
+				view.instructionDisplay.show("tile is full, place on another");
+			}
+			
+			// Check tile discovery
+			else if (!tile.data.discovered) {
+				
+				view.instructionDisplay.show("place on a discovered tile");
+			}
+			
+			// Okay. Actually place the dang thing
+			else {
+				
+				placeInstrument(tile);
+			}
 		}
 		
 		public function addNewCable(tile:HexTile):void
