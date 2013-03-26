@@ -51,7 +51,7 @@ package hex.controllers {
 			}
 		}
 		
-		public function addNewCable(tile:HexTile)
+		public function addNewCable(tile:HexTile):void
 		{
 			//uses fact that entity will have been added to the back of the list
 			var insX:int = tile.hexSubEntities[tile.data.instruments.length - 1].wireX();

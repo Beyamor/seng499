@@ -172,7 +172,18 @@ package hex
 			}
 
 			return onscreenTiles;
-		 }
+		}
+		 
+		//Get a specitfied tile
+		public function getTileAtIndex(indecies:HexIndices):HexTile
+		{
+			if (HexIndices.areValid(indecies.x, indecies.y) && tileExists(new HexIndices(indecies.x, indecies.y)))
+			{
+				return tiles[indecies.x][indecies.y];
+			}
+			else
+				return null;
+		}
 	}
 
 }

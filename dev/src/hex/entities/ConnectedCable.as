@@ -25,21 +25,14 @@ package hex.entities
 			this.rootX = rootX;
 			this.rootY = rootY;
 			
-			/*var bitmap:BitmapData = new BitmapData(Math.abs(x1 - x2), Math.abs(y1 - y2), true, 0);
-			Draw.setTarget(bitmap);
-			
-			Draw.line(x1, y1, x2, y2, 0xFF00FF);
-			
-			graphic = new Stamp(bitmap);*/
 			layer = 2;
-			//FP.world.addGraphic(new Stamp(bitmap),-1);
 		}
 		
 		override public function render():void 
 		{
 			super.render();
 			
-			// Temporary. Throw splines in whenever.
+			//cloned from connection cable
 			var line:Shape			= new Shape();
 			var graphics:Graphics	= line.graphics;
 			

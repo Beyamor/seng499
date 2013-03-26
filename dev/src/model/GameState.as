@@ -26,7 +26,6 @@ package model
 		private var instrumentBeingPlaced:ComponentData = null;
 		private var connectionPoint:Connectable = null;
 		private var lastViewedHex:Point = null;
-		//private var _activeTerrainForces:Vector.< Vector.< Vector.<TerrainForce> > > = new Vector.< Vector.< Vector.<TerrainForce> > >;	
 		private var _activeTerrainForces:Object = new Object;
 		private var eventDisplayQueue:Vector.<Display> = new <Display>[];
 		

@@ -20,7 +20,6 @@ package map
 	{
 		private var node:Node;
 		private var game:Game
-		//private var connections:Vector.<Instrument>;
 		
 		public function NodeEntity(node:Node, game:Game) 
 		{

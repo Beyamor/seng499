@@ -45,13 +45,6 @@ package hex.ui
 			(renderTarget ? renderTarget : FP.buffer).draw(line);
 		}
 		
-		/*public function saveShape(view:HexView):void
-		{	
-			view.hexDisplay.add(new ConnectedCable(x - world.camera.x, 
-											y - world.camera.y, 
-											world.mouseX - world.camera.x, 
-											world.mouseY - world.camera.y));
-		}*/
 	}
 
 }

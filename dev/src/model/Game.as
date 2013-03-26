@@ -17,7 +17,6 @@ package model
 		{
 			state = new GameState();
 			data = new PlayerData();
-			//addFeatures();
 		}
 		
 		//Aww fuck it, just move this to playerData asap.
