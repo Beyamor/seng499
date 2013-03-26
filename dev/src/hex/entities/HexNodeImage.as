@@ -19,10 +19,10 @@ package hex.entities
 			
 			PositionHelper.centerOn(this, tile);
 			
-			for (var i:int; i < (tile.data.observatoryComponents[0]as Connectable).getConnections.length; i++ )
+			/*for (var i:int; i < (tile.data.observatoryComponents[0]as Connectable).getConnections.length; i++ )
 			{
 				var destTile:Tile
-			}
+			}*/
 		}
 	}
 }

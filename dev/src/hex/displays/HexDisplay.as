@@ -77,7 +77,7 @@ package hex.displays
             var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
 			grid = new HexGrid(factory, this, camera, HEX_RADIUS, WIDTH, HEIGHT, game);
 		
-			addWires(game.data);
+			//addWires(game.data);
 			
 			this.game = game;
 		}

@@ -80,6 +80,7 @@ package model
 		{
 			var converter:SpaceConverter = SpaceConverter.getCanonical();
 			var hexCoords:HexIndices     = converter.getTileIndices(node.getMapX(), node.getMapY());
+
 			nodeList.push(node);
 			for each (var feature:Feature in terrainFeatures)
 			{
