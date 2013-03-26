@@ -34,6 +34,10 @@ package common{
 		[Embed(source = "../assets/Hydrophone/HydrophoneShipping.png")] public static const IMG_HYDROPHONESHIPPING:Class
 		[Embed(source = "../assets/Hydrophone/HydrophoneUnidentified.png")] public static const IMG_HYDROPHONEUNIDENTIFIED:Class
 		[Embed(source = "../assets/Hydrophone/HydrophoneWhales.png")] public static const IMG_HYDROPHONEWHALES:Class
+		[Embed(source = "../assets/map/ADCP.png")] public static const IMG_ADCP:Class
+		[Embed(source = "../assets/map/CameraSprite.png")] public static const IMG_CAMERASPRITE:Class
+		[Embed(source = "../assets/map/CTD.png")] public static const IMG_CTD:Class
+		[Embed(source = "../assets/map/Hydrophone.png")] public static const IMG_HYDROPHONE:Class
 		[Embed(source = "../assets/map/InventoryBackgound.png")] public static const IMG_INVENTORYBACKGOUND:Class
 		[Embed(source = "../assets/map/ItemBackground.png")] public static const IMG_ITEMBACKGROUND:Class
 		[Embed(source = "../assets/map/Map.png")] public static const IMG_MAP:Class
