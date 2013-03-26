@@ -64,7 +64,7 @@ package model
 				.displayDescription("Hydrophones capture audio data.\n Neat!")
 				.dataDescription("This is just audio data. \nNot that there's anything wrong \nwith that.")
 				.interestingDataDescription("You're capturing some interesting data for great science!")
-				.image(Assets.IMG_TESTINSTRUMENT)
+				.image(Assets.IMG_HYDROPHONE)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.AUDIO)
@@ -76,7 +76,7 @@ package model
 				.displayDescription("A CTD!")
 				.dataDescription("CTDs capture conductivity, temperature, and depth.")
 				.interestingDataDescription("Oh my! Look at that huge drop in depth and temperature!")
-				.image(Assets.IMG_TESTINSTRUMENT)
+				.image(Assets.IMG_CTD)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.CTD_DATA)
@@ -88,7 +88,7 @@ package model
 				.displayDescription("Takes video of things under the ocean.")
 				.dataDescription("High definition video streams \navailable 24/7 on the Internet.")
 				.interestingDataDescription("What is going on in that video stream!?")
-				.image(Assets.IMG_TESTINSTRUMENT)
+				.image(Assets.IMG_CAMERASPRITE)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.VIDEO)
@@ -100,7 +100,7 @@ package model
 				.displayDescription("Acoustic doppler current profiler")
 				.dataDescription("similar to a sonar, attempting to measure\n water current velocities over a depth\n range using the Doppler effect of sound\n waves scattered back from \nparticles within the water column")
 				.interestingDataDescription("Check out that effect! So doppler!")
-				.image(Assets.IMG_TESTINSTRUMENT)
+				.image(Assets.IMG_ADCP)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.PROFILES)

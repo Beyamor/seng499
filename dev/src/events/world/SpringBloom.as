@@ -59,7 +59,7 @@ package events.world
 						
 						var instrument:Instrument = observatoryComponent as Instrument;
 						
-						if (instrument.dataType == DataTypes.VIDEO) return true;
+						if (instrument.dataType == DataTypes.VIDEO && hexData.terrain.type==Types.REEF) return true;
 					}
 				}
 			}
