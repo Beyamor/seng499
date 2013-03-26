@@ -2,6 +2,7 @@ package hex.controllers {
         
 	import common.ui.Cursor;
 	import hex.entities.ConnectedCable;
+	import hex.terrain.Types;
     import model.Game;
     import hex.HexTile;
     import net.flashpunk.FP;
@@ -32,23 +33,36 @@ package hex.controllers {
         }
 
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
-			if (tile.data.observatoryComponents.length < 2 && !tile.data.hasNode())
-			{
-				var addedInstrument:Instrument = new Instrument(instrument, tile);
-				tile.addInstrument(addedInstrument);
+			
+			// Check tile population
+			if (tile.data.observatoryComponents.length >= 2 || tile.data.hasNode()) {
 				
-				addNewCable(tile);
-				
-				game.state.getConnectionPoint().connect(addedInstrument);
-				game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());				
-				game.state.stopPlacingInstrument();
-				
-				view.removeCursor();
-				view.hexDisplay.removeConnectionCable();
-				
-				// Okay. Switch out of instrument placement I guess?
-				view.controller = new TileViewer(view, game);
+				view.instructionDisplay.show("tile is full, place on another");
+				return;
 			}
+			
+			// Check tile discovery
+			if (!tile.data.discovered) {
+				
+				view.instructionDisplay.show("place on a discovered tile");
+				return;
+			}
+			
+			// Okay. Actually place the dang thing
+			var addedInstrument:Instrument = new Instrument(instrument, tile);
+			tile.addInstrument(addedInstrument);
+			
+			addNewCable(tile);
+			
+			game.state.getConnectionPoint().connect(addedInstrument);
+			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());				
+			game.state.stopPlacingInstrument();
+			
+			view.removeCursor();
+			view.hexDisplay.removeConnectionCable();
+			
+			// Okay. Switch out of instrument placement I guess?
+			view.controller = new TileViewer(view, game);
 		}
 		
 		public function addNewCable(tile:HexTile):void
