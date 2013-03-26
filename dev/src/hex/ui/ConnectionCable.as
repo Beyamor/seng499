@@ -2,9 +2,14 @@ package hex.ui
 {
 	import flash.display.Graphics;
 	import flash.display.Shape;
+	import hex.entities.ConnectedCable;
+	import hex.HexView;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
+	import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Draw;
+	
 	
 	/**
 	 * The cable rendered when connecting a new instrument.
@@ -12,10 +17,11 @@ package hex.ui
 	 */
 	public class ConnectionCable extends Entity 
 	{
-		
+		private var line:Shape
 		public function ConnectionCable(x:Number, y:Number)
 		{
 			super(x, y);
+			layer = 2;
 		}
 		
 		override public function update():void 
@@ -28,7 +34,7 @@ package hex.ui
 			super.render();
 			
 			// Temporary. Throw splines in whenever.
-			var line:Shape			= new Shape();
+			line			= new Shape();
 			var graphics:Graphics	= line.graphics;
 			
 			graphics.lineStyle(2);			
@@ -38,6 +44,14 @@ package hex.ui
 			
 			(renderTarget ? renderTarget : FP.buffer).draw(line);
 		}
+		
+		/*public function saveShape(view:HexView):void
+		{	
+			view.hexDisplay.add(new ConnectedCable(x - world.camera.x, 
+											y - world.camera.y, 
+											world.mouseX - world.camera.x, 
+											world.mouseY - world.camera.y));
+		}*/
 	}
 
 }

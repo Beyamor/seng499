@@ -18,6 +18,11 @@ package observatory
 			connections.push(component);
 		}
 		
+		public function getConnections():Vector.<ObservatoryComponent>
+		{
+			return connections;
+		}
+		
 	}
 
 }

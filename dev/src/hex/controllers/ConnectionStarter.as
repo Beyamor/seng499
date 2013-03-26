@@ -38,6 +38,8 @@ package hex.controllers
 						
 						view.controller					= new InstrumentPlacer(view, game);
 						view.hexDisplay.connectionCable	= new ConnectionCable(tile.x, tile.y);
+						game.state.connectionX = tile.x;
+						game.state.connectionY = tile.y;
 						
 						view.instructionDisplay.show("place instrument on a hex");						
 						return;

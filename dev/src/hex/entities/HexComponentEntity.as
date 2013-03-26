@@ -2,6 +2,7 @@ package hex.entities
 {
 	import hex.HexTile;
 	import net.flashpunk.Entity;
+	import observatory.Connectable;
 	import observatory.ObservatoryComponent;
 	import net.flashpunk.graphics.Image;
 	
@@ -24,6 +25,16 @@ package hex.entities
 			height = image.height;
 			graphic = image;
 			layer = 1;
+		}
+		
+		public function wireY():int
+		{
+			return y + height / 2;
+		}
+		
+		public function wireX():int
+		{
+			return x + width / 2;
 		}
 		
 		public function containsPoint(x:int, y:int):Boolean

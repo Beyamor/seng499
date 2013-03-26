@@ -2,6 +2,8 @@ package hex.displays
 {
 	import common.displays.Display;
 	import common.displays.DataDisplay;
+	import net.flashpunk.graphics.Stamp;
+	import net.flashpunk.utils.Draw;
 	import hex.Cartographer;
 	import hex.HexFactory;
 	import hex.HexGrid;
@@ -47,7 +49,6 @@ package hex.displays
 		public function removeConnectionCable():void {
 			
 			if (_connectionCable) {
-				
 				remove(_connectionCable);
 				_connectionCable = null;
 			}
@@ -76,6 +77,8 @@ package hex.displays
             var factory:HexFactory = new HexFactory(new Cartographer(game.data), game.data);
 			grid = new HexGrid(factory, this, camera, HEX_RADIUS, WIDTH, HEIGHT, game);
 		
+			addWires(game.data);
+			
 			this.game = game;
 		}
 		

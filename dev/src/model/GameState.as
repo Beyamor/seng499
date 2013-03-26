@@ -30,6 +30,9 @@ package model
 		private var _activeTerrainForces:Object = new Object;
 		private var eventDisplayQueue:Vector.<Display> = new <Display>[];
 		
+		public var connectionX:int;
+		public var connectionY:int;
+		
 		public function GameState() 
 		{
 			
