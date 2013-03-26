@@ -71,6 +71,12 @@ package model
 			state = PLACING_ON_HEX;
 		}
 		
+		public function unsetConnectionPoint():void {
+			
+			connectionPoint = null;
+			state = SELECTING_CONNECTION_ON_HEX;
+		}
+		
 		public function getConnectionPoint():Connectable
 		{
 			return connectionPoint;

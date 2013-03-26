@@ -41,7 +41,6 @@ package hex
 			super();
 			game.state.setLastViewedHex(mapX, mapY);
 			this.game	= game;
-			controller	= (new ControllerFactory).createFor(game, this);
 			
 			controlPanel	= new HexControlPanel(this, game).thatSlidesOn;
 			hexDisplay		= new HexDisplay(this, game, mapX, mapY);
@@ -55,7 +54,7 @@ package hex
 				instructionDisplay
 			);
 			
-			if (game.state.isConnecting()) instructionDisplay.show("select a node or junction box");
+			controller	= (new ControllerFactory).createFor(game, this);
 		}
 		
 		public function returnToMapView():void {

@@ -24,6 +24,7 @@ package hex.controllers
 			this.view = view;
 			
 			view.setCursor(Cursor.forPlacingInstrument(game.state.getInstrumentBeingPlaced()));
+			view.instructionDisplay.show("select a node or junction box");
 		}
 		
 		public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {

@@ -2,6 +2,7 @@ package hex.controllers {
         
 	import common.ui.Cursor;
 	import hex.entities.ConnectedCable;
+	import hex.terrain.Types;
     import model.Game;
     import hex.HexTile;
     import net.flashpunk.FP;
@@ -30,24 +31,58 @@ package hex.controllers {
 
 			view.setCursor(Cursor.forPlacingInstrument(instrument));
         }
+		
+		private function stopConnecting():void {
+			
+			view.hexDisplay.removeConnectionCable();
+			game.state.unsetConnectionPoint();
+			view.removeCursor();
+			
+			view.controller = new ConnectionStarter(view, game);
+		}
+		
+		private function placeInstrument(tile:HexTile):void {
+			
+			var addedInstrument:Instrument = new Instrument(instrument, tile);
+			tile.addInstrument(addedInstrument);
+			
+			addNewCable(tile);
+			
+			game.state.getConnectionPoint().connect(addedInstrument);
+			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());				
+			game.state.stopPlacingInstrument();
+			
+			view.removeCursor();
+			view.hexDisplay.removeConnectionCable();
+			
+			// Okay. Switch out of instrument placement I guess?
+			view.controller = new TileViewer(view, game);
+		}
 
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
-			if (tile.data.observatoryComponents.length < 2 && !tile.data.hasNode())
-			{
-				var addedInstrument:Instrument = new Instrument(instrument, tile);
-				tile.addInstrument(addedInstrument);
+			
+			// Okay. Uh. CP suggested that clicking on the connection point again would unset it
+			if (tile.data.hasNode()) {
 				
-				addNewCable(tile);
+				stopConnecting();
+			}
+			
+			// Check tile population
+			else if (tile.data.observatoryComponents.length >= 2) {
 				
-				game.state.getConnectionPoint().connect(addedInstrument);
-				game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());				
-				game.state.stopPlacingInstrument();
+				view.instructionDisplay.show("tile is full, place on another");
+			}
+			
+			// Check tile discovery
+			else if (!tile.data.discovered) {
 				
-				view.removeCursor();
-				view.hexDisplay.removeConnectionCable();
+				view.instructionDisplay.show("place on a discovered tile");
+			}
+			
+			// Okay. Actually place the dang thing
+			else {
 				
-				// Okay. Switch out of instrument placement I guess?
-				view.controller = new TileViewer(view, game);
+				placeInstrument(tile);
 			}
 		}
 		
