@@ -13,13 +13,7 @@ package events.instruments
 	 * @author beyamor
 	 */
 	public class InstrumentEventDispatcher 
-	{
-		
-		public function InstrumentEventDispatcher()
-		{
-			
-		}
-		
+	{		
 		/**
 		 * Returns the instrument/hex object on which the event was started or null if no event was started
 		 */

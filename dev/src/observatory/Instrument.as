@@ -60,9 +60,12 @@ package observatory
 			_sample = Collections.any(GameTables.interestingDataSampleCollection[dataType]);
 		}
 		
-		public function endInterestingEvent():void {
-			
+		public function endSeason():void {
+		
+			// This is under the assumption that a special instrument event only lasts one season.
 			_interestingEventIsOccurring = false;
+			
+			// Randomize the sample. Note that even if it was an interesting one, it'll be set back to a boring one.
 			_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
 		}
 		

@@ -8,6 +8,7 @@ package time
 	import events.world.SpecialEvents;
 	import events.GameEvent;
 	import model.Game;
+	import observatory.Instrument;
 	/**
 	 * This guy wraps up whatever happens to the game models when a season changes.
 	 * @author beyamor
@@ -24,8 +25,11 @@ package time
 		
 		public function changeSeason():void {
 			
+			// Actually change the season! Hey!
+			for each (var instrument:Instrument in game.data.instruments) instrument.endSeason();
 			calendar.goToNextSeason();
 
+			// Plug away active events.
 			var gameEvents:Vector.<GameEvent> = game.data.gameEvents.concat(); // Copy so we can remove events
 			for each (var event:GameEvent in gameEvents) {
 				
