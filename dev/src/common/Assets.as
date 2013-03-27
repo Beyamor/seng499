@@ -6,6 +6,7 @@ package common{
 		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
 
 		/* Generating mp3 assets! */
+		[Embed(source = "../assets/sound/Autumn.mp3")] public static const SOUND_AUTUMN:Class
 		[Embed(source = "../assets/sound/native_rainfall.mp3")] public static const SOUND_NATIVE_RAINFALL:Class
 		[Embed(source = "../assets/sound/neptune.mp3")] public static const SOUND_NEPTUNE:Class
 		[Embed(source = "../assets/sound/ontouch.mp3")] public static const SOUND_ONTOUCH:Class
@@ -48,10 +49,14 @@ package common{
 		[Embed(source = "../assets/map/PlacingMouse.png")] public static const IMG_PLACINGMOUSE:Class
 		[Embed(source = "../assets/map/SeaLife.png")] public static const IMG_SEALIFE:Class
 		[Embed(source = "../assets/map/TestInstrument.png")] public static const IMG_TESTINSTRUMENT:Class
+		[Embed(source = "../assets/store/adcp_image.png")] public static const IMG_ADCP_IMAGE:Class
 		[Embed(source = "../assets/store/back.png")] public static const IMG_BACK:Class
 		[Embed(source = "../assets/store/bg.png")] public static const IMG_BG:Class
 		[Embed(source = "../assets/store/buy.png")] public static const IMG_BUY:Class
+		[Embed(source = "../assets/store/camera_image.png")] public static const IMG_CAMERA_IMAGE:Class
 		[Embed(source = "../assets/store/close.png")] public static const IMG_CLOSE:Class
+		[Embed(source = "../assets/store/ctd_image.png")] public static const IMG_CTD_IMAGE:Class
+		[Embed(source = "../assets/store/hydrophone_image.png")] public static const IMG_HYDROPHONE_IMAGE:Class
 		[Embed(source = "../assets/store/instrument_image.png")] public static const IMG_INSTRUMENT_IMAGE:Class
 		[Embed(source = "../assets/store/left.png")] public static const IMG_LEFT:Class
 		[Embed(source = "../assets/store/prepurchase-display.png")] public static const IMG_PREPURCHASE_DISPLAY:Class

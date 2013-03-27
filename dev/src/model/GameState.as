@@ -1,14 +1,19 @@
 package model 
 {
+	import common.Assets;
 	import common.displays.Display;
 	import events.displays.SeasonEventAnnouncement;
 	import events.world.SeasonalEvent;
 	import flash.geom.Point;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	import hex.HexIndices;
 	import map.terrain.TerrainForce;
 	import observatory.Connectable;
     import observatory.ComponentData;
 	import time.Season;
+	import time.Seasons;
+	import flash.media.SoundMixer;
 	//import GameConstants;
 	
 	/**
@@ -32,9 +37,47 @@ package model
 		public var connectionX:int;
 		public var connectionY:int;
 		
+		public var bgSound:Sound;
+		public var bgChannel:SoundChannel;
+		
+		
+		
 		public function GameState() 
 		{
+			// Spring
+			bgChannel = new SoundChannel();
+			bgSound = (new Assets.SOUND_NEPTUNE) as Sound;
+			bgChannel = bgSound.play();
+		}
+		
+		public function playSeasonalMusic(season:Season):void
+		{
+			trace(season.name);
+			var asset:Class;
+			if (season.name == Seasons.SPRING.name) 
+			{
+				asset = Assets.SOUND_NEPTUNE;
+			}
+			else if (season.name == Seasons.SUMMER.name)
+			{
+				asset = Assets.SOUND_AUTUMN;
+			}
+			else if (season.name == Seasons.FALL.name) 
+			{
+				asset = Assets.SOUND_AUTUMN;
+			}
+			else if (season.name == Seasons.WINTER.name) 
+			{
+				asset = Assets.SOUND_NATIVE_RAINFALL;
+			}
 			
+			bgChannel.stop();
+			bgChannel.soundTransform.volume = 0;
+			bgSound = (new asset) as Sound;
+			
+			flash.media.SoundMixer.stopAll();
+			bgChannel = null;
+			bgChannel = bgSound.play();
 		}
 		
 		public function isPlacing():Boolean

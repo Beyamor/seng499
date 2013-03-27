@@ -73,6 +73,7 @@ package time
 			add(backButton);
 			
 			game.data.clearSeasonTotals();
+			game.state.playSeasonalMusic(calendar.season);
 		}
 	}
 

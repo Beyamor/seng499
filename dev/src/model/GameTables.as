@@ -87,7 +87,7 @@ package model
 				.dataDescription("This is just audio data. \nNot that there's anything wrong \nwith that.")
 				.interestingDataDescription("You're capturing some interesting data for great science!")
 				.image(Assets.IMG_HYDROPHONE)
-				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+				.storeImage(Assets.IMG_HYDROPHONE_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.AUDIO)
 				.costs(50000)
@@ -99,7 +99,7 @@ package model
 				.dataDescription("CTDs capture conductivity, temperature, and depth.")
 				.interestingDataDescription("Oh my! Look at that huge drop in depth and temperature!")
 				.image(Assets.IMG_CTD)
-				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+				.storeImage(Assets.IMG_CTD_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.CTD_DATA)
 				.costs(100000)
@@ -111,7 +111,7 @@ package model
 				.dataDescription("High definition video streams\navailable 24/7 on the Internet.")
 				.interestingDataDescription("What is going on in that video stream!?")
 				.image(Assets.IMG_CAMERASPRITE)
-				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
+				.storeImage(Assets.IMG_CAMERA_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.VIDEO)
 				.costs(200000)
