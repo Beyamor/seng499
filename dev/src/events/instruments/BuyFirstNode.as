@@ -31,10 +31,10 @@ package events.instruments
 		{//								"									"
 			super(Seasons.SUMMER, 0, "Congratulations!  The government of\n"
 										+"Canada has given you a substantial\n"
-										+"grant to build an ocean obervatory:\n"
+										+"grant to build an ocean observatory:\n"
 										+"a network of undersea instruments \n"
-										+"connected to the internet through a\n"
-										+"series of cables and nodes.  To \n"
+										+"connected to the Internet through a\n"
+										+"series of cables and nodes.  \n\nTo "
 										+"start your observatory, you will\n"
 										+"need to purchace a node and place\n"
 										+"it on the map.");

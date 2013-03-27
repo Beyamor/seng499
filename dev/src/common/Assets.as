@@ -12,6 +12,7 @@ package common{
 		[Embed(source = "../assets/sound/ontouch.mp3")] public static const SOUND_ONTOUCH:Class
 		[Embed(source = "../assets/sound/ontouch2.mp3")] public static const SOUND_ONTOUCH2:Class
 		[Embed(source = "../assets/sound/ontouch3.mp3")] public static const SOUND_ONTOUCH3:Class
+		[Embed(source = "../assets/sound/Summer.mp3")] public static const SOUND_SUMMER:Class
 		[Embed(source = "../assets/sound/uvic_gamedev_bumper.mp3")] public static const SOUND_UVIC_GAMEDEV_BUMPER:Class
 
 		/* Generating png assets! */

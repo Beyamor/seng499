@@ -64,7 +64,7 @@ package model
 			}
 			else if (season.name == Seasons.FALL.name) 
 			{
-				asset = Assets.SOUND_AUTUMN;
+				asset = Assets.SOUND_SUMMER;
 			}
 			else if (season.name == Seasons.WINTER.name) 
 			{
