@@ -59,12 +59,7 @@ package common.ui
 				if ( world.mouseX >= x && world.mouseX <= x + width)
 				{
 					if (world.mouseY >= y && world.mouseY <= y + height)
-					{
-						// Highly doubt this be put here but does the trick for now - CP
-						var soundAsset:Class = FP.choose(Assets.SOUND_ONTOUCH3); 
-						var clickSound:Sound = (new soundAsset) as Sound;
-						clickSound.play();
-						
+					{	
 						return true;
 					}
 				}

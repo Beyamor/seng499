@@ -1,6 +1,8 @@
 package common.displays 
 {
+	import common.Assets;
 	import common.tweens.InOutTweener;
+	import flash.media.Sound;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
@@ -59,6 +61,11 @@ package common.displays
 				autoclearAlarm = new Alarm(DISPLAY_TIME, function():void { hide(); } );
 				parent.addTween(autoclearAlarm, true);
 			}
+			
+			// Highly doubt this be put here but does the trick for now - CP
+			var soundAsset:Class = FP.choose(Assets.SOUND_ONTOUCH2); 
+			var showSound:Sound = (new soundAsset) as Sound;
+			showSound.play();
 		}
 		
 		public function hide():void {

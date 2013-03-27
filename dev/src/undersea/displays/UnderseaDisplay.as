@@ -41,7 +41,7 @@ package undersea.displays {
 			add(NeptuneButtons.standard(
 				"back", 
 				width/2 - 48, 
-				height - 82, 
+				height - 22, 
 				function():void {
 					FP.world = new HexView(game, game.state.getLastViewedHex().x, game.state.getLastViewedHex().y);
 				}));
@@ -70,24 +70,23 @@ package undersea.displays {
 			{
 				
 				// evenly spaced out on ground
-				var placePoint:Point = new Point((FP.width / (components.length + 1)) * (components.indexOf(component) + 1), 400);
+				var MAGIC:uint = 60;
+				var placePoint:Point = new Point(-15 -MAGIC + (FP.width / (components.length + 1)) * (components.indexOf(component) + 1), -MAGIC +  375);
 				var placeImage:Image = new Image(component.getImage());
-				placeImage.scale = 3.0;
-				var placeText:Text = new Text(component.getName());
-				placeText.color = 0x000000;
+				placeImage.scale = 8.0;
+				//var placeText:Text = new Text(component.getName());
+				//placeText.color = 0x000000;
 				// HACK: Centering the 00 makes it look much better, but breaks the button - CP
-				//placeImage.centerOO();
-				placeText.centerOO();
-				placeText.x += (placeImage.scaledWidth / 2);
-				placeText.y += (placeImage.scaledHeight / 2); // remove these later - CP
+				//splaceImage.centerOO();
+				//placeText.centerOO();
+				//placeText.x += (placeImage.scaledWidth / 2);
+				//placeText.y += (placeImage.scaledHeight / 2); // remove these later - CP
 				
 				
 				
 				add(Button.description()
 					.fixedAt(placePoint.x, placePoint.y)
-					.withImageAndText(
-						placeImage,
-						placeText)
+					.withImage(placeImage)
 					.withDepth(-1)
 					.whenClicked(clickedComponent(component))
 					.build());
