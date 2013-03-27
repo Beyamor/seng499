@@ -45,8 +45,9 @@ package time
 			var bonusValue:uint			= dataMoney.bonusValue;
 
 			var representativeImage:Image = new Image(calendar.season.picture);
-			representativeImage.scale = Math.min(200.0 / representativeImage.width, 200.0 / representativeImage.height);
-			addGraphic(representativeImage, 0, FP.width - representativeImage.scaledWidth - 50, 50);
+			var MAGIC:Number = 350;
+			representativeImage.scale = Math.min(MAGIC / representativeImage.width, MAGIC / representativeImage.height);
+			addGraphic(representativeImage, 0, FP.width - representativeImage.scaledWidth - 10, 10);
 			
 			addGraphic(new Text(calendar.season.name.toUpperCase(), 50, 50));
 			//this description will be replaced with a larger, more detailed stats display
