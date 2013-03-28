@@ -91,6 +91,8 @@ package model
 			setter.setTerrainForces(hexCoords)
 			setter.setTerrain(hexCoords);//kinda hacky, but I need access to state for propegation.  We can clean this later
 			getHexData(hexCoords).addObservatoryComponent(node/*new Observ(new ComponentData(GameTables.instrumentIDByName("node"))*/);
+			
+			++nodesPlacedThisSeason;
 		}
 		
 		public function populateStoreList():void

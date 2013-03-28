@@ -51,6 +51,7 @@ package hex.controllers {
 			game.state.getConnectionPoint().connect(addedInstrument);
 			game.data.removeFromInventory(game.state.getInstrumentBeingPlaced());				
 			game.state.stopPlacingInstrument();
+			++game.data.instrumentsPlaceThisSeason;
 			
 			view.removeCursor();
 			view.hexDisplay.removeConnectionCable();
