@@ -62,13 +62,23 @@ package hex.controllers {
         public function hexSelected(mouseX:Number, mouseY:Number, tile:HexTile):void {
 			
 			// Okay. Uh. CP suggested that clicking on the connection point again would unset it
-			if (tile.data.hasNode()) {
+			var wasConnectionStartPoint:Boolean = false;
+			for each (var component:ObservatoryComponent in tile.data.observatoryComponents) {
+				
+				if (component == game.state.getConnectionPoint()) {
+					
+					wasConnectionStartPoint = true;
+					break;
+				}
+			}
+			
+			if (wasConnectionStartPoint) {
 				
 				stopConnecting();
 			}
 			
 			// Check tile population
-			else if (tile.data.observatoryComponents.length >= 2) {
+			else if (tile.data.observatoryComponents.length >= 2 || tile.data.hasNode()) {
 				
 				view.instructionDisplay.show("tile is full, place on another");
 			}
