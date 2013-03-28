@@ -44,7 +44,7 @@ package events.world
 			game.data.addTerrainFeature(new FeatureBuilder()	.setImage(new Image(Assets.IMG_SEALIFE))
 																.setLocationStructure(new LocationPoint(1000, 400))
 																.setImageCoordinates(974, 374)
-																.setRange(300)
+																.setRange(100)
 																.setTerrainForceSpread(1)
 																.setTerrainInitialForce(4)
 																.setTerrainTile(new Terrain(Types.REEF))
