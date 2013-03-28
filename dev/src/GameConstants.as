@@ -6,9 +6,9 @@ package {
         public static const MAP_PIXEL_HEIGHT:uint   = 640;
 		public static const MAP_INITIAL_CAMERA_POS:uint = 450;
 		
-		public static const HEX_VIEW_WIDTH:uint = 2000;
-		public static const HEX_VIEW_HEIGHT:uint = 2000;
 		public static const HEX_RADIUS:uint = 60;
+		public static const HEX_VIEW_WIDTH:uint = 200000;
+		public static const HEX_VIEW_HEIGHT:uint = 200000;
 		
 		public static const DEFAULT_FREE_SPACE:int = 2;
 		
