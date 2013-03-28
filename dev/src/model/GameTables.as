@@ -102,8 +102,8 @@ package model
 				.storeImage(Assets.IMG_CTD_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.CTD_DATA)
-				.costs(100000)
-				.dataValue(4)
+				.costs(75000)
+				.dataValue(3)
 				.finish(),
 				
 			InstrumentProperties.describe("Camera")
@@ -114,8 +114,8 @@ package model
 				.storeImage(Assets.IMG_CAMERA_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.VIDEO)
-				.costs(200000)
-				.dataValue(8)
+				.costs(160000)
+				.dataValue(5)
 				.finish(),
 				
 			InstrumentProperties.describe("ADCP")
@@ -126,8 +126,8 @@ package model
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)
 				.producesDataOnAllTerrain
 				.produces(DataTypes.PROFILES)
-				.costs(400000)
-				.dataValue(10)
+				.costs(240000)
+				.dataValue(8)
 				.finish()
 		);
 		

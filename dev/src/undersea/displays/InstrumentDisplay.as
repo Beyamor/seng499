@@ -60,9 +60,19 @@ package undersea.displays {
 
 			addGraphic(new Text("Data:\n" + instrument.sample.description, 350, 250));
 
-			var instrumentDataImage:Image = new Image(instrument.sample.media);
-			addGraphic(ImageHelper.scaleTo(instrumentDataImage, 300 , 300), 0, 10, height - instrumentDataImage.scaledHeight - 10);
+			//if (instrument.sample.isVideo)
+			//{
+				//video = instrument.sample.media;
+				//setUpFLVStream();
+				//addOnEndCallback(onEnd);
+			//}
+			//else
+			//{
+				var instrumentDataImage:Image = new Image(instrument.sample.media);
+				addGraphic(ImageHelper.scaleTo(instrumentDataImage, 300 , 300), 0, 10, height - instrumentDataImage.scaledHeight - 10);
+			//}
 		}
+		
 
 		private function getMeta(mdata:Object):void
 		{

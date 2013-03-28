@@ -15,6 +15,6 @@ package {
 		public static const EXPO_RADIUS:int = 3;
 		
 		// The chance that *an* instrument (any instrument) gets an event at the start of a season
-		public static const INSTRUMENT_EVENT_PROBABILITY:Number	= 0.3;
+		public static const INSTRUMENT_EVENT_PROBABILITY:Number	= 0.5;
     }
 }

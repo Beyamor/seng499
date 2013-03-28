@@ -41,7 +41,7 @@ package data
 				
 				if (instrument.isProducingData)
 				{
-					if (instrument.interestingEventIsOccurring) count += 2 * instrument.getDataValue();
+					if (instrument.interestingEventIsOccurring) count += instrument.getDataValue();
 					else count += instrument.getDataValue()
 				}
 			}
@@ -51,7 +51,7 @@ package data
 		
 		public function get baseSum():uint {
 			
-			return activeInstrumentCount;
+			return totalDataCount;
 		}
 		
 		public function get bonusSum():uint {
