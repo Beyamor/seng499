@@ -19,23 +19,23 @@ package model
 		boringDataSampleCollection[DataTypes.PROFILES] = new Vector.< DataSample>;
 		
 		
-		boringDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.IMG_VIDEOBORING,"No animals were recorded in this video."));
+		boringDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.VIDEO_VIDEOBORING, true, "Plenty of animals here, but none of\nthem are polite enough to stay\nin the frame."));
 		
 		
-		boringDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEUNIDENTIFIED, "Scientists have not yet identified\n"+
+		boringDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEUNIDENTIFIED, false,"Scientists have not yet identified\n"+
 																											"the sounds in this hydrophone\n"+
 																											"recording."));
 		
 		
-		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTEMPERATURE, "The temperature recorded by the\n" + 
+		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTEMPERATURE, false,"The temperature recorded by the\n" + 
 																										"CTD varies from 3.7-4.2 degrees C."));
-		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTIDES_PRESSURE, "The CTD pressure sensor records the\n"+
+		boringDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTIDES_PRESSURE, false,"The CTD pressure sensor records the\n"+
 																											"tidal cycle."));
 
 		
 		
-		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_SCALAR,"B"));
-		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_UVWBS,"B"));
+		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_SCALAR, false,"These pieces of data are very noisy."));
+		boringDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130321T225136180Z_1D726_UVWBS, false,"These pieces of data are very noisy."));
 		
 		public static var interestingDataSampleCollection:Object = new Object;
 		interestingDataSampleCollection[DataTypes.VIDEO]=new Vector.< DataSample>;
@@ -44,29 +44,29 @@ package model
 		interestingDataSampleCollection[DataTypes.PROFILES]=new Vector.< DataSample>;
 		
 		
-		interestingDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.IMG_VIDEOCRABSNAIL, "The video camera captured 3 crabs\n" +
+		interestingDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.IMG_VIDEOCRABSNAIL, false, "The video camera captured 3 crabs\n" +
 																											"and a deep-sea snail."));
-		interestingDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.IMG_VIDEOSABLEFISHHAGFISH,"Two sablefish, a hagfish and a\n"+
+																											interestingDataSampleCollection[DataTypes.VIDEO].push(new DataSample(Assets.IMG_VIDEOSABLEFISHHAGFISH, false, "Two sablefish, a hagfish and a\n"+
 																												" gastropod visit the video camera."));
 		
-		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEEARTHQUAKE, "The low frequency rumble of an\n"+
+		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEEARTHQUAKE, false, "The low frequency rumble of an\n"+
 																												"earthquake was recorded by the\n"+
 																												"hydrophone."));
-		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONESHIPPING, "A ship with a distinctive whine in\n" +
+		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONESHIPPING, false, "A ship with a distinctive whine in\n" +
 																											"its engine was recorded."));
-		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEWHALES,"The hydrophone recorded whale calls."));
+		interestingDataSampleCollection[DataTypes.AUDIO].push(new DataSample(Assets.IMG_HYDROPHONEWHALES, false, "The hydrophone recorded whale calls."));
 		
 		
-		interestingDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTSUNAMI_PRESSURE, "The pressure sensor on the CTD has\n" +
+		interestingDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDTSUNAMI_PRESSURE, false, "The pressure sensor on the CTD has\n" +
 																													"recorded the arrival of a tsunami."));
 		
-		interestingDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDSTORM_TEMP_SALINITY, "The effects of a storm can be seen in\n"+
+		interestingDataSampleCollection[DataTypes.CTD_DATA].push(new DataSample(Assets.IMG_CTDSTORM_TEMP_SALINITY, false, "The effects of a storm can be seen in\n"+
 																												"the temperature and pressure sensors\n" + 
 																												"on the CTD."));
 		
 		
-		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_SCALAR,"I"));
-		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_UVWBS,"I"));
+		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_SCALAR, false, "These pieces of data show a very\nclear pattern"));
+		interestingDataSampleCollection[DataTypes.PROFILES].push(new DataSample(Assets.IMG_RDIADCP150WH8497_20130320T000000330Z_1D726_UVWBS, false, "These pieces of data show a very\nclear pattern"));
 		
 		// Ugggh.
 		// I would love to make a class for this - InstrumentPropertyList?
@@ -119,8 +119,8 @@ package model
 				.finish(),
 				
 			InstrumentProperties.describe("ADCP")
-				.displayDescription("An Acoustic doppler current profiler is similar\nto a sonar, attempting to measure\nwater current velocities over a depth range\nusing the Doppler effect of sound\n waves scattered back from particles\nwithin the water column.")
-				.dataDescription("similar to a sonar, attempting to measure\n water current velocities over a depth\n range using the Doppler effect of sound\n waves scattered back from \nparticles within the water column")
+				.displayDescription("An Acoustic Doppler Current Profiler is similar\nto a sonar, measures water current\nvelocities over a depth range using the\nDoppler effect of sound.\n")
+				.dataDescription("similar to a sonar, attempting to measure\n water current velocities over a depth\n range using the Doppler effect of sound\n waves scattered back from \nparticles within the water column.")
 				.interestingDataDescription("Check out that effect! So doppler!")
 				.image(Assets.IMG_ADCP)
 				.storeImage(Assets.IMG_INSTRUMENT_IMAGE)

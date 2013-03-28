@@ -1,6 +1,7 @@
 package events.world 
 {
 	import events.displays.EventResultPopup;
+	import hex.displays.HexDisplay;
 	import hex.HexData;
 	import model.Game;
 	import observatory.DataTypes;
@@ -24,6 +25,10 @@ package events.world
 	 */
 	public class SpringBloom extends SeasonalEvent 
 	{
+		
+		public var instrument:Instrument = null;
+		public var game:Game = null;
+		public var hexData:HexData = null;
 		
 		public function SpringBloom() 
 		{
@@ -59,7 +64,13 @@ package events.world
 						
 						var instrument:Instrument = observatoryComponent as Instrument;
 						
-						if (instrument.dataType == DataTypes.VIDEO && hexData.terrain.type==Types.REEF) return true;
+						if (instrument.dataType == DataTypes.VIDEO && hexData.terrain.type == Types.REEF) 
+						{
+							/*this.game = game;
+							this.hexData = hexData;
+							this.instrument = instrument;*/
+							return true;
+						}
 					}
 				}
 			}

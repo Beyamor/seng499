@@ -1,10 +1,12 @@
 package observatory
 {
 	import adobe.utils.CustomActions;
+	import common.Assets;
 	import common.Collections;
 	import data.DataSample;
 	import hex.controllers.TileViewer;
 	import hex.HexTile;
+	import hex.terrain.Types;
     import model.GameTables;
 	
 	/**
@@ -30,7 +32,11 @@ package observatory
 			this.tile = tile;
 
 			isProducingData = instrument.properties.producesDataFor(tile.data.terrain);
-			_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
+			
+			if (component.dataType == DataTypes.VIDEO && tile.data.terrain.type == Types.REEF)
+				_sample = new DataSample(Assets.IMG_VIDEOREEF, false, "Diverse life is visible on the reef with\n the video camera.");
+			else
+				_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
 		}
 		
 		override public function getName():String
@@ -65,8 +71,15 @@ package observatory
 			// This is under the assumption that a special instrument event only lasts one season.
 			_interestingEventIsOccurring = false;
 			
+			//Extreme hack, but i think the reef should hava special result
+			if (component.dataType == DataTypes.VIDEO && tile.data.terrain.type == Types.REEF)
+			{
+				_sample = new DataSample(Assets.IMG_VIDEOREEF, false, "Diverse life is visible on the reef with\n the video camera.")
+			}
+			else{
 			// Randomize the sample. Note that even if it was an interesting one, it'll be set back to a boring one.
 			_sample = Collections.any(GameTables.boringDataSampleCollection[dataType]);
+			}
 		}
 		
 		public function get dataDescription():String {

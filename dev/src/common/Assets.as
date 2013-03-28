@@ -3,7 +3,11 @@ package common{
 	public class Assets {
 	
 		/* Generating flv assets! */
-		[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
+		//[Embed(source = "../assets/video/test.flv", mimeType = "application/octet-stream")] public static const VIDEO_TEST:Class
+		[Embed(source = "../assets/video/VideoBoring.flv", mimeType = "application/octet-stream")] public static const VIDEO_VIDEOBORING:Class
+		//[Embed(source = "../assets/video/VideoCrabSnail.flv", mimeType = "application/octet-stream")] public static const VIDEO_VIDEOCRABSNAIL:Class
+		//[Embed(source = "../assets/video/VideoReef.flv", mimeType = "application/octet-stream")] public static const VIDEO_VIDEOREEF:Class
+		//[Embed(source = "../assets/video/VideoSablefishHagfish.flv", mimeType = "application/octet-stream")] public static const VIDEO_VIDEOSABLEFISHHAGFISH:Class
 
 		/* Generating mp3 assets! */
 		[Embed(source = "../assets/sound/Autumn.mp3")] public static const SOUND_AUTUMN:Class

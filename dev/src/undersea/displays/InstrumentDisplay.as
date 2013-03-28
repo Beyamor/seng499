@@ -60,17 +60,17 @@ package undersea.displays {
 
 			addGraphic(new Text("Data:\n" + instrument.sample.description, 350, 250));
 
-			//if (instrument.sample.isVideo)
-			//{
-				//video = instrument.sample.media;
-				//setUpFLVStream();
-				//addOnEndCallback(onEnd);
-			//}
-			//else
-			//{
+			if (instrument.sample.isVideo)
+			{
+				
+				setUpFLVStream();
+				addOnEndCallback(onEnd);
+			}
+			else
+			{
 				var instrumentDataImage:Image = new Image(instrument.sample.media);
 				addGraphic(ImageHelper.scaleTo(instrumentDataImage, 300 , 300), 0, 10, height - instrumentDataImage.scaledHeight - 10);
-			//}
+			}
 		}
 		
 
@@ -87,7 +87,7 @@ package undersea.displays {
 				ns = new NetStream(e.target as NetConnection);
 				
 				ns.client = {};
-				//var file:ByteArray = new Assets.VIDEO_TEST();
+				var file:ByteArray = new instrument.sample.media;//Assets.VIDEO_TEST();
 				var file:ByteArray = new (instrument as Instrument).sample.media;
 				ns.play(null);
 				
